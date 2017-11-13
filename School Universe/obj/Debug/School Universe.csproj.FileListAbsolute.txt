@@ -1,0 +1,49 @@
+G:\SU\School Universe\School Universe\obj\Debug\School Universe.csprojResolveAssemblyReference.cache
+G:\SU\School Universe\School Universe\obj\Debug\Views\FeeCollectionList.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\login.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\App.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\School Universe_Content.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\GeneratedInternalTypeHelper.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\School Universe_MarkupCompile.cache
+G:\SU\School Universe\School Universe\obj\Debug\School Universe_MarkupCompile.lref
+G:\SU\School Universe\School Universe\bin\SchoolUniverse.mdf
+G:\SU\School Universe\School Universe\bin\SchoolUniverse_log.ldf
+G:\SU\School Universe\School Universe\bin\School Universe.exe.config
+G:\SU\School Universe\School Universe\bin\School Universe.exe
+G:\SU\School Universe\School Universe\bin\School Universe.pdb
+G:\SU\School Universe\School Universe\bin\MaterialDesignColors.dll
+G:\SU\School Universe\School Universe\bin\MaterialDesignThemes.Wpf.dll
+G:\SU\School Universe\School Universe\bin\School Universe Businness Layer.dll
+G:\SU\School Universe\School Universe\bin\School Universe Models.dll
+G:\SU\School Universe\School Universe\bin\School Universe Data Layer.dll
+G:\SU\School Universe\School Universe\bin\School Universe Businness Layer.pdb
+G:\SU\School Universe\School Universe\bin\School Universe Models.pdb
+G:\SU\School Universe\School Universe\bin\MaterialDesignColors.pdb
+G:\SU\School Universe\School Universe\bin\MaterialDesignThemes.Wpf.pdb
+G:\SU\School Universe\School Universe\bin\MaterialDesignThemes.Wpf.xml
+G:\SU\School Universe\School Universe\bin\School Universe Data Layer.pdb
+G:\SU\School Universe\School Universe\obj\Debug\App.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\FeeCollectionList.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\login.baml
+G:\SU\School Universe\School Universe\obj\Debug\School Universe.g.resources
+G:\SU\School Universe\School Universe\obj\Debug\School_Universe.Properties.Resources.resources
+G:\SU\School Universe\School Universe\obj\Debug\School Universe.csproj.GenerateResource.Cache
+G:\SU\School Universe\School Universe\obj\Debug\School Universe.exe
+G:\SU\School Universe\School Universe\obj\Debug\School Universe.pdb
+G:\SU\School Universe\School Universe\obj\Debug\Views\main.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\main.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\Sync.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\Settings.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\Sync.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\Settings.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\FeeCollect.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\FeeCollect.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\Notification.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\Notification.baml
+G:\SU\School Universe\School Universe\obj\Debug\Views\SchoolSetup.g.cs
+G:\SU\School Universe\School Universe\obj\Debug\Views\SchoolSetup.baml
+G:\SU\School Universe\School Universe\bin\Newtonsoft.Json.dll
+G:\SU\School Universe\School Universe\bin\Newtonsoft.Json.xml
+G:\SMS\School Universe\bin\School Universe.exe.config
+G:\SMS\School Universe\obj\Debug\School Universe.exe
+G:\SMS\School Universe\obj\Debug\School Universe.pdb
