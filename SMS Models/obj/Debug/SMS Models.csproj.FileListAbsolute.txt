@@ -1,5 +1,0 @@
-G:\SMS\SMS Models\bin\Debug\SMS Models.dll
-G:\SMS\SMS Models\bin\Debug\SMS Models.pdb
-G:\SMS\SMS Models\obj\Debug\SMS Models.dll
-G:\SMS\SMS Models\obj\Debug\SMS Models.pdb
-G:\SMS\SMS Models\obj\Debug\SMS Models.csprojResolveAssemblyReference.cache

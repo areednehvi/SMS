@@ -1,5 +1,0 @@
-G:\SU\School Universe\School Universe Data Layer\bin\School Universe Data Layer.dll
-G:\SU\School Universe\School Universe Data Layer\bin\School Universe Data Layer.pdb
-G:\SU\School Universe\School Universe Data Layer\obj\Debug\School Universe Data Layer.dll
-G:\SU\School Universe\School Universe Data Layer\obj\Debug\School Universe Data Layer.pdb
-G:\SU\School Universe\School Universe Data Layer\obj\Debug\School Universe Data Layer.csprojResolveAssemblyReference.cache

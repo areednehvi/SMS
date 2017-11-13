@@ -1,9 +1,0 @@
-G:\SU\School Universe\School Universe Businness Layer\bin\School Universe Businness Layer.dll
-G:\SU\School Universe\School Universe Businness Layer\bin\School Universe Businness Layer.pdb
-G:\SU\School Universe\School Universe Businness Layer\bin\School Universe Data Layer.dll
-G:\SU\School Universe\School Universe Businness Layer\bin\School Universe Models.dll
-G:\SU\School Universe\School Universe Businness Layer\bin\School Universe Data Layer.pdb
-G:\SU\School Universe\School Universe Businness Layer\bin\School Universe Models.pdb
-G:\SU\School Universe\School Universe Businness Layer\obj\Debug\School Universe Businness Layer.csprojResolveAssemblyReference.cache
-G:\SU\School Universe\School Universe Businness Layer\obj\Debug\School Universe Businness Layer.dll
-G:\SU\School Universe\School Universe Businness Layer\obj\Debug\School Universe Businness Layer.pdb

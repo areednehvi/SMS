@@ -1,0 +1,9 @@
+SMS/bin/*
+SMS/obj/*
+SMS Businness Layer/bin/*
+SMS Businness Layer/obj/*
+SMS Data Layer/bin/*
+SMS Data Layer/obj/*
+SMS Models/bin/*
+SMS Models/obj/*
+.vs/SMS/v14/.suo

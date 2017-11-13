@@ -1,5 +1,0 @@
-G:\SMS\School Universe Models\bin\Debug\School Universe Models.dll
-G:\SMS\School Universe Models\bin\Debug\School Universe Models.pdb
-G:\SMS\School Universe Models\obj\Debug\SMS Models.csprojResolveAssemblyReference.cache
-G:\SMS\School Universe Models\obj\Debug\School Universe Models.dll
-G:\SMS\School Universe Models\obj\Debug\School Universe Models.pdb

@@ -47,5 +47,9 @@ namespace SMS_Businness_Layer.Shared
         public static string SyncUsers = "SyncUsers";
         public static string SyncVehicles = "SyncVehicles";
         public static string IsSchoolSetup = "IsSchoolSetup";
+        public static string CreateOrModifyGrades = "CreateOrModifyGrades";
+        public static string CreateOrModifySessions = "CreateOrModifySessions";
+        public static string CreateOrModifySections = "CreateOrModifySections";
+        
     }
 }
