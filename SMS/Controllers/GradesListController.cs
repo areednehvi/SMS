@@ -20,8 +20,6 @@ namespace SMS.Controllers
         #region Fields
         private GradesSetupModel _GradesSetup;
 
-
-        private ObservableCollection<gradesModel> _gradesList;
         private FeeCollectionStudentListModel _selectedItemInFeeCollectionStudentList;
         private FeeCollectionListFiltersModel _FeeCollectionListFilters;
         private FeeCollectionListOtherFiledsModel _FeeCollectionListOtherFileds;
@@ -33,6 +31,7 @@ namespace SMS.Controllers
         private string _NoRecordsFound;
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
+        private ICommand _addNewGradeCommand;
         #endregion
 
         #region Constructor
@@ -41,7 +40,6 @@ namespace SMS.Controllers
 
             _GradesSetup = new GradesSetupModel();
 
-            _gradesList = new ObservableCollection<gradesModel>();
             _FeeCollectionListFilters = new FeeCollectionListFiltersModel();
             _FeeCollectionListOtherFileds = new FeeCollectionListOtherFiledsModel();
             // Get Lists
@@ -60,7 +58,8 @@ namespace SMS.Controllers
             this.GetGradesList();
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
-            _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);        
+            _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
+            _addNewGradeCommand = new RelayCommand(AddNewGrade, CanAddNewGrade);
 
             NoRecordsFound = "Visible";
         }
@@ -82,21 +81,6 @@ namespace SMS.Controllers
             }
         }
 
-
-
-        public ObservableCollection<gradesModel> GradesList
-        {
-            get
-            {
-                return _gradesList;
-            }
-
-            set
-            {
-                _gradesList = value;
-            }
-
-        }
 
         public FeeCollectionStudentListModel SelectedItemInFeeCollectionStudentList
         {
@@ -212,9 +196,9 @@ namespace SMS.Controllers
                 fromRowNo = toRowNo + 1;
                 toRowNo = pageNo * NoOfRecordsPerPage;
                 this.GetGradesList();
-                if (pageNo > 1 && GradesList.Count == 0)
+                if (pageNo > 1 && GradesSetup.GradesList.Count == 0)
                     MoveToPreviousPage(obj);
-                FeeCollectionListDataGrid.ItemsSource = GradesList;
+                FeeCollectionListDataGrid.ItemsSource = GradesSetup.GradesList;
             }
             catch (Exception ex)
             {
@@ -256,9 +240,42 @@ namespace SMS.Controllers
                     toRowNo = fromRowNo - 1;
                     fromRowNo = (toRowNo + 1) - NoOfRecordsPerPage;
                     this.GetGradesList();
-                    FeeCollectionListDataGrid.ItemsSource = GradesList;
+                    FeeCollectionListDataGrid.ItemsSource = GradesSetup.GradesList;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+
+            }
+        }
+        #endregion
+
+        #region AddNewGradeCommand
+
+        public ICommand AddNewGradeCommand
+        {
+            get { return _addNewGradeCommand; }
+        }
+
+
+        public bool CanAddNewGrade(object obj)
+        {
+            return true;
+        }
+
+
+        public void AddNewGrade(object obj)
+        {
+            try
+            {
+                GradesView winGradesView = new GradesView();
+                winGradesView.Show();
             }
             catch (Exception ex)
             {
@@ -290,7 +307,7 @@ namespace SMS.Controllers
             try
             {
                 GradesSetup.GradesList = GradesListManager.GetGradesList(fromRowNo, toRowNo);
-                NoRecordsFound = GradesList.Count > 0 ? "Collapsed" : "Visible";
+                NoRecordsFound = GradesSetup.GradesList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
             {
@@ -333,7 +350,7 @@ namespace SMS.Controllers
             if (FeeCollectionListDataGrid != null)
             {
                 FeeCollectionListDataGrid.ItemsSource = null;
-                FeeCollectionListDataGrid.ItemsSource = GradesList;
+                FeeCollectionListDataGrid.ItemsSource = GradesSetup.GradesList;
             }
         }
 

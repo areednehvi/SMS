@@ -11,6 +11,7 @@ namespace SMS.Models
 {
     public class GradesSetupModel : INotifyPropertyChanged
     {
+        private GradesListModel _SelectedItemInGradesList;
         private ObservableCollection<GradesListModel> _GradesList;
 
         public ObservableCollection<GradesListModel> GradesList
@@ -23,6 +24,19 @@ namespace SMS.Models
             {
                 _GradesList = value;
                 OnPropertyChanged("GradesList");
+            }
+        }
+
+        public GradesListModel SelectedItemInGradesList
+        {
+            get
+            {
+                return _SelectedItemInGradesList;
+            }
+            set
+            {
+                _SelectedItemInGradesList = value;
+                OnPropertyChanged("SelectedItemInGradesList");
             }
         }
 

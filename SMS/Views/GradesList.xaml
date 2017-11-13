@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <materialDesign:Card Grid.Row="0" Padding="5"  Margin="5,10,5,5" >
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Add New Grade" ToolTip="Click to add a grade" ></Button>
+                <Button Content="Add New Grade" ToolTip="Click to add a grade" Height="50" FontSize="18" Command="{Binding AddNewGradeCommand}" ></Button>
             </WrapPanel>
 
         </materialDesign:Card>

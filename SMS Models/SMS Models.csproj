@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DBModels.cs" />
-    <Compile Include="Models\GradesListModels.cs" />
+    <Compile Include="Models\GradesSetupModels.cs" />
     <Compile Include="Models\FeeCollectionListModels.cs" />
     <Compile Include="Models\FeeCollectModels.cs" />
     <Compile Include="Models\GetListModels.cs" />

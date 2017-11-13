@@ -92,7 +92,9 @@ G:\SMS\SMS\bin\SMS.mdf
 G:\SMS\SMS\bin\SMS_log.ldf
 G:\SMS\SMS\obj\Debug\Views\Sessions.g.cs
 G:\SMS\SMS\obj\Debug\Views\Sessions.baml
-G:\SMS\SMS\obj\Debug\Views\Grades.g.cs
-G:\SMS\SMS\obj\Debug\Views\Grades.baml
 G:\SMS\SMS\obj\Debug\Views\Sections.g.cs
 G:\SMS\SMS\obj\Debug\Views\Sections.baml
+G:\SMS\SMS\obj\Debug\Views\GradesView.g.cs
+G:\SMS\SMS\obj\Debug\Views\GradesView.baml
+G:\SMS\SMS\obj\Debug\Views\GradesList.g.cs
+G:\SMS\SMS\obj\Debug\Views\GradesList.baml
