@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 G:\SMS\SMS\App.xaml
-8-883316150
+11579672378
 2-925780820
-31-385150323
+35-1797334078
 18-693457044
-Views\SchoolSetup.xaml;Views\FeeCollect.xaml;Views\FeeCollectionList.xaml;Views\login.xaml;Views\Main.xaml;Views\Notification.xaml;Views\Sync.xaml;Views\Settings.xaml;
+Views\Grades.xaml;Views\Sections.xaml;Views\Sessions.xaml;Views\SchoolSetup.xaml;Views\FeeCollect.xaml;Views\FeeCollectionList.xaml;Views\login.xaml;Views\Main.xaml;Views\Notification.xaml;Views\Sync.xaml;Views\Settings.xaml;
 
-False
+True
 

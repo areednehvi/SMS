@@ -10,30 +10,30 @@ namespace SMS.Models
 {
     public class FeeCollectionStudentListModel
     {
-        public Int64 id { get; set; } // student ID
-        public Int64 school_id { get; set; }
-        public Int64 registration_id { get; set; }
+        public string id_offline { get; set; } // student ID
+        public string school_id { get; set; }
+        public string registration_id { get; set; }
         public string status { get; set; }
         public string file_id { get; set; }
-        public Int64 session_id { get; set; }
-        public Int64 fees_id { get; set; }
-        public Int64 grade_fees_id { get; set; }
+        public string session_id { get; set; }
+        public string fees_id { get; set; }
+        public string grade_fees_id { get; set; }
         public DateTime apply_from { get; set; }
         public DateTime apply_to { get; set; }
         public Double concession_amount { get; set; }
         public Double fine { get; set; }
-        public Int64 grade_id { get; set; }
-        public Int64 section_id { get; set; }
+        public string grade_id { get; set; }
+        public string section_id { get; set; }
         public string full_name { get; set; }
         public string roll_number { get; set; }
         public string section_name { get; set; }
-        public Int64 order { get; set; }
+        public string order { get; set; }
         public string grade_section { get; set; }
         public Int64 allocated_fee_cource_count { get; set; }
         public string parentage { get; set; }
     }
     public class FeeCollectionListFiltersModel : INotifyPropertyChanged
-    {        
+    {
         private GradesModel _grade;
         private SectionsModel _section;
         private string _rollNumber;
@@ -54,7 +54,7 @@ namespace SMS.Models
                 OnPropertyChanged("Grade");
             }
         }
-        
+
 
         public SectionsModel Section
         {
@@ -155,7 +155,7 @@ namespace SMS.Models
 
     public class FeeCollectionListOtherFiledsModel : INotifyPropertyChanged
     {
-        private string _pageNo;      
+        private string _pageNo;
 
         public string PageNo
         {
@@ -169,7 +169,7 @@ namespace SMS.Models
                 OnPropertyChanged("PageNo");
             }
         }
-       
+
 
         #region INotifyPropertyChanged Members
 
@@ -186,13 +186,15 @@ namespace SMS.Models
 
     public class GradesModel
     {
-        public string id { get; set; }
+        public string id_offline { get; set; }
+        public string id_online { get; set; }
         public string name { get; set; }
     }
 
     public class SectionsModel
     {
-        public string id { get; set; }
+        public string id_offline { get; set; }
+        public string id_online { get; set; }
         public string name { get; set; }
     }
 }

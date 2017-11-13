@@ -24,7 +24,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     tableName = "grades",
                     keyColumn = "name",
-                    valueColumn = "id",
+                    valueColumn = "id_offline",
                     orderBy = "[order]"
                 };
                 DataTable objDatatable = GetList(objGetListModel);
@@ -52,7 +52,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     tableName = "sections",
                     keyColumn = "name",
-                    valueColumn = "id",
+                    valueColumn = "id_offline",
                     orderBy = "name"
                 };
                 DataTable objDatatable = GetList(objGetListModel);
@@ -105,7 +105,7 @@ namespace SMS_Businness_Layer.Businness
             {
                 ObservableCollection<PaymentModeModel> lstPaymentModes = new ObservableCollection<PaymentModeModel>()
                 {
-                    new PaymentModeModel() { id ="Cash", name = "Cash" },
+                    new PaymentModeModel() { id = "Cash", name = "Cash" },
                     new PaymentModeModel() { id ="Cheque", name = "Cheque" },
                     new PaymentModeModel() { id ="Challan", name = "Challan" },
                     new PaymentModeModel() { id ="Online", name = "Online" }
@@ -159,12 +159,12 @@ namespace SMS_Businness_Layer.Businness
             ObservableCollection<GradesModel> objGradesModelList = new ObservableCollection<GradesModel>();
             try
             {
-                objGradesModelList.Add(new GradesModel { id = "0", name = "All" });
+                objGradesModelList.Add(new GradesModel { id_offline = Guid.Empty.ToString(), name = "All" });
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     GradesModel objGradesModel = new GradesModel();
 
-                    objGradesModel.id = row["id"] != DBNull.Value ? row["id"].ToString() : string.Empty;
+                    objGradesModel.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objGradesModel.name = row["name"] != DBNull.Value ? row["name"].ToString() : string.Empty;
 
                     objGradesModelList.Add(objGradesModel);
@@ -187,12 +187,12 @@ namespace SMS_Businness_Layer.Businness
             ObservableCollection<SectionsModel> objSectionsModelList = new ObservableCollection<SectionsModel>();
             try
             {
-                objSectionsModelList.Add(new SectionsModel { id = "0", name = "All" });
+                objSectionsModelList.Add(new SectionsModel { id_offline = Guid.Empty.ToString(), name = "All" });
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     SectionsModel objSectionsModel = new SectionsModel();
 
-                    objSectionsModel.id = row["id"] != DBNull.Value ? row["id"].ToString() : string.Empty;
+                    objSectionsModel.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objSectionsModel.name = row["name"] != DBNull.Value ? row["name"].ToString() : string.Empty;
 
                     objSectionsModelList.Add(objSectionsModel);
@@ -215,12 +215,12 @@ namespace SMS_Businness_Layer.Businness
             ObservableCollection<FeeCategoryModel> objFeeCategoryList = new ObservableCollection<FeeCategoryModel>();
             try
             {
-                objFeeCategoryList.Add(new FeeCategoryModel { id = "0", name = "All" });
+                objFeeCategoryList.Add(new FeeCategoryModel { id_offline = Guid.Empty.ToString() , name = "All" });
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     FeeCategoryModel objFeeCategoryModel = new FeeCategoryModel();
 
-                    objFeeCategoryModel.id = row["id"] != DBNull.Value ? row["id"].ToString() : string.Empty;
+                    objFeeCategoryModel.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objFeeCategoryModel.name = row["name"] != DBNull.Value ? row["name"].ToString() : string.Empty;
 
                     objFeeCategoryList.Add(objFeeCategoryModel);

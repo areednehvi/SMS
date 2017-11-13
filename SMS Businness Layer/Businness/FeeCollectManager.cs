@@ -49,7 +49,7 @@ namespace SMS_Businness_Layer.Businness
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     FeeBalancesModel objFeeBalance = new FeeBalancesModel();
-                    objFeeBalance.id = row["id"] != DBNull.Value ? row["id"].ToString() : string.Empty;
+                    objFeeBalance.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objFeeBalance.apply_from = row["apply_from"] != DBNull.Value ? Convert.ToDateTime(row["apply_from"]) : DateTime.MinValue;
                     objFeeBalance.last_day = row["last_day"] != DBNull.Value ? Convert.ToInt32(row["last_day"]) : 0;
                     objFeeBalance.fine_per_day = row["fine_per_day"] != DBNull.Value ? Convert.ToDouble(row["fine_per_day"]) : 0;
@@ -109,9 +109,10 @@ namespace SMS_Businness_Layer.Businness
                 foreach (FeeBalancesModel objFeeBalance in objMakePayment.SelectedFeeBalances)
                 {
                     PaymentModel objPayment = new PaymentModel();
-                    objPayment.id = "0";
-                    objPayment.school_id = SchoolInfo.id;
-                    objPayment.student_fees_id = objFeeBalance.id;
+                    objPayment.id_offline =  new Guid().ToString();
+                    objPayment.id_online = Guid.Empty.ToString();
+                    objPayment.school_id = SchoolInfo.id_offline;
+                    objPayment.student_fees_id = objFeeBalance.id_offline;
                     objPayment.payment_mode = objMakePayment.SelectedPaymentMode.name;
                     objPayment.amount = objFeeBalance.balance_amount;
                     objPayment.fine = objFeeBalance.fine;
@@ -166,7 +167,7 @@ namespace SMS_Businness_Layer.Businness
 
                 table.Rows.Add(
                                 objPaymentHistoryModel.id_offline,
-                                objPaymentHistoryModel.id,
+                                objPaymentHistoryModel.id_online,
                                 objPaymentHistoryModel.school_id,
                                 objPaymentHistoryModel.student_fees_id,
                                 objPaymentHistoryModel.amount,
@@ -228,8 +229,8 @@ namespace SMS_Businness_Layer.Businness
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     PaymentModel objPaymentHistory = new PaymentModel();
-                    objPaymentHistory.id = row["id"] != DBNull.Value ? row["id"].ToString() : string.Empty;
-                    objPaymentHistory.id_offline = row["id_offline"] != DBNull.Value ? Guid.Parse(row["id_offline"].ToString()) : Guid.Empty;
+                    objPaymentHistory.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
+                    objPaymentHistory.id_online = row["id_online"] != DBNull.Value ? row["id_online"].ToString() : string.Empty;
                     objPaymentHistory.school_id = row["school_id"] != DBNull.Value ? row["school_id"].ToString() : string.Empty;
                     objPaymentHistory.student_fees_id = row["student_fees_id"] != DBNull.Value ? row["student_fees_id"].ToString() : string.Empty;
                     objPaymentHistory.amount = row["amount"] != DBNull.Value ? Convert.ToDouble(row["amount"]) : 0;
@@ -299,7 +300,7 @@ namespace SMS_Businness_Layer.Businness
                     new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = fromRowNo},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = toRowNo},
                     new SqlParameter() {ParameterName = "@StudentID",  SqlDbType = SqlDbType.NVarChar, Value = studentID == "" ? null : studentID},
-                    new SqlParameter() {ParameterName = "@FeeCategoryID",  SqlDbType = SqlDbType.NVarChar, Value = (FeeDueListFilters.FeeCategory != null && FeeDueListFilters.FeeCategory.name ==  "All") ? null : (FeeDueListFilters.FeeCategory != null ? FeeDueListFilters.FeeCategory.id : null)},
+                    new SqlParameter() {ParameterName = "@FeeCategoryID",  SqlDbType = SqlDbType.NVarChar, Value = (FeeDueListFilters.FeeCategory != null && FeeDueListFilters.FeeCategory.name ==  "All") ? null : (FeeDueListFilters.FeeCategory != null ? FeeDueListFilters.FeeCategory.id_offline : null)},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentFeeDue, lstSqlParameters);
                 return MapDatatableToFeeDueObject(objDatable);
@@ -324,7 +325,7 @@ namespace SMS_Businness_Layer.Businness
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     FeeDueModel objFeeDue = new FeeDueModel();
-                    objFeeDue.id = row["id"] != DBNull.Value ? row["id"].ToString() : string.Empty;
+                    objFeeDue.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objFeeDue.student_balance = row["student_balance"] != DBNull.Value ? Convert.ToDouble(row["student_balance"]) : 0;
                     objFeeDue.student_id = row["student_id"] != DBNull.Value ? row["student_id"].ToString() : string.Empty;
                     objFeeDue.concession_amount = row["concession_amount"] != DBNull.Value ? Convert.ToDouble(row["concession_amount"]) : 0;
@@ -380,7 +381,7 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 DataTable table = new DataTable();
-                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("id_offline", typeof(string));
                 table.Columns.Add("student_id", typeof(string));
                 table.Columns.Add("student_balance", typeof(Double));                
                 table.Columns.Add("apply_from", typeof(DateTime));
@@ -392,7 +393,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_by", typeof(string));
                 table.Columns.Add("updated_on", typeof(DateTime));
 
-                table.Rows.Add(objFeeDueModel.id,
+                table.Rows.Add(objFeeDueModel.id_offline,
                                 objFeeDueModel.student_id,
                                 objFeeDueModel.student_balance,
                                 objFeeDueModel.apply_from,
@@ -422,7 +423,7 @@ namespace SMS_Businness_Layer.Businness
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
                     new SqlParameter() {ParameterName = "@key",     SqlDbType = SqlDbType.NVarChar, Value = "id"},
-                    new SqlParameter() {ParameterName = "@value",     SqlDbType = SqlDbType.NVarChar, Value = objFeeDueModel.id},
+                    new SqlParameter() {ParameterName = "@value",     SqlDbType = SqlDbType.NVarChar, Value = objFeeDueModel.id_offline},
                     new SqlParameter() {ParameterName = "@tableName",  SqlDbType = SqlDbType.NVarChar, Value = "student_fees"}                
                 };
                 return DataAccess.ExecuteNonQuery(StoredProcedures.DeleteRecord, lstSqlParameters);

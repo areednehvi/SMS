@@ -98,9 +98,9 @@ namespace SMS.Controllers
             {
                 PasswordBox pwBox = obj as PasswordBox;
                 Login.Password = pwBox.Password;
-                if(Login.Username.ToUpper() == "SUADMIN" && IsSUAdminDisabled)
+                if(Login.Username.ToUpper() == "ADMIN" && IsSUAdminDisabled)
                 {
-                    Login.Message = "SU Admin Account is disabled";
+                    Login.Message = "Admin Account is disabled!";
                     return;
                 }
                 if (LoginManager.ValidateUser(Login))

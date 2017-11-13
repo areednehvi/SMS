@@ -293,7 +293,7 @@ namespace SMS.Controllers
                     case 2:
                         // Get Lists
                         this.GetFeeDueDropDownLists();
-                        SelectedFeeCategory = new FeeCategoryModel() { id = "0", name ="All" };
+                        SelectedFeeCategory = new FeeCategoryModel() { id_offline = Guid.Empty.ToString(), name ="All" };
                         this.GetStudentFeeDueList();
                         break;
                 }
@@ -852,7 +852,7 @@ namespace SMS.Controllers
             try
             {
                 PaymentHistorListDataGrid.ItemsSource = null;
-                PaymentHistoryList = FeeCollectManager.GetStudentPaymentHistory(fromRowNo, toRowNo, FeeCollectionStudentList.id.ToString());
+                PaymentHistoryList = FeeCollectManager.GetStudentPaymentHistory(fromRowNo, toRowNo, FeeCollectionStudentList.id_offline.ToString());
                 PaymentHistorListDataGrid.ItemsSource = PaymentHistoryList;
                 NoRecordsFound = PaymentHistoryList.Count > 0 ? "Collapsed" : "Visible";
             }
@@ -873,7 +873,7 @@ namespace SMS.Controllers
             try
             {
                 if (FeeCollectionStudentList != null)
-                    PendingMonthlyFeeList = FeeCollectManager.GetStudentFeeBalances(FeeCollectionStudentList.id.ToString());
+                    PendingMonthlyFeeList = FeeCollectManager.GetStudentFeeBalances(FeeCollectionStudentList.id_offline.ToString());
                 //NoRecordsFound = PaymentHistoryList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
@@ -893,7 +893,7 @@ namespace SMS.Controllers
             try
             {
                 FeeDueListDataGrid.ItemsSource = null;
-                FeeDueList = FeeCollectManager.GetStudentFeeDue(fromRowNo, toRowNo, FeeCollectionStudentList.id.ToString(),FeeDueListFilters);
+                FeeDueList = FeeCollectManager.GetStudentFeeDue(fromRowNo, toRowNo, FeeCollectionStudentList.id_offline.ToString(),FeeDueListFilters);
                 FeeDueListDataGrid.ItemsSource = FeeDueList;
                 NoRecordsFound = FeeDueList.Count > 0 ? "Collapsed" : "Visible";
             }

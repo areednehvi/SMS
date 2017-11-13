@@ -11,7 +11,8 @@ namespace SMS_Models.Models
 
         public class fee_categoriesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string name { get; set; }
             public string recur { get; set; }
@@ -24,7 +25,8 @@ namespace SMS_Models.Models
         }
         public class feesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string fee_category_id { get; set; }
             public string session_id { get; set; }
@@ -43,7 +45,8 @@ namespace SMS_Models.Models
         }
         public class filesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string name { get; set; }
             public string extension { get; set; }
             public string size { get; set; }
@@ -54,7 +57,8 @@ namespace SMS_Models.Models
         }
         public class grade_feesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string fees_id { get; set; }
             public string grade_id { get; set; }
@@ -65,7 +69,8 @@ namespace SMS_Models.Models
         }
         public class gradesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string block { get; set; }
             public string name { get; set; }
@@ -78,7 +83,8 @@ namespace SMS_Models.Models
         }
         public class parentsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string f_first_name { get; set; }
             public string f_middle_name { get; set; }
@@ -101,7 +107,8 @@ namespace SMS_Models.Models
         }
         public class route_stopsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string route_id { get; set; }
             public string name { get; set; }
@@ -115,7 +122,8 @@ namespace SMS_Models.Models
         }
         public class route_vehicle_stopsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string route_vehicle_id { get; set; }
             public string route_stop_id { get; set; }
@@ -123,14 +131,16 @@ namespace SMS_Models.Models
         }
         public class route_vehicle_stops_fee_logsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string route_vehicle_stop_id { get; set; }
             public string fees_id { get; set; }
 
         }
         public class route_vehiclesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string vehicle_id { get; set; }
             public string route_id { get; set; }
@@ -138,7 +148,8 @@ namespace SMS_Models.Models
         }
         public class routesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string name { get; set; }
             public string start_location { get; set; }
@@ -151,7 +162,8 @@ namespace SMS_Models.Models
         }
         public class schoolsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string database_id { get; set; }
             public string subdomain { get; set; }
             public string domain { get; set; }
@@ -163,7 +175,8 @@ namespace SMS_Models.Models
         }
         public class sectionsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string name { get; set; }
             public string capacity { get; set; }
@@ -173,7 +186,8 @@ namespace SMS_Models.Models
         }
         public class sessionsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string name { get; set; }
             public string order { get; set; }
@@ -185,7 +199,8 @@ namespace SMS_Models.Models
         }
         public class student_feesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string grade_fees_id { get; set; }
             public string student_id { get; set; }
@@ -203,7 +218,8 @@ namespace SMS_Models.Models
         }
         public class student_grade_session_logModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string student_id { get; set; }
             public string registration_id { get; set; }
@@ -219,10 +235,10 @@ namespace SMS_Models.Models
             public DateTime updated_on { get; set; }
 
         }
-        public class student_paymentsModel   
+        public class student_paymentsModel
         {
             public string id_offline { get; set; }
-            public string id { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string student_fees_id { get; set; }
             public Double amount { get; set; }
@@ -240,7 +256,8 @@ namespace SMS_Models.Models
         }
         public class studentsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string user_id { get; set; }
             public string parent_id { get; set; }
@@ -263,7 +280,8 @@ namespace SMS_Models.Models
         }
         public class trip_stopsModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string route_vehicle_stop_id { get; set; }
             public string trip { get; set; }
@@ -274,12 +292,14 @@ namespace SMS_Models.Models
         public class SyncTableInfoModel
         {
             public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string TableName { get; set; }
             public DateTime LastSyncedOn { get; set; }
         }
         public class user_avatar_filesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string user_id { get; set; }
             public string applicant_id { get; set; }
@@ -288,7 +308,8 @@ namespace SMS_Models.Models
         }
         public class usersModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string student_id { get; set; }
             public string role_id { get; set; }
@@ -326,7 +347,8 @@ namespace SMS_Models.Models
         }
         public class vehiclesModel
         {
-            public string id { get; set; }
+            public string id_offline { get; set; }
+            public string id_online { get; set; }
             public string school_id { get; set; }
             public string tracker_id { get; set; }
             public string registration_number { get; set; }

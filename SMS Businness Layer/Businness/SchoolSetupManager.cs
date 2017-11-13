@@ -58,7 +58,7 @@ namespace SMS_Businness_Layer.Businness
             SchoolModel objSchoolInfo = new SchoolModel();
             try
             {
-                objSchoolInfo.id = objDatatable.Rows[0]["id"] != DBNull.Value ? objDatatable.Rows[0]["id"].ToString() : string.Empty;
+                objSchoolInfo.id_offline =  objDatatable.Rows[0]["id_offline"] != DBNull.Value ? objDatatable.Rows[0]["id_offline"].ToString() : string.Empty;
                 objSchoolInfo.database_id = objDatatable.Rows[0]["database_id"] != DBNull.Value ? objDatatable.Rows[0]["database_id"].ToString() : string.Empty;
                 objSchoolInfo.subdomain = objDatatable.Rows[0]["subdomain"] != DBNull.Value ? objDatatable.Rows[0]["subdomain"].ToString() : string.Empty;
                 objSchoolInfo.domain = objDatatable.Rows[0]["domain"] != DBNull.Value ? objDatatable.Rows[0]["domain"].ToString() : string.Empty;
@@ -117,7 +117,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("created_on", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.database_id,
                                 obj.subdomain,
                                 obj.domain,

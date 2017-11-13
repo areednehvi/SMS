@@ -441,7 +441,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.users + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleStatus);                
 
-                string i = Sync.SyncDBmodels.usersList[count].id;
+                string i = Sync.SyncDBmodels.usersList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleProgress.Progress++;
             }
@@ -454,7 +454,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.user_avatar_files + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.user_avatar_filesList[count].id;
+                string i = Sync.SyncDBmodels.user_avatar_filesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleProgress.Progress++;
             }
@@ -467,7 +467,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.files + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.filesList[count].id;
+                string i = Sync.SyncDBmodels.filesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Users)].SyncModuleProgress.Progress++;
             }
@@ -529,7 +529,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.students + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.studentsList[count].id;
+                string i = Sync.SyncDBmodels.studentsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleProgress.Progress++;
             }
@@ -544,7 +544,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.parents + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.parentsList[count].id;
+                string i = Sync.SyncDBmodels.parentsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleProgress.Progress++;
             }
@@ -610,7 +610,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.grades + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.gradesList[count].id;
+                string i = Sync.SyncDBmodels.gradesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleProgress.Progress++;
             }
@@ -623,7 +623,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.sections + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.sectionsList[count].id;
+                string i = Sync.SyncDBmodels.sectionsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleProgress.Progress++;
             }
@@ -636,7 +636,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.sessions + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.sessionsList[count].id;
+                string i = Sync.SyncDBmodels.sessionsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleProgress.Progress++;
             }
@@ -649,7 +649,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.student_grade_session_log + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.student_grade_session_logList[count].id;
+                string i = Sync.SyncDBmodels.student_grade_session_logList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Grades)].SyncModuleProgress.Progress++;
             }
@@ -718,7 +718,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.vehicles + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.vehiclesList[count].id;
+                string i = Sync.SyncDBmodels.vehiclesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleProgress.Progress++;
             }
@@ -731,7 +731,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.routes + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.routesList[count].id;
+                string i = Sync.SyncDBmodels.routesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleProgress.Progress++;
             }
@@ -744,7 +744,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.route_stops + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.route_stopsList[count].id;
+                string i = Sync.SyncDBmodels.route_stopsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleProgress.Progress++;
             }
@@ -757,7 +757,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.route_vehicles + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.route_vehiclesList[count].id;
+                string i = Sync.SyncDBmodels.route_vehiclesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleProgress.Progress++;
             }
@@ -770,7 +770,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.route_vehicle_stops + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.route_vehicle_stopsList[count].id;
+                string i = Sync.SyncDBmodels.route_vehicle_stopsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleProgress.Progress++;
             }
@@ -783,7 +783,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.trip_stops + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.trip_stopsList[count].id;
+                string i = Sync.SyncDBmodels.trip_stopsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Transportation)].SyncModuleProgress.Progress++;
             }
@@ -854,7 +854,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.fee_categories + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.fee_categoriesList[count].id;
+                string i = Sync.SyncDBmodels.fee_categoriesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleProgress.Progress++;
             }
@@ -867,7 +867,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.fees + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.feesList[count].id;
+                string i = Sync.SyncDBmodels.feesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleProgress.Progress++;
             }
@@ -880,7 +880,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.grade_fees + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.grade_feesList[count].id;
+                string i = Sync.SyncDBmodels.grade_feesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleProgress.Progress++;
             }
@@ -893,7 +893,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.student_fees + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Students)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.student_feesList[count].id;
+                string i = Sync.SyncDBmodels.student_feesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleProgress.Progress++;
             }
@@ -907,7 +907,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.route_vehicle_stops_fee_logs + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.route_vehicle_stops_fee_logsList[count].id;
+                string i = Sync.SyncDBmodels.route_vehicle_stops_fee_logsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleProgress.Progress++;
             }
@@ -932,7 +932,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.student_fees + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.student_feesList[count].id;
+                string i = Sync.SyncDBmodels.student_feesList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Fees)].SyncModuleProgress.Progress++;
             }
@@ -997,7 +997,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Payments)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.student_payments + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Payments)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.student_paymentsList[count].id;
+                string i = Sync.SyncDBmodels.student_paymentsList[count].id_offline;
                 SyncManager.SyncStudent_paymentsFromOnline(Sync.SyncDBmodels.student_paymentsList[count]);
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Payments)].SyncModuleProgress.Progress++;
@@ -1023,7 +1023,7 @@ namespace SMS.Controllers
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Payments)].SyncModuleStatus = SyncNotifications.SyncInProgress + " Table: " + Tables.student_payments + " Record: " + count;
                 GeneralMethods.Log(Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Payments)].SyncModuleStatus);
 
-                string i = Sync.SyncDBmodels.student_paymentsList[count].id;
+                string i = Sync.SyncDBmodels.student_paymentsList[count].id_offline;
                 //Thread.Sleep(1);
                 Sync.SyncModuleList[SyncModules.GetSyncModuleID(SyncModules.Payments)].SyncModuleProgress.Progress++;
             }

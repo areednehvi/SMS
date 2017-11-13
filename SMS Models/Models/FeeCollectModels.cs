@@ -12,7 +12,7 @@ namespace SMS.Models
     {
         private Boolean _IsSelected;
         public string Period { get; set; }
-        public Double Total { get; set; }        
+        public Double Total { get; set; }
         public ObservableCollection<FeeBalancesModel> FeeBalancesList { get; set; }
         public Boolean IsSelected
         {
@@ -39,19 +39,19 @@ namespace SMS.Models
         }
         #endregion
     }
-    public class FeeBalancesModel : INotifyPropertyChanged 
+    public class FeeBalancesModel : INotifyPropertyChanged
     {
         private Boolean _IsSelected;
         private Double _fine;
         private Double _balance_amount;
-        public string id { get; set; } // StudentFeeID
+        public string id_offline { get; set; } // StudentFeeID
         public DateTime apply_from { get; set; }
         public int last_day { get; set; }
         public Double fine_per_day { get; set; }
         public string fees_category { get; set; }
         public string student_id { get; set; }
         public string fees_id { get; set; }
-        public Double fee_amount { get; set;}
+        public Double fee_amount { get; set; }
         public string payment_mode { get; set; }
         public DateTime payment_date { get; set; }
         public string recept_no { get; set; }
@@ -67,7 +67,7 @@ namespace SMS.Models
             set
             {
                 _fine = value;
-                balance_amount = amount_to_pay - concession_amount + fine;                 
+                balance_amount = amount_to_pay - concession_amount + fine;
                 OnPropertyChanged("fine");
             }
         }
@@ -123,8 +123,8 @@ namespace SMS.Models
         private DateTime _payment_date;
         private string _payment_mode;
 
-        public string id { get; set; }
-        public Guid id_offline { get; set; }
+        public string id_offline { get; set; }
+        public string id_online { get; set; }
         public string school_id { get; set; }
         public string student_fees_id { get; set; }
         public Double amount
@@ -227,7 +227,8 @@ namespace SMS.Models
     public class FeeDueModel : INotifyPropertyChanged // Represents mostly student_fees Table
     {
         private Boolean _IsSelected;
-        public string id { get; set; }
+        public string id_offline { get; set; }
+        public string id_online { get; set; }
         public string student_id { get; set; }
         public Double student_balance { get; set; }
         public Double concession_amount { get; set; }
@@ -400,7 +401,8 @@ namespace SMS.Models
 
     public class FeeCategoryModel
     {
-        public string id { get; set; }
+        public string id_offline { get; set; }
+        public string id_online { get; set; }
         public string name { get; set; }
     }
 
@@ -410,7 +412,7 @@ namespace SMS.Models
         public string name { get; set; }
     }
 
-    public class MakePaymentModel :INotifyPropertyChanged
+    public class MakePaymentModel : INotifyPropertyChanged
     {
         private ObservableCollection<FeeBalancesModel> _SelectedFeeBalances;
         private PaymentModeModel _SelectedPaymentMode;
@@ -421,7 +423,7 @@ namespace SMS.Models
         private Double _TotalOfSelectedFeeBalancesFine;
         private Double _TotalOfSelectedFeeBalancesGrandTotal;
         private Double _TotalOfSelectedFeeBalancesConcession;
-        public PaymentModel Payment{ get; set;}
+        public PaymentModel Payment { get; set; }
         public PaymentModeModel SelectedPaymentMode
         {
             get { return _SelectedPaymentMode; }

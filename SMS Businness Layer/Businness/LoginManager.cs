@@ -30,7 +30,7 @@ namespace SMS_Businness_Layer.Businness
                 if (objDatable.Rows.Count > 0)
                 {
                     isValidUser = true;
-                    objLogin.ID = objDatable.Rows[0]["id"] != DBNull.Value ? objDatable.Rows[0]["id"].ToString() : string.Empty;
+                    objLogin.ID =  objDatable.Rows[0]["id_offline"] != DBNull.Value ? objDatable.Rows[0]["id_offline"].ToString() : string.Empty;
                 }
             }
             catch (Exception ex)

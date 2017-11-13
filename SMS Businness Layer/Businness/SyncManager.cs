@@ -25,7 +25,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     fee_categoriesModel objfee_categories = new fee_categoriesModel();
-                    objfee_categories.id = (i).ToString();
+                    objfee_categories.id_offline =  (i).ToString();
                     lstFeeCategories.Add(objfee_categories);
                 }
             }
@@ -47,7 +47,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     feesModel objfees = new feesModel();
-                    objfees.id = (i).ToString();
+                    objfees.id_offline =  (i).ToString();
                     lstFees.Add(objfees);
                 }
             }
@@ -69,7 +69,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     filesModel objfiles = new filesModel();
-                    objfiles.id = (i).ToString();
+                    objfiles.id_offline =  (i).ToString();
                     lstFiles.Add(objfiles);
                 }
             }
@@ -91,7 +91,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     grade_feesModel objgrade_fees = new grade_feesModel();
-                    objgrade_fees.id = (i).ToString();
+                    objgrade_fees.id_offline =  (i).ToString();
                     lstgrade_fees.Add(objgrade_fees);
                 }
             }
@@ -113,7 +113,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     gradesModel objgrades = new gradesModel();
-                    objgrades.id = (i).ToString();
+                    objgrades.id_offline =  (i).ToString();
                     lstgrades.Add(objgrades);
                 }
             }
@@ -135,7 +135,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     parentsModel objparents = new parentsModel();
-                    objparents.id = (i).ToString();
+                    objparents.id_offline =  (i).ToString();
                     lstparents.Add(objparents);
                 }
             }
@@ -157,7 +157,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     route_stopsModel objroute_stops = new route_stopsModel();
-                    objroute_stops.id = (i).ToString();
+                    objroute_stops.id_offline =  (i).ToString();
                     lstroute_stops.Add(objroute_stops);
                 }
             }
@@ -179,7 +179,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     route_vehicle_stopsModel objroute_vehicle_stops = new route_vehicle_stopsModel();
-                    objroute_vehicle_stops.id = (i).ToString();
+                    objroute_vehicle_stops.id_offline =  (i).ToString();
                     lstroute_vehicle_stops.Add(objroute_vehicle_stops);
                 }
             }
@@ -201,7 +201,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     route_vehicle_stops_fee_logsModel objroute_vehicle_stops_fee_log = new route_vehicle_stops_fee_logsModel();
-                    objroute_vehicle_stops_fee_log.id = (i).ToString();
+                    objroute_vehicle_stops_fee_log.id_offline =  (i).ToString();
                     lstroute_vehicle_stops_fee_logs.Add(objroute_vehicle_stops_fee_log);
                 }
             }
@@ -223,7 +223,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     route_vehiclesModel objroute_vehicles = new route_vehiclesModel();
-                    objroute_vehicles.id = (i).ToString();
+                    objroute_vehicles.id_offline =  (i).ToString();
                     lstroute_vehicles.Add(objroute_vehicles);
                 }
             }
@@ -245,7 +245,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     routesModel objroutes = new routesModel();
-                    objroutes.id = (i).ToString();
+                    objroutes.id_offline =  (i).ToString();
                     lstroutes.Add(objroutes);
                 }
             }
@@ -267,7 +267,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     sectionsModel objsections = new sectionsModel();
-                    objsections.id = (i).ToString();
+                    objsections.id_offline =  (i).ToString();
                     lstsections.Add(objsections);
                 }
             }
@@ -289,7 +289,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     sessionsModel objsessions = new sessionsModel();
-                    objsessions.id = (i).ToString();
+                    objsessions.id_offline =  (i).ToString();
                     lstsessions.Add(objsessions);
                 }
             }
@@ -311,7 +311,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     student_feesModel objstudent_fees = new student_feesModel();
-                    objstudent_fees.id = (i).ToString();
+                    objstudent_fees.id_offline =  (i).ToString();
                     lststudent_fees.Add(objstudent_fees);
                 }
             }
@@ -333,7 +333,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     student_grade_session_logModel objstudent_grade_session_log = new student_grade_session_logModel();
-                    objstudent_grade_session_log.id = (i).ToString();
+                    objstudent_grade_session_log.id_offline =  (i).ToString();
                     lststudent_grade_session_log.Add(objstudent_grade_session_log);
                 }
             }
@@ -355,7 +355,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     student_paymentsModel objstudent_payments = new student_paymentsModel();
-                    objstudent_payments.id = (i).ToString();
+                    objstudent_payments.id_offline =  (i).ToString();
                     lststudent_payments.Add(objstudent_payments);
                 }
             }
@@ -377,7 +377,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     studentsModel objstudents = new studentsModel();
-                    objstudents.id = (i).ToString();
+                    objstudents.id_offline =  (i).ToString();
                     lststudents.Add(objstudents);
                 }
             }
@@ -399,7 +399,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     trip_stopsModel objtrip_stops = new trip_stopsModel();
-                    objtrip_stops.id = (i).ToString();
+                    objtrip_stops.id_offline =  (i).ToString();
                     lsttrip_stops.Add(objtrip_stops);
                 }
             }
@@ -421,7 +421,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     user_avatar_filesModel objuser_avatar_files = new user_avatar_filesModel();
-                    objuser_avatar_files.id = (i).ToString();
+                    objuser_avatar_files.id_offline =  (i).ToString();
                     lstuser_avatar_files.Add(objuser_avatar_files);
                 }
             }
@@ -443,7 +443,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     usersModel objUser = new usersModel();
-                    objUser.id = (i).ToString();
+                    objUser.id_offline =  (i).ToString();
                     lstUsers.Add(objUser);
                 }
             }
@@ -465,7 +465,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     vehiclesModel objvehicles = new vehiclesModel();
-                    objvehicles.id = (i).ToString();
+                    objvehicles.id_offline =  (i).ToString();
                     lstvehicles.Add(objvehicles);
                 }
             }
@@ -490,7 +490,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     student_feesModel objstudent_fees = new student_feesModel();
-                    objstudent_fees.id = (i).ToString();
+                    objstudent_fees.id_offline =  (i).ToString();
                     lststudent_fees.Add(objstudent_fees);
                 }
             }
@@ -512,7 +512,7 @@ namespace SMS_Businness_Layer.Businness
                 for (int i = 0; i < 100; i++)
                 {
                     student_paymentsModel objstudent_payments = new student_paymentsModel();
-                    objstudent_payments.id = (i).ToString();
+                    objstudent_payments.id_offline =  (i).ToString();
                     lststudent_payments.Add(objstudent_payments);
                 }
             }
@@ -595,7 +595,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_by", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.student_id,
                                 obj.role_id,
@@ -677,7 +677,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("file_id", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.user_id,
                                 obj.applicant_id,
@@ -732,7 +732,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("created", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.name,
                                 obj.extension,
                                 obj.size,
@@ -801,7 +801,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.user_id,
                                 obj.parent_id,
@@ -881,7 +881,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("g_email", typeof(string));
 
                 table.Rows.Add(
-								obj.id,
+								obj.id_offline,
 								obj.school_id,
 								obj.f_first_name,
 								obj.f_middle_name,
@@ -954,7 +954,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.block,
                                 obj.name,
@@ -1012,7 +1012,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("created_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.name,
                                 obj.capacity,
@@ -1069,7 +1069,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("created_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.name,
                                 obj.order,
@@ -1134,7 +1134,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.student_id,
                                 obj.registration_id,
@@ -1204,7 +1204,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.tracker_id,
                                 obj.registration_number,
@@ -1266,7 +1266,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.name,
                                 obj.start_location,
@@ -1328,7 +1328,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.route_id,
                                 obj.name,
@@ -1384,7 +1384,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("route_id", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.vehicle_id,
                                 obj.route_id
@@ -1435,7 +1435,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("route_stop_id", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.route_vehicle_id,
                                 obj.route_stop_id
@@ -1487,7 +1487,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("drop", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.route_vehicle_stop_id,
                                 obj.trip,
@@ -1548,7 +1548,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.name,
                                 obj.recur,
@@ -1615,7 +1615,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.fee_category_id,
                                 obj.session_id,
@@ -1680,7 +1680,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.fees_id,
                                 obj.grade_id,
@@ -1744,7 +1744,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("updated_on", typeof(DateTime));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.school_id,
                                 obj.grade_fees_id,
                                 obj.student_id,
@@ -1803,7 +1803,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("fees_id", typeof(string));
 
                 table.Rows.Add(
-                                obj.id,
+                                obj.id_offline,
                                 obj.route_vehicle_stop_id,
                                 obj.fees_id
                               );
@@ -1857,7 +1857,7 @@ namespace SMS_Businness_Layer.Businness
             {
                 DataTable table = new DataTable();
                 table.Columns.Add("id_offline", typeof(Guid));
-                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("student_fees_id", typeof(string));
                 table.Columns.Add("amount", typeof(Double));
@@ -1874,7 +1874,7 @@ namespace SMS_Businness_Layer.Businness
 
                 table.Rows.Add(
                                 objPaymentHistoryModel.id_offline,
-                                objPaymentHistoryModel.id,
+                                objPaymentHistoryModel.id_online,
                                 objPaymentHistoryModel.school_id,
                                 objPaymentHistoryModel.student_fees_id,
                                 objPaymentHistoryModel.amount,
