@@ -1,0 +1,18 @@
+G:\SMS\School Universe Businness Layer\bin\School Universe Businness Layer.dll
+G:\SMS\School Universe Businness Layer\bin\School Universe Businness Layer.pdb
+G:\SMS\School Universe Businness Layer\bin\School Universe Data Layer.dll
+G:\SMS\School Universe Businness Layer\bin\School Universe Models.dll
+G:\SMS\School Universe Businness Layer\bin\School Universe Data Layer.pdb
+G:\SMS\School Universe Businness Layer\bin\School Universe Models.pdb
+G:\SMS\School Universe Businness Layer\obj\Debug\SMS Businness Layer.csprojResolveAssemblyReference.cache
+G:\SMS\School Universe Businness Layer\obj\Debug\School Universe Businness Layer.dll
+G:\SMS\School Universe Businness Layer\obj\Debug\School Universe Businness Layer.pdb
+G:\SMS\SMS Businness Layer\obj\Debug\SMS Businness Layer.csprojResolveAssemblyReference.cache
+G:\SMS\SMS Businness Layer\bin\SMS Businness Layer.dll
+G:\SMS\SMS Businness Layer\bin\SMS Businness Layer.pdb
+G:\SMS\SMS Businness Layer\bin\SMS Data Layer.dll
+G:\SMS\SMS Businness Layer\bin\SMS Models.dll
+G:\SMS\SMS Businness Layer\bin\SMS Data Layer.pdb
+G:\SMS\SMS Businness Layer\bin\SMS Models.pdb
+G:\SMS\SMS Businness Layer\obj\Debug\SMS Businness Layer.dll
+G:\SMS\SMS Businness Layer\obj\Debug\SMS Businness Layer.pdb
