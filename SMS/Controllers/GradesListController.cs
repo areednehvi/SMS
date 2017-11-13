@@ -306,7 +306,7 @@ namespace SMS.Controllers
         {
             try
             {
-                GradesSetup.GradesList = GradesListManager.GetGradesList(fromRowNo, toRowNo);
+                GradesSetup.GradesList = GradesSetupManager.GetGradesList(fromRowNo, toRowNo);
                 NoRecordsFound = GradesSetup.GradesList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)

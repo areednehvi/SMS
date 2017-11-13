@@ -14,8 +14,10 @@ using static SMS_Models.Models.DBModels;
 
 namespace SMS_Businness_Layer.Businness
 {
-    public class GradesListManager
-    {        
+    public class GradesSetupManager
+    {
+
+        #region List      
         public static ObservableCollection<GradesListModel> GetGradesList(Int64 fromRowNo, Int64 toRowNo)
         {            
             try
@@ -73,6 +75,71 @@ namespace SMS_Businness_Layer.Businness
             return objGradesList;
         }
 
-      
+        #endregion
+
+        #region view
+        public static Boolean CreateOrModfiyGrades(GradesListModel objGrade, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
+        {
+            Boolean IsSuccess = false;
+            try
+            {
+
+                DataTable objDatatable = MapGradeListObjectToDataTable(objGrade);
+                SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
+                objSqlParameter.TypeName = DBTableTypes.grades;
+                objSqlParameter.Value = objDatatable;
+                IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyGrades, objSqlParameter);
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return IsSuccess;
+        }
+
+        private static DataTable MapGradeListObjectToDataTable(GradesListModel obj)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("school_id", typeof(string));
+                table.Columns.Add("block", typeof(string));
+                table.Columns.Add("name", typeof(string));
+                table.Columns.Add("order", typeof(string));
+                table.Columns.Add("created_by", typeof(string));
+                table.Columns.Add("created_on", typeof(DateTime));
+                table.Columns.Add("updated_by", typeof(string));
+                table.Columns.Add("updated_on", typeof(DateTime));
+
+                table.Rows.Add(
+                                obj.id_offline,
+                                obj.school_id,
+                                obj.block,
+                                obj.name,
+                                obj.order,
+                                obj.created_by,
+                                obj.created_on,
+                                obj.updated_by,
+                                obj.updated_on                                
+                              );
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+        #endregion
+
     }
 }
