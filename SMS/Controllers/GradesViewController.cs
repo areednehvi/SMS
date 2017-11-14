@@ -16,21 +16,30 @@ using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class GradesViewController :INotifyPropertyChanged
+    public class GradesViewController : GradesListController,INotifyPropertyChanged
     {
         #region Fields
-        
+        private GradesSetupModel _GradeSetup;
+
         private ICommand _saveGradesCommand;
         private ICommand _closeCommand;
-        private ICommand _minimizeCommand;
-        private Window _window;
-        private LoginModel _CurrentLogin;
-        private SchoolModel _SchoolInfo;
+        private ICommand _minimizeCommand;        
+        
         #endregion
 
         #region Constructor
         public GradesViewController()
         {
+            _GradeSetup = new GradesSetupModel()
+            {
+                CurrentLogin = new LoginModel(),
+                SchoolInfo = new SchoolModel(),
+                NewGrade = new GradesListModel()
+            };
+
+            //Get Global Objects
+            GetGlobalObjects();
+
             //Initialize Commands
             _saveGradesCommand = new RelayCommand(SaveGrades,CanSaveGrades);
             _closeCommand = new RelayCommand(Close, CanClose);
@@ -40,38 +49,16 @@ namespace SMS.Controllers
         #endregion
 
         #region Properties
-        public LoginModel CurrentLogin
+        
+        public GradesSetupModel GradeSetup
         {
             get
             {
-                return _CurrentLogin;
+                return _GradeSetup;
             }
             set
             {
-                _CurrentLogin = value;
-            }
-        }
-        public SchoolModel SchoolInfo
-        {
-            get
-            {
-                return _SchoolInfo;
-            }
-            set
-            {
-                _SchoolInfo = value;
-            }
-        }
-
-        public Window Window
-        {
-            get
-            {
-                return _window;
-            }
-            set
-            {
-                _window = value;
+                _GradeSetup = value;
             }
         }
         #endregion
@@ -92,6 +79,18 @@ namespace SMS.Controllers
         {
             try
             {
+                if (GradesSetupManager.CreateOrModfiyGrades(GradeSetup.NewGrade, GradeSetup.CurrentLogin, GradeSetup.SchoolInfo))
+                {
+                    GeneralMethods.ShowNotification("Notification", "Grade Saved Successfully");
+                    
+                    //GradesListController obj2 = (GradesListController)this; // cast to base class 
+                    //obj2.GradesSetup.GradesList = null;
+                    //obj2.GradesListDataGrid.ItemsSource = null;
+
+                    GradeSetup.Window.Close();
+
+
+                }
                 
             }
             catch (Exception ex)
@@ -124,7 +123,7 @@ namespace SMS.Controllers
 
         public void Close(object obj)
         {
-            Window.Close();
+            GradeSetup.Window.Close();
         }
         #endregion
 
@@ -144,7 +143,7 @@ namespace SMS.Controllers
 
         public void Minimize(object obj)
         {
-            Window.WindowState = WindowState.Minimized;
+            GradeSetup.Window.WindowState = WindowState.Minimized;
         }
         #endregion
 
@@ -160,6 +159,16 @@ namespace SMS.Controllers
         }
         #endregion
 
+        #region Private Functions
+        private void GetGlobalObjects()
+        {
+            //Get the Current Login
+            GradeSetup.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
+            //Get School Info
+            GradeSetup.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+        }
+        #endregion
+
     }
-    
+
 }

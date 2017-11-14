@@ -5,6 +5,7 @@ using SMS_Businness_Layer.Businness;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,9 +54,14 @@ namespace SMS.Controllers
             //this.FeeCollectionListFilters.PropertyChanged += (s, e) => {
             //    this.LoadFeeCollectionAsFiltersHaveChanged();
             //};
-                        
+
+            
+
             //Get Initial Grades list
             this.GetGradesList();
+
+            this.GradesSetup.GradesList.CollectionChanged += GradeList_CollectionChanged;
+
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
@@ -149,7 +155,7 @@ namespace SMS.Controllers
             }
         }
 
-        public DataGrid FeeCollectionListDataGrid
+        public DataGrid GradesListDataGrid
         {
             get
             {
@@ -190,7 +196,7 @@ namespace SMS.Controllers
         {
             try
             {
-                FeeCollectionListDataGrid.ItemsSource = null;
+                GradesListDataGrid.ItemsSource = null;
                 pageNo++;
                 FeeCollectionListOtherFileds.PageNo = "Page No : " + pageNo;
                 fromRowNo = toRowNo + 1;
@@ -198,7 +204,7 @@ namespace SMS.Controllers
                 this.GetGradesList();
                 if (pageNo > 1 && GradesSetup.GradesList.Count == 0)
                     MoveToPreviousPage(obj);
-                FeeCollectionListDataGrid.ItemsSource = GradesSetup.GradesList;
+                GradesListDataGrid.ItemsSource = GradesSetup.GradesList;
             }
             catch (Exception ex)
             {
@@ -234,13 +240,13 @@ namespace SMS.Controllers
             {             
                 if (pageNo > 1)
                 {
-                    FeeCollectionListDataGrid.ItemsSource = null;
+                    GradesListDataGrid.ItemsSource = null;
                     pageNo--;
                     FeeCollectionListOtherFileds.PageNo = "Page No : " + pageNo;
                     toRowNo = fromRowNo - 1;
                     fromRowNo = (toRowNo + 1) - NoOfRecordsPerPage;
                     this.GetGradesList();
-                    FeeCollectionListDataGrid.ItemsSource = GradesSetup.GradesList;
+                    GradesListDataGrid.ItemsSource = GradesSetup.GradesList;
                 }
 
             }
@@ -347,10 +353,10 @@ namespace SMS.Controllers
         {
             ResetPagination();
             this.GetGradesList();
-            if (FeeCollectionListDataGrid != null)
+            if (GradesListDataGrid != null)
             {
-                FeeCollectionListDataGrid.ItemsSource = null;
-                FeeCollectionListDataGrid.ItemsSource = GradesSetup.GradesList;
+                GradesListDataGrid.ItemsSource = null;
+                GradesListDataGrid.ItemsSource = GradesSetup.GradesList;
             }
         }
 
@@ -362,6 +368,19 @@ namespace SMS.Controllers
                 objFeeCollectWindow.Show();
             }
         }
+
+        public void GradeList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {            
+            /*if (e.NewItems != null)
+                foreach (FeeBalancesModel item in e.NewItems)
+                    item.PropertyChanged += FeeBalancesModel_PropertyChanged;
+
+            if (e.OldItems != null)
+                foreach (FeeBalancesModel item in e.OldItems)
+                    item.PropertyChanged -= FeeBalancesModel_PropertyChanged;*/
+        }
+
+
 
     }
 }

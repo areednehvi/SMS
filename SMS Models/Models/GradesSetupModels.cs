@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
@@ -12,7 +13,11 @@ namespace SMS.Models
     public class GradesSetupModel : INotifyPropertyChanged
     {
         private GradesListModel _SelectedItemInGradesList;
+        private GradesListModel _NewGrade;
         private ObservableCollection<GradesListModel> _GradesList;
+        private Window _window;
+        private LoginModel _CurrentLogin;
+        private SchoolModel _SchoolInfo;
 
         public ObservableCollection<GradesListModel> GradesList
         {
@@ -37,6 +42,53 @@ namespace SMS.Models
             {
                 _SelectedItemInGradesList = value;
                 OnPropertyChanged("SelectedItemInGradesList");
+            }
+        }
+        public GradesListModel NewGrade
+        {
+            get
+            {
+                return _NewGrade;
+            }
+            set
+            {
+                _NewGrade = value;
+                OnPropertyChanged("NewGrade");
+            }
+        }
+
+        public LoginModel CurrentLogin
+        {
+            get
+            {
+                return _CurrentLogin;
+            }
+            set
+            {
+                _CurrentLogin = value;
+            }
+        }
+        public SchoolModel SchoolInfo
+        {
+            get
+            {
+                return _SchoolInfo;
+            }
+            set
+            {
+                _SchoolInfo = value;
+            }
+        }
+
+        public Window Window
+        {
+            get
+            {
+                return _window;
+            }
+            set
+            {
+                _window = value;
             }
         }
 

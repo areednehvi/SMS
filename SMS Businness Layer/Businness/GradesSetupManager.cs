@@ -83,7 +83,14 @@ namespace SMS_Businness_Layer.Businness
             Boolean IsSuccess = false;
             try
             {
-
+                objGrade.id_offline = Guid.NewGuid().ToString();
+                objGrade.id_online = Guid.Empty.ToString();
+                objGrade.order = "2";
+                objGrade.created_by = objCurrentLogin.ID;
+                objGrade.updated_by = objCurrentLogin.ID;
+                objGrade.created_on = DateTime.Now;
+                objGrade.updated_on = DateTime.Now;
+                objGrade.school_id = Guid.NewGuid().ToString();
                 DataTable objDatatable = MapGradeListObjectToDataTable(objGrade);
                 SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
                 objSqlParameter.TypeName = DBTableTypes.grades;
@@ -107,7 +114,8 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 DataTable table = new DataTable();
-                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("id_offline", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("block", typeof(string));
                 table.Columns.Add("name", typeof(string));
@@ -119,6 +127,7 @@ namespace SMS_Businness_Layer.Businness
 
                 table.Rows.Add(
                                 obj.id_offline,
+                                obj.id_online, 
                                 obj.school_id,
                                 obj.block,
                                 obj.name,

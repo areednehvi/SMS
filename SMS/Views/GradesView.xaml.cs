@@ -25,12 +25,12 @@ namespace SMS.Views
         {
             InitializeComponent();
             //((FeeCollectController)grdPaymentHistory.DataContext).PaymentHistorListDataGrid = this.dataGridPaymentHistoryList;
-            ((GradesViewController)dpGradesView.DataContext).Window = this;
+            ((GradesViewController)dpGradesView.DataContext).GradeSetup.Window = this;
         }
         public GradesView(FeeCollectionStudentListModel objFeeCollectionStudentList)
         {
             InitializeComponent();
-            ((GradesViewController)dpGradesView.DataContext).Window = this;
+            ((GradesViewController)dpGradesView.DataContext).GradeSetup.Window = this;
             //((FeeCollectController)grdPaymentHistory.DataContext).PaymentHistorListDataGrid = this.dataGridPaymentHistoryList;
             //((FeeCollectController)grdPaymentHistory.DataContext).FeeDueListDataGrid = this.dataGridFeeDueList;
             //((FeeCollectController)grdPaymentHistory.DataContext).PendingMonthlyFeesMaterialDesignCard = this.mdPendingMonthlyFees;
