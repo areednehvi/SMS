@@ -18,8 +18,7 @@ namespace SMS.Controllers
     public class GradesSetupController :INotifyPropertyChanged
     {
         #region Fields
-        private GradesSetupModel _GradesSetup;
-        private DataGrid _dataGrid;        
+        private GradesSetupModel _GradesSetup;      
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
@@ -87,18 +86,6 @@ namespace SMS.Controllers
             {
                 _GradesSetup = value;
                 OnPropertyChanged("GradesSetup");
-            }
-        }
-
-        public DataGrid GradesListDataGrid
-        {
-            get
-            {
-                return _dataGrid;
-            }
-            set
-            {
-                _dataGrid = value;
             }
         }
        
