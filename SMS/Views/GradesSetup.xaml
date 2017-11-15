@@ -28,7 +28,7 @@
             <Label  Grid.Row="1"   Margin="10,10,0,0"  HorizontalAlignment="Left" Content="Click on any grade to modify it" FontStyle="Italic">
             </Label>
             <StackPanel Grid.Row="1"   Margin="0,0,10,0"  Orientation="Horizontal"  HorizontalAlignment="Right">
-                <Label x:Name="lblPageNo" Content="{Binding FeeCollectionListOtherFileds.PageNo}" FontStyle="Italic" Margin="0,12,5,0"/>
+                <Label x:Name="lblPageNo" Content="{Binding GradesSetup.PageNo}" FontStyle="Italic" Margin="0,12,5,0"/>
                 <Button ToolTip="Move to previous page" Width="26" Height="26" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Command="{Binding PreviousPageCommand}" 
                     Margin="0,0,0,0" HorizontalAlignment="Right" RenderTransformOrigin="0.385,2.01">
                     <Viewbox Width="30" Height="30">
@@ -73,7 +73,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>-->
             </DataGrid>
-            <TextBlock Grid.Row="2" Text="No Record(s) Found" FontSize="20" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,200,0,0" Visibility="{Binding NoRecordsFound}" />
+            <TextBlock Grid.Row="2" Text="No Record(s) Found" FontSize="20" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,200,0,0" Visibility="{Binding GradesSetup.NoRecordsFound}" />
         </Grid>
 
         <!-- Form -->

@@ -19,17 +19,7 @@ namespace SMS.Controllers
     {
         #region Fields
         private GradesSetupModel _GradesSetup;
-
-
-        private FeeCollectionStudentListModel _selectedItemInFeeCollectionStudentList;
-        private FeeCollectionListFiltersModel _FeeCollectionListFilters;
-        private FeeCollectionListOtherFiledsModel _FeeCollectionListOtherFileds;
-        private GradesModel _selectedGradeModel;
-        private SectionsModel _selectedSectionModel;
-        private DataGrid _dataGrid;
-        private int NoOfRecords;
-        private int fromRowNo,pageNo, NoOfRecordsPerPage, toRowNo;
-        private string _NoRecordsFound;
+        private DataGrid _dataGrid;        
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
@@ -51,10 +41,9 @@ namespace SMS.Controllers
             //Get Global Objects
             GetGlobalObjects();
 
-            _FeeCollectionListFilters = new FeeCollectionListFiltersModel();
-            _FeeCollectionListOtherFileds = new FeeCollectionListOtherFiledsModel();
             // Get Lists
-            this.GetDropDownLists();
+            //this.GetDropDownLists();
+
             //Get Settings
             this.GetSettings();
             // Set pagination
@@ -74,16 +63,12 @@ namespace SMS.Controllers
             //Get Initial Grades list
             this.GetGradesList();
 
-            this.GradesSetup.GradesList.CollectionChanged += GradeList_CollectionChanged;
-
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
             _addNewGradeCommand = new RelayCommand(AddNewGrade, CanAddNewGrade);
             _cancelNewGradeCommand = new RelayCommand(CancelNewGrade, CanCancelNewGrade);
             _saveGradesCommand = new RelayCommand(SaveGrades, CanSaveGrades);
-
-            NoRecordsFound = "Visible";
 
             this.ShowList();
         }
@@ -105,74 +90,6 @@ namespace SMS.Controllers
             }
         }
 
-
-        public FeeCollectionStudentListModel SelectedItemInFeeCollectionStudentList
-        {
-            get
-            {
-                return _selectedItemInFeeCollectionStudentList;
-            }
-
-            set
-            {
-                _selectedItemInFeeCollectionStudentList = value;
-                loadCollectFeeWindow();
-            }
-
-        }
-
-        public FeeCollectionListFiltersModel FeeCollectionListFilters
-        {
-            get
-            {
-                return _FeeCollectionListFilters;
-            }
-            set
-            {
-                _FeeCollectionListFilters = value;
-            }
-        }
-
-        public FeeCollectionListOtherFiledsModel FeeCollectionListOtherFileds
-        {
-            get
-            {
-                return _FeeCollectionListOtherFileds;
-            }
-            set
-            {
-                _FeeCollectionListOtherFileds = value;
-            }
-        }
-
-        public GradesModel SelectedGrade
-        {
-            get { return _selectedGradeModel; }
-            set
-            {
-                if (_selectedGradeModel != value)
-                {
-                    _selectedGradeModel = value;
-                    FeeCollectionListFilters.Grade = this.SelectedGrade;
-                    this.LoadFeeCollectionAsFiltersHaveChanged();
-                }
-            }
-        }
-
-        public SectionsModel SelectedSection
-        {
-            get { return _selectedSectionModel; }
-            set
-            {
-                if (_selectedSectionModel != value)
-                {
-                    _selectedSectionModel = value;
-                    FeeCollectionListFilters.Section = this.SelectedSection;
-                    this.LoadFeeCollectionAsFiltersHaveChanged();
-                }
-            }
-        }
-
         public DataGrid GradesListDataGrid
         {
             get
@@ -184,18 +101,7 @@ namespace SMS.Controllers
                 _dataGrid = value;
             }
         }
-        public string NoRecordsFound
-        {
-            get
-            {
-                return _NoRecordsFound;
-            }
-            set
-            {
-                _NoRecordsFound = value;
-                OnPropertyChanged("NoRecordsFound");
-            }
-        }
+       
         #endregion
 
         #region NextPageCommand
@@ -214,15 +120,13 @@ namespace SMS.Controllers
         {
             try
             {
-                GradesListDataGrid.ItemsSource = null;
-                pageNo++;
-                FeeCollectionListOtherFileds.PageNo = "Page No : " + pageNo;
-                fromRowNo = toRowNo + 1;
-                toRowNo = pageNo * NoOfRecordsPerPage;
+                GradesSetup.pageNo++;
+                GradesSetup.PageNo = "Page No : " + GradesSetup.pageNo;
+                GradesSetup.fromRowNo = GradesSetup.toRowNo + 1;
+                GradesSetup.toRowNo = GradesSetup.pageNo * GradesSetup.NoOfRecordsPerPage;
                 this.GetGradesList();
-                if (pageNo > 1 && GradesSetup.GradesList.Count == 0)
+                if (GradesSetup.pageNo > 1 && GradesSetup.GradesList.Count == 0)
                     MoveToPreviousPage(obj);
-                GradesListDataGrid.ItemsSource = GradesSetup.GradesList;
             }
             catch (Exception ex)
             {
@@ -256,15 +160,13 @@ namespace SMS.Controllers
         {
             try
             {             
-                if (pageNo > 1)
+                if (GradesSetup.pageNo > 1)
                 {
-                    GradesListDataGrid.ItemsSource = null;
-                    pageNo--;
-                    FeeCollectionListOtherFileds.PageNo = "Page No : " + pageNo;
-                    toRowNo = fromRowNo - 1;
-                    fromRowNo = (toRowNo + 1) - NoOfRecordsPerPage;
+                    GradesSetup.pageNo--;
+                    GradesSetup.PageNo = "Page No : " + GradesSetup.pageNo;
+                    GradesSetup.toRowNo = GradesSetup.fromRowNo - 1;
+                    GradesSetup.fromRowNo = (GradesSetup.toRowNo + 1) - GradesSetup.NoOfRecordsPerPage;
                     this.GetGradesList();
-                    GradesListDataGrid.ItemsSource = GradesSetup.GradesList;
                 }
 
             }
@@ -402,8 +304,8 @@ namespace SMS.Controllers
         {
             try
             {
-                GradesSetup.GradesList = GradesSetupManager.GetGradesList(fromRowNo, toRowNo);
-                NoRecordsFound = GradesSetup.GradesList.Count > 0 ? "Collapsed" : "Visible";
+                GradesSetup.GradesList = GradesSetupManager.GetGradesList(GradesSetup.fromRowNo, GradesSetup.toRowNo);
+                GradesSetup.NoRecordsFound = GradesSetup.GradesList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
             {
@@ -439,59 +341,19 @@ namespace SMS.Controllers
 
         private void ResetPagination()
         {
-            fromRowNo = 1;
-            pageNo = 1;
-            FeeCollectionListOtherFileds.PageNo = "Page No : " + pageNo;
-            NoOfRecordsPerPage = NoOfRecords;
-            toRowNo = pageNo * NoOfRecordsPerPage;
+            GradesSetup.fromRowNo = 1;
+            GradesSetup.pageNo = 1;
+            GradesSetup.PageNo = "Page No : " + GradesSetup.pageNo;
+            GradesSetup.NoOfRecordsPerPage = GradesSetup.NoOfRecords;
+            GradesSetup.toRowNo = GradesSetup.pageNo * GradesSetup.NoOfRecordsPerPage;
         }
 
-        private void GetDropDownLists()
-        {
-
-            FeeCollectionListFilters.GradesList = GetListManager.GetGrades();
-            FeeCollectionListFilters.SectionsList = GetListManager.GetSections();
-        }
 
         private void GetSettings()
         {
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
-            NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
+            GradesSetup.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
         }
-
-        private void LoadFeeCollectionAsFiltersHaveChanged()
-        {
-            ResetPagination();
-            this.GetGradesList();
-            if (GradesListDataGrid != null)
-            {
-                GradesListDataGrid.ItemsSource = null;
-                GradesListDataGrid.ItemsSource = GradesSetup.GradesList;
-            }
-        }
-
-        private void loadCollectFeeWindow()
-        {
-            if (SelectedItemInFeeCollectionStudentList != null)
-            {
-                FeeCollect objFeeCollectWindow = new FeeCollect(SelectedItemInFeeCollectionStudentList);
-                objFeeCollectWindow.Show();
-            }
-        }
-
-        public void GradeList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {            
-            /*if (e.NewItems != null)
-                foreach (FeeBalancesModel item in e.NewItems)
-                    item.PropertyChanged += FeeBalancesModel_PropertyChanged;
-
-            if (e.OldItems != null)
-                foreach (FeeBalancesModel item in e.OldItems)
-                    item.PropertyChanged -= FeeBalancesModel_PropertyChanged;*/
-        }
-
-       
-
 
 
     }

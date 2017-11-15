@@ -27,8 +27,6 @@ namespace SMS.Views
             double height = SystemParameters.PrimaryScreenHeight - 250;
             GridLength gl = new GridLength(height);
             grdRowNo2.Height = gl;
-            ((GradesSetupController)dataGridGardesList.DataContext).GradesListDataGrid = this.dataGridGardesList;
-            //((FeeCollectionListController)grdFeeCollectionList.DataContext).Window = this;
         }
     }
 }

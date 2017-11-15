@@ -16,8 +16,15 @@ namespace SMS.Models
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
         private string _FormVisibility;
+        private string _PageNo;
+        private string _NoRecordsFound;
 
 
+        public int NoOfRecords{get; set;}
+        public int fromRowNo { get; set; }
+        public int pageNo { get; set; }
+        public int NoOfRecordsPerPage { get; set; }
+        public int toRowNo { get; set; }
         public ObservableCollection<GradesListModel> GradesList
         {
             get
@@ -52,6 +59,30 @@ namespace SMS.Models
             {
                 _FormVisibility = value;
                 OnPropertyChanged("FormVisibility");
+            }
+        }
+        public string PageNo
+        {
+            get
+            {
+                return _PageNo;
+            }
+            set
+            {
+                _PageNo = value;
+                OnPropertyChanged("PageNo");
+            }
+        }
+        public string NoRecordsFound
+        {
+            get
+            {
+                return _NoRecordsFound;
+            }
+            set
+            {
+                _NoRecordsFound = value;
+                OnPropertyChanged("NoRecordsFound");
             }
         }
 
