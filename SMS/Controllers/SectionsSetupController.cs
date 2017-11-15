@@ -8,23 +8,23 @@ using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class GradesSetupController :INotifyPropertyChanged
+    public class SectionsSetupController :INotifyPropertyChanged
     {
         #region Fields
-        private GradesSetupModel _GradesSetup;      
+        private SectionsSetupModel _SectionsSetup;      
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
-        private ICommand _addNewGradeCommand;
-        private ICommand _cancelNewGradeCommand;
-        private ICommand _saveGradesCommand;
+        private ICommand _addNewSectionCommand;
+        private ICommand _cancelNewSectionCommand;
+        private ICommand _saveSectionsCommand;
         #endregion
 
         #region Constructor
-        public GradesSetupController()
+        public SectionsSetupController()
         {
 
-            _GradesSetup = new GradesSetupModel()
+            _SectionsSetup = new SectionsSetupModel()
             {
                 CurrentLogin = new LoginModel(),
                 SchoolInfo = new SchoolModel()
@@ -42,25 +42,25 @@ namespace SMS.Controllers
             this.ResetPagination();
 
             //Subscribe to Model's Property changed event
-            this.GradesSetup.PropertyChanged += (s, e) => {
-                if (e.PropertyName == "SelectedItemInGradesList")
+            this.SectionsSetup.PropertyChanged += (s, e) => {
+                if (e.PropertyName == "SelectedItemInSectionsList")
                 {
-                    GradesSetup.Grade = GradesSetup.SelectedItemInGradesList;
+                    SectionsSetup.Section = SectionsSetup.SelectedItemInSectionsList;
                     this.ShowForm();
                 }
             };
 
             
 
-            //Get Initial Grades list
-            this.GetGradesList();
+            //Get Initial Sections list
+            this.GetSectionsList();
 
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
-            _addNewGradeCommand = new RelayCommand(AddNewGrade, CanAddNewGrade);
-            _cancelNewGradeCommand = new RelayCommand(CancelNewGrade, CanCancelNewGrade);
-            _saveGradesCommand = new RelayCommand(SaveGrades, CanSaveGrades);
+            _addNewSectionCommand = new RelayCommand(AddNewSection, CanAddNewSection);
+            _cancelNewSectionCommand = new RelayCommand(CancelNewSection, CanCancelNewSection);
+            _saveSectionsCommand = new RelayCommand(SaveSections, CanSaveSections);
 
             this.ShowList();
         }
@@ -69,16 +69,16 @@ namespace SMS.Controllers
 
         #region Properties
 
-        public GradesSetupModel GradesSetup
+        public SectionsSetupModel SectionsSetup
         {
             get
             {
-                return _GradesSetup;
+                return _SectionsSetup;
             }
             set
             {
-                _GradesSetup = value;
-                OnPropertyChanged("GradesSetup");
+                _SectionsSetup = value;
+                OnPropertyChanged("SectionsSetup");
             }
         }
        
@@ -100,12 +100,12 @@ namespace SMS.Controllers
         {
             try
             {
-                GradesSetup.pageNo++;
-                GradesSetup.PageNo = "Page No : " + GradesSetup.pageNo;
-                GradesSetup.fromRowNo = GradesSetup.toRowNo + 1;
-                GradesSetup.toRowNo = GradesSetup.pageNo * GradesSetup.NoOfRecordsPerPage;
-                this.GetGradesList();
-                if (GradesSetup.pageNo > 1 && GradesSetup.GradesList.Count == 0)
+                SectionsSetup.pageNo++;
+                SectionsSetup.PageNo = "Page No : " + SectionsSetup.pageNo;
+                SectionsSetup.fromRowNo = SectionsSetup.toRowNo + 1;
+                SectionsSetup.toRowNo = SectionsSetup.pageNo * SectionsSetup.NoOfRecordsPerPage;
+                this.GetSectionsList();
+                if (SectionsSetup.pageNo > 1 && SectionsSetup.SectionsList.Count == 0)
                     MoveToPreviousPage(obj);
             }
             catch (Exception ex)
@@ -140,13 +140,13 @@ namespace SMS.Controllers
         {
             try
             {             
-                if (GradesSetup.pageNo > 1)
+                if (SectionsSetup.pageNo > 1)
                 {
-                    GradesSetup.pageNo--;
-                    GradesSetup.PageNo = "Page No : " + GradesSetup.pageNo;
-                    GradesSetup.toRowNo = GradesSetup.fromRowNo - 1;
-                    GradesSetup.fromRowNo = (GradesSetup.toRowNo + 1) - GradesSetup.NoOfRecordsPerPage;
-                    this.GetGradesList();
+                    SectionsSetup.pageNo--;
+                    SectionsSetup.PageNo = "Page No : " + SectionsSetup.pageNo;
+                    SectionsSetup.toRowNo = SectionsSetup.fromRowNo - 1;
+                    SectionsSetup.fromRowNo = (SectionsSetup.toRowNo + 1) - SectionsSetup.NoOfRecordsPerPage;
+                    this.GetSectionsList();
                 }
 
             }
@@ -162,25 +162,25 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region AddNewGradeCommand
+        #region AddNewSectionCommand
 
-        public ICommand AddNewGradeCommand
+        public ICommand AddNewSectionCommand
         {
-            get { return _addNewGradeCommand; }
+            get { return _addNewSectionCommand; }
         }
 
 
-        public bool CanAddNewGrade(object obj)
+        public bool CanAddNewSection(object obj)
         {
             return true;
         }
 
 
-        public void AddNewGrade(object obj)
+        public void AddNewSection(object obj)
         {
             try
             {
-                GradesSetup.Grade = new GradesListModel();
+                SectionsSetup.Section = new SectionsListModel();
                 this.ShowForm();
             }
             catch (Exception ex)
@@ -195,21 +195,21 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region CancelNewGradeCommand
+        #region CancelNewSectionCommand
 
-        public ICommand CancelNewGradeCommand
+        public ICommand CancelNewSectionCommand
         {
-            get { return _cancelNewGradeCommand; }
+            get { return _cancelNewSectionCommand; }
         }
 
 
-        public bool CanCancelNewGrade(object obj)
+        public bool CanCancelNewSection(object obj)
         {
             return true;
         }
 
 
-        public void CancelNewGrade(object obj)
+        public void CancelNewSection(object obj)
         {
             try
             {
@@ -227,26 +227,26 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region SaveGradesCommand
-        public ICommand SaveGradesCommand
+        #region SaveSectionsCommand
+        public ICommand SaveSectionsCommand
         {
-            get { return _saveGradesCommand; }
+            get { return _saveSectionsCommand; }
         }
 
 
-        public bool CanSaveGrades(object obj)
+        public bool CanSaveSections(object obj)
         {
-            return GradesSetup.Grade != null && GradesSetup.Grade.name != null && GradesSetup.Grade.block != null;                
+            return SectionsSetup.Section != null && SectionsSetup.Section.name != null && SectionsSetup.Section.capacity != 0;                
         }
 
-        public void SaveGrades(object obj)
+        public void SaveSections(object obj)
         {
             try
             {
-                if (GradesSetupManager.CreateOrModfiyGrades(GradesSetup.Grade, GradesSetup.CurrentLogin, GradesSetup.SchoolInfo))
+                if (SectionsSetupManager.CreateOrModfiySections(SectionsSetup.Section, SectionsSetup.CurrentLogin, SectionsSetup.SchoolInfo))
                 {
-                    GeneralMethods.ShowNotification("Notification", "Grade Saved Successfully");
-                    this.GetGradesList();
+                    GeneralMethods.ShowNotification("Notification", "Section Saved Successfully");
+                    this.GetSectionsList();
                     this.ShowList();
                 }
 
@@ -277,12 +277,12 @@ namespace SMS.Controllers
         }
         #endregion
 
-        private void GetGradesList()
+        private void GetSectionsList()
         {
             try
             {
-                GradesSetup.GradesList = GradesSetupManager.GetGradesList(GradesSetup.fromRowNo, GradesSetup.toRowNo);
-                GradesSetup.NoRecordsFound = GradesSetup.GradesList.Count > 0 ? "Collapsed" : "Visible";
+                SectionsSetup.SectionsList = SectionsSetupManager.GetSectionsList(SectionsSetup.fromRowNo, SectionsSetup.toRowNo);
+                SectionsSetup.NoRecordsFound = SectionsSetup.SectionsList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
             {
@@ -298,38 +298,38 @@ namespace SMS.Controllers
 
         private void ShowForm()
         {
-            GradesSetup.ListVisibility = "Collapsed";
-            GradesSetup.FormVisibility = "Visible";
+            SectionsSetup.ListVisibility = "Collapsed";
+            SectionsSetup.FormVisibility = "Visible";
         }
 
         private void ShowList()
         {
-            GradesSetup.ListVisibility = "Visible";
-            GradesSetup.FormVisibility = "Collapsed";
+            SectionsSetup.ListVisibility = "Visible";
+            SectionsSetup.FormVisibility = "Collapsed";
         }
 
         private void GetGlobalObjects()
         {
             //Get the Current Login
-            GradesSetup.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
+            SectionsSetup.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
             //Get School Info
-            GradesSetup.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+            SectionsSetup.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
         }
 
         private void ResetPagination()
         {
-            GradesSetup.fromRowNo = 1;
-            GradesSetup.pageNo = 1;
-            GradesSetup.PageNo = "Page No : " + GradesSetup.pageNo;
-            GradesSetup.NoOfRecordsPerPage = GradesSetup.NoOfRecords;
-            GradesSetup.toRowNo = GradesSetup.pageNo * GradesSetup.NoOfRecordsPerPage;
+            SectionsSetup.fromRowNo = 1;
+            SectionsSetup.pageNo = 1;
+            SectionsSetup.PageNo = "Page No : " + SectionsSetup.pageNo;
+            SectionsSetup.NoOfRecordsPerPage = SectionsSetup.NoOfRecords;
+            SectionsSetup.toRowNo = SectionsSetup.pageNo * SectionsSetup.NoOfRecordsPerPage;
         }
 
 
         private void GetSettings()
         {
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
-            GradesSetup.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
+            SectionsSetup.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
         }
 
 

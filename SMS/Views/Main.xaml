@@ -33,7 +33,7 @@
             <local:SessionsList />
         </DataTemplate>
         <DataTemplate x:Key="SectionsView" DataType="{x:Type vm:MainController}">
-            <local:SectionsList />
+            <local:SectionsSetup />
         </DataTemplate>
 
     </Window.Resources>
