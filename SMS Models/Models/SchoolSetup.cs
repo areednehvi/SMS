@@ -11,45 +11,7 @@ namespace SMS.Models
 {
     public class SchoolSetupModel : INotifyPropertyChanged
     {
-        private bool _IsSetupInProgress;
-        private string _SetupStatus;
-        private string _Key;
         private SchoolModel _SchoolInfo;
-
-        public bool IsSetupInProgress
-        {
-            get { return _IsSetupInProgress; }
-            set
-            {
-                _IsSetupInProgress = value;
-                OnPropertyChanged("IsSetupInProgress");
-            }
-        }
-        public string SetupStatus
-        {
-            get
-            {
-                return _SetupStatus;
-            }
-            set
-            {
-                _SetupStatus = value;
-                OnPropertyChanged("SetupStatus");
-            }
-        }
-
-        public string Key
-        {
-            get
-            {
-                return _Key;
-            }
-            set
-            {
-                _Key = value;
-                OnPropertyChanged("Key");
-            }
-        }
 
         public SchoolModel SchoolInfo
         {

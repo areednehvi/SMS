@@ -29,7 +29,10 @@ namespace SMS.Controllers
         #region Constructor
         public SchoolSetupController()
         {
-            _SchoolSetup = new SchoolSetupModel();
+            _SchoolSetup = new SchoolSetupModel()
+            {
+                SchoolInfo = new SchoolModel()
+            };
             //Initialize  Commands
             _setupSchoolCommand = new RelayCommand(SetupSchool, CanSetupSchool);
             _closeCommand = new RelayCommand(CloseLogin, CanClose);
@@ -66,34 +69,26 @@ namespace SMS.Controllers
       
         public bool CanSetupSchool(object obj)
         {
-            return !SchoolSetup.IsSetupInProgress && !string.IsNullOrEmpty(SchoolSetup.Key);
+            return SchoolSetup.SchoolInfo!= null && 
+                SchoolSetup.SchoolInfo.name != null &&
+                SchoolSetup.SchoolInfo.phone != null &&
+                SchoolSetup.SchoolInfo.address != null;
         }
 
         public void SetupSchool(object obj)
         {
             try
             {
-                SchoolSetup.IsSetupInProgress = true;
-                
-                BackgroundWorker objBackgroundWorker = new BackgroundWorker();
+                if (SchoolSetupManager.SetSchooInfo(SchoolSetup.SchoolInfo))
+                {
+                    CreateSchoolGlobalObject();
 
-                // Configure the function that will run when started
-                objBackgroundWorker.DoWork += new DoWorkEventHandler(Setup);
+                    GeneralMethods.ShowNotification("Notification", "School Setup Successfully");
 
-                /*The progress reporting is not needed with this implementation and is therefore
-                commented out.  However, if our School App Grows into a more complex application, we may have a use for
-                for this.
-
-                //Enable progress and configure the progress function
-                worker.WorkerReportsProgress = true;
-                worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-                */
-
-                // Configure the function to run when completed
-                objBackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(SetupCompleted);
-
-                // Launch the sync               
-                objBackgroundWorker.RunWorkerAsync();
+                    Main winMain = new Main();
+                    winMain.Show();
+                    Window.Close();
+                }
 
             }
             catch (Exception ex)
@@ -163,66 +158,7 @@ namespace SMS.Controllers
         #endregion
 
         #region Private Functions
-        private void Setup(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                //BackgroundWorker worker = sender as BackgroundWorker;
 
-                SchoolSetup.SetupStatus = SchoolSetupNotifications.CheckingInternetConnection;
-                if (!GeneralMethods.IsInternetAvailable())
-                {
-                    SchoolSetup.SetupStatus = SchoolSetupNotifications.InternetNotAvailable;
-                    return;
-                }
-                SchoolSetup.SetupStatus = SchoolSetupNotifications.SetupStarted;
-                Thread.Sleep(100);
-                SchoolSetup.SchoolInfo = new SchoolModel();
-                //get School Info from online API
-                //.....
-                //SchoolSetupManager.SetSchooInfo(SchoolSetup.SchoolInfo);
-                //....
-
-                SchoolSetup.SetupStatus = SchoolSetupNotifications.SetupCompleted;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-
-            }
-
-
-        }
-
-        void SetupCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            try
-            {
-                SchoolSetup.IsSetupInProgress = false;
-                if (SchoolSetup.SetupStatus == SchoolSetupNotifications.InternetNotAvailable)
-                    GeneralMethods.ShowNotification("Internet Not Available!", "Please check your Internet Connection!", true);
-                else if (SchoolSetup.SetupStatus == SchoolSetupNotifications.SetupCompleted)
-                {
-                    CreateSchoolGlobalObject();
-
-                    Main winMain = new Main();
-                    winMain.Show();
-                    Window.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-
-            }
-        }
         private void CreateSchoolGlobalObject()
         {
             //Maintain state of School Info

@@ -90,7 +90,7 @@ namespace SMS_Businness_Layer.Businness
                 objGrade.updated_by = objCurrentLogin.ID;
                 objGrade.created_on = DateTime.Now;
                 objGrade.updated_on = DateTime.Now;
-                objGrade.school_id = Guid.NewGuid().ToString();
+                objGrade.school_id = SchoolInfo.id_offline;
                 DataTable objDatatable = MapGradeListObjectToDataTable(objGrade);
                 SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
                 objSqlParameter.TypeName = DBTableTypes.grades;
