@@ -83,7 +83,7 @@ namespace SMS_Businness_Layer.Businness
             Boolean IsSuccess = false;
             try
             {
-                objGrade.id_offline = Guid.NewGuid().ToString();
+                objGrade.id_offline = objGrade.id_offline == null ? Guid.NewGuid().ToString() : objGrade.id_offline;
                 objGrade.id_online = Guid.Empty.ToString();
                 objGrade.order = "2";
                 objGrade.created_by = objCurrentLogin.ID;

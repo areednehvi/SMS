@@ -82,8 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\GradesViewController.cs" />
-    <Compile Include="Controllers\GradesListController.cs" />
+    <Compile Include="Controllers\GradesSetupController.cs" />
     <Compile Include="Controllers\SchoolSetupController.cs" />
     <Compile Include="Controllers\FeeCollectController.cs" />
     <Compile Include="Controllers\FeeCollectionListController.cs" />
@@ -99,11 +98,8 @@
     <Compile Include="Shared\SyncDefnitions.cs" />
     <Compile Include="Shared\SettingDefinitions.cs" />
     <Compile Include="Shared\ViewDefinitions.cs" />
-    <Compile Include="Views\GradesView.xaml.cs">
-      <DependentUpon>GradesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GradesList.xaml.cs">
-      <DependentUpon>GradesList.xaml</DependentUpon>
+    <Compile Include="Views\GradesSetup.xaml.cs">
+      <DependentUpon>GradesSetup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Sections.xaml.cs">
       <DependentUpon>Sections.xaml</DependentUpon>
@@ -132,11 +128,7 @@
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\GradesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\GradesList.xaml">
+    <Page Include="Views\GradesSetup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

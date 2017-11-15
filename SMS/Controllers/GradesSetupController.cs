@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static SMS_Models.Models.DBModels;
 
 namespace SMS.Controllers
 {
-    public class GradesListController :INotifyPropertyChanged
+    public class GradesSetupController :INotifyPropertyChanged
     {
         #region Fields
         private GradesSetupModel _GradesSetup;
+
 
         private FeeCollectionStudentListModel _selectedItemInFeeCollectionStudentList;
         private FeeCollectionListFiltersModel _FeeCollectionListFilters;
@@ -30,16 +30,26 @@ namespace SMS.Controllers
         private int NoOfRecords;
         private int fromRowNo,pageNo, NoOfRecordsPerPage, toRowNo;
         private string _NoRecordsFound;
+
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
         private ICommand _addNewGradeCommand;
+        private ICommand _cancelNewGradeCommand;
+        private ICommand _saveGradesCommand;
         #endregion
 
         #region Constructor
-        public GradesListController()
+        public GradesSetupController()
         {
 
-            _GradesSetup = new GradesSetupModel();
+            _GradesSetup = new GradesSetupModel()
+            {
+                CurrentLogin = new LoginModel(),
+                SchoolInfo = new SchoolModel()
+            };
+
+            //Get Global Objects
+            GetGlobalObjects();
 
             _FeeCollectionListFilters = new FeeCollectionListFiltersModel();
             _FeeCollectionListOtherFileds = new FeeCollectionListOtherFiledsModel();
@@ -51,9 +61,13 @@ namespace SMS.Controllers
             this.ResetPagination();
 
             //Subscribe to Model's Property changed event
-            //this.FeeCollectionListFilters.PropertyChanged += (s, e) => {
-            //    this.LoadFeeCollectionAsFiltersHaveChanged();
-            //};
+            this.GradesSetup.PropertyChanged += (s, e) => {
+                if (e.PropertyName == "SelectedItemInGradesList")
+                {
+                    GradesSetup.Grade = GradesSetup.SelectedItemInGradesList;
+                    this.ShowForm();
+                }
+            };
 
             
 
@@ -66,8 +80,12 @@ namespace SMS.Controllers
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
             _addNewGradeCommand = new RelayCommand(AddNewGrade, CanAddNewGrade);
+            _cancelNewGradeCommand = new RelayCommand(CancelNewGrade, CanCancelNewGrade);
+            _saveGradesCommand = new RelayCommand(SaveGrades, CanSaveGrades);
 
             NoRecordsFound = "Visible";
+
+            this.ShowList();
         }
         
         #endregion
@@ -280,8 +298,8 @@ namespace SMS.Controllers
         {
             try
             {
-                GradesView winGradesView = new GradesView();
-                winGradesView.Show();
+                GradesSetup.Grade = new GradesListModel();
+                this.ShowForm();
             }
             catch (Exception ex)
             {
@@ -295,6 +313,78 @@ namespace SMS.Controllers
         }
         #endregion
 
+        #region CancelNewGradeCommand
+
+        public ICommand CancelNewGradeCommand
+        {
+            get { return _cancelNewGradeCommand; }
+        }
+
+
+        public bool CanCancelNewGrade(object obj)
+        {
+            return true;
+        }
+
+
+        public void CancelNewGrade(object obj)
+        {
+            try
+            {
+                this.ShowList();
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+
+            }
+        }
+        #endregion
+
+        #region SaveGradesCommand
+        public ICommand SaveGradesCommand
+        {
+            get { return _saveGradesCommand; }
+        }
+
+
+        public bool CanSaveGrades(object obj)
+        {
+            if (GradesSetup.Grade != null && GradesSetup.Grade.name != null && GradesSetup.Grade.block != null)
+                return true;
+            else
+                return false;
+        }
+
+        public void SaveGrades(object obj)
+        {
+            try
+            {
+                if (GradesSetupManager.CreateOrModfiyGrades(GradesSetup.Grade, GradesSetup.CurrentLogin, GradesSetup.SchoolInfo))
+                {
+                    GeneralMethods.ShowNotification("Notification", "Grade Saved Successfully");
+                    this.GetGradesList();
+                    this.ShowList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+
+            }
+
+        }
+
+        #endregion      
 
         #region INotifyPropertyChanged Members
 
@@ -325,6 +415,26 @@ namespace SMS.Controllers
 
             }
 
+        }
+
+        private void ShowForm()
+        {
+            GradesSetup.ListVisibility = "Collapsed";
+            GradesSetup.FormVisibility = "Visible";
+        }
+
+        private void ShowList()
+        {
+            GradesSetup.ListVisibility = "Visible";
+            GradesSetup.FormVisibility = "Collapsed";
+        }
+
+        private void GetGlobalObjects()
+        {
+            //Get the Current Login
+            GradesSetup.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
+            //Get School Info
+            GradesSetup.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
         }
 
         private void ResetPagination()
@@ -379,6 +489,8 @@ namespace SMS.Controllers
                 foreach (FeeBalancesModel item in e.OldItems)
                     item.PropertyChanged -= FeeBalancesModel_PropertyChanged;*/
         }
+
+       
 
 
 

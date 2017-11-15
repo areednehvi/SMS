@@ -4,20 +4,19 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
     public class GradesSetupModel : INotifyPropertyChanged
     {
         private GradesListModel _SelectedItemInGradesList;
-        private GradesListModel _NewGrade;
+        private GradesListModel _Grade;
         private ObservableCollection<GradesListModel> _GradesList;
-        private Window _window;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
+        private string _ListVisibility;
+        private string _FormVisibility;
+
 
         public ObservableCollection<GradesListModel> GradesList
         {
@@ -29,6 +28,30 @@ namespace SMS.Models
             {
                 _GradesList = value;
                 OnPropertyChanged("GradesList");
+            }
+        }
+        public string ListVisibility
+        {
+            get
+            {
+                return _ListVisibility;
+            }
+            set
+            {
+                _ListVisibility = value;
+                OnPropertyChanged("ListVisibility");
+            }
+        }
+        public string FormVisibility
+        {
+            get
+            {
+                return _FormVisibility;
+            }
+            set
+            {
+                _FormVisibility = value;
+                OnPropertyChanged("FormVisibility");
             }
         }
 
@@ -44,16 +67,16 @@ namespace SMS.Models
                 OnPropertyChanged("SelectedItemInGradesList");
             }
         }
-        public GradesListModel NewGrade
+        public GradesListModel Grade
         {
             get
             {
-                return _NewGrade;
+                return _Grade;
             }
             set
             {
-                _NewGrade = value;
-                OnPropertyChanged("NewGrade");
+                _Grade = value;
+                OnPropertyChanged("Grade");
             }
         }
 
@@ -77,18 +100,6 @@ namespace SMS.Models
             set
             {
                 _SchoolInfo = value;
-            }
-        }
-
-        public Window Window
-        {
-            get
-            {
-                return _window;
-            }
-            set
-            {
-                _window = value;
             }
         }
 

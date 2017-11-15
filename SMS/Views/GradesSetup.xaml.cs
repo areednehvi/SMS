@@ -17,17 +17,17 @@ using System.Windows.Shapes;
 namespace SMS.Views
 {
     /// <summary>
-    /// Interaction logic for Grades.xaml
+    /// Interaction logic for GradesSetup.xaml
     /// </summary>
-    public partial class GradesList : UserControl
+    public partial class GradesSetup : UserControl
     {
-        public GradesList()
+        public GradesSetup()
         {
             InitializeComponent();
             double height = SystemParameters.PrimaryScreenHeight - 250;
             GridLength gl = new GridLength(height);
             grdRowNo2.Height = gl;
-            ((GradesListController)dataGridGardesList.DataContext).GradesListDataGrid = this.dataGridGardesList;
+            ((GradesSetupController)dataGridGardesList.DataContext).GradesListDataGrid = this.dataGridGardesList;
             //((FeeCollectionListController)grdFeeCollectionList.DataContext).Window = this;
         }
     }

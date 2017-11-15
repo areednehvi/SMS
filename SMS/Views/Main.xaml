@@ -27,7 +27,7 @@
             <local:Settings />
         </DataTemplate>
         <DataTemplate x:Key="GradesView" DataType="{x:Type vm:MainController}">
-            <local:GradesList />
+            <local:GradesSetup />
         </DataTemplate>
         <DataTemplate x:Key="SessionsView" DataType="{x:Type vm:MainController}">
             <local:SessionsList />
