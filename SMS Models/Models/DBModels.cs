@@ -369,7 +369,7 @@ namespace SMS_Models.Models
             public string flags { get; set; }
             public DateTime last_login_time { get; set; }
             public string user_avatar_file_id { get; set; }
-            public string status { get; set; }
+            public Boolean is_active { get; set; }
             public DateTime created_on { get; set; }
             public string created_by { get; set; }
             public DateTime updated_on { get; set; }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DBModels.cs" />
+    <Compile Include="Models\UsersModels.cs" />
     <Compile Include="Models\SessionsSetupModels.cs" />
     <Compile Include="Models\SectionsSetupModels.cs" />
     <Compile Include="Models\GradesSetupModels.cs" />

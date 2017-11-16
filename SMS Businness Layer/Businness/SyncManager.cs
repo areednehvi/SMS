@@ -559,7 +559,8 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 DataTable table = new DataTable();
-                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("id_offline", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("student_id", typeof(string));
                 table.Columns.Add("role_id", typeof(string));
@@ -588,7 +589,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("flags", typeof(string));
                 table.Columns.Add("last_login_time", typeof(DateTime));
                 table.Columns.Add("user_avatar_file_id", typeof(string));
-                table.Columns.Add("status", typeof(string));
+                table.Columns.Add("is_active", typeof(Boolean));
                 table.Columns.Add("created_on", typeof(DateTime));
                 table.Columns.Add("created_by", typeof(string));
                 table.Columns.Add("updated_on", typeof(DateTime));
@@ -596,6 +597,7 @@ namespace SMS_Businness_Layer.Businness
 
                 table.Rows.Add(
                                 obj.id_offline,
+                                obj.id_online,
                                 obj.school_id,
                                 obj.student_id,
                                 obj.role_id,
@@ -624,7 +626,7 @@ namespace SMS_Businness_Layer.Businness
                                 obj.flags,
                                 obj.last_login_time,
                                 obj.user_avatar_file_id,
-                                obj.status,
+                                obj.is_active,
                                 obj.created_on,
                                 obj.created_by,
                                 obj.updated_on,
