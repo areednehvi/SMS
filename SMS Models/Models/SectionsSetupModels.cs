@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
@@ -147,17 +148,8 @@ namespace SMS.Models
         #endregion
     }
 
-    public class SectionsListModel
+    public class SectionsListModel :sectionsModel
     {
-        public string id_offline { get; set; }
-        public string id_online { get; set; }
-        public string school_id { get; set; }
-        public int capacity { get; set; }
-        public string name { get; set; }
-        public string created_by { get; set; }
-        public DateTime created_on { get; set; }
-        public string updated_by { get; set; }
-        public DateTime updated_on { get; set; }
         public string createdBy { get; set; }
     }
 

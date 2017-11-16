@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -179,13 +180,17 @@ namespace SMS_Models.Models
             public string id_online { get; set; }
             public string school_id { get; set; }
             public string name { get; set; }
-            public string capacity { get; set; }
+            public int capacity { get; set; }
             public string created_by { get; set; }
             public DateTime created_on { get; set; }
+            public string updated_by { get; set; }
+            public DateTime updated_on { get; set; }
 
         }
-        public class sessionsModel
+        public class sessionsModel : INotifyPropertyChanged
         {
+            private Boolean _is_active;
+
             public string id_offline { get; set; }
             public string id_online { get; set; }
             public string school_id { get; set; }
@@ -193,8 +198,34 @@ namespace SMS_Models.Models
             public string order { get; set; }
             public DateTime from_date { get; set; }
             public DateTime to_date { get; set; }
+            public Boolean is_active
+            {
+                get
+                {
+                    return _is_active;
+                }
+                set
+                {
+                    _is_active = value;
+                    OnPropertyChanged("is_active");
+                }
+            }
             public string created_by { get; set; }
             public DateTime created_on { get; set; }
+            public string updated_by { get; set; }
+            public DateTime updated_on { get; set; }
+
+            #region INotifyPropertyChanged Members
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            private void OnPropertyChanged(string propertyName)
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+            #endregion
 
         }
         public class student_feesModel

@@ -30,7 +30,7 @@
             <local:GradesSetup />
         </DataTemplate>
         <DataTemplate x:Key="SessionsView" DataType="{x:Type vm:MainController}">
-            <local:SessionsList />
+            <local:SessionsSetup />
         </DataTemplate>
         <DataTemplate x:Key="SectionsView" DataType="{x:Type vm:MainController}">
             <local:SectionsSetup />

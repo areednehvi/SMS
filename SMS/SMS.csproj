@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\SessionsSetupController.cs" />
     <Compile Include="Controllers\SectionsSetupController.cs" />
     <Compile Include="Controllers\GradesSetupController.cs" />
     <Compile Include="Controllers\SchoolSetupController.cs" />
@@ -99,14 +100,14 @@
     <Compile Include="Shared\SyncDefnitions.cs" />
     <Compile Include="Shared\SettingDefinitions.cs" />
     <Compile Include="Shared\ViewDefinitions.cs" />
+    <Compile Include="Views\SessionsSetup.xaml.cs">
+      <DependentUpon>SessionsSetup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SectionsSetup.xaml.cs">
       <DependentUpon>SectionsSetup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GradesSetup.xaml.cs">
       <DependentUpon>GradesSetup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Sessions.xaml.cs">
-      <DependentUpon>Sessions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SchoolSetup.xaml.cs">
       <DependentUpon>SchoolSetup.xaml</DependentUpon>
@@ -129,15 +130,15 @@
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\SessionsSetup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SectionsSetup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\GradesSetup.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Sessions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

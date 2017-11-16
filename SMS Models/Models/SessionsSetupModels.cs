@@ -8,11 +8,11 @@ using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
-    public class GradesSetupModel : INotifyPropertyChanged
+    public class SessionsSetupModel : INotifyPropertyChanged
     {
-        private GradesListModel _SelectedItemInGradesList;
-        private GradesListModel _Grade;
-        private ObservableCollection<GradesListModel> _GradesList;
+        private SessionsListModel _SelectedItemInSessionsList;
+        private SessionsListModel _Session;
+        private ObservableCollection<SessionsListModel> _SessionsList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
@@ -26,16 +26,16 @@ namespace SMS.Models
         public int pageNo { get; set; }
         public int NoOfRecordsPerPage { get; set; }
         public int toRowNo { get; set; }
-        public ObservableCollection<GradesListModel> GradesList
+        public ObservableCollection<SessionsListModel> SessionsList
         {
             get
             {
-                return _GradesList;
+                return _SessionsList;
             }
             set
             {
-                _GradesList = value;
-                OnPropertyChanged("GradesList");
+                _SessionsList = value;
+                OnPropertyChanged("SessionsList");
             }
         }
         public string ListVisibility
@@ -87,28 +87,28 @@ namespace SMS.Models
             }
         }
 
-        public GradesListModel SelectedItemInGradesList
+        public SessionsListModel SelectedItemInSessionsList
         {
             get
             {
-                return _SelectedItemInGradesList;
+                return _SelectedItemInSessionsList;
             }
             set
             {
-                _SelectedItemInGradesList = value;
-                OnPropertyChanged("SelectedItemInGradesList");
+                _SelectedItemInSessionsList = value;
+                OnPropertyChanged("SelectedItemInSessionsList");
             }
         }
-        public GradesListModel Grade
+        public SessionsListModel Session
         {
             get
             {
-                return _Grade;
+                return _Session;
             }
             set
             {
-                _Grade = value;
-                OnPropertyChanged("Grade");
+                _Session = value;
+                OnPropertyChanged("Session");
             }
         }
 
@@ -148,8 +148,8 @@ namespace SMS.Models
         #endregion
     }
 
-    public class GradesListModel : gradesModel
-    {        
+    public class SessionsListModel : sessionsModel
+    {
         public string createdBy { get; set; }
     }
 
