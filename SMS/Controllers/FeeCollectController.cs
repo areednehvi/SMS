@@ -409,7 +409,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -453,7 +453,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -500,7 +500,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -536,7 +536,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -586,7 +586,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -640,7 +640,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -677,7 +677,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -720,7 +720,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -764,7 +764,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -859,7 +859,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -879,7 +879,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {
@@ -900,7 +900,7 @@ namespace SMS.Controllers
             catch (Exception ex)
             {
                 var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
-                MessageBox.Show(errorMessage);
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
             }
             finally
             {

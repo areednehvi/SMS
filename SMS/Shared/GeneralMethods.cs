@@ -18,6 +18,12 @@ namespace SMS.Shared
             winNotification.Show();
         }
 
+        public static void ShowDialog(string Title, string Message, Boolean IsError = false)
+        {
+            Dialog winDialog = new Dialog(Title, Message, IsError);
+            winDialog.Show();
+        }
+
         public static void CreateGlobalObject(string globalObjectName, object objObject)
         {
             Application.Current.Properties[globalObjectName] = objObject;

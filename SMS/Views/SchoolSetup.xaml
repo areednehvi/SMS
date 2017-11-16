@@ -55,7 +55,7 @@
             <TextBlock Grid.Row="0" Margin="0,10,0,0" Text="Welcome to School Universe!" Style="{StaticResource MaterialDesignTitleTextBlock}" Foreground="#FF009688" HorizontalAlignment="Center" FontSize="30" />
             <TextBlock Grid.Row="1" Margin="0,20,0,0" Text="Enter following details to setup up your School" HorizontalAlignment="Center" FontSize="20" />
             <!-- Form -->
-            <Grid x:Name="grdGradesForm" Grid.Row="2" Visibility="{Binding GradesSetup.FormVisibility}">
+            <Grid x:Name="grdGradesForm" Grid.Row="2" Visibility="{Binding GradesSetup.FormVisibility}" FocusManager.FocusedElement="{Binding ElementName=tbName}">
                 <StackPanel>
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
@@ -76,7 +76,7 @@
                             <Label Content="Name *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="0" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="200" Text="{Binding SchoolSetup.SchoolInfo.name}" ToolTip="Enter Name" />
+                            <TextBox  x:Name="tbName" VerticalAlignment="Center" FontSize="18"   Width="200" Text="{Binding SchoolSetup.SchoolInfo.name}" ToolTip="Enter Name" />
                         </Border>
                         <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                             <Label Content="Phone *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
