@@ -249,12 +249,20 @@ namespace SMS.Controllers
             try
             {
                 Users.User.password = Users.PasswordBox.Password;
-                if (UsersManager.CreateOrModfiyUsers(Users.User, Users.CurrentLogin, Users.SchoolInfo))
+                if (!UsersManager.IsExistingUser(Users.User))
                 {
-                    GeneralMethods.ShowNotification("Notification", "User Saved Successfully");
-                    this.GetUsersList();
-                    this.ShowList();
+                    if (UsersManager.CreateOrModfiyUsers(Users.User, Users.CurrentLogin, Users.SchoolInfo))
+                    {
+                        GeneralMethods.ShowNotification("Notification", "User Saved Successfully");
+                        this.GetUsersList();
+                        this.ShowList();
+                    }
                 }
+                else
+                {
+                    GeneralMethods.ShowDialog("User Cannot be Created", "An account with same username exists. Kindly choose some other username", true);
+                }
+                
 
             }
             catch (Exception ex)

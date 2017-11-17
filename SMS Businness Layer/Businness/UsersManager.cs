@@ -103,6 +103,29 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
+        public static Boolean IsExistingUser(UsersListModel objUser)
+        {
+            Boolean isExistingUser = false;
+            try
+            {
+                List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
+                {
+                    new SqlParameter() {ParameterName = "@Username", SqlDbType = SqlDbType.NVarChar, Value = objUser.username}
+                };
+                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.IsExistingUser, lstSqlParameters);
+                isExistingUser = objDatable.Rows.Count > 0 ? true : false;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return isExistingUser;
+        }
         public static Boolean CreateOrModfiyUsers(UsersListModel objUsers, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
         {
             Boolean IsSuccess = false;
