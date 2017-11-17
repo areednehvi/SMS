@@ -182,7 +182,10 @@ namespace SMS.Controllers
         {
             try
             {
-                Users.User = new UsersListModel();
+                Users.User = new UsersListModel()
+                {
+                    is_active = true,
+                };
                 this.ShowForm();
             }
             catch (Exception ex)

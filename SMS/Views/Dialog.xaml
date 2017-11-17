@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SMS.Views"
         mc:Ignorable="d"
-        Title="Notification Popup" Width="600" SizeToContent="Height"
+        Title="Notification Popup" Width="500" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded" >
     <Grid FocusManager.FocusedElement="{Binding ElementName=tbTitle}">
 
