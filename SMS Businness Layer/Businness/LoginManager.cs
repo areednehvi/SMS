@@ -29,8 +29,19 @@ namespace SMS_Businness_Layer.Businness
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.AuthenticateUser, lstSqlParameters);
                 if (objDatable.Rows.Count > 0)
                 {
-                    isValidUser = true;
-                    objLogin.ID =  objDatable.Rows[0]["id_offline"] != DBNull.Value ? objDatable.Rows[0]["id_offline"].ToString() : string.Empty;
+                    if (objDatable.Rows[0][0].ToString() == LoginDefinitions.AccountIsNotActive)
+                        objLogin.Message = LoginDefinitions.AccountIsNotActive;
+                    else if (objDatable.Rows[0][0].ToString() == LoginDefinitions.PasswordIsIncorrect)
+                        objLogin.Message = LoginDefinitions.PasswordIsIncorrect;
+                    else if (objDatable.Rows[0][0].ToString() == LoginDefinitions.UsernameIsIncorrect)
+                        objLogin.Message = LoginDefinitions.UsernameIsIncorrect;
+                    else if (objDatable.Rows[0][0].ToString() == LoginDefinitions.AccountDoesntExist)
+                        objLogin.Message = LoginDefinitions.AccountDoesntExist;
+                    else
+                    {
+                        objLogin.ID = objDatable.Rows[0]["id_offline"] != DBNull.Value ? objDatable.Rows[0]["id_offline"].ToString() : string.Empty;
+                        isValidUser = true;
+                    }
                 }
             }
             catch (Exception ex)

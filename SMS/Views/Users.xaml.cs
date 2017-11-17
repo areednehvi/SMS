@@ -24,6 +24,8 @@ namespace SMS.Views
         public Users()
         {
             InitializeComponent();
+            ((UsersController)txtPassword.DataContext).Users.PasswordBox = this.txtPassword;
+
             double height = SystemParameters.PrimaryScreenHeight - 250;
             GridLength gl = new GridLength(height);
             grdRowNo2.Height = gl;

@@ -38,12 +38,7 @@ namespace SMS.Controllers
                 {
                     //Save to DB
                     SettingsManager.SaveSetting(SettingDefinitions.AlwaysShowMenuBar, Settings.AlwaysShowMenuBar.ToString());                    
-                }
-                else if (e.PropertyName == SettingDefinitions.DisableSUAdminAccount)
-                {
-                    //Save to DB
-                    SettingsManager.SaveSetting(SettingDefinitions.DisableSUAdminAccount, Settings.DisableSUAdminAccount.ToString());
-                }
+                }            
                 GeneralMethods.ShowNotification("Notification", "Setting Saved Successfully!");
             };
         }
@@ -100,9 +95,6 @@ namespace SMS.Controllers
             //AlwaysShowMenuBar
             var alwaysShowMenuBar = SettingsManager.GetSetting(SettingDefinitions.AlwaysShowMenuBar);
             Settings.AlwaysShowMenuBar = alwaysShowMenuBar == null ? false : Convert.ToBoolean(alwaysShowMenuBar);
-            //DisableSUAdminAccount
-            var disableSUAdminAccount = SettingsManager.GetSetting(SettingDefinitions.DisableSUAdminAccount);
-            Settings.DisableSUAdminAccount = disableSUAdminAccount == null ? false : Convert.ToBoolean(disableSUAdminAccount);
         }
         private void CloseOtherWindows()
         {

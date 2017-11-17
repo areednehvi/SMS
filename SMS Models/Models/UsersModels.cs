@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
@@ -15,6 +16,7 @@ namespace SMS.Models
         private ObservableCollection<UsersListModel> _UsersList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
+        private PasswordBox _PasswordBox;
         private string _ListVisibility;
         private string _FormVisibility;
         private string _PageNo;
@@ -60,6 +62,18 @@ namespace SMS.Models
             {
                 _FormVisibility = value;
                 OnPropertyChanged("FormVisibility");
+            }
+        }
+        public PasswordBox PasswordBox
+        {
+            get
+            {
+                return _PasswordBox;
+            }
+            set
+            {
+                _PasswordBox = value;
+                OnPropertyChanged("PasswordBox");
             }
         }
         public string PageNo

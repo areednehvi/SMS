@@ -115,6 +115,13 @@ namespace SMS_Businness_Layer.Businness
                 objUsers.created_on = DateTime.Now;
                 objUsers.updated_on = DateTime.Now;
                 objUsers.school_id = SchoolInfo.id_offline;
+                objUsers.user_type = "staff";
+                objUsers.student_id = Guid.Empty.ToString();
+                objUsers.role_id = Guid.Empty.ToString();
+                objUsers.user_avatar_file_id = Guid.Empty.ToString();
+                objUsers.default_phone_number_id = Guid.Empty.ToString();
+                objUsers.first_name = objUsers.full_name.Split(' ')[0];
+                objUsers.last_name = objUsers.full_name.Split(' ').Length > 1 ? objUsers.full_name.Split(' ')[1] : string.Empty;
                 DataTable objDatatable = MapUsersListObjectToDataTable(objUsers);
                 SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
                 objSqlParameter.TypeName = DBTableTypes.users;
@@ -168,7 +175,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("flags", typeof(string));
                 table.Columns.Add("last_login_time", typeof(DateTime));
                 table.Columns.Add("user_avatar_file_id", typeof(string));
-                table.Columns.Add("is_active", typeof(Boolean));
+                table.Columns.Add("is_active", typeof(string));
                 table.Columns.Add("created_on", typeof(DateTime));
                 table.Columns.Add("created_by", typeof(string));
                 table.Columns.Add("updated_on", typeof(DateTime));

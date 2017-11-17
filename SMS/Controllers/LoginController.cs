@@ -18,8 +18,7 @@ namespace SMS.Controllers
         #region Fields
         private LoginModel _login;
         private SchoolModel _SchoolInfo;
-        private Window _window;
-        private Boolean IsSUAdminDisabled;       
+        private Window _window;      
         private ICommand _loginCommand;
         private ICommand _closeCommand;
         private ICommand _minimizeCommand;
@@ -29,8 +28,10 @@ namespace SMS.Controllers
         public LoginController()
         {
             _login = new LoginModel();
+
             //Get Settings
-            this.GetSettings();
+            //this.GetSettings();
+
             //Initialize commands
             _loginCommand = new RelayCommand(AuthenticateUser, CanLogin);
             _closeCommand = new RelayCommand(CloseLogin, CanClose);
@@ -98,11 +99,6 @@ namespace SMS.Controllers
             {
                 PasswordBox pwBox = obj as PasswordBox;
                 Login.Password = pwBox.Password;
-                if(Login.Username.ToUpper() == "ADMIN" && IsSUAdminDisabled)
-                {
-                    Login.Message = "Admin Account is disabled!";
-                    return;
-                }
                 if (LoginManager.ValidateUser(Login))
                 {
 
@@ -126,8 +122,6 @@ namespace SMS.Controllers
                         Window.Close();
                     }
                 }
-                else
-                    Login.Message = "Username and password are incorrect";
                 
             }
             catch (Exception ex)
@@ -197,9 +191,7 @@ namespace SMS.Controllers
         }
         private void GetSettings()
         {
-            //DisableSUAdminAccount
-            var disableSUAdminAccount = SettingsManager.GetSetting(SettingDefinitions.DisableSUAdminAccount);
-            IsSUAdminDisabled = disableSUAdminAccount == null ? false : Convert.ToBoolean(disableSUAdminAccount);
+
         }
         #endregion  
 

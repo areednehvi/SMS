@@ -4,6 +4,7 @@ using SMS_Businness_Layer.Businness;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SMS.Controllers
@@ -46,6 +47,7 @@ namespace SMS.Controllers
                 if (e.PropertyName == "SelectedItemInUsersList")
                 {
                     Users.User = Users.SelectedItemInUsersList;
+                    Users.PasswordBox.Password = Users.User != null ? Users.User.password : string.Empty;
                     this.ShowForm();
                 }
             };
@@ -238,8 +240,6 @@ namespace SMS.Controllers
         {
             return Users.User != null &&
                 Users.User.full_name != null &&
-                Users.User.gender != null &&
-                Users.User.password != null &&
                 Users.User.username != null;
 
         }
@@ -248,6 +248,7 @@ namespace SMS.Controllers
         {
             try
             {
+                Users.User.password = Users.PasswordBox.Password;
                 if (UsersManager.CreateOrModfiyUsers(Users.User, Users.CurrentLogin, Users.SchoolInfo))
                 {
                     GeneralMethods.ShowNotification("Notification", "User Saved Successfully");

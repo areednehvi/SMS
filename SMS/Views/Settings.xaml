@@ -45,17 +45,6 @@
                     <Label VerticalAlignment="Center" Margin="20,0,0,0"  HorizontalAlignment="Left" Content="(Tick the checkbox if you always want the menu bar to be visible)" FontStyle="Italic"/>
                 </Border>
 
-                <Border Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFE4FFE8" >
-                    <Label VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="DemiBold" Content="Disable SU Admin Account" Width="Auto" FontSize="16" Foreground="#FF009688" />
-                </Border>
-
-                <Border Grid.Row="2" Grid.Column="1" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Settings.DisableSUAdminAccount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0" Content="{Binding Settings.DisableSUAdminAccount}" ></CheckBox>
-                </Border>
-                <Border Grid.Row="2" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3" >
-                    <Label VerticalAlignment="Center" Margin="20,0,0,0"  HorizontalAlignment="Left" Content="(Tick the checkbox if you want to disable the suadmin login)" FontStyle="Italic"/>
-                </Border>
-
             </Grid>
         </materialDesign:Card>
     </Grid>
