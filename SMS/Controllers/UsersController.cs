@@ -186,6 +186,7 @@ namespace SMS.Controllers
                 {
                     is_active = true,
                 };
+                Users.PasswordBox.Password = null;
                 this.ShowForm();
             }
             catch (Exception ex)
@@ -252,7 +253,12 @@ namespace SMS.Controllers
             try
             {
                 Users.User.password = Users.PasswordBox.Password;
-                if (!UsersManager.IsExistingUser(Users.User))
+                if (Users.User.id_offline == null && UsersManager.IsExistingUser(Users.User))
+                {
+                    GeneralMethods.ShowDialog("User Cannot be Created", "An account with same username exists. Kindly choose some other username", true);
+                   
+                }
+                else
                 {
                     if (UsersManager.CreateOrModfiyUsers(Users.User, Users.CurrentLogin, Users.SchoolInfo))
                     {
@@ -260,11 +266,7 @@ namespace SMS.Controllers
                         this.GetUsersList();
                         this.ShowList();
                     }
-                }
-                else
-                {
-                    GeneralMethods.ShowDialog("User Cannot be Created", "An account with same username exists. Kindly choose some other username", true);
-                }
+                }                
                 
 
             }
