@@ -62,11 +62,20 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding full_name}"/>
-                    <DataGridTextColumn Width="*" Header="Login" Binding="{Binding Studentname}"/>
-                    <DataGridTextColumn Width="*" Header="Phone" Binding="{Binding phone}" />
-                    <DataGridTextColumn Width="*" Header="Is Active" Binding="{Binding is_active}" />
-                    <DataGridTextColumn Width="*" Header="Last Login" Binding="{Binding last_login_time,StringFormat='dd/MM/yyyy hh:mm tt'}" />
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding User.full_name}"/>
+                    <DataGridTextColumn Width="*" Header="Registration #" Binding="{Binding registration_id}"/>
+                    <DataGridTextColumn Width="*" Header="Grade" Binding="{Binding Grade.name}" />
+                    <DataGridTextColumn Width="*" Header="Section" Binding="{Binding Section.name}" />
+                    <DataGridTextColumn Width="*" Header="Roll No." Binding="{Binding roll_number}" />
+                    <DataGridTextColumn Width="*" Header="Parentage">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}F:{0} M:{1}">
+                                <Binding Path="Parents.f_full_name" />
+                                <Binding Path="Parents.m_full_name" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Status" Binding="{Binding status}" />
                 </DataGrid.Columns>
                 <!-- the following defines sub rows-->
                 <!--<DataGrid.RowDetailsTemplate>

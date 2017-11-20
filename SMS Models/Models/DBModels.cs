@@ -90,6 +90,7 @@ namespace SMS_Models.Models
             public string f_first_name { get; set; }
             public string f_middle_name { get; set; }
             public string f_last_name { get; set; }
+            public string f_full_name { get; set; }
             public string f_mobile { get; set; }
             public string f_phone { get; set; }
             public string f_office { get; set; }
@@ -97,6 +98,7 @@ namespace SMS_Models.Models
             public string m_first_name { get; set; }
             public string m_middle_name { get; set; }
             public string m_last_name { get; set; }
+            public string m_full_name { get; set; }
             public string m_mobile { get; set; }
             public string m_phone { get; set; }
             public string m_office { get; set; }
@@ -104,6 +106,10 @@ namespace SMS_Models.Models
             public string g_fullname { get; set; }
             public string g_mobile { get; set; }
             public string g_email { get; set; }
+            public string created_by { get; set; }
+            public DateTime created_on { get; set; }
+            public string updated_by { get; set; }
+            public DateTime updated_on { get; set; }
 
         }
         public class route_stopsModel

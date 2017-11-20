@@ -162,9 +162,74 @@ namespace SMS.Models
         #endregion
     }
 
-    public class StudentsListModel : studentsModel
+    public class StudentsListModel : studentsModel, INotifyPropertyChanged 
     {
-        public string createdBy { get; set; }
+        private usersModel _User;
+        private parentsModel _Parents;
+        private gradesModel _Grade;
+        private sectionsModel _Section;
+        public usersModel User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                _User = value;
+                OnPropertyChanged("User");
+            }
+        }
+
+        public parentsModel Parents
+        {
+            get
+            {
+                return _Parents;
+            }
+            set
+            {
+                _Parents = value;
+                OnPropertyChanged("Parents");
+            }
+        }
+        public gradesModel Grade
+        {
+            get
+            {
+                return _Grade;
+            }
+            set
+            {
+                _Grade = value;
+                OnPropertyChanged("Grade");
+            }
+        }
+        public sectionsModel Section
+        {
+            get
+            {
+                return _Section;
+            }
+            set
+            {
+                _Section = value;
+                OnPropertyChanged("Section");
+            }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+
     }
 
 
