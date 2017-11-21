@@ -97,6 +97,9 @@
                             <RowDefinition Height="65" />
                             <RowDefinition Height="65" />
                             <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
+                            <RowDefinition Height="65" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
@@ -107,52 +110,94 @@
 
                         <!-- Row 0 -->
                         <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Login *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Name *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="0" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding Students.Student.Studentname}"/>
+                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding Students.Student.User.full_name}"/>
                         </Border>
                         <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Password *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Session *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="0" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <PasswordBox x:Name="txtPassword"  VerticalAlignment="Center" FontSize="18" Width="300" />
+                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding Students.Student.session_id}"/>
                         </Border>
 
                         <!-- Row 1 -->
                         
                         <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Name *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Grade *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="1" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.full_name}"/>
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Grade}"/>
                         </Border>
                         <Border Grid.Row="1" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Email" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Section *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="1" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding Students.Student.email}"/>
+                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding Students.Student.Section}"/>
                         </Border>
 
                         <!-- Row 2 -->
                         <Border Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Phone" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Gender *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="2" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.phone}"/>
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.gender}"/>
                         </Border>
                         <Border Grid.Row="2" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Is Active *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Status *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="2" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <CheckBox  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding Students.Student.is_active}" IsChecked="{Binding Students.Student.is_active}"/>
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.status}"/>
                         </Border>
 
-                        <!-- Row 3-->
+                        <!-- Row 3 -->
+                        <Border Grid.Row="3" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Registration ID *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        </Border>
+                        <Border Grid.Row="3" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.registration_id}"/>
+                        </Border>
+                        <Border Grid.Row="3" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Date of Enrollment *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        </Border>
+                        <Border Grid.Row="3" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.enrollment_date}"/>
+                        </Border>
+
+                        <!-- Row 4 -->
                         <Border Grid.Row="4" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            <Label Content="Blood Group *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="4" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.blood_group}"/>
+                        </Border>
+                        <Border Grid.Row="4" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Birth Date *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        </Border>
+                        <Border Grid.Row="4" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.birth_date}"/>
+                        </Border>
+
+                        <!-- Row 5 -->
+                        <Border Grid.Row="5" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Blood Group *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        </Border>
+                        <Border Grid.Row="5" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.blood_group}"/>
+                        </Border>
+                        <Border Grid.Row="5" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Birth Date *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        </Border>
+                        <Border Grid.Row="5" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.birth_date}"/>
+                        </Border>
+
+                        <!-- Row 7-->
+                        <Border Grid.Row="7" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                        </Border>
+                        <Border Grid.Row="7" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
                             <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding Students.CurrentLogin.Studentname}"/>
                         </Border>
                     </Grid>
