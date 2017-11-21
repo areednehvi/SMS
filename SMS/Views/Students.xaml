@@ -106,6 +106,14 @@
                                 <RowDefinition Height="65" />
                                 <RowDefinition Height="65" />
                                 <RowDefinition Height="65" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="65" />
+                                <RowDefinition Height="65" />
+                                <RowDefinition Height="65" />
+                                <RowDefinition Height="65" />
+                                <RowDefinition Height="65" />
+                                <RowDefinition Height="65" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200" />
@@ -238,6 +246,89 @@
                             </Border>
                             <Border Grid.Row="9" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
                                 <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding Students.CurrentLogin.Studentname}"/>
+                            </Border>
+
+                            <!-- Row 11 -->
+                            <Border Grid.Row="11" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FF009688" CornerRadius="25,25,0,0">
+                                <Label Content="Parents Detail" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White" />
+                            </Border>
+
+                            <!-- Row 12-->
+                            <Border Grid.Row="12" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Father" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            </Border>
+                            <Border Grid.Row="12" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.f_full_name}"/>
+                            </Border>
+                            <Border Grid.Row="12" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Father's Phone" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            </Border>
+                            <Border Grid.Row="12" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.f_mobile}"/>
+                            </Border>
+
+                            <!-- Row 13-->
+                            <Border Grid.Row="13" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Father's Office" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            </Border>
+                            <Border Grid.Row="13" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.f_office}"/>
+                            </Border>
+                            <Border Grid.Row="13" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Father's Email" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            </Border>
+                            <Border Grid.Row="13" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.f_email}"/>
+                            </Border>
+
+                            <!-- Row 14 -->
+                            <Border Grid.Row="14" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Mother" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            </Border>
+                            <Border Grid.Row="14" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.m_full_name}"/>
+                            </Border>
+                            <Border Grid.Row="14" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Mother's Phone" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            </Border>
+                            <Border Grid.Row="14" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.m_phone}"/>
+                            </Border>
+
+                            <!-- Row 15 -->
+                            <Border Grid.Row="15" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Mother's Office" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            </Border>
+                            <Border Grid.Row="15" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.m_office}"/>
+                            </Border>
+                            <Border Grid.Row="15" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Mother's Email" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            </Border>
+                            <Border Grid.Row="15" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.m_email}"/>
+                            </Border>
+
+                            <!-- Row 16 -->
+                            <Border Grid.Row="16" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Gaurdian" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            </Border>
+                            <Border Grid.Row="16" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.g_fullname}"/>
+                            </Border>
+                            <Border Grid.Row="16" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Gaurdian's Phone" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            </Border>
+                            <Border Grid.Row="16" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.g_mobile}"/>
+                            </Border>
+
+                            <!-- Row 17 -->
+                            <Border Grid.Row="17" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                <Label Content="Gaurdian's Email" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
+                            </Border>
+                            <Border Grid.Row="17" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Parents.g_email}"/>
                             </Border>
                         </Grid>
                     </ScrollViewer>
