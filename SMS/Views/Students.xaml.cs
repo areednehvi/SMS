@@ -28,6 +28,8 @@ namespace SMS.Views
             double height = SystemParameters.PrimaryScreenHeight - 250;
             GridLength gl = new GridLength(height);
             grdRowNo2.Height = gl;
+
+            svForm.Height = height + 100;
         }
     }
 }
