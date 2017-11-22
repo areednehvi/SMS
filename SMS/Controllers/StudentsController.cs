@@ -2,10 +2,12 @@
 using SMS.Shared;
 using SMS_Businness_Layer.Businness;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static SMS_Models.Models.DBModels;
 
 namespace SMS.Controllers
 {
@@ -28,14 +30,14 @@ namespace SMS.Controllers
             _Students = new StudentsModel()
             {
                 CurrentLogin = new LoginModel(),
-                SchoolInfo = new SchoolModel()
+                SchoolInfo = new SchoolModel(),              
             };
 
             //Get Global Objects
             GetGlobalObjects();
 
-            // Get Lists
-            //this.GetDropDownLists();
+            // Get drop down Lists
+            this.GetDropDownLists();
 
             //Get Settings
             this.GetSettings();
@@ -48,6 +50,14 @@ namespace SMS.Controllers
                 if (e.PropertyName == "SelectedItemInStudentsList")
                 {
                     Students.Student = Students.SelectedItemInStudentsList;
+                    if (Students.Student != null)
+                    {
+                        Students.Student.Section = Students.SectionsList.Find(x => x.id_offline == Students.Student.section_id);
+                        Students.Student.Grade = Students.GradesList.Find(x => x.id_offline == Students.Student.grade_id);
+                        Students.Student.BloodGroup = Students.BloodGroupList.Find(x => x.id == Students.Student.User.blood_group);
+                        Students.Student.Gender = Students.GenderList.Find(x => x.id == Students.Student.User.gender);
+                        Students.Student.Status = Students.StatusList.Find(x => x.id == Students.Student.status);
+                    }
                     this.ShowForm();
                 }
             };
@@ -183,7 +193,8 @@ namespace SMS.Controllers
             try
             {
                 Students.Student = new StudentsListModel();
-                Students.PasswordBox.Password = null;
+                if(Students.PasswordBox != null)
+                    Students.PasswordBox.Password = null;
                 this.ShowForm();
             }
             catch (Exception ex)
@@ -336,6 +347,15 @@ namespace SMS.Controllers
         {
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
             Students.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
+        }
+
+        private void GetDropDownLists()
+        {
+            Students.GradesList = GradesSetupManager.GetAllGrades();
+            Students.SectionsList = SectionsSetupManager.GetAllSections();
+            Students.BloodGroupList = GetListManager.GetStudentBloodGroupList();
+            Students.GenderList = GetListManager.GetGenderList();
+            Students.StatusList = GetListManager.GetStudentStatusList();
         }
 
 

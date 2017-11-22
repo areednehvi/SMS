@@ -125,6 +125,88 @@ namespace SMS_Businness_Layer.Businness
 
         }
 
+        public static List<ListModel> GetStudentStatusList()
+        {
+
+            try
+            {
+                List<ListModel> objList = new List<ListModel>()
+                {
+                    new ListModel() { id = "Active", name = "Active" },
+                    new ListModel() { id ="In Active", name = "In Active" },
+                    new ListModel() { id ="Pass Out", name = "Pass Out" },
+                };
+
+                return objList;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
+
+        public static List<ListModel> GetStudentBloodGroupList()
+        {
+
+            try
+            {
+                List<ListModel> objList = new List<ListModel>()
+                {
+                    new ListModel() { id = "AB-", name = "AB-" },
+                    new ListModel() { id = "AB+", name = "AB+" },
+                    new ListModel() { id = "B-", name = "B-" },
+                    new ListModel() { id = "B+", name = "B+" },
+                    new ListModel() { id = "A-", name = "A-" },
+                    new ListModel() { id = "A+", name = "A+" },
+                    new ListModel() { id = "O-", name = "O-" },
+                    new ListModel() { id = "O+", name = "O+" },
+                };
+
+                return objList;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
+
+        public static List<ListModel> GetGenderList()
+        {
+
+            try
+            {
+                List<ListModel> objList = new List<ListModel>()
+                {
+                    new ListModel() { id = "male", name = "Male" },
+                    new ListModel() { id ="female", name = "Female" },
+                };
+
+                return objList;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
+
         public static ObservableCollection<NoOfRowsInGridsModel> GetNoOfRowsInGridsList()
         {
 

@@ -57,89 +57,110 @@ namespace SMS_Businness_Layer.Businness
                         Parents = new parentsModel()
                     };
                     //Student
-                    obj.id_offline = row["id_offline"] != DBNull.Value ? Convert.ToString(row["id_offline"]) : string.Empty;
-                    obj.id_online = row["id_online"] != DBNull.Value ? Convert.ToString(row["id_online"]) : string.Empty;
-                    obj.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
-                    obj.user_id = row["user_id"] != DBNull.Value ? Convert.ToString(row["user_id"]) : string.Empty;
-                    obj.parent_id = row["parent_id"] != DBNull.Value ? Convert.ToString(row["parent_id"]) : string.Empty;
-                    obj.grade_id = row["grade_id"] != DBNull.Value ? Convert.ToString(row["grade_id"]) : string.Empty;
-                    obj.section_id = row["section_id"] != DBNull.Value ? Convert.ToString(row["section_id"]) : string.Empty;
-                    obj.session_id = row["session_id"] != DBNull.Value ? Convert.ToString(row["session_id"]) : string.Empty;
-                    obj.trip_stop_id = row["trip_stop_id"] != DBNull.Value ? Convert.ToString(row["trip_stop_id"]) : string.Empty;
-                    obj.registration_id = row["registration_id"] != DBNull.Value ? Convert.ToString(row["registration_id"]) : string.Empty;
-                    obj.roll_number = row["roll_number"] != DBNull.Value ? Convert.ToString(row["roll_number"]) : string.Empty;
-                    obj.exam_roll_number = row["exam_roll_number"] != DBNull.Value ? Convert.ToString(row["exam_roll_number"]) : string.Empty;
-                    obj.enrollment_date = row["enrollment_date"] != DBNull.Value ? Convert.ToDateTime(row["enrollment_date"]) : DateTime.MinValue;
-                    obj.status = row["status"] != DBNull.Value ? Convert.ToString(row["status"]) : string.Empty;
-                    obj.dc_number = row["dc_number"] != DBNull.Value ? Convert.ToString(row["dc_number"]) : string.Empty;
-                    obj.dc_date_of_issue = row["dc_date_of_issue"] != DBNull.Value ? Convert.ToDateTime(row["dc_date_of_issue"]) : DateTime.MinValue;
-                    obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
-                    obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.id_offline = row["students.id_offline"] != DBNull.Value ? Convert.ToString(row["students.id_offline"]) : string.Empty;
+                    obj.id_online = row["students.id_online"] != DBNull.Value ? Convert.ToString(row["students.id_online"]) : string.Empty;
+                    obj.school_id = row["students.school_id"] != DBNull.Value ? Convert.ToString(row["students.school_id"]) : string.Empty;
+                    obj.user_id = row["students.user_id"] != DBNull.Value ? Convert.ToString(row["students.user_id"]) : string.Empty;
+                    obj.parent_id = row["students.parent_id"] != DBNull.Value ? Convert.ToString(row["students.parent_id"]) : string.Empty;
+                    obj.grade_id = row["students.grade_id"] != DBNull.Value ? Convert.ToString(row["students.grade_id"]) : string.Empty;
+                    obj.section_id = row["students.section_id"] != DBNull.Value ? Convert.ToString(row["students.section_id"]) : string.Empty;
+                    obj.session_id = row["students.session_id"] != DBNull.Value ? Convert.ToString(row["students.session_id"]) : string.Empty;
+                    obj.trip_stop_id = row["students.trip_stop_id"] != DBNull.Value ? Convert.ToString(row["students.trip_stop_id"]) : string.Empty;
+                    obj.registration_id = row["students.registration_id"] != DBNull.Value ? Convert.ToString(row["students.registration_id"]) : string.Empty;
+                    obj.roll_number = row["students.roll_number"] != DBNull.Value ? Convert.ToString(row["students.roll_number"]) : string.Empty;
+                    obj.exam_roll_number = row["students.exam_roll_number"] != DBNull.Value ? Convert.ToString(row["students.exam_roll_number"]) : string.Empty;
+                    obj.enrollment_date = row["students.enrollment_date"] != DBNull.Value ? Convert.ToDateTime(row["students.enrollment_date"]) : DateTime.MinValue;
+                    obj.status = row["students.status"] != DBNull.Value ? Convert.ToString(row["students.status"]) : string.Empty;
+                    obj.dc_number = row["students.dc_number"] != DBNull.Value ? Convert.ToString(row["students.dc_number"]) : string.Empty;
+                    obj.dc_date_of_issue = row["students.dc_date_of_issue"] != DBNull.Value ? Convert.ToDateTime(row["students.dc_date_of_issue"]) : DateTime.MinValue;
+                    obj.created_by = row["students.created_by"] != DBNull.Value ? Convert.ToString(row["students.created_by"]) : string.Empty;
+                    obj.created_on = row["students.created_on"] != DBNull.Value ? Convert.ToDateTime(row["students.created_on"]) : DateTime.MinValue;
+                    obj.updated_by = row["students.updated_by"] != DBNull.Value ? Convert.ToString(row["students.updated_by"]) : string.Empty;
+                    obj.updated_on = row["students.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["students.updated_on"]) : DateTime.MinValue;
                     //User
-                    obj.User.id_offline = row["user_id"] != DBNull.Value ? Convert.ToString(row["user_id"]) : string.Empty;
-                    obj.User.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
-                    obj.User.student_id = row["student_id"] != DBNull.Value ? Convert.ToString(row["student_id"]) : string.Empty;
-                    obj.User.role_id = row["role_id"] != DBNull.Value ? Convert.ToString(row["role_id"]) : string.Empty;
-                    obj.User.user_type = row["user_type"] != DBNull.Value ? Convert.ToString(row["user_type"]) : string.Empty;
-                    obj.User.username = row["username"] != DBNull.Value ? Convert.ToString(row["username"]) : string.Empty;
-                    obj.User.email = row["email"] != DBNull.Value ? Convert.ToString(row["email"]) : string.Empty;
-                    obj.User.phone = row["phone"] != DBNull.Value ? Convert.ToString(row["phone"]) : string.Empty;
-                    obj.User.address_line_one = row["address_line_one"] != DBNull.Value ? Convert.ToString(row["address_line_one"]) : string.Empty;
-                    obj.User.address_line_two = row["address_line_two"] != DBNull.Value ? Convert.ToString(row["address_line_two"]) : string.Empty;
-                    obj.User.area = row["area"] != DBNull.Value ? Convert.ToString(row["area"]) : string.Empty;
-                    obj.User.first_name = row["first_name"] != DBNull.Value ? Convert.ToString(row["first_name"]) : string.Empty;
-                    obj.User.middle_name = row["middle_name"] != DBNull.Value ? Convert.ToString(row["middle_name"]) : string.Empty;
-                    obj.User.last_name = row["last_name"] != DBNull.Value ? Convert.ToString(row["last_name"]) : string.Empty;
-                    obj.User.full_name = row["full_name"] != DBNull.Value ? Convert.ToString(row["full_name"]) : string.Empty;
-                    obj.User.gender = row["gender"] != DBNull.Value ? Convert.ToString(row["gender"]) : string.Empty;
-                    obj.User.blood_group = row["blood_group"] != DBNull.Value ? Convert.ToString(row["blood_group"]) : string.Empty;
-                    obj.User.password = row["password"] != DBNull.Value ? Convert.ToString(row["password"]) : string.Empty;
-                    obj.User.birth_date = row["birth_date"] != DBNull.Value ? Convert.ToDateTime(row["birth_date"]) : DateTime.MinValue;
-                    obj.User.other_phones = row["other_phones"] != DBNull.Value ? Convert.ToString(row["other_phones"]) : string.Empty;
-                    obj.User.default_phone_number_id = row["default_phone_number_id"] != DBNull.Value ? Convert.ToString(row["default_phone_number_id"]) : string.Empty;
-                    obj.User.adhaar_number = row["adhaar_number"] != DBNull.Value ? Convert.ToString(row["adhaar_number"]) : string.Empty;
-                    obj.User.bank_name = row["bank_name"] != DBNull.Value ? Convert.ToString(row["bank_name"]) : string.Empty;
-                    obj.User.bank_branch = row["bank_branch"] != DBNull.Value ? Convert.ToString(row["bank_branch"]) : string.Empty;
-                    obj.User.bank_account_number = row["bank_account_number"] != DBNull.Value ? Convert.ToString(row["bank_account_number"]) : string.Empty;
-                    obj.User.bank_ifsc_code = row["bank_ifsc_code"] != DBNull.Value ? Convert.ToString(row["bank_ifsc_code"]) : string.Empty;
-                    obj.User.flags = row["flags"] != DBNull.Value ? Convert.ToString(row["flags"]) : string.Empty;
-                    obj.User.last_login_time = row["last_login_time"] != DBNull.Value ? Convert.ToDateTime(row["last_login_time"]) : DateTime.MinValue;
-                    obj.User.user_avatar_file_id = row["user_avatar_file_id"] != DBNull.Value ? Convert.ToString(row["user_avatar_file_id"]) : string.Empty;
-                    obj.User.is_active = row["is_active"] != DBNull.Value ? Convert.ToBoolean(row["is_active"]) : false;
+                    obj.User.id_offline = row["users.id_offline"] != DBNull.Value ? Convert.ToString(row["users.id_offline"]) : string.Empty;
+                    obj.User.id_online = row["users.id_online"] != DBNull.Value ? Convert.ToString(row["users.id_online"]) : string.Empty;
+                    obj.User.school_id = row["users.school_id"] != DBNull.Value ? Convert.ToString(row["users.school_id"]) : string.Empty;
+                    obj.User.student_id = row["users.student_id"] != DBNull.Value ? Convert.ToString(row["users.student_id"]) : string.Empty;
+                    obj.User.role_id = row["users.role_id"] != DBNull.Value ? Convert.ToString(row["users.role_id"]) : string.Empty;
+                    obj.User.user_type = row["users.user_type"] != DBNull.Value ? Convert.ToString(row["users.user_type"]) : string.Empty;
+                    obj.User.username = row["users.username"] != DBNull.Value ? Convert.ToString(row["users.username"]) : string.Empty;
+                    obj.User.email = row["users.email"] != DBNull.Value ? Convert.ToString(row["users.email"]) : string.Empty;
+                    obj.User.phone = row["users.phone"] != DBNull.Value ? Convert.ToString(row["users.phone"]) : string.Empty;
+                    obj.User.address_line_one = row["users.address_line_one"] != DBNull.Value ? Convert.ToString(row["users.address_line_one"]) : string.Empty;
+                    obj.User.address_line_two = row["users.address_line_two"] != DBNull.Value ? Convert.ToString(row["users.address_line_two"]) : string.Empty;
+                    obj.User.area = row["users.area"] != DBNull.Value ? Convert.ToString(row["users.area"]) : string.Empty;
+                    obj.User.first_name = row["users.first_name"] != DBNull.Value ? Convert.ToString(row["users.first_name"]) : string.Empty;
+                    obj.User.middle_name = row["users.middle_name"] != DBNull.Value ? Convert.ToString(row["users.middle_name"]) : string.Empty;
+                    obj.User.last_name = row["users.last_name"] != DBNull.Value ? Convert.ToString(row["users.last_name"]) : string.Empty;
+                    obj.User.full_name = row["users.full_name"] != DBNull.Value ? Convert.ToString(row["users.full_name"]) : string.Empty;
+                    obj.User.gender = row["users.gender"] != DBNull.Value ? Convert.ToString(row["users.gender"]) : string.Empty;
+                    obj.User.blood_group = row["users.blood_group"] != DBNull.Value ? Convert.ToString(row["users.blood_group"]) : string.Empty;
+                    obj.User.password = row["users.password"] != DBNull.Value ? Convert.ToString(row["users.password"]) : string.Empty;
+                    obj.User.birth_date = row["users.birth_date"] != DBNull.Value ? Convert.ToDateTime(row["users.birth_date"]) : DateTime.MinValue;
+                    obj.User.other_phones = row["users.other_phones"] != DBNull.Value ? Convert.ToString(row["users.other_phones"]) : string.Empty;
+                    obj.User.default_phone_number_id = row["users.default_phone_number_id"] != DBNull.Value ? Convert.ToString(row["users.default_phone_number_id"]) : string.Empty;
+                    obj.User.adhaar_number = row["users.adhaar_number"] != DBNull.Value ? Convert.ToString(row["users.adhaar_number"]) : string.Empty;
+                    obj.User.bank_name = row["users.bank_name"] != DBNull.Value ? Convert.ToString(row["users.bank_name"]) : string.Empty;
+                    obj.User.bank_branch = row["users.bank_branch"] != DBNull.Value ? Convert.ToString(row["users.bank_branch"]) : string.Empty;
+                    obj.User.bank_account_number = row["users.bank_account_number"] != DBNull.Value ? Convert.ToString(row["users.bank_account_number"]) : string.Empty;
+                    obj.User.bank_ifsc_code = row["users.bank_ifsc_code"] != DBNull.Value ? Convert.ToString(row["users.bank_ifsc_code"]) : string.Empty;
+                    obj.User.flags = row["users.flags"] != DBNull.Value ? Convert.ToString(row["users.flags"]) : string.Empty;
+                    obj.User.last_login_time = row["users.last_login_time"] != DBNull.Value ? Convert.ToDateTime(row["users.last_login_time"]) : DateTime.MinValue;
+                    obj.User.user_avatar_file_id = row["users.user_avatar_file_id"] != DBNull.Value ? Convert.ToString(row["users.user_avatar_file_id"]) : string.Empty;
+                    obj.User.is_active = row["users.is_active"] != DBNull.Value ? Convert.ToBoolean(row["users.is_active"]) : false;
+                    obj.User.created_on = row["users.created_on"] != DBNull.Value ? Convert.ToDateTime(row["users.created_on"]) : DateTime.MinValue;
+                    obj.User.created_by = row["users.created_by"] != DBNull.Value ? Convert.ToString(row["users.created_by"]) : string.Empty;
+                    obj.User.updated_on = row["users.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["users.updated_on"]) : DateTime.MinValue;
+                    obj.User.updated_by = row["users.updated_by"] != DBNull.Value ? Convert.ToString(row["users.updated_by"]) : string.Empty;
                     //Grade
-                    obj.Grade.id_offline = row["grade_id"] != DBNull.Value ? Convert.ToString(row["grade_id"]) : string.Empty;
-                    obj.Grade.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
-                    obj.Grade.block = row["block"] != DBNull.Value ? Convert.ToString(row["block"]) : string.Empty;
-                    obj.Grade.name = row["grade"] != DBNull.Value ? Convert.ToString(row["grade"]) : string.Empty;
+                    obj.Grade.id_offline = row["grades.id_offline"] != DBNull.Value ? Convert.ToString(row["grades.id_offline"]) : string.Empty;
+                    obj.Grade.id_online = row["grades.id_online"] != DBNull.Value ? Convert.ToString(row["grades.id_online"]) : string.Empty;
+                    obj.Grade.school_id = row["grades.school_id"] != DBNull.Value ? Convert.ToString(row["grades.school_id"]) : string.Empty;
+                    obj.Grade.block = row["grades.block"] != DBNull.Value ? Convert.ToString(row["grades.block"]) : string.Empty;
+                    obj.Grade.name = row["grades.name"] != DBNull.Value ? Convert.ToString(row["grades.name"]) : string.Empty;
+                    obj.Grade.order = row["grades.order"] != DBNull.Value ? Convert.ToString(row["grades.order"]) : string.Empty;
+                    obj.Grade.created_by = row["grades.created_by"] != DBNull.Value ? Convert.ToString(row["grades.created_by"]) : string.Empty;
+                    obj.Grade.created_on = row["grades.created_on"] != DBNull.Value ? Convert.ToDateTime(row["grades.created_on"]) : DateTime.MinValue;
+                    obj.Grade.updated_by = row["grades.updated_by"] != DBNull.Value ? Convert.ToString(row["grades.updated_by"]) : string.Empty;
+                    obj.Grade.updated_on = row["grades.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["grades.updated_on"]) : DateTime.MinValue;
                     //Section
-                    obj.Section.id_offline = row["section_id"] != DBNull.Value ? Convert.ToString(row["section_id"]) : string.Empty;
-                    obj.Section.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
-                    obj.Section.name = row["section"] != DBNull.Value ? Convert.ToString(row["section"]) : string.Empty;
-                    obj.Section.capacity = row["capacity"] != DBNull.Value ? Convert.ToInt16(row["capacity"]) : 0;
+                    obj.Section.id_offline = row["sections.id_offline"] != DBNull.Value ? Convert.ToString(row["sections.id_offline"]) : string.Empty;
+                    obj.Section.id_online = row["sections.id_online"] != DBNull.Value ? Convert.ToString(row["sections.id_online"]) : string.Empty;
+                    obj.Section.school_id = row["sections.school_id"] != DBNull.Value ? Convert.ToString(row["sections.school_id"]) : string.Empty;
+                    obj.Section.name = row["sections.name"] != DBNull.Value ? Convert.ToString(row["sections.name"]) : string.Empty;
+                    obj.Section.capacity = row["sections.capacity"] != DBNull.Value ? Convert.ToInt16(row["sections.capacity"]) : 0;
+                    obj.Section.created_by = row["sections.created_by"] != DBNull.Value ? Convert.ToString(row["sections.created_by"]) : string.Empty;
+                    obj.Section.created_on = row["sections.created_on"] != DBNull.Value ? Convert.ToDateTime(row["sections.created_on"]) : DateTime.MinValue;
+                    obj.Section.updated_by = row["sections.updated_by"] != DBNull.Value ? Convert.ToString(row["sections.updated_by"]) : string.Empty;
+                    obj.Section.updated_on = row["sections.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["sections.updated_on"]) : DateTime.MinValue;
                     //Parents
-                    obj.Parents.id_offline = row["parent_id"] != DBNull.Value ? Convert.ToString(row["parent_id"]) : string.Empty;
-                    obj.Parents.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
-                    obj.Parents.f_first_name = row["f_first_name"] != DBNull.Value ? Convert.ToString(row["f_first_name"]) : string.Empty;
-                    obj.Parents.f_middle_name = row["f_middle_name"] != DBNull.Value ? Convert.ToString(row["f_middle_name"]) : string.Empty;
-                    obj.Parents.f_last_name = row["f_last_name"] != DBNull.Value ? Convert.ToString(row["f_last_name"]) : string.Empty;
-                    obj.Parents.f_full_name = row["f_full_name"] != DBNull.Value ? Convert.ToString(row["f_full_name"]) : string.Empty;
-                    obj.Parents.f_mobile = row["f_mobile"] != DBNull.Value ? Convert.ToString(row["f_mobile"]) : string.Empty;
-                    obj.Parents.f_phone = row["f_phone"] != DBNull.Value ? Convert.ToString(row["f_phone"]) : string.Empty;
-                    obj.Parents.f_office = row["f_office"] != DBNull.Value ? Convert.ToString(row["f_office"]) : string.Empty;
-                    obj.Parents.f_email = row["f_email"] != DBNull.Value ? Convert.ToString(row["f_email"]) : string.Empty;
-                    obj.Parents.m_first_name = row["m_first_name"] != DBNull.Value ? Convert.ToString(row["m_first_name"]) : string.Empty;
-                    obj.Parents.m_middle_name = row["m_middle_name"] != DBNull.Value ? Convert.ToString(row["m_middle_name"]) : string.Empty;
-                    obj.Parents.m_last_name = row["m_last_name"] != DBNull.Value ? Convert.ToString(row["m_last_name"]) : string.Empty;
-                    obj.Parents.m_full_name = row["m_full_name"] != DBNull.Value ? Convert.ToString(row["m_full_name"]) : string.Empty;
-                    obj.Parents.m_mobile = row["m_mobile"] != DBNull.Value ? Convert.ToString(row["m_mobile"]) : string.Empty;
-                    obj.Parents.m_phone = row["m_phone"] != DBNull.Value ? Convert.ToString(row["m_phone"]) : string.Empty;
-                    obj.Parents.m_office = row["m_office"] != DBNull.Value ? Convert.ToString(row["m_office"]) : string.Empty;
-                    obj.Parents.m_email = row["m_email"] != DBNull.Value ? Convert.ToString(row["m_email"]) : string.Empty;
-                    obj.Parents.g_fullname = row["g_fullname"] != DBNull.Value ? Convert.ToString(row["g_fullname"]) : string.Empty;
-                    obj.Parents.g_mobile = row["g_mobile"] != DBNull.Value ? Convert.ToString(row["g_mobile"]) : string.Empty;
-                    obj.Parents.g_email = row["g_email"] != DBNull.Value ? Convert.ToString(row["g_email"]) : string.Empty;
+                    obj.Parents.id_offline = row["parents.id_offline"] != DBNull.Value ? Convert.ToString(row["parents.id_offline"]) : string.Empty;
+                    obj.Parents.id_online = row["parents.id_online"] != DBNull.Value ? Convert.ToString(row["parents.id_online"]) : string.Empty;
+                    obj.Parents.school_id = row["parents.school_id"] != DBNull.Value ? Convert.ToString(row["parents.school_id"]) : string.Empty;
+                    obj.Parents.f_first_name = row["parents.f_first_name"] != DBNull.Value ? Convert.ToString(row["parents.f_first_name"]) : string.Empty;
+                    obj.Parents.f_middle_name = row["parents.f_middle_name"] != DBNull.Value ? Convert.ToString(row["parents.f_middle_name"]) : string.Empty;
+                    obj.Parents.f_last_name = row["parents.f_last_name"] != DBNull.Value ? Convert.ToString(row["parents.f_last_name"]) : string.Empty;
+                    obj.Parents.f_full_name = row["parents.f_full_name"] != DBNull.Value ? Convert.ToString(row["parents.f_full_name"]) : string.Empty;
+                    obj.Parents.f_mobile = row["parents.f_mobile"] != DBNull.Value ? Convert.ToString(row["parents.f_mobile"]) : string.Empty;
+                    obj.Parents.f_phone = row["parents.f_phone"] != DBNull.Value ? Convert.ToString(row["parents.f_phone"]) : string.Empty;
+                    obj.Parents.f_office = row["parents.f_office"] != DBNull.Value ? Convert.ToString(row["parents.f_office"]) : string.Empty;
+                    obj.Parents.f_email = row["parents.f_email"] != DBNull.Value ? Convert.ToString(row["parents.f_email"]) : string.Empty;
+                    obj.Parents.m_first_name = row["parents.m_first_name"] != DBNull.Value ? Convert.ToString(row["parents.m_first_name"]) : string.Empty;
+                    obj.Parents.m_middle_name = row["parents.m_middle_name"] != DBNull.Value ? Convert.ToString(row["parents.m_middle_name"]) : string.Empty;
+                    obj.Parents.m_last_name = row["parents.m_last_name"] != DBNull.Value ? Convert.ToString(row["parents.m_last_name"]) : string.Empty;
+                    obj.Parents.m_full_name = row["parents.m_full_name"] != DBNull.Value ? Convert.ToString(row["parents.m_full_name"]) : string.Empty;
+                    obj.Parents.m_mobile = row["parents.m_mobile"] != DBNull.Value ? Convert.ToString(row["parents.m_mobile"]) : string.Empty;
+                    obj.Parents.m_phone = row["parents.m_phone"] != DBNull.Value ? Convert.ToString(row["parents.m_phone"]) : string.Empty;
+                    obj.Parents.m_office = row["parents.m_office"] != DBNull.Value ? Convert.ToString(row["parents.m_office"]) : string.Empty;
+                    obj.Parents.m_email = row["parents.m_email"] != DBNull.Value ? Convert.ToString(row["parents.m_email"]) : string.Empty;
+                    obj.Parents.g_fullname = row["parents.g_fullname"] != DBNull.Value ? Convert.ToString(row["parents.g_fullname"]) : string.Empty;
+                    obj.Parents.g_mobile = row["parents.g_mobile"] != DBNull.Value ? Convert.ToString(row["parents.g_mobile"]) : string.Empty;
+                    obj.Parents.g_email = row["parents.g_email"] != DBNull.Value ? Convert.ToString(row["parents.g_email"]) : string.Empty;
+                    obj.Parents.created_by = row["parents.created_by"] != DBNull.Value ? Convert.ToString(row["parents.created_by"]) : string.Empty;
+                    obj.Parents.created_on = row["parents.created_on"] != DBNull.Value ? Convert.ToDateTime(row["parents.created_on"]) : DateTime.MinValue;
+                    obj.Parents.updated_by = row["parents.updated_by"] != DBNull.Value ? Convert.ToString(row["parents.updated_by"]) : string.Empty;
+                    obj.Parents.updated_on = row["parents.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["parents.updated_on"]) : DateTime.MinValue;
 
 
                     objStudentsList.Add(obj);
@@ -165,18 +186,37 @@ namespace SMS_Businness_Layer.Businness
             Boolean IsSuccess = false;
             try
             {
-                objStudents.id_offline = objStudents.id_offline == null ? Guid.NewGuid().ToString() : objStudents.id_offline;
-                objStudents.id_online = Guid.Empty.ToString();
-                objStudents.created_by = objCurrentLogin.ID;
+                if (objStudents.id_offline == null) // new student
+                {
+                    objStudents.id_offline = Guid.NewGuid().ToString();
+                    objStudents.id_online = Guid.Empty.ToString();
+                    objStudents.created_by = objCurrentLogin.ID;                    
+                    objStudents.created_on = DateTime.Now;                                       
+                    objStudents.trip_stop_id = Guid.Empty.ToString();
+                    objStudents.school_id = SchoolInfo.id_offline;
+                }                
                 objStudents.updated_by = objCurrentLogin.ID;
-                objStudents.created_on = DateTime.Now;
                 objStudents.updated_on = DateTime.Now;
-                objStudents.school_id = SchoolInfo.id_offline;
-                DataTable objDatatable = MapStudentsListObjectToDataTable(objStudents);
-                SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
-                objSqlParameter.TypeName = DBTableTypes.students;
-                objSqlParameter.Value = objDatatable;
-                IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyStudents, objSqlParameter);
+                objStudents.section_id = objStudents.Section.id_offline;
+                objStudents.grade_id = objStudents.Grade.id_offline;
+                objStudents.User.blood_group = objStudents.BloodGroup.id;
+                objStudents.User.gender = objStudents.Gender.id;
+                objStudents.status = objStudents.Status.id;
+
+
+                DataTable objStudentDatatable = MapStudentsListObjectToDataTable(objStudents);
+                DataTable objUserDatatable = UsersManager.MapUsersObjectToDataTable(objStudents.User);
+                DataTable objGradeDatatable = GradesSetupManager.MapGradeObjectToDataTable(objStudents.Grade);
+                DataTable objSectionDatatable = SectionsSetupManager.MapSectionObjectToDataTable(objStudents.Section);
+                DataTable objParentsDatatable = ParentsManager.MapParentsToDataTable(objStudents.Parents);
+
+                List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
+                {
+                    new SqlParameter() {ParameterName = "@StudentModel", SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.students, Value = objStudentDatatable},
+                    new SqlParameter() {ParameterName = "@UserModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.users, Value = objUserDatatable},
+                    new SqlParameter() {ParameterName = "@ParentModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.parents, Value = objParentsDatatable},
+                };
+                IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyStudents, lstSqlParameters);
                 
             }
             catch (Exception ex)

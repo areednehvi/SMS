@@ -14,6 +14,11 @@ namespace SMS.Models
         private StudentsListModel _SelectedItemInStudentsList;
         private StudentsListModel _Student;
         private ObservableCollection<StudentsListModel> _StudentsList;
+        private List<gradesModel> _GradesList;
+        private List<sectionsModel> _SectionsList;
+        private List<ListModel> _BloodGroupList;
+        private List<ListModel> _GenderList;
+        private List<ListModel> _StatusList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
         private PasswordBox _PasswordBox;
@@ -38,6 +43,66 @@ namespace SMS.Models
             {
                 _StudentsList = value;
                 OnPropertyChanged("StudentsList");
+            }
+        }
+        public List<gradesModel> GradesList
+        {
+            get
+            {
+                return _GradesList;
+            }
+            set
+            {
+                _GradesList = value;
+                OnPropertyChanged("GradesList");
+            }
+        }
+        public List<sectionsModel> SectionsList
+        {
+            get
+            {
+                return _SectionsList;
+            }
+            set
+            {
+                _SectionsList = value;
+                OnPropertyChanged("SectionsList");
+            }
+        }
+        public List<ListModel> BloodGroupList
+        {
+            get
+            {
+                return _BloodGroupList;
+            }
+            set
+            {
+                _BloodGroupList = value;
+                OnPropertyChanged("BloodGroupList");
+            }
+        }
+        public List<ListModel> GenderList
+        {
+            get
+            {
+                return _GenderList;
+            }
+            set
+            {
+                _GenderList = value;
+                OnPropertyChanged("GenderList");
+            }
+        }
+        public List<ListModel> StatusList
+        {
+            get
+            {
+                return _StatusList;
+            }
+            set
+            {
+                _StatusList = value;
+                OnPropertyChanged("StatusList");
             }
         }
         public string ListVisibility
@@ -168,6 +233,9 @@ namespace SMS.Models
         private parentsModel _Parents;
         private gradesModel _Grade;
         private sectionsModel _Section;
+        private ListModel _BloodGroup;
+        private ListModel _Gender;
+        private ListModel _Status;
         public usersModel User
         {
             get
@@ -217,6 +285,42 @@ namespace SMS.Models
                 OnPropertyChanged("Section");
             }
         }
+        public ListModel BloodGroup
+        {
+            get
+            {
+                return _BloodGroup;
+            }
+            set
+            {
+                _BloodGroup = value;
+                OnPropertyChanged("BloodGroup");
+            }
+        }
+        public ListModel Gender
+        {
+            get
+            {
+                return _Gender;
+            }
+            set
+            {
+                _Gender = value;
+                OnPropertyChanged("Gender");
+            }
+        }
+        public ListModel Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                _Status = value;
+                OnPropertyChanged("Status");
+            }
+        }
 
         #region INotifyPropertyChanged Members
 
@@ -231,6 +335,7 @@ namespace SMS.Models
         #endregion
 
     }
+
 
 
 }

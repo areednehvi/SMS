@@ -147,13 +147,13 @@
                                 <Label Content="Grade *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="2" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.Grade}"/>
+                                <ComboBox  FontSize="18"  Width="300" ItemsSource="{Binding Students.GradesList}" DisplayMemberPath="name" SelectedItem="{Binding Students.Student.Grade,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </Border>
                             <Border Grid.Row="2" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                                 <Label Content="Section *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="2" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                                <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding Students.Student.Section}"/>
+                                <ComboBox  FontSize="18"  Width="300" ItemsSource="{Binding Students.SectionsList}" DisplayMemberPath="name" SelectedItem="{Binding Students.Student.Section,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </Border>
 
                             <!-- Row 3 -->
@@ -161,13 +161,13 @@
                                 <Label Content="Gender *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="3" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.gender}"/>
+                                <ComboBox  FontSize="18"  Width="300" ItemsSource="{Binding Students.GenderList}" DisplayMemberPath="name" SelectedItem="{Binding Students.Student.Gender,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </Border>
                             <Border Grid.Row="3" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                                 <Label Content="Status *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="3" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.status}"/>
+                                <ComboBox  FontSize="18"  Width="300" ItemsSource="{Binding Students.StatusList}" DisplayMemberPath="name" SelectedItem="{Binding Students.Student.Status,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </Border>
 
                             <!-- Row 4 -->
@@ -181,7 +181,7 @@
                                 <Label Content="Date of Enrollment *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="4" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.enrollment_date}"/>
+                                <DatePicker  VerticalAlignment="Center" FontSize="18"   Width="300" SelectedDate="{Binding Students.Student.enrollment_date}"/>
                             </Border>
 
                             <!-- Row 5 -->
@@ -189,13 +189,13 @@
                                 <Label Content="Blood Group *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="5" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.blood_group}"/>
+                                <ComboBox  FontSize="18"  Width="300" ItemsSource="{Binding Students.BloodGroupList}" DisplayMemberPath="name" SelectedItem="{Binding Students.Student.BloodGroup,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </Border>
                             <Border Grid.Row="5" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                                 <Label Content="Birth Date *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="5" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.User.birth_date}"/>
+                                <DatePicker  VerticalAlignment="Center" FontSize="18"   Width="300" SelectedDate="{Binding Students.Student.User.birth_date}"/>
                             </Border>
 
                             <!-- Row 6 -->
@@ -237,7 +237,7 @@
                                 <Label Content="DC Date of Issue" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                             </Border>
                             <Border Grid.Row="8" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                                <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding Students.Student.dc_date_of_issue}"/>
+                                <DatePicker  VerticalAlignment="Center" FontSize="18"   Width="300" SelectedDate="{Binding Students.Student.dc_date_of_issue}"/>
                             </Border>
 
                             <!-- Row 9-->

@@ -84,14 +84,18 @@ namespace SMS_Businness_Layer.Businness
             Boolean IsSuccess = false;
             try
             {
-                objSession.id_offline = objSession.id_offline == null ? Guid.NewGuid().ToString() : objSession.id_offline;
-                objSession.id_online = Guid.Empty.ToString();
+                if (objSession.id_offline == null) // new Session
+                {
+                    objSession.id_offline = Guid.NewGuid().ToString();
+                    objSession.id_online = Guid.Empty.ToString();
+                    objSession.created_by = objCurrentLogin.ID;
+                    objSession.created_on = DateTime.Now;
+                    objSession.school_id = SchoolInfo.id_offline;                    
+                }
                 objSession.order = "0";
-                objSession.created_by = objCurrentLogin.ID;
                 objSession.updated_by = objCurrentLogin.ID;
-                objSession.created_on = DateTime.Now;
                 objSession.updated_on = DateTime.Now;
-                objSession.school_id = SchoolInfo.id_offline;
+
                 DataTable objDatatable = MapSessionListObjectToDataTable(objSession);
                 SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
                 objSqlParameter.TypeName = DBTableTypes.sessions;

@@ -14,4 +14,10 @@ namespace SMS.Models
         public string valueColumn { get; set; }
         public string orderBy { get; set; }
     }
+
+    public class ListModel
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+    }
 }

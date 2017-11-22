@@ -252,6 +252,95 @@ namespace SMS_Businness_Layer.Businness
 
             }
         }
+        public static DataTable MapUsersObjectToDataTable(usersModel obj)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("id_offline", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
+                table.Columns.Add("school_id", typeof(string));
+                table.Columns.Add("student_id", typeof(string));
+                table.Columns.Add("role_id", typeof(string));
+                table.Columns.Add("user_type", typeof(string));
+                table.Columns.Add("username", typeof(string));
+                table.Columns.Add("email", typeof(string));
+                table.Columns.Add("phone", typeof(string));
+                table.Columns.Add("address_line_one", typeof(string));
+                table.Columns.Add("address_line_two", typeof(string));
+                table.Columns.Add("area", typeof(string));
+                table.Columns.Add("first_name", typeof(string));
+                table.Columns.Add("middle_name", typeof(string));
+                table.Columns.Add("last_name", typeof(string));
+                table.Columns.Add("full_name", typeof(string));
+                table.Columns.Add("gender", typeof(string));
+                table.Columns.Add("blood_group", typeof(string));
+                table.Columns.Add("password", typeof(string));
+                table.Columns.Add("birth_date", typeof(DateTime));
+                table.Columns.Add("other_phones", typeof(string));
+                table.Columns.Add("default_phone_number_id", typeof(string));
+                table.Columns.Add("adhaar_number", typeof(string));
+                table.Columns.Add("bank_name", typeof(string));
+                table.Columns.Add("bank_branch", typeof(string));
+                table.Columns.Add("bank_account_number", typeof(string));
+                table.Columns.Add("bank_ifsc_code", typeof(string));
+                table.Columns.Add("flags", typeof(string));
+                table.Columns.Add("last_login_time", typeof(DateTime));
+                table.Columns.Add("user_avatar_file_id", typeof(string));
+                table.Columns.Add("is_active", typeof(string));
+                table.Columns.Add("created_on", typeof(DateTime));
+                table.Columns.Add("created_by", typeof(string));
+                table.Columns.Add("updated_on", typeof(DateTime));
+                table.Columns.Add("updated_by", typeof(string));
+
+                table.Rows.Add(
+                                obj.id_offline,
+                                obj.id_online,
+                                obj.school_id,
+                                obj.student_id,
+                                obj.role_id,
+                                obj.user_type,
+                                obj.username,
+                                obj.email,
+                                obj.phone,
+                                obj.address_line_one,
+                                obj.address_line_two,
+                                obj.area,
+                                obj.first_name,
+                                obj.middle_name,
+                                obj.last_name,
+                                obj.full_name,
+                                obj.gender,
+                                obj.blood_group,
+                                obj.password,
+                                obj.birth_date,
+                                obj.other_phones,
+                                obj.default_phone_number_id,
+                                obj.adhaar_number,
+                                obj.bank_name,
+                                obj.bank_branch,
+                                obj.bank_account_number,
+                                obj.bank_ifsc_code,
+                                obj.flags,
+                                obj.last_login_time,
+                                obj.user_avatar_file_id,
+                                obj.is_active,
+                                obj.created_on,
+                                obj.created_by,
+                                obj.updated_on,
+                                obj.updated_by
+                              );
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
         #endregion
 
     }
