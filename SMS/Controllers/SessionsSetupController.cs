@@ -183,7 +183,8 @@ namespace SMS.Controllers
                 SessionsSetup.Session = new SessionsListModel()
                 {
                     from_date = DateTime.Now,
-                    to_date = DateTime.Now.AddYears(1)
+                    to_date = DateTime.Now.AddYears(1),                   
+                    CreatedBy = SessionsSetup.CurrentLogin.full_name,
                 };
                 this.ShowForm();
             }

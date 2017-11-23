@@ -63,7 +63,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="*" Header="Name" Binding="{Binding name}"/>
                     <DataGridTextColumn Width="*" Header="Block" Binding="{Binding block}"/>
-                    <DataGridTextColumn Width="*" Header="Created By" Binding="{Binding createdBy}" />
+                    <DataGridTextColumn Width="*" Header="Created By" Binding="{Binding CreatedBy}" />
                 </DataGrid.Columns>
                 <!-- the following defines sub rows-->
                 <!--<DataGrid.RowDetailsTemplate>
@@ -92,27 +92,30 @@
                             <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
                         <!-- Row 0 -->
-                        <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                        <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FF009688" CornerRadius="25,25,0,0">
+                            <Label Content="Grade Detail" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White" />
+                        </Border>
+                        <!-- Row 1 -->
+                        <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                             <Label Content="Name *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
-                        <Border Grid.Row="0" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                        <Border Grid.Row="1" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
                             <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding GradesSetup.Grade.name}"/>
                         </Border>
-                        <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                        <Border Grid.Row="1" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                             <Label Content="Block *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
-                        <Border Grid.Row="0" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                        <Border Grid.Row="1" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
                             <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding GradesSetup.Grade.block}"/>
                         </Border>
 
-                        <!-- Row 1 -->
-                        <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                        <!-- Row 2 -->
+                        <Border Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                             <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
                         </Border>
-                        <Border Grid.Row="1" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                            <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding GradesSetup.CurrentLogin.Username}"/>
+                        <Border Grid.Row="2" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
+                            <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding GradesSetup.Grade.CreatedBy}"/>
                         </Border>
                     </Grid>
 

@@ -180,7 +180,10 @@ namespace SMS.Controllers
         {
             try
             {
-                SectionsSetup.Section = new SectionsListModel();
+                SectionsSetup.Section = new SectionsListModel()
+                {
+                    CreatedBy = SectionsSetup.CurrentLogin.full_name
+                };
                 this.ShowForm();
             }
             catch (Exception ex)

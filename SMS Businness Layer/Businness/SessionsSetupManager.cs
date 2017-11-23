@@ -60,7 +60,7 @@ namespace SMS_Businness_Layer.Businness
                     obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
                     obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
-                    obj.createdBy = row["createdBy"] != DBNull.Value ? Convert.ToString(row["createdBy"]) : string.Empty;
+                    obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     objSessionsList.Add(obj);
                 }
 

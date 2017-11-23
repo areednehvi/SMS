@@ -164,7 +164,7 @@ namespace SMS.Models
 
     public class UsersListModel :usersModel
     {
-        public string createdBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 
 

@@ -222,7 +222,8 @@ namespace SMS.Controllers
                     Section = new sectionsModel(),
                     Grade = new gradesModel(),
                     BloodGroup = new ListModel(),
-                    Gender = new ListModel(),                   
+                    Gender = new ListModel(),  
+                    Status = new ListModel(),                 
                     CreatedBy = Students.CurrentLogin.full_name
                 };
                 if(Students.PasswordBox != null)
@@ -282,7 +283,19 @@ namespace SMS.Controllers
 
         public bool CanSaveStudents(object obj)
         {
-            return Students.Student != null;               
+            return Students.Student != null &&
+                    Students.Student.User.full_name != null &&
+                    Students.Student.roll_number != null &&
+                    Students.Student.Grade != null &&
+                    Students.Student.Section != null &&
+                    Students.Student.Gender != null &&
+                    Students.Student.Status != null &&
+                    Students.Student.registration_id != null &&
+                    Students.Student.enrollment_date != null &&
+                    Students.Student.BloodGroup != null &&
+                    Students.Student.User.birth_date != null &&
+                    Students.Student.User.address_line_one != null;
+                    
         }
 
         public void SaveStudents(object obj)

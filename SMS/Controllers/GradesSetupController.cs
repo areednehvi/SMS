@@ -180,7 +180,10 @@ namespace SMS.Controllers
         {
             try
             {
-                GradesSetup.Grade = new GradesListModel();
+                GradesSetup.Grade = new GradesListModel()
+                {
+                    CreatedBy = GradesSetup.CurrentLogin.full_name
+                };
                 this.ShowForm();
             }
             catch (Exception ex)

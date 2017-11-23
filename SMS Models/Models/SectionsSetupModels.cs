@@ -150,7 +150,7 @@ namespace SMS.Models
 
     public class SectionsListModel :sectionsModel
     {
-        public string createdBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 
 
