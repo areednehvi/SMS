@@ -321,6 +321,7 @@ namespace SMS.Models
                 OnPropertyChanged("Status");
             }
         }
+        public string CreatedBy { get; set; }
 
         #region INotifyPropertyChanged Members
 

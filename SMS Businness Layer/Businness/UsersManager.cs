@@ -131,18 +131,22 @@ namespace SMS_Businness_Layer.Businness
             Boolean IsSuccess = false;
             try
             {
-                objUsers.id_offline = objUsers.id_offline == null ? Guid.NewGuid().ToString() : objUsers.id_offline;
-                objUsers.id_online = Guid.Empty.ToString();
-                objUsers.created_by = objCurrentLogin.ID;
+                if (objUsers.id_offline == null) // New User
+                {
+                    objUsers.id_offline = Guid.NewGuid().ToString();
+                    objUsers.id_online = Guid.Empty.ToString();
+                    objUsers.created_by = objCurrentLogin.ID;
+                    objUsers.created_on = DateTime.Now;
+                    objUsers.school_id = SchoolInfo.id_offline;
+                    objUsers.user_type = "staff";
+                    objUsers.student_id = Guid.Empty.ToString();
+                    objUsers.role_id = Guid.Empty.ToString();
+                    objUsers.user_avatar_file_id = Guid.Empty.ToString();
+                    objUsers.default_phone_number_id = Guid.Empty.ToString();
+                }
                 objUsers.updated_by = objCurrentLogin.ID;
-                objUsers.created_on = DateTime.Now;
                 objUsers.updated_on = DateTime.Now;
-                objUsers.school_id = SchoolInfo.id_offline;
-                objUsers.user_type = "staff";
-                objUsers.student_id = Guid.Empty.ToString();
-                objUsers.role_id = Guid.Empty.ToString();
-                objUsers.user_avatar_file_id = Guid.Empty.ToString();
-                objUsers.default_phone_number_id = Guid.Empty.ToString();
+                                                
                 objUsers.first_name = objUsers.full_name.Split(' ')[0];
                 objUsers.last_name = objUsers.full_name.Split(' ').Length > 1 ? objUsers.full_name.Split(' ')[1] : string.Empty;
                 DataTable objDatatable = MapUsersListObjectToDataTable(objUsers);

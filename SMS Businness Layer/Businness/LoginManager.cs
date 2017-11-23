@@ -40,6 +40,7 @@ namespace SMS_Businness_Layer.Businness
                     else
                     {
                         objLogin.ID = objDatable.Rows[0]["id_offline"] != DBNull.Value ? objDatable.Rows[0]["id_offline"].ToString() : string.Empty;
+                        objLogin.full_name = objDatable.Rows[0]["full_name"] != DBNull.Value ? objDatable.Rows[0]["full_name"].ToString() : string.Empty;
                         isValidUser = true;
                     }
                 }

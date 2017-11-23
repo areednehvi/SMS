@@ -69,14 +69,15 @@ namespace SMS_Businness_Layer.Businness
                     obj.registration_id = row["students.registration_id"] != DBNull.Value ? Convert.ToString(row["students.registration_id"]) : string.Empty;
                     obj.roll_number = row["students.roll_number"] != DBNull.Value ? Convert.ToString(row["students.roll_number"]) : string.Empty;
                     obj.exam_roll_number = row["students.exam_roll_number"] != DBNull.Value ? Convert.ToString(row["students.exam_roll_number"]) : string.Empty;
-                    obj.enrollment_date = row["students.enrollment_date"] != DBNull.Value ? Convert.ToDateTime(row["students.enrollment_date"]) : DateTime.MinValue;
+                    obj.enrollment_date = row["students.enrollment_date"] != DBNull.Value ? Convert.ToDateTime(row["students.enrollment_date"]) : (DateTime?)null;
                     obj.status = row["students.status"] != DBNull.Value ? Convert.ToString(row["students.status"]) : string.Empty;
                     obj.dc_number = row["students.dc_number"] != DBNull.Value ? Convert.ToString(row["students.dc_number"]) : string.Empty;
-                    obj.dc_date_of_issue = row["students.dc_date_of_issue"] != DBNull.Value ? Convert.ToDateTime(row["students.dc_date_of_issue"]) : DateTime.MinValue;
+                    obj.dc_date_of_issue = row["students.dc_date_of_issue"] != DBNull.Value ? Convert.ToDateTime(row["students.dc_date_of_issue"]) : (DateTime?)null;
                     obj.created_by = row["students.created_by"] != DBNull.Value ? Convert.ToString(row["students.created_by"]) : string.Empty;
                     obj.created_on = row["students.created_on"] != DBNull.Value ? Convert.ToDateTime(row["students.created_on"]) : DateTime.MinValue;
                     obj.updated_by = row["students.updated_by"] != DBNull.Value ? Convert.ToString(row["students.updated_by"]) : string.Empty;
                     obj.updated_on = row["students.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["students.updated_on"]) : DateTime.MinValue;
+                    obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     //User
                     obj.User.id_offline = row["users.id_offline"] != DBNull.Value ? Convert.ToString(row["users.id_offline"]) : string.Empty;
                     obj.User.id_online = row["users.id_online"] != DBNull.Value ? Convert.ToString(row["users.id_online"]) : string.Empty;
@@ -97,7 +98,7 @@ namespace SMS_Businness_Layer.Businness
                     obj.User.gender = row["users.gender"] != DBNull.Value ? Convert.ToString(row["users.gender"]) : string.Empty;
                     obj.User.blood_group = row["users.blood_group"] != DBNull.Value ? Convert.ToString(row["users.blood_group"]) : string.Empty;
                     obj.User.password = row["users.password"] != DBNull.Value ? Convert.ToString(row["users.password"]) : string.Empty;
-                    obj.User.birth_date = row["users.birth_date"] != DBNull.Value ? Convert.ToDateTime(row["users.birth_date"]) : DateTime.MinValue;
+                    obj.User.birth_date = row["users.birth_date"] != DBNull.Value ? Convert.ToDateTime(row["users.birth_date"]) : (DateTime?)null;
                     obj.User.other_phones = row["users.other_phones"] != DBNull.Value ? Convert.ToString(row["users.other_phones"]) : string.Empty;
                     obj.User.default_phone_number_id = row["users.default_phone_number_id"] != DBNull.Value ? Convert.ToString(row["users.default_phone_number_id"]) : string.Empty;
                     obj.User.adhaar_number = row["users.adhaar_number"] != DBNull.Value ? Convert.ToString(row["users.adhaar_number"]) : string.Empty;
@@ -194,11 +195,29 @@ namespace SMS_Businness_Layer.Businness
                     objStudents.created_on = DateTime.Now;                                       
                     objStudents.trip_stop_id = Guid.Empty.ToString();
                     objStudents.school_id = SchoolInfo.id_offline;
+                    objStudents.user_id = Guid.Empty.ToString();
+                    objStudents.parent_id = Guid.Empty.ToString();
+                    objStudents.session_id = Guid.Empty.ToString();
+                    if (objStudents.User.full_name != null)
+                    {
+                        objStudents.User.first_name = objStudents.User.full_name.Split(' ')[0];
+                        objStudents.User.last_name = objStudents.User.full_name.Split(' ').Length > 1 ? objStudents.User.full_name.Split(' ')[1] : string.Empty;
+                    }
                 }                
                 objStudents.updated_by = objCurrentLogin.ID;
                 objStudents.updated_on = DateTime.Now;
                 objStudents.section_id = objStudents.Section.id_offline;
                 objStudents.grade_id = objStudents.Grade.id_offline;
+                if (objStudents.Parents.f_full_name != null)
+                {
+                    objStudents.Parents.f_first_name = objStudents.Parents.f_full_name.Split(' ')[0] ;
+                    objStudents.Parents.f_last_name = objStudents.Parents.f_full_name.Split(' ').Length > 1 ? objStudents.Parents.f_full_name.Split(' ')[1] : string.Empty;
+                }
+                if (objStudents.Parents.m_full_name != null)
+                {
+                    objStudents.Parents.m_first_name = objStudents.Parents.m_full_name.Split(' ')[0];
+                    objStudents.Parents.m_last_name = objStudents.Parents.m_full_name.Split(' ').Length > 1 ? objStudents.Parents.m_full_name.Split(' ')[1] : string.Empty;
+                }
                 objStudents.User.blood_group = objStudents.BloodGroup.id;
                 objStudents.User.gender = objStudents.Gender.id;
                 objStudents.status = objStudents.Status.id;

@@ -245,7 +245,7 @@
                                 <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
                             </Border>
                             <Border Grid.Row="9" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                                <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding Students.CurrentLogin.Studentname}"/>
+                                <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding Students.Student.CreatedBy}"/>
                             </Border>
 
                             <!-- Row 11 -->

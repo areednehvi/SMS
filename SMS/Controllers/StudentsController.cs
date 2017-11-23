@@ -192,7 +192,39 @@ namespace SMS.Controllers
         {
             try
             {
-                Students.Student = new StudentsListModel();
+                Students.Student = new StudentsListModel()
+                {
+                    User = new usersModel()
+                    {
+                        id_offline = Guid.NewGuid().ToString(),
+                        id_online = Guid.Empty.ToString(),
+                        created_by = Students.CurrentLogin.ID,
+                        updated_by = Students.CurrentLogin.ID,
+                        created_on = DateTime.Now,
+                        updated_on = DateTime.Now,
+                        school_id = Students.SchoolInfo.id_offline,
+                        user_type = "student",
+                        student_id = Guid.Empty.ToString(),
+                        role_id = Guid.Empty.ToString(),
+                        user_avatar_file_id = Guid.Empty.ToString(),
+                        default_phone_number_id = Guid.Empty.ToString(),
+                    },
+                    Parents = new parentsModel()
+                    {
+                        id_offline = Guid.NewGuid().ToString(),
+                        id_online = Guid.Empty.ToString(),
+                        created_by = Students.CurrentLogin.ID,
+                        updated_by = Students.CurrentLogin.ID,
+                        created_on = DateTime.Now,
+                        updated_on = DateTime.Now,
+                        school_id = Students.SchoolInfo.id_offline,
+                    },
+                    Section = new sectionsModel(),
+                    Grade = new gradesModel(),
+                    BloodGroup = new ListModel(),
+                    Gender = new ListModel(),                   
+                    CreatedBy = Students.CurrentLogin.full_name
+                };
                 if(Students.PasswordBox != null)
                     Students.PasswordBox.Password = null;
                 this.ShowForm();

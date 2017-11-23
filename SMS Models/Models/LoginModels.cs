@@ -10,6 +10,7 @@ namespace SMS.Models
     public class LoginModel : INotifyPropertyChanged
     {     
         private string _username;
+        private string _full_name;
         private string _password;
         private string _message;
 
@@ -55,6 +56,18 @@ namespace SMS.Models
                 OnPropertyChanged("Message");
             }
 
+        }
+        public string full_name
+        {
+            get
+            {
+                return _full_name;
+            }
+            set
+            {
+                _full_name = value;
+                OnPropertyChanged("full_name");
+            }
         }
 
 
