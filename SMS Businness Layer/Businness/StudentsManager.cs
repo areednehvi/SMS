@@ -54,7 +54,8 @@ namespace SMS_Businness_Layer.Businness
                         User = new usersModel(),
                         Grade = new gradesModel(),
                         Section = new sectionsModel(),
-                        Parents = new parentsModel()
+                        Parents = new parentsModel(),
+                        Session = new sessionsModel()
                     };
                     //Student
                     obj.id_offline = row["students.id_offline"] != DBNull.Value ? Convert.ToString(row["students.id_offline"]) : string.Empty;
@@ -74,9 +75,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.dc_number = row["students.dc_number"] != DBNull.Value ? Convert.ToString(row["students.dc_number"]) : string.Empty;
                     obj.dc_date_of_issue = row["students.dc_date_of_issue"] != DBNull.Value ? Convert.ToDateTime(row["students.dc_date_of_issue"]) : (DateTime?)null;
                     obj.created_by = row["students.created_by"] != DBNull.Value ? Convert.ToString(row["students.created_by"]) : string.Empty;
-                    obj.created_on = row["students.created_on"] != DBNull.Value ? Convert.ToDateTime(row["students.created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["students.created_on"] != DBNull.Value ? Convert.ToDateTime(row["students.created_on"]) : (DateTime?)null;
                     obj.updated_by = row["students.updated_by"] != DBNull.Value ? Convert.ToString(row["students.updated_by"]) : string.Empty;
-                    obj.updated_on = row["students.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["students.updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["students.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["students.updated_on"]) : (DateTime?)null;
                     obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     //User
                     obj.User.id_offline = row["users.id_offline"] != DBNull.Value ? Convert.ToString(row["users.id_offline"]) : string.Empty;
@@ -107,12 +108,12 @@ namespace SMS_Businness_Layer.Businness
                     obj.User.bank_account_number = row["users.bank_account_number"] != DBNull.Value ? Convert.ToString(row["users.bank_account_number"]) : string.Empty;
                     obj.User.bank_ifsc_code = row["users.bank_ifsc_code"] != DBNull.Value ? Convert.ToString(row["users.bank_ifsc_code"]) : string.Empty;
                     obj.User.flags = row["users.flags"] != DBNull.Value ? Convert.ToString(row["users.flags"]) : string.Empty;
-                    obj.User.last_login_time = row["users.last_login_time"] != DBNull.Value ? Convert.ToDateTime(row["users.last_login_time"]) : DateTime.MinValue;
+                    obj.User.last_login_time = row["users.last_login_time"] != DBNull.Value ? Convert.ToDateTime(row["users.last_login_time"]) : (DateTime?)null;
                     obj.User.user_avatar_file_id = row["users.user_avatar_file_id"] != DBNull.Value ? Convert.ToString(row["users.user_avatar_file_id"]) : string.Empty;
                     obj.User.is_active = row["users.is_active"] != DBNull.Value ? Convert.ToBoolean(row["users.is_active"]) : false;
-                    obj.User.created_on = row["users.created_on"] != DBNull.Value ? Convert.ToDateTime(row["users.created_on"]) : DateTime.MinValue;
+                    obj.User.created_on = row["users.created_on"] != DBNull.Value ? Convert.ToDateTime(row["users.created_on"]) : (DateTime?)null;
                     obj.User.created_by = row["users.created_by"] != DBNull.Value ? Convert.ToString(row["users.created_by"]) : string.Empty;
-                    obj.User.updated_on = row["users.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["users.updated_on"]) : DateTime.MinValue;
+                    obj.User.updated_on = row["users.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["users.updated_on"]) : (DateTime?)null;
                     obj.User.updated_by = row["users.updated_by"] != DBNull.Value ? Convert.ToString(row["users.updated_by"]) : string.Empty;
                     //Grade
                     obj.Grade.id_offline = row["grades.id_offline"] != DBNull.Value ? Convert.ToString(row["grades.id_offline"]) : string.Empty;
@@ -122,9 +123,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.Grade.name = row["grades.name"] != DBNull.Value ? Convert.ToString(row["grades.name"]) : string.Empty;
                     obj.Grade.order = row["grades.order"] != DBNull.Value ? Convert.ToString(row["grades.order"]) : string.Empty;
                     obj.Grade.created_by = row["grades.created_by"] != DBNull.Value ? Convert.ToString(row["grades.created_by"]) : string.Empty;
-                    obj.Grade.created_on = row["grades.created_on"] != DBNull.Value ? Convert.ToDateTime(row["grades.created_on"]) : DateTime.MinValue;
+                    obj.Grade.created_on = row["grades.created_on"] != DBNull.Value ? Convert.ToDateTime(row["grades.created_on"]) : (DateTime?)null;
                     obj.Grade.updated_by = row["grades.updated_by"] != DBNull.Value ? Convert.ToString(row["grades.updated_by"]) : string.Empty;
-                    obj.Grade.updated_on = row["grades.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["grades.updated_on"]) : DateTime.MinValue;
+                    obj.Grade.updated_on = row["grades.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["grades.updated_on"]) : (DateTime?)null;
                     //Section
                     obj.Section.id_offline = row["sections.id_offline"] != DBNull.Value ? Convert.ToString(row["sections.id_offline"]) : string.Empty;
                     obj.Section.id_online = row["sections.id_online"] != DBNull.Value ? Convert.ToString(row["sections.id_online"]) : string.Empty;
@@ -132,9 +133,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.Section.name = row["sections.name"] != DBNull.Value ? Convert.ToString(row["sections.name"]) : string.Empty;
                     obj.Section.capacity = row["sections.capacity"] != DBNull.Value ? Convert.ToInt16(row["sections.capacity"]) : 0;
                     obj.Section.created_by = row["sections.created_by"] != DBNull.Value ? Convert.ToString(row["sections.created_by"]) : string.Empty;
-                    obj.Section.created_on = row["sections.created_on"] != DBNull.Value ? Convert.ToDateTime(row["sections.created_on"]) : DateTime.MinValue;
+                    obj.Section.created_on = row["sections.created_on"] != DBNull.Value ? Convert.ToDateTime(row["sections.created_on"]) : (DateTime?)null;
                     obj.Section.updated_by = row["sections.updated_by"] != DBNull.Value ? Convert.ToString(row["sections.updated_by"]) : string.Empty;
-                    obj.Section.updated_on = row["sections.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["sections.updated_on"]) : DateTime.MinValue;
+                    obj.Section.updated_on = row["sections.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["sections.updated_on"]) : (DateTime?)null;
                     //Parents
                     obj.Parents.id_offline = row["parents.id_offline"] != DBNull.Value ? Convert.ToString(row["parents.id_offline"]) : string.Empty;
                     obj.Parents.id_online = row["parents.id_online"] != DBNull.Value ? Convert.ToString(row["parents.id_online"]) : string.Empty;
@@ -159,9 +160,22 @@ namespace SMS_Businness_Layer.Businness
                     obj.Parents.g_mobile = row["parents.g_mobile"] != DBNull.Value ? Convert.ToString(row["parents.g_mobile"]) : string.Empty;
                     obj.Parents.g_email = row["parents.g_email"] != DBNull.Value ? Convert.ToString(row["parents.g_email"]) : string.Empty;
                     obj.Parents.created_by = row["parents.created_by"] != DBNull.Value ? Convert.ToString(row["parents.created_by"]) : string.Empty;
-                    obj.Parents.created_on = row["parents.created_on"] != DBNull.Value ? Convert.ToDateTime(row["parents.created_on"]) : DateTime.MinValue;
+                    obj.Parents.created_on = row["parents.created_on"] != DBNull.Value ? Convert.ToDateTime(row["parents.created_on"]) : (DateTime?)null;
                     obj.Parents.updated_by = row["parents.updated_by"] != DBNull.Value ? Convert.ToString(row["parents.updated_by"]) : string.Empty;
-                    obj.Parents.updated_on = row["parents.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["parents.updated_on"]) : DateTime.MinValue;
+                    obj.Parents.updated_on = row["parents.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["parents.updated_on"]) : (DateTime?)null;
+                    //Sessions
+                    obj.Session.id_offline = row["sessions.id_offline"] != DBNull.Value ? Convert.ToString(row["sessions.id_offline"]) : string.Empty;
+                    obj.Session.id_online = row["sessions.id_online"] != DBNull.Value ? Convert.ToString(row["sessions.id_online"]) : string.Empty;
+                    obj.Session.school_id = row["sessions.school_id"] != DBNull.Value ? Convert.ToString(row["sessions.school_id"]) : string.Empty;
+                    obj.Session.name = row["sessions.name"] != DBNull.Value ? Convert.ToString(row["sessions.name"]) : string.Empty;
+                    obj.Session.order = row["sessions.order"] != DBNull.Value ? Convert.ToString(row["sessions.order"]) : string.Empty;
+                    obj.Session.from_date = row["sessions.from_date"] != DBNull.Value ? Convert.ToDateTime(row["sessions.from_date"]) : (DateTime?)null;
+                    obj.Session.to_date = row["sessions.to_date"] != DBNull.Value ? Convert.ToDateTime(row["sessions.to_date"]) : (DateTime?)null;
+                    obj.Session.is_active = row["sessions.is_active"] != DBNull.Value ? Convert.ToBoolean(row["sessions.is_active"]) : false;
+                    obj.Session.created_by = row["sessions.created_by"] != DBNull.Value ? Convert.ToString(row["sessions.created_by"]) : string.Empty;
+                    obj.Session.created_on = row["sessions.created_on"] != DBNull.Value ? Convert.ToDateTime(row["sessions.created_on"]) : (DateTime?)null;
+                    obj.Session.updated_by = row["sessions.updated_by"] != DBNull.Value ? Convert.ToString(row["sessions.updated_by"]) : string.Empty;
+                    obj.Session.updated_on = row["sessions.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["sessions.updated_on"]) : (DateTime?)null;
 
 
                     objStudentsList.Add(obj);
@@ -182,7 +196,7 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
-        public static Boolean CreateOrModfiyStudents(StudentsListModel objStudents, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean CreateOrModfiyStudents(StudentsListModel objStudents, LoginModel CurrentLogin, SchoolModel SchoolInfo, SessionsListModel CurrentSession)
         {
             Boolean IsSuccess = false;
             try
@@ -191,20 +205,20 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objStudents.id_offline = Guid.NewGuid().ToString();
                     objStudents.id_online = Guid.Empty.ToString();
-                    objStudents.created_by = objCurrentLogin.User.id_offline;                    
+                    objStudents.created_by = CurrentLogin.User.id_offline;                    
                     objStudents.created_on = DateTime.Now;                                       
                     objStudents.trip_stop_id = Guid.Empty.ToString();
                     objStudents.school_id = SchoolInfo.id_offline;
                     objStudents.user_id = Guid.Empty.ToString();
                     objStudents.parent_id = Guid.Empty.ToString();
-                    objStudents.session_id = Guid.Empty.ToString();
+                    objStudents.session_id = CurrentSession.id_offline;
                     if (objStudents.User.full_name != null)
                     {
                         objStudents.User.first_name = objStudents.User.full_name.Split(' ')[0];
                         objStudents.User.last_name = objStudents.User.full_name.Split(' ').Length > 1 ? objStudents.User.full_name.Split(' ')[1] : string.Empty;
                     }
                 }                
-                objStudents.updated_by = objCurrentLogin.User.id_offline;
+                objStudents.updated_by = CurrentLogin.User.id_offline;
                 objStudents.updated_on = DateTime.Now;
                 objStudents.section_id = objStudents.Section.id_offline;
                 objStudents.grade_id = objStudents.Grade.id_offline;

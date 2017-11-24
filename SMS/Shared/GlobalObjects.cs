@@ -10,5 +10,6 @@ namespace SMS.Shared
     {
         public static string CurrentLogin = "CurrentLogin";
         public static string SchoolInfo = "SchoolInfo";
+        public static string CurrentSession = "CurrentSession";
     }
 }

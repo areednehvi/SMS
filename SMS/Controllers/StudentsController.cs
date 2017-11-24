@@ -192,6 +192,8 @@ namespace SMS.Controllers
         {
             try
             {
+                Students.SelectedItemInStudentsList = null;
+
                 Students.Student = new StudentsListModel()
                 {
                     User = new usersModel()
@@ -219,6 +221,7 @@ namespace SMS.Controllers
                         updated_on = DateTime.Now,
                         school_id = Students.SchoolInfo.id_offline,
                     },
+                    Session = Students.CurrentSession,
                     Section = new sectionsModel(),
                     Grade = new gradesModel(),
                     BloodGroup = new ListModel(),
@@ -303,7 +306,7 @@ namespace SMS.Controllers
             try
             {
 
-                if (StudentsManager.CreateOrModfiyStudents(Students.Student, Students.CurrentLogin, Students.SchoolInfo))
+                if (StudentsManager.CreateOrModfiyStudents(Students.Student, Students.CurrentLogin, Students.SchoolInfo,Students.CurrentSession))
                 {
                     GeneralMethods.ShowNotification("Notification", "Student Saved Successfully");
                     this.GetStudentsList();
@@ -376,6 +379,8 @@ namespace SMS.Controllers
             Students.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
             //Get School Info
             Students.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+            //Get Current Session
+            Students.CurrentSession = (SessionsListModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentSession);
         }
 
         private void ResetPagination()

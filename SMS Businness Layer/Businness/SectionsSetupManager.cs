@@ -78,9 +78,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.capacity = row["capacity"] != DBNull.Value ? Convert.ToInt32(row["capacity"]) : 0;
                     obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;
                     obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
                     objSectionsList.Add(obj);
                 }
 
@@ -109,9 +109,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.capacity = row["capacity"] != DBNull.Value ? Convert.ToInt32(row["capacity"]) : 0;
                     obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;                   
                     obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
                     obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     objSectionsList.Add(obj);
                 }
@@ -131,7 +131,7 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
-        public static Boolean CreateOrModfiySections(SectionsListModel objSection, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean CreateOrModfiySections(SectionsListModel objSection, LoginModel CurrentLogin, SchoolModel SchoolInfo)
         {
             Boolean IsSuccess = false;
             try
@@ -140,11 +140,11 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objSection.id_offline = Guid.NewGuid().ToString();
                     objSection.id_online = Guid.Empty.ToString();
-                    objSection.created_by = objCurrentLogin.User.id_offline;
+                    objSection.created_by = CurrentLogin.User.id_offline;
                     objSection.created_on = DateTime.Now;
                     objSection.school_id = SchoolInfo.id_offline;
                 }
-                objSection.updated_by = objCurrentLogin.User.id_offline;
+                objSection.updated_by = CurrentLogin.User.id_offline;
                 objSection.updated_on = DateTime.Now;
 
                 DataTable objDatatable = MapSectionListObjectToDataTable(objSection);

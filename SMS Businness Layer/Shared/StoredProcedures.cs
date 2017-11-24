@@ -20,6 +20,7 @@ namespace SMS_Businness_Layer.Shared
         public static string GetStudentPaymentHistory = "GetStudentPaymentHistory";
         public static string GetStudentFeeDue = "GetStudentFeeDue";
         public static string GetStudentBalances = "GetStudentBalances";
+        public static string GetCurrentSession = "GetCurrentSession";
         public static string UpdatePayment = "UpdatePayment";
         public static string MakePayment = "MakePayment";
         public static string UpdateFeeDue = "UpdateFeeDue";

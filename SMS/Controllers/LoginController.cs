@@ -19,6 +19,7 @@ namespace SMS.Controllers
         #region Fields
         private LoginModel _login;
         private SchoolModel _SchoolInfo;
+        private SessionsListModel _CurrentSession;
         private Window _window;      
         private ICommand _loginCommand;
         private ICommand _closeCommand;
@@ -68,6 +69,18 @@ namespace SMS.Controllers
             }
         }
 
+        public SessionsListModel CurrentSession
+        {
+            get
+            {
+                return _CurrentSession;
+            }
+            set
+            {
+                _CurrentSession = value;
+            }
+        }
+
         public Window Window
         {
             get
@@ -107,6 +120,8 @@ namespace SMS.Controllers
                 {
 
                     CreateLoginGlobalObject();
+
+                    CreateSessionGlobalObject();
 
                     UpdateLastLoginTime();
 
@@ -192,8 +207,17 @@ namespace SMS.Controllers
         private void CreateSchoolGlobalObject()
         {
             //Maintain state of School Info
-            SchoolInfo = SchoolSetupManager.GetSchooInfo();
+            SchoolInfo = SchoolSetupManager.GetSchoolInfo();
             GeneralMethods.CreateGlobalObject(GlobalObjects.SchoolInfo, SchoolInfo);
+        }
+        private void CreateSessionGlobalObject()
+        {
+            //Maintain state of Session Info
+            if (SessionsSetupManager.GetCurrentSession().Count > 0)
+            {
+                CurrentSession = SessionsSetupManager.GetCurrentSession()[0];
+                GeneralMethods.CreateGlobalObject(GlobalObjects.CurrentSession, CurrentSession);
+            }
         }
         private void GetSettings()
         {

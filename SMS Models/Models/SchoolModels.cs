@@ -20,6 +20,6 @@ namespace SMS.Models
         public string email { get; set; }
         public string address { get; set; }
         public string theme { get; set; }
-        public DateTime created_on { get; set; }
+        public DateTime? created_on { get; set; }
     }
 }

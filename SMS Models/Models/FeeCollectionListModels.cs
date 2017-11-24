@@ -18,8 +18,8 @@ namespace SMS.Models
         public string session_id { get; set; }
         public string fees_id { get; set; }
         public string grade_fees_id { get; set; }
-        public DateTime apply_from { get; set; }
-        public DateTime apply_to { get; set; }
+        public DateTime? apply_from { get; set; }
+        public DateTime? apply_to { get; set; }
         public Double concession_amount { get; set; }
         public Double fine { get; set; }
         public string grade_id { get; set; }

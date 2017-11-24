@@ -162,7 +162,7 @@ namespace SMS.Controllers
         private void CreateSchoolGlobalObject()
         {
             //Maintain state of School Info
-            SchoolSetup.SchoolInfo = SchoolSetupManager.GetSchooInfo();
+            SchoolSetup.SchoolInfo = SchoolSetupManager.GetSchoolInfo();
             GeneralMethods.CreateGlobalObject(GlobalObjects.SchoolInfo, SchoolSetup.SchoolInfo);
         }
         #endregion

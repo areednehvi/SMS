@@ -250,6 +250,8 @@ namespace SMS.Controllers
             {
                 if (SessionsSetupManager.CreateOrModfiySessions(SessionsSetup.Session, SessionsSetup.CurrentLogin, SessionsSetup.SchoolInfo))
                 {
+                    CreateSessionGlobalObject();
+
                     GeneralMethods.ShowNotification("Notification", "Session Saved Successfully");
                     this.GetSessionsList();
                     this.ShowList();
@@ -319,6 +321,11 @@ namespace SMS.Controllers
             SessionsSetup.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
             //Get School Info
             SessionsSetup.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+        }
+        private void CreateSessionGlobalObject()
+        {
+            //Maintain state of Session Info
+            GeneralMethods.CreateGlobalObject(GlobalObjects.CurrentSession, SessionsSetup.Session);
         }
 
         private void ResetPagination()

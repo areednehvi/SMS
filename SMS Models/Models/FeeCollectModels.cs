@@ -45,7 +45,7 @@ namespace SMS.Models
         private Double _fine;
         private Double _balance_amount;
         public string id_offline { get; set; } // StudentFeeID
-        public DateTime apply_from { get; set; }
+        public DateTime? apply_from { get; set; }
         public int last_day { get; set; }
         public Double fine_per_day { get; set; }
         public string fees_category { get; set; }
@@ -53,7 +53,7 @@ namespace SMS.Models
         public string fees_id { get; set; }
         public Double fee_amount { get; set; }
         public string payment_mode { get; set; }
-        public DateTime payment_date { get; set; }
+        public DateTime? payment_date { get; set; }
         public string recept_no { get; set; }
         public string comment { get; set; }
         public Double payment_amount { get; set; }
@@ -120,7 +120,7 @@ namespace SMS.Models
         private string _recept_no;
         private Double _amount;
         private Double _fine;
-        private DateTime _payment_date;
+        private DateTime? _payment_date;
         private string _payment_mode;
 
         public string id_offline { get; set; }
@@ -175,7 +175,7 @@ namespace SMS.Models
                 OnPropertyChanged("payment_mode");
             }
         }
-        public DateTime payment_date
+        public DateTime? payment_date
         {
             get
             {
@@ -189,8 +189,8 @@ namespace SMS.Models
         }
         public Double concession_amount { get; set; }
         public string month { get; set; }
-        public DateTime apply_from { get; set; }
-        public DateTime apply_to { get; set; }
+        public DateTime? apply_from { get; set; }
+        public DateTime? apply_to { get; set; }
         public Double fee_amount { get; set; }
         public string category_name { get; set; }
         public string ip { get; set; }
@@ -207,9 +207,9 @@ namespace SMS.Models
             }
         }
         public string created_by { get; set; }
-        public DateTime created_on { get; set; }
+        public DateTime? created_on { get; set; }
         public string updated_by { get; set; }
-        public DateTime updated_on { get; set; }
+        public DateTime? updated_on { get; set; }
 
         #region INotifyPropertyChanged Members
 
@@ -232,14 +232,14 @@ namespace SMS.Models
         public string student_id { get; set; }
         public Double student_balance { get; set; }
         public Double concession_amount { get; set; }
-        public DateTime apply_from { get; set; }
-        public DateTime apply_to { get; set; }
+        public DateTime? apply_from { get; set; }
+        public DateTime? apply_to { get; set; }
         public Double fine { get; set; }
         public string category_name { get; set; }
         public string created_by { get; set; }
-        public DateTime created_on { get; set; }
+        public DateTime? created_on { get; set; }
         public string updated_by { get; set; }
-        public DateTime updated_on { get; set; }
+        public DateTime? updated_on { get; set; }
         public Boolean IsSelected
         {
             get

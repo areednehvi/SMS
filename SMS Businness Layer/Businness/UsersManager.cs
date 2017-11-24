@@ -69,7 +69,7 @@ namespace SMS_Businness_Layer.Businness
                     obj.gender = row["gender"] != DBNull.Value ? Convert.ToString(row["gender"]) : string.Empty;
                     obj.blood_group = row["blood_group"] != DBNull.Value ? Convert.ToString(row["blood_group"]) : string.Empty;
                     obj.password = row["password"] != DBNull.Value ? Convert.ToString(row["password"]) : string.Empty;
-                    obj.birth_date = row["birth_date"] != DBNull.Value ? Convert.ToDateTime(row["birth_date"]) : DateTime.MinValue;
+                    obj.birth_date = row["birth_date"] != DBNull.Value ? Convert.ToDateTime(row["birth_date"]) : (DateTime?)null;
                     obj.other_phones = row["other_phones"] != DBNull.Value ? Convert.ToString(row["other_phones"]) : string.Empty;
                     obj.default_phone_number_id = row["default_phone_number_id"] != DBNull.Value ? Convert.ToString(row["default_phone_number_id"]) : string.Empty;
                     obj.adhaar_number = row["adhaar_number"] != DBNull.Value ? Convert.ToString(row["adhaar_number"]) : string.Empty;
@@ -78,12 +78,12 @@ namespace SMS_Businness_Layer.Businness
                     obj.bank_account_number = row["bank_account_number"] != DBNull.Value ? Convert.ToString(row["bank_account_number"]) : string.Empty;
                     obj.bank_ifsc_code = row["bank_ifsc_code"] != DBNull.Value ? Convert.ToString(row["bank_ifsc_code"]) : string.Empty;
                     obj.flags = row["flags"] != DBNull.Value ? Convert.ToString(row["flags"]) : string.Empty;
-                    obj.last_login_time = row["last_login_time"] != DBNull.Value ? Convert.ToDateTime(row["last_login_time"]) : DateTime.MinValue;
+                    obj.last_login_time = row["last_login_time"] != DBNull.Value ? Convert.ToDateTime(row["last_login_time"]) : (DateTime?)null;
                     obj.user_avatar_file_id = row["user_avatar_file_id"] != DBNull.Value ? Convert.ToString(row["user_avatar_file_id"]) : string.Empty;
                     obj.is_active = row["is_active"] != DBNull.Value ? Convert.ToBoolean(row["is_active"]) : false;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
                     obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
                     objUsersList.Add(obj);
                 }
@@ -126,7 +126,7 @@ namespace SMS_Businness_Layer.Businness
             }
             return isExistingUser;
         }
-        public static Boolean CreateOrModfiyUsers(UsersListModel objUsers, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean CreateOrModfiyUsers(UsersListModel objUsers, LoginModel CurrentLogin, SchoolModel SchoolInfo)
         {
             Boolean IsSuccess = false;
             try
@@ -135,7 +135,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objUsers.id_offline = Guid.NewGuid().ToString();
                     objUsers.id_online = Guid.Empty.ToString();
-                    objUsers.created_by = objCurrentLogin.User.id_offline;
+                    objUsers.created_by = CurrentLogin.User.id_offline;
                     objUsers.created_on = DateTime.Now;
                     objUsers.school_id = SchoolInfo.id_offline;
                     objUsers.user_type = "staff";
@@ -144,7 +144,7 @@ namespace SMS_Businness_Layer.Businness
                     objUsers.user_avatar_file_id = Guid.Empty.ToString();
                     objUsers.default_phone_number_id = Guid.Empty.ToString();
                 }
-                objUsers.updated_by = objCurrentLogin.User.id_offline;
+                objUsers.updated_by = CurrentLogin.User.id_offline;
                 objUsers.updated_on = DateTime.Now;
                                                 
                 objUsers.first_name = objUsers.full_name.Split(' ')[0];

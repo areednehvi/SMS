@@ -42,6 +42,24 @@ namespace SMS_Businness_Layer.Businness
             
         }
 
+        public static ObservableCollection<SessionsListModel> GetCurrentSession()
+        {
+            try
+            {
+                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetCurrentSession);
+                return MapDatatableToSessionsListObject(objDatable);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
+
         private static ObservableCollection<SessionsListModel> MapDatatableToSessionsListObject(DataTable objDatatable)
         {
             ObservableCollection<SessionsListModel> objSessionsList = new ObservableCollection<SessionsListModel>();
@@ -53,13 +71,13 @@ namespace SMS_Businness_Layer.Businness
                     obj.id_offline = row["id_offline"] != DBNull.Value ? Convert.ToString(row["id_offline"]) : string.Empty;
                     obj.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
                     obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;
-                    obj.from_date = row["from_date"] != DBNull.Value ? Convert.ToDateTime(row["from_date"]) : DateTime.MinValue;
-                    obj.to_date = row["to_date"] != DBNull.Value ? Convert.ToDateTime(row["to_date"]) : DateTime.MinValue;
+                    obj.from_date = row["from_date"] != DBNull.Value ? Convert.ToDateTime(row["from_date"]) : (DateTime?)null;
+                    obj.to_date = row["to_date"] != DBNull.Value ? Convert.ToDateTime(row["to_date"]) : (DateTime?)null;
                     obj.is_active = row["is_active"] != DBNull.Value ? Convert.ToBoolean(row["is_active"]) : false;
                     obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
                     obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     objSessionsList.Add(obj);
                 }
@@ -79,7 +97,7 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
-        public static Boolean CreateOrModfiySessions(SessionsListModel objSession, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean CreateOrModfiySessions(SessionsListModel objSession, LoginModel CurrentLogin, SchoolModel SchoolInfo)
         {
             Boolean IsSuccess = false;
             try
@@ -88,12 +106,12 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objSession.id_offline = Guid.NewGuid().ToString();
                     objSession.id_online = Guid.Empty.ToString();
-                    objSession.created_by = objCurrentLogin.User.id_offline;
+                    objSession.created_by = CurrentLogin.User.id_offline;
                     objSession.created_on = DateTime.Now;
                     objSession.school_id = SchoolInfo.id_offline;                    
                 }
                 objSession.order = "0";
-                objSession.updated_by = objCurrentLogin.User.id_offline;
+                objSession.updated_by = CurrentLogin.User.id_offline;
                 objSession.updated_on = DateTime.Now;
 
                 DataTable objDatatable = MapSessionListObjectToDataTable(objSession);

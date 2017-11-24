@@ -62,8 +62,8 @@ namespace SMS_Businness_Layer.Businness
                     objFeeCollectionStudent.session_id = row["session_id"] != DBNull.Value ? Convert.ToString(row["session_id"]) : string.Empty; ;
                     objFeeCollectionStudent.fees_id = row["fees_id"] != DBNull.Value ? Convert.ToString(row["fees_id"]) : string.Empty; ;
                     objFeeCollectionStudent.grade_fees_id = row["grade_fees_id"] != DBNull.Value ? Convert.ToString(row["grade_fees_id"]) : string.Empty; ;
-                    objFeeCollectionStudent.apply_from = row["apply_from"] != DBNull.Value ? Convert.ToDateTime(row["apply_from"]) : DateTime.MinValue;
-                    objFeeCollectionStudent.apply_to = row["apply_to"] != DBNull.Value ? Convert.ToDateTime(row["apply_to"]) : DateTime.MinValue;
+                    objFeeCollectionStudent.apply_from = row["apply_from"] != DBNull.Value ? Convert.ToDateTime(row["apply_from"]) : (DateTime?)null;
+                    objFeeCollectionStudent.apply_to = row["apply_to"] != DBNull.Value ? Convert.ToDateTime(row["apply_to"]) : (DateTime?)null;
                     objFeeCollectionStudent.concession_amount = row["concession_amount"] != DBNull.Value ? Convert.ToDouble(row["concession_amount"]) : 0; ;
                     objFeeCollectionStudent.fine = row["fine"] != DBNull.Value ? Convert.ToDouble(row["fine"]) : 0 ;
                     objFeeCollectionStudent.grade_id = row["grade_id"] != DBNull.Value ? Convert.ToString(row["grade_id"]) : string.Empty; ;

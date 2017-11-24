@@ -20,9 +20,9 @@ namespace SMS_Models.Models
             public string is_transport { get; set; }
             public string order { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
         }
         public class feesModel
         {
@@ -39,9 +39,9 @@ namespace SMS_Models.Models
             public string is_allocated { get; set; }
             public string remarks { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class filesModel
@@ -53,7 +53,7 @@ namespace SMS_Models.Models
             public string size { get; set; }
             public string school_id { get; set; }
             public string owner_user_id { get; set; }
-            public DateTime created { get; set; }
+            public DateTime? created { get; set; }
 
         }
         public class grade_feesModel
@@ -64,9 +64,9 @@ namespace SMS_Models.Models
             public string fees_id { get; set; }
             public string grade_id { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
         }
         public class gradesModel
         {
@@ -77,9 +77,9 @@ namespace SMS_Models.Models
             public string name { get; set; }
             public string order { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class parentsModel
@@ -107,9 +107,9 @@ namespace SMS_Models.Models
             public string g_mobile { get; set; }
             public string g_email { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class route_stopsModel
@@ -122,9 +122,9 @@ namespace SMS_Models.Models
             public string latitude { get; set; }
             public string longitude { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class route_vehicle_stopsModel
@@ -162,9 +162,9 @@ namespace SMS_Models.Models
             public string start_location { get; set; }
             public string end_location { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class schoolsModel
@@ -177,7 +177,7 @@ namespace SMS_Models.Models
             public string name { get; set; }
             public string address { get; set; }
             public string theme { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
 
         }
         public class sectionsModel
@@ -188,9 +188,9 @@ namespace SMS_Models.Models
             public string name { get; set; }
             public int capacity { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class sessionsModel : INotifyPropertyChanged
@@ -202,8 +202,8 @@ namespace SMS_Models.Models
             public string school_id { get; set; }
             public string name { get; set; }
             public string order { get; set; }
-            public DateTime from_date { get; set; }
-            public DateTime to_date { get; set; }
+            public DateTime? from_date { get; set; }
+            public DateTime? to_date { get; set; }
             public Boolean is_active
             {
                 get
@@ -217,9 +217,9 @@ namespace SMS_Models.Models
                 }
             }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
             #region INotifyPropertyChanged Members
 
@@ -242,15 +242,15 @@ namespace SMS_Models.Models
             public string grade_fees_id { get; set; }
             public string student_id { get; set; }
             public string route_vehicle_stops_fee_log_id { get; set; }
-            public DateTime apply_from { get; set; }
-            public DateTime apply_to { get; set; }
+            public DateTime? apply_from { get; set; }
+            public DateTime? apply_to { get; set; }
             public Double fine { get; set; }
             public Double concession_amount { get; set; }
             public string no_fine { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class student_grade_session_logModel
@@ -267,9 +267,9 @@ namespace SMS_Models.Models
             public string session_id { get; set; }
             public string sgsl_status { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class student_paymentsModel
@@ -283,12 +283,12 @@ namespace SMS_Models.Models
             public string comment { get; set; }
             public string recept_no { get; set; }
             public string payment_mode { get; set; }
-            public DateTime payment_date { get; set; }
+            public DateTime? payment_date { get; set; }
             public string ip { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class studentsModel
@@ -310,9 +310,9 @@ namespace SMS_Models.Models
             public string dc_number { get; set; }
             public DateTime? dc_date_of_issue { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
         public class trip_stopsModel
@@ -331,7 +331,7 @@ namespace SMS_Models.Models
             public string id_offline { get; set; }
             public string id_online { get; set; }
             public string TableName { get; set; }
-            public DateTime LastSyncedOn { get; set; }
+            public DateTime? LastSyncedOn { get; set; }
         }
         public class user_avatar_filesModel
         {
@@ -376,9 +376,9 @@ namespace SMS_Models.Models
             public DateTime? last_login_time { get; set; }
             public string user_avatar_file_id { get; set; }
             public Boolean is_active { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string created_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
             public string updated_by { get; set; }
 
         }
@@ -393,9 +393,9 @@ namespace SMS_Models.Models
             public string insurance_renew_date { get; set; }
             public string staff_id { get; set; }
             public string created_by { get; set; }
-            public DateTime created_on { get; set; }
+            public DateTime? created_on { get; set; }
             public string updated_by { get; set; }
-            public DateTime updated_on { get; set; }
+            public DateTime? updated_on { get; set; }
 
         }
 

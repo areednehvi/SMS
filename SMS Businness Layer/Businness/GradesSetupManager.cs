@@ -78,9 +78,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;
                     obj.order = row["order"] != DBNull.Value ? Convert.ToString(row["order"]) : string.Empty;
                     obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
                     obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     objGradesList.Add(obj);
                 }
@@ -110,9 +110,9 @@ namespace SMS_Businness_Layer.Businness
                     obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;
                     obj.order = row["order"] != DBNull.Value ? Convert.ToString(row["order"]) : string.Empty;
                     obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : DateTime.MinValue;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
                     obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : DateTime.MinValue;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
                     objGradesList.Add(obj);
                 }
 
@@ -131,7 +131,7 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
-        public static Boolean CreateOrModfiyGrades(GradesListModel objGrade, LoginModel objCurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean CreateOrModfiyGrades(GradesListModel objGrade, LoginModel CurrentLogin, SchoolModel SchoolInfo)
         {
             Boolean IsSuccess = false;
             try
@@ -140,12 +140,12 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objGrade.id_offline = Guid.NewGuid().ToString();
                     objGrade.id_online = Guid.Empty.ToString();
-                    objGrade.created_by = objCurrentLogin.User.id_offline;
+                    objGrade.created_by = CurrentLogin.User.id_offline;
                     objGrade.created_on = DateTime.Now;
                     objGrade.school_id = SchoolInfo.id_offline;
                     objGrade.order = string.Empty;
                 }                
-                objGrade.updated_by = objCurrentLogin.User.id_offline;
+                objGrade.updated_by = CurrentLogin.User.id_offline;
                 objGrade.updated_on = DateTime.Now;
                                 
                 DataTable objDatatable = MapGradeListObjectToDataTable(objGrade);

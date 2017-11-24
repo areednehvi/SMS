@@ -21,6 +21,7 @@ namespace SMS.Models
         private List<ListModel> _StatusList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
+        private SessionsListModel _CurrentSession;
         private PasswordBox _PasswordBox;
         private string _ListVisibility;
         private string _FormVisibility;
@@ -213,6 +214,17 @@ namespace SMS.Models
                 _SchoolInfo = value;
             }
         }
+        public SessionsListModel CurrentSession
+        {
+            get
+            {
+                return _CurrentSession;
+            }
+            set
+            {
+                _CurrentSession = value;
+            }
+        }
 
         #region INotifyPropertyChanged Members
 
@@ -233,6 +245,7 @@ namespace SMS.Models
         private parentsModel _Parents;
         private gradesModel _Grade;
         private sectionsModel _Section;
+        private sessionsModel _Session;
         private ListModel _BloodGroup;
         private ListModel _Gender;
         private ListModel _Status;
@@ -319,6 +332,18 @@ namespace SMS.Models
             {
                 _Status = value;
                 OnPropertyChanged("Status");
+            }
+        }
+        public sessionsModel Session
+        {
+            get
+            {
+                return _Session;
+            }
+            set
+            {
+                _Session = value;
+                OnPropertyChanged("Session");
             }
         }
         public string CreatedBy { get; set; }

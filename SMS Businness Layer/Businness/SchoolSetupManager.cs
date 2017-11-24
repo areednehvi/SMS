@@ -35,7 +35,7 @@ namespace SMS_Businness_Layer.Businness
 
         }
 
-        public static SchoolModel GetSchooInfo()
+        public static SchoolModel GetSchoolInfo()
         {
             try
             {
@@ -69,7 +69,7 @@ namespace SMS_Businness_Layer.Businness
                 objSchoolInfo.email = objDatatable.Rows[0]["email"] != DBNull.Value ? objDatatable.Rows[0]["email"].ToString() : string.Empty;
                 objSchoolInfo.address = objDatatable.Rows[0]["address"] != DBNull.Value ? objDatatable.Rows[0]["address"].ToString() : string.Empty;
                 objSchoolInfo.theme = objDatatable.Rows[0]["theme"] != DBNull.Value ? objDatatable.Rows[0]["theme"].ToString() : string.Empty;
-                objSchoolInfo.created_on = objDatatable.Rows[0]["created_on"] != DBNull.Value ? Convert.ToDateTime(objDatatable.Rows[0]["created_on"].ToString()) : DateTime.MinValue;
+                objSchoolInfo.created_on = objDatatable.Rows[0]["created_on"] != DBNull.Value ? Convert.ToDateTime(objDatatable.Rows[0]["created_on"].ToString()) : (DateTime?)null;
             }
             catch (Exception ex)
             {

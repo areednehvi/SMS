@@ -1935,7 +1935,7 @@ namespace SMS_Businness_Layer.Businness
 
                     objSyncTableInfo.id_offline = row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objSyncTableInfo.TableName = row["TableName"] != DBNull.Value ? row["TableName"].ToString() : string.Empty;
-                    objSyncTableInfo.LastSyncedOn = row["LastSyncedOn"] != DBNull.Value ? Convert.ToDateTime(row["LastSyncedOn"]) : DateTime.MinValue;
+                    objSyncTableInfo.LastSyncedOn = row["LastSyncedOn"] != DBNull.Value ? Convert.ToDateTime(row["LastSyncedOn"]) : (DateTime?)null;
 
                     lstSyncTableInfoList.Add(objSyncTableInfo);
                 }
