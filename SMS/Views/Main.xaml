@@ -17,7 +17,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate x:Key="FeeCollectionListView" DataType="{x:Type vm:MainController}">
+        <DataTemplate x:Key="FeeCollectionView" DataType="{x:Type vm:MainController}">
             <local:FeeCollectionList />
         </DataTemplate>
         <DataTemplate x:Key="SyncView" DataType="{x:Type vm:MainController}">
@@ -90,7 +90,7 @@
                     </MenuItem.Header>
                     <MenuItem Header="List" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.StudentsView}}" />
                 </MenuItem>
-                <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionListView}}" >
+                <MenuItem Cursor="Hand">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="24" Height="24" Margin="0,0,5,0">
@@ -98,9 +98,12 @@
                                     <Path Data="M8,3H18L17,5H13.74C14.22,5.58 14.58,6.26 14.79,7H18L17,9H15C14.75,11.57 12.74,13.63 10.2,13.96V14H9.5L15.5,21H13L7,14V12H9.5V12C11.26,12 12.72,10.7 12.96,9H7L8,7H12.66C12.1,5.82 10.9,5 9.5,5H7L8,3Z" Fill="white" />
                                 </Canvas>
                             </Viewbox>
-                            <ContentPresenter Content="Fee Collection" />
+                            <ContentPresenter Content="Accounts" />
                         </StackPanel>
                     </MenuItem.Header>
+                    <MenuItem Header="Fee Categories" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
+                    <MenuItem Header="Fee Allocation" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
+                    <MenuItem Header="Fee Collection" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionListView}}"  />
                 </MenuItem>
                 <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}">
                     <MenuItem.Header>
@@ -193,10 +196,10 @@
             <ContentControl DataContext="{Binding}" >
                 <ContentControl.Style>
                     <Style TargetType="{x:Type ContentControl}">
-                        <Setter Property="ContentTemplate" Value="{StaticResource FeeCollectionListView}" />
+                        <Setter Property="ContentTemplate" Value="{StaticResource FeeCollectionView}" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeCollectionListView">
-                                <Setter Property="ContentTemplate" Value="{StaticResource FeeCollectionListView}" />
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeCollectionView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource FeeCollectionView}" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="SettingsView">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SettingsView}" />
