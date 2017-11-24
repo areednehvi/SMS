@@ -140,12 +140,12 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objGrade.id_offline = Guid.NewGuid().ToString();
                     objGrade.id_online = Guid.Empty.ToString();
-                    objGrade.created_by = objCurrentLogin.ID;
+                    objGrade.created_by = objCurrentLogin.User.id_offline;
                     objGrade.created_on = DateTime.Now;
                     objGrade.school_id = SchoolInfo.id_offline;
                     objGrade.order = string.Empty;
                 }                
-                objGrade.updated_by = objCurrentLogin.ID;
+                objGrade.updated_by = objCurrentLogin.User.id_offline;
                 objGrade.updated_on = DateTime.Now;
                                 
                 DataTable objDatatable = MapGradeListObjectToDataTable(objGrade);

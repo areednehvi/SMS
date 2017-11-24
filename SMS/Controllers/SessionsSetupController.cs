@@ -184,7 +184,7 @@ namespace SMS.Controllers
                 {
                     from_date = DateTime.Now,
                     to_date = DateTime.Now.AddYears(1),                   
-                    CreatedBy = SessionsSetup.CurrentLogin.full_name,
+                    CreatedBy = SessionsSetup.CurrentLogin.User.full_name,
                 };
                 this.ShowForm();
             }

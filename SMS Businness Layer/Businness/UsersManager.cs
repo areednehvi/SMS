@@ -42,7 +42,7 @@ namespace SMS_Businness_Layer.Businness
             
         }
 
-        private static ObservableCollection<UsersListModel> MapDatatableToUsersListObject(DataTable objDatatable)
+        public static ObservableCollection<UsersListModel> MapDatatableToUsersListObject(DataTable objDatatable)
         {
             ObservableCollection<UsersListModel> objUsersList = new ObservableCollection<UsersListModel>();
             try
@@ -135,7 +135,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objUsers.id_offline = Guid.NewGuid().ToString();
                     objUsers.id_online = Guid.Empty.ToString();
-                    objUsers.created_by = objCurrentLogin.ID;
+                    objUsers.created_by = objCurrentLogin.User.id_offline;
                     objUsers.created_on = DateTime.Now;
                     objUsers.school_id = SchoolInfo.id_offline;
                     objUsers.user_type = "staff";
@@ -144,7 +144,7 @@ namespace SMS_Businness_Layer.Businness
                     objUsers.user_avatar_file_id = Guid.Empty.ToString();
                     objUsers.default_phone_number_id = Guid.Empty.ToString();
                 }
-                objUsers.updated_by = objCurrentLogin.ID;
+                objUsers.updated_by = objCurrentLogin.User.id_offline;
                 objUsers.updated_on = DateTime.Now;
                                                 
                 objUsers.first_name = objUsers.full_name.Split(' ')[0];

@@ -182,7 +182,7 @@ namespace SMS.Controllers
             {
                 SectionsSetup.Section = new SectionsListModel()
                 {
-                    CreatedBy = SectionsSetup.CurrentLogin.full_name
+                    CreatedBy = SectionsSetup.CurrentLogin.User.full_name
                 };
                 this.ShowForm();
             }

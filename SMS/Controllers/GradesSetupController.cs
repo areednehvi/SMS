@@ -182,7 +182,7 @@ namespace SMS.Controllers
             {
                 GradesSetup.Grade = new GradesListModel()
                 {
-                    CreatedBy = GradesSetup.CurrentLogin.full_name
+                    CreatedBy = GradesSetup.CurrentLogin.User.full_name
                 };
                 this.ShowForm();
             }

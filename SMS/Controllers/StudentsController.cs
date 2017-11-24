@@ -198,8 +198,8 @@ namespace SMS.Controllers
                     {
                         id_offline = Guid.NewGuid().ToString(),
                         id_online = Guid.Empty.ToString(),
-                        created_by = Students.CurrentLogin.ID,
-                        updated_by = Students.CurrentLogin.ID,
+                        created_by = Students.CurrentLogin.User.id_offline,
+                        updated_by = Students.CurrentLogin.User.id_offline,
                         created_on = DateTime.Now,
                         updated_on = DateTime.Now,
                         school_id = Students.SchoolInfo.id_offline,
@@ -213,8 +213,8 @@ namespace SMS.Controllers
                     {
                         id_offline = Guid.NewGuid().ToString(),
                         id_online = Guid.Empty.ToString(),
-                        created_by = Students.CurrentLogin.ID,
-                        updated_by = Students.CurrentLogin.ID,
+                        created_by = Students.CurrentLogin.User.id_offline,
+                        updated_by = Students.CurrentLogin.User.id_offline,
                         created_on = DateTime.Now,
                         updated_on = DateTime.Now,
                         school_id = Students.SchoolInfo.id_offline,
@@ -224,7 +224,7 @@ namespace SMS.Controllers
                     BloodGroup = new ListModel(),
                     Gender = new ListModel(),  
                     Status = new ListModel(),                 
-                    CreatedBy = Students.CurrentLogin.full_name
+                    CreatedBy = Students.CurrentLogin.User.full_name
                 };
                 if(Students.PasswordBox != null)
                     Students.PasswordBox.Password = null;

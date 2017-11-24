@@ -88,12 +88,12 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objSession.id_offline = Guid.NewGuid().ToString();
                     objSession.id_online = Guid.Empty.ToString();
-                    objSession.created_by = objCurrentLogin.ID;
+                    objSession.created_by = objCurrentLogin.User.id_offline;
                     objSession.created_on = DateTime.Now;
                     objSession.school_id = SchoolInfo.id_offline;                    
                 }
                 objSession.order = "0";
-                objSession.updated_by = objCurrentLogin.ID;
+                objSession.updated_by = objCurrentLogin.User.id_offline;
                 objSession.updated_on = DateTime.Now;
 
                 DataTable objDatatable = MapSessionListObjectToDataTable(objSession);

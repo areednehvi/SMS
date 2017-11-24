@@ -23,8 +23,8 @@ namespace SMS_Businness_Layer.Businness
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
 
-                    new SqlParameter() {ParameterName = "@Username",     SqlDbType = SqlDbType.NVarChar, Value = objLogin.Username},
-                    new SqlParameter() {ParameterName = "@Password",  SqlDbType = SqlDbType.NVarChar, Value = objLogin.Password}
+                    new SqlParameter() {ParameterName = "@Username",     SqlDbType = SqlDbType.NVarChar, Value = objLogin.User.username},
+                    new SqlParameter() {ParameterName = "@Password",  SqlDbType = SqlDbType.NVarChar, Value = objLogin.User.password}
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.AuthenticateUser, lstSqlParameters);
                 if (objDatable.Rows.Count > 0)
@@ -39,8 +39,7 @@ namespace SMS_Businness_Layer.Businness
                         objLogin.Message = LoginDefinitions.AccountDoesntExist;
                     else
                     {
-                        objLogin.ID = objDatable.Rows[0]["id_offline"] != DBNull.Value ? objDatable.Rows[0]["id_offline"].ToString() : string.Empty;
-                        objLogin.full_name = objDatable.Rows[0]["full_name"] != DBNull.Value ? objDatable.Rows[0]["full_name"].ToString() : string.Empty;
+                        objLogin.User = UsersManager.MapDatatableToUsersListObject(objDatable)[0];                  
                         isValidUser = true;
                     }
                 }

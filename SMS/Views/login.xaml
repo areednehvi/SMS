@@ -17,7 +17,7 @@
         <ImageBrush ImageSource="../assets/images/login.png"/>
     </Window.Background>
     <Grid x:Name="grdLogin" DataContext="{Binding Source={StaticResource LoginController}}" FocusManager.FocusedElement="{Binding ElementName=txtUserName}">
-        <TextBox x:Name="txtUserName"  Style="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" Height="21" Margin="322,371,0,0" TextWrapping="NoWrap" Text="{Binding Login.Username,Mode=TwoWay}" VerticalAlignment="Top" Width="145" ToolTip="Enter your username"/>
+        <TextBox x:Name="txtUserName"  Style="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" Height="21" Margin="322,371,0,0" TextWrapping="NoWrap" Text="{Binding Login.User.username,Mode=TwoWay}" VerticalAlignment="Top" Width="145" ToolTip="Enter your username"/>
         <PasswordBox x:Name="txtPassword" Style="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" Height="19" Margin="322,416,0,0" VerticalAlignment="Top" Width="145" ToolTip="Enter your password" />
         <Button x:Name="btnLogin" Content="" HorizontalAlignment="Left" Margin="372,511,0,0" VerticalAlignment="Top" Width="102" Opacity="0" Height="26" ToolTip="Login into your account" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=txtPassword}" />
         <Button Grid.Column="0" ToolTip="Close Login" Width="26" Height="26" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Command="{Binding CloseCommand}"

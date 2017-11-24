@@ -4,42 +4,25 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
     public class LoginModel : INotifyPropertyChanged
-    {     
-        private string _username;
-        private string _full_name;
-        private string _password;
+    {
+        private UsersListModel _User;
         private string _message;
 
-        public string ID { get; set; }
-        public string Username
+        public UsersListModel User
         {
             get
             {
-                return _username;
+                return _User;
             }
             set
             {
-                _username = value;
-                Message = null;
-                OnPropertyChanged("Username");
-            }
-        }
-
-        public string Password
-        {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-                Message = null;
-                OnPropertyChanged("Password");
+                _User = value;
+                OnPropertyChanged("User");
             }
 
         }
@@ -57,19 +40,6 @@ namespace SMS.Models
             }
 
         }
-        public string full_name
-        {
-            get
-            {
-                return _full_name;
-            }
-            set
-            {
-                _full_name = value;
-                OnPropertyChanged("full_name");
-            }
-        }
-
 
         #region INotifyPropertyChanged Members
 

@@ -191,7 +191,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objStudents.id_offline = Guid.NewGuid().ToString();
                     objStudents.id_online = Guid.Empty.ToString();
-                    objStudents.created_by = objCurrentLogin.ID;                    
+                    objStudents.created_by = objCurrentLogin.User.id_offline;                    
                     objStudents.created_on = DateTime.Now;                                       
                     objStudents.trip_stop_id = Guid.Empty.ToString();
                     objStudents.school_id = SchoolInfo.id_offline;
@@ -204,7 +204,7 @@ namespace SMS_Businness_Layer.Businness
                         objStudents.User.last_name = objStudents.User.full_name.Split(' ').Length > 1 ? objStudents.User.full_name.Split(' ')[1] : string.Empty;
                     }
                 }                
-                objStudents.updated_by = objCurrentLogin.ID;
+                objStudents.updated_by = objCurrentLogin.User.id_offline;
                 objStudents.updated_on = DateTime.Now;
                 objStudents.section_id = objStudents.Section.id_offline;
                 objStudents.grade_id = objStudents.Grade.id_offline;

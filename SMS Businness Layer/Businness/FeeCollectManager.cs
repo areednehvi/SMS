@@ -119,8 +119,8 @@ namespace SMS_Businness_Layer.Businness
                     objPayment.comment = objMakePayment.Payment.comment;
                     objPayment.recept_no = objMakePayment.Payment.recept_no;
                     objPayment.ip = null;
-                    objPayment.created_by = objCurrentLogin.ID != null ? objCurrentLogin.ID : "0";
-                    objPayment.updated_by = objCurrentLogin.ID != null ? objCurrentLogin.ID : "0";
+                    objPayment.created_by = objCurrentLogin.User.id_offline != null ? objCurrentLogin.User.id_offline : Guid.Empty.ToString();
+                    objPayment.updated_by = objCurrentLogin.User.id_offline != null ? objCurrentLogin.User.id_offline : Guid.Empty.ToString();
                     objPayment.created_on = DateTime.Now;
                     objPayment.updated_on = DateTime.Now;
                     objPayment.payment_date = objMakePayment.Payment.payment_date;
@@ -271,7 +271,7 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 objPayment.updated_on = DateTime.Now;
-                objPayment.updated_by = objCurrentLogin.ID!= null ? objCurrentLogin.ID : "0";
+                objPayment.updated_by = objCurrentLogin.User.id_offline!= null ? objCurrentLogin.User.id_offline : Guid.Empty.ToString();
 
                 DataTable objDatatable = MapPaymentToDataTable(objPayment);
                 SqlParameter objSqlParameter = new SqlParameter("@PaymentTable", SqlDbType.Structured);
@@ -357,7 +357,7 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 objFeeDueModel.updated_on = DateTime.Now;
-                objFeeDueModel.updated_by = objCurrentLogin.ID != null ? objCurrentLogin.ID : "0";
+                objFeeDueModel.updated_by = objCurrentLogin.User.id_offline != null ? objCurrentLogin.User.id_offline : Guid.Empty.ToString();
 
                 DataTable objDatatable = MapFeeDueToDataTable(objFeeDueModel);
                 SqlParameter objSqlParameter = new SqlParameter("@StudentFeesTable", SqlDbType.Structured);

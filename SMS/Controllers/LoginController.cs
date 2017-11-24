@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static SMS_Models.Models.DBModels;
 
 namespace SMS.Controllers
 {
@@ -27,7 +28,10 @@ namespace SMS.Controllers
         #region Constructor
         public LoginController()
         {
-            _login = new LoginModel();
+            _login = new LoginModel()
+            {
+                User = new UsersListModel()
+            };
 
             //Get Settings
             //this.GetSettings();
@@ -87,7 +91,7 @@ namespace SMS.Controllers
         public bool CanLogin(object obj)
         {
           
-            if (Login.Username != null)
+            if (Login.User.username != null)
                 return true;
             return false;
         }
@@ -98,11 +102,13 @@ namespace SMS.Controllers
             try
             {
                 PasswordBox pwBox = obj as PasswordBox;
-                Login.Password = pwBox.Password;
+                Login.User.password = pwBox.Password;
                 if (LoginManager.ValidateUser(Login))
                 {
 
                     CreateLoginGlobalObject();
+
+                    UpdateLastLoginTime();
 
                     if (SchoolSetupManager.IsSchoolSetup())
                     {
@@ -192,6 +198,11 @@ namespace SMS.Controllers
         private void GetSettings()
         {
 
+        }
+        private void UpdateLastLoginTime()
+        {
+            Login.User.last_login_time = DateTime.Now;
+            UsersManager.CreateOrModfiyUsers(Login.User, Login, SchoolInfo);
         }
         #endregion  
 

@@ -140,11 +140,11 @@ namespace SMS_Businness_Layer.Businness
                 {
                     objSection.id_offline = Guid.NewGuid().ToString();
                     objSection.id_online = Guid.Empty.ToString();
-                    objSection.created_by = objCurrentLogin.ID;
+                    objSection.created_by = objCurrentLogin.User.id_offline;
                     objSection.created_on = DateTime.Now;
                     objSection.school_id = SchoolInfo.id_offline;
                 }
-                objSection.updated_by = objCurrentLogin.ID;
+                objSection.updated_by = objCurrentLogin.User.id_offline;
                 objSection.updated_on = DateTime.Now;
 
                 DataTable objDatatable = MapSectionListObjectToDataTable(objSection);
