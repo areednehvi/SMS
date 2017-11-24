@@ -17,18 +17,17 @@ using System.Windows.Shapes;
 namespace SMS.Views
 {
     /// <summary>
-    /// Interaction logic for FeeCollectionList.xaml
+    /// Interaction logic for FeeCategories.xaml
     /// </summary>
-    public partial class FeeCollectionList : UserControl
+    public partial class FeeCategories : UserControl
     {
-        public FeeCollectionList()
+        public FeeCategories()
         {
             InitializeComponent();
+
             double height = SystemParameters.PrimaryScreenHeight - 250;
             GridLength gl = new GridLength(height);
             grdRowNo2.Height = gl;
-            ((FeeCollectionListController)grdFeeCollectionList.DataContext).FeeCollectionListDataGrid = this.dataGridFeeCollectionList;
-            //((FeeCollectionListController)grdFeeCollectionList.DataContext).Window = this;
         }
     }
 }

@@ -18,7 +18,7 @@
 
     <Window.Resources>
         <DataTemplate x:Key="FeeCollectionView" DataType="{x:Type vm:MainController}">
-            <local:FeeCollectionList />
+            <local:FeeCollection />
         </DataTemplate>
         <DataTemplate x:Key="SyncView" DataType="{x:Type vm:MainController}">
             <local:Sync />
@@ -101,9 +101,9 @@
                             <ContentPresenter Content="Accounts" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="Fee Categories" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
+                    <MenuItem Header="Fee Categories" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCategoriesView}}" />
                     <MenuItem Header="Fee Allocation" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
-                    <MenuItem Header="Fee Collection" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionListView}}"  />
+                    <MenuItem Header="Fee Collection" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionView}}"  />
                 </MenuItem>
                 <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}">
                     <MenuItem.Header>

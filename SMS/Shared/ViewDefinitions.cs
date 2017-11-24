@@ -9,7 +9,7 @@ namespace SMS.Shared
 {
     public class ViewDefinitions
     {
-        public static View FeeCollectionListView = new View() { Name = "FeeCollectionListView", Title = "Fee Collection" };
+        public static View FeeCollectionView = new View() { Name = "FeeCollectionView", Title = "Fee Collection" };
         public static View SyncView = new View() { Name = "SyncView", Title = "Sync with Online" };
         public static View SettingsView = new View() { Name = "SettingsView", Title = "Settings" };
         public static View SessionsView = new View() { Name = "SessionsView", Title = "Setup Current Session" };
@@ -17,5 +17,7 @@ namespace SMS.Shared
         public static View SectionsView = new View() { Name = "SectionsView", Title = "Setup Sections" };
         public static View UsersView = new View() { Name = "UsersView", Title = "Manage Users" };
         public static View StudentsView = new View() { Name = "StudentsView", Title = "Manage Students" };
+        public static View FeeCategoriesView = new View() { Name = "FeeCategoriesView", Title = "Fee Categories" };
+        public static View FeeAllocationView = new View() { Name = "FeeAllocationView", Title = "Fee Allocation" };
     }
 }

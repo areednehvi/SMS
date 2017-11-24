@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class FeeCollectionListController :INotifyPropertyChanged
+    public class FeeCollectionController :INotifyPropertyChanged
     {
         #region Fields
         private ObservableCollection<FeeCollectionStudentListModel> _feeCollectionStudentList;
@@ -32,7 +32,7 @@ namespace SMS.Controllers
         #endregion
 
         #region Constructor
-        public FeeCollectionListController()
+        public FeeCollectionController()
         {
             _feeCollectionStudentList = new ObservableCollection<FeeCollectionStudentListModel>();
             _FeeCollectionListFilters = new FeeCollectionListFiltersModel();

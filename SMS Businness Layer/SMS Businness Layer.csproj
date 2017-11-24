@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Businness\ParentsManager.cs" />
     <Compile Include="Businness\StudentsManager.cs" />
+    <Compile Include="Businness\FeeCategoriesManager.cs" />
     <Compile Include="Businness\UsersManager.cs" />
     <Compile Include="Businness\SessionsSetupManager.cs" />
     <Compile Include="Businness\SectionsSetupManager.cs" />

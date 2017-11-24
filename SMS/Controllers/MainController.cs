@@ -33,7 +33,7 @@ namespace SMS.Controllers
         public MainController()
         {
             _MenuVisibility = new Visibility();
-            SelectedView = ViewDefinitions.FeeCollectionListView; // startup View
+            SelectedView = ViewDefinitions.FeeCollectionView; // startup View
             //Initialize Commands
             _closeCommand = new RelayCommand(CloseLogin, CanClose);
             _minimizeCommand = new RelayCommand(MinimizeLogin, CanMinimize);
