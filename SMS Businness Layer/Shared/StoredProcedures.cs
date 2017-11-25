@@ -59,5 +59,6 @@ namespace SMS_Businness_Layer.Shared
         public static string CreateOrModifySections = "CreateOrModifySections";
         public static string CreateOrModifyUsers = "CreateOrModifyUsers"; 
         public static string CreateOrModifyStudents = "CreateOrModifyStudents";
+        public static string CreateOrModifyFeeCategories = "CreateOrModifyFeeCategories";
     }
 }

@@ -9,10 +9,10 @@ using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class FeeCategoriesController :INotifyPropertyChanged
+    public class FeeCategoriesController : INotifyPropertyChanged
     {
         #region Fields
-        private FeeCategoriesModel _FeeCategories;      
+        private FeeCategoriesModel _FeeCategories;
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
@@ -43,7 +43,8 @@ namespace SMS.Controllers
             this.ResetPagination();
 
             //Subscribe to Model's Property changed event
-            this.FeeCategories.PropertyChanged += (s, e) => {
+            this.FeeCategories.PropertyChanged += (s, e) =>
+            {
                 if (e.PropertyName == "SelectedItemInFeeCategoriesList")
                 {
                     FeeCategories.FeeCategory = FeeCategories.SelectedItemInFeeCategoriesList;
@@ -51,7 +52,7 @@ namespace SMS.Controllers
                 }
             };
 
-            
+
 
             //Get Initial FeeCategories list
             this.GetFeeCategoriesList();
@@ -65,7 +66,7 @@ namespace SMS.Controllers
 
             this.ShowList();
         }
-        
+
         #endregion
 
         #region Properties
@@ -82,18 +83,18 @@ namespace SMS.Controllers
                 OnPropertyChanged("FeeCategories");
             }
         }
-       
+
         #endregion
 
         #region NextPageCommand
         public ICommand NextPageCommand
         {
-            get { return _nextPageCommand; }        
+            get { return _nextPageCommand; }
         }
 
-      
+
         public bool CanMoveToNextPage(object obj)
-        {          
+        {
             return true;
         }
 
@@ -118,7 +119,7 @@ namespace SMS.Controllers
             {
 
             }
-            
+
         }
 
         #endregion
@@ -140,7 +141,7 @@ namespace SMS.Controllers
         public void MoveToPreviousPage(object obj)
         {
             try
-            {             
+            {
                 if (FeeCategories.pageNo > 1)
                 {
                     FeeCategories.pageNo--;
@@ -181,8 +182,10 @@ namespace SMS.Controllers
         {
             try
             {
-                FeeCategories.FeeCategory = new FeeCategoriesListModel();
-                FeeCategories.PasswordBox.Password = null;
+                FeeCategories.FeeCategory = new FeeCategoriesListModel()
+                {
+                    CreatedBy = FeeCategories.CurrentLogin.User.full_name
+                };
                 this.ShowForm();
             }
             catch (Exception ex)
@@ -246,21 +249,15 @@ namespace SMS.Controllers
         {
             try
             {
-                if (FeeCategories.FeeCategory.id_offline == null)
+
+                if (FeeCategoriesManager.CreateOrModfiyFeeCategories(FeeCategories.FeeCategory, FeeCategories.CurrentLogin, FeeCategories.SchoolInfo))
                 {
-                    GeneralMethods.ShowDialog("FeeCategory Cannot be Created", "An account with same FeeCategoryname exists. Kindly choose some other FeeCategoryname", true);
-                   
+                    GeneralMethods.ShowNotification("Notification", "Fee Category Saved Successfully");
+                    this.GetFeeCategoriesList();
+                    this.ShowList();
                 }
-                else
-                {
-                    if (FeeCategoriesManager.CreateOrModfiyFeeCategories(FeeCategories.FeeCategory, FeeCategories.CurrentLogin, FeeCategories.SchoolInfo))
-                    {
-                        GeneralMethods.ShowNotification("Notification", "FeeCategory Saved Successfully");
-                        this.GetFeeCategoriesList();
-                        this.ShowList();
-                    }
-                }                
-                
+
+
 
             }
             catch (Exception ex)

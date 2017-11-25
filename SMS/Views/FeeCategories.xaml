@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
             <materialDesign:Card Grid.Row="0" Padding="5"  Margin="5,10,5,5" >
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Add New FeeCategory" ToolTip="Click to add a FeeCategory" Height="40" FontSize="18" Command="{Binding AddNewFeeCategoryCommand}" ></Button>
+                    <Button Content="Add New Fee Category" ToolTip="Click to add a FeeCategory" Height="40" FontSize="18" Command="{Binding AddNewFeeCategoryCommand}" ></Button>
                 </WrapPanel>
 
             </materialDesign:Card>
@@ -62,11 +62,8 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding full_name}"/>
-                    <DataGridTextColumn Width="*" Header="Login" Binding="{Binding FeeCategoryname}"/>
-                    <DataGridTextColumn Width="*" Header="Phone" Binding="{Binding phone}" />
-                    <DataGridTextColumn Width="*" Header="Is Active" Binding="{Binding is_active}" />
-                    <DataGridTextColumn Width="*" Header="Last Login" Binding="{Binding last_login_time,StringFormat='dd/MM/yyyy hh:mm tt'}" />
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding name}"/>
+                    <DataGridTextColumn Width="*" Header="Created By" Binding="{Binding CreatedBy}"/>
                 </DataGrid.Columns>
                 <!-- the following defines sub rows-->
                 <!--<DataGrid.RowDetailsTemplate>
@@ -86,8 +83,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="65" />
                             <RowDefinition Height="65" />
-                            <RowDefinition Height="65" />
-                            <RowDefinition Height="65" />
+
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
@@ -98,54 +94,19 @@
 
                         <!-- Row 0 -->
                         <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Login *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
-                        </Border>
-                        <Border Grid.Row="0" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding FeeCategories.FeeCategory.FeeCategoryname}"/>
-                        </Border>
-                        <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Password *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
-                        </Border>
-                        <Border Grid.Row="0" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <PasswordBox x:Name="txtPassword"  VerticalAlignment="Center" FontSize="18" Width="300" />
-                        </Border>
-
-                        <!-- Row 1 -->
-                        
-                        <Border Grid.Row="1" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                             <Label Content="Name *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
-                        <Border Grid.Row="1" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding FeeCategories.FeeCategory.full_name}"/>
+                        <Border Grid.Row="0" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding FeeCategories.FeeCategory.name}"/>
                         </Border>
-                        <Border Grid.Row="1" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Email" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
-                        <Border Grid.Row="1" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <TextBox  VerticalAlignment="Center" FontSize="18" Width="300" Text="{Binding FeeCategories.FeeCategory.email}"/>
-                        </Border>
-
-                        <!-- Row 2 -->
-                        <Border Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Phone" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
-                        </Border>
-                        <Border Grid.Row="2" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                            <TextBox  VerticalAlignment="Center" FontSize="18"   Width="300" Text="{Binding FeeCategories.FeeCategory.phone}"/>
-                        </Border>
-                        <Border Grid.Row="2" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Is Active *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
-                        </Border>
-                        <Border Grid.Row="2" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <CheckBox  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeCategories.FeeCategory.is_active}" IsChecked="{Binding FeeCategories.FeeCategory.is_active}"/>
+                        <Border Grid.Row="0" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                            <Label  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeCategories.FeeCategory.CreatedBy}"/>
                         </Border>
 
-                        <!-- Row 3-->
-                        <Border Grid.Row="4" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688"  />
-                        </Border>
-                        <Border Grid.Row="4" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White" >
-                            <Label  VerticalAlignment="Center" FontSize="18"   Width="300" Content="{Binding FeeCategories.CurrentLogin.FeeCategoryname}"/>
-                        </Border>
+                        
                     </Grid>
                     <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                         <Button  VerticalAlignment="Center" Margin="0,0,20,20" FontSize="18" Width="140" Height="40" Command="{Binding CancelNewFeeCategoryCommand}" Background="#2f4050" Content="Cancel"/>

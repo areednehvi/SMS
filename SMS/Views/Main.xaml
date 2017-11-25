@@ -41,6 +41,9 @@
         <DataTemplate x:Key="StudentsView" DataType="{x:Type vm:MainController}">
             <local:Students />
         </DataTemplate>
+        <DataTemplate x:Key="FeeCategoriesView" DataType="{x:Type vm:MainController}">
+            <local:FeeCategories />
+        </DataTemplate>
     </Window.Resources>
 
     <Grid x:Name="grdMain">
@@ -75,7 +78,7 @@
                             <ContentPresenter Content="Users" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="List" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.UsersView}}" />
+                    <MenuItem Header="List" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.UsersView}}" />
                 </MenuItem>
                 <MenuItem Cursor="Hand">
                     <MenuItem.Header>
@@ -88,7 +91,7 @@
                             <ContentPresenter Content="Students" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="List" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.StudentsView}}" />
+                    <MenuItem Header="List" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.StudentsView}}" />
                 </MenuItem>
                 <MenuItem Cursor="Hand">
                     <MenuItem.Header>
@@ -101,9 +104,9 @@
                             <ContentPresenter Content="Accounts" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="Fee Categories" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCategoriesView}}" />
-                    <MenuItem Header="Fee Allocation" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
-                    <MenuItem Header="Fee Collection" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionView}}"  />
+                    <MenuItem Header="Fee Categories" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCategoriesView}}" />
+                    <MenuItem Header="Fee Allocation" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
+                    <MenuItem Header="Fee Collection" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionView}}"  />
                 </MenuItem>
                 <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}">
                     <MenuItem.Header>
@@ -140,9 +143,9 @@
                             <ContentPresenter Content="Setup" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="Session" Width="290" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SessionsView}}" />
-                    <MenuItem Header="Grades" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.GradesView}}" />
-                    <MenuItem Header="Sections" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SectionsView}}" />
+                    <MenuItem Header="Session" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SessionsView}}" />
+                    <MenuItem Header="Grades" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.GradesView}}" />
+                    <MenuItem Header="Sections" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SectionsView}}" />
                 </MenuItem>
                 <MenuItem Cursor="Hand" Command="{Binding LogOutCommand}">
                     <MenuItem.Header>
@@ -221,6 +224,9 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="StudentsView">
                                 <Setter Property="ContentTemplate" Value="{StaticResource StudentsView}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeCategoriesView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource FeeCategoriesView}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
