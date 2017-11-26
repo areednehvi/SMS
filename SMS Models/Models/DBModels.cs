@@ -193,7 +193,7 @@ namespace SMS_Models.Models
             public DateTime? updated_on { get; set; }
 
         }
-        public class sessionsModel : INotifyPropertyChanged
+        public class sessionsModel :NotifyPropertyChanged
         {
             private Boolean _is_active;
 
@@ -221,17 +221,7 @@ namespace SMS_Models.Models
             public string updated_by { get; set; }
             public DateTime? updated_on { get; set; }
 
-            #region INotifyPropertyChanged Members
-
-            public event PropertyChangedEventHandler PropertyChanged;
-            private void OnPropertyChanged(string propertyName)
-            {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
-            #endregion
+            
 
         }
         public class student_feesModel

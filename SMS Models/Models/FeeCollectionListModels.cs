@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace SMS.Models
         public Int64 allocated_fee_cource_count { get; set; }
         public string parentage { get; set; }
     }
-    public class FeeCollectionListFiltersModel : INotifyPropertyChanged
+    public class FeeCollectionListFiltersModel :NotifyPropertyChanged
     {
         private GradesModel _grade;
         private SectionsModel _section;
@@ -140,20 +141,10 @@ namespace SMS.Models
 
 
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
-    public class FeeCollectionListOtherFiledsModel : INotifyPropertyChanged
+    public class FeeCollectionListOtherFiledsModel :NotifyPropertyChanged
     {
         private string _pageNo;
 
@@ -171,17 +162,7 @@ namespace SMS.Models
         }
 
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
     public class GradesModel

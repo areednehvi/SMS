@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SMS.Models
 {
-    public class SettingsModel : INotifyPropertyChanged
+    public class SettingsModel :NotifyPropertyChanged
     {     
         private ObservableCollection<NoOfRowsInGridsModel> _NoOfRowsInGrids;
         private Boolean _AlwaysShowMenuBar;
@@ -52,17 +53,7 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
     public class NoOfRowsInGridsModel
     {

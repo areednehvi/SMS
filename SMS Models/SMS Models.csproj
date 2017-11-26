@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DBModels.cs" />
+    <Compile Include="Models\NotifyPropertyChanged.cs" />
     <Compile Include="Models\StudentsModels.cs" />
     <Compile Include="Models\FeeCategoriesModels.cs" />
     <Compile Include="Models\UsersModels.cs" />

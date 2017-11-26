@@ -3,6 +3,7 @@ using SMS.Models;
 using SMS.Shared;
 using SMS.Views;
 using SMS_Businness_Layer.Businness;
+using SMS_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class SchoolSetupController :INotifyPropertyChanged
+    public class SchoolSetupController :NotifyPropertyChanged
     {
         #region Fields
         private SchoolSetupModel _SchoolSetup;
@@ -145,18 +146,7 @@ namespace SMS.Controllers
         }
         #endregion        
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
-
+        
         #region Private Functions
 
         private void CreateSchoolGlobalObject()

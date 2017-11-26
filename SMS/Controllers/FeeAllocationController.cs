@@ -5,27 +5,28 @@ using SMS_Models.Models;
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class SectionsSetupController :NotifyPropertyChanged
+    public class FeeAllocationController : NotifyPropertyChanged
     {
         #region Fields
-        private SectionsSetupModel _SectionsSetup;      
+        private FeeCategoriesModel _FeeCategories;
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
-        private ICommand _addNewSectionCommand;
-        private ICommand _cancelNewSectionCommand;
-        private ICommand _saveSectionsCommand;
+        private ICommand _addNewFeeCategoryCommand;
+        private ICommand _cancelNewFeeCategoryCommand;
+        private ICommand _saveFeeCategoriesCommand;
         #endregion
 
         #region Constructor
-        public SectionsSetupController()
+        public FeeAllocationController()
         {
 
-            _SectionsSetup = new SectionsSetupModel()
+            _FeeCategories = new FeeCategoriesModel()
             {
                 CurrentLogin = new LoginModel(),
                 SchoolInfo = new SchoolModel()
@@ -43,57 +44,58 @@ namespace SMS.Controllers
             this.ResetPagination();
 
             //Subscribe to Model's Property changed event
-            this.SectionsSetup.PropertyChanged += (s, e) => {
-                if (e.PropertyName == "SelectedItemInSectionsList")
+            this.FeeCategories.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "SelectedItemInFeeCategoriesList")
                 {
-                    SectionsSetup.Section = SectionsSetup.SelectedItemInSectionsList;
+                    FeeCategories.FeeCategory = FeeCategories.SelectedItemInFeeCategoriesList;
                     this.ShowForm();
                 }
             };
 
-            
 
-            //Get Initial Sections list
-            this.GetSectionsList();
+
+            //Get Initial FeeCategories list
+            this.GetFeeCategoriesList();
 
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
-            _addNewSectionCommand = new RelayCommand(AddNewSection, CanAddNewSection);
-            _cancelNewSectionCommand = new RelayCommand(CancelNewSection, CanCancelNewSection);
-            _saveSectionsCommand = new RelayCommand(SaveSections, CanSaveSections);
+            _addNewFeeCategoryCommand = new RelayCommand(AddNewFeeCategory, CanAddNewFeeCategory);
+            _cancelNewFeeCategoryCommand = new RelayCommand(CancelNewFeeCategory, CanCancelNewFeeCategory);
+            _saveFeeCategoriesCommand = new RelayCommand(SaveFeeCategories, CanSaveFeeCategories);
 
             this.ShowList();
         }
-        
+
         #endregion
 
         #region Properties
 
-        public SectionsSetupModel SectionsSetup
+        public FeeCategoriesModel FeeCategories
         {
             get
             {
-                return _SectionsSetup;
+                return _FeeCategories;
             }
             set
             {
-                _SectionsSetup = value;
-                OnPropertyChanged("SectionsSetup");
+                _FeeCategories = value;
+                OnPropertyChanged("FeeCategories");
             }
         }
-       
+
         #endregion
 
         #region NextPageCommand
         public ICommand NextPageCommand
         {
-            get { return _nextPageCommand; }        
+            get { return _nextPageCommand; }
         }
 
-      
+
         public bool CanMoveToNextPage(object obj)
-        {          
+        {
             return true;
         }
 
@@ -101,12 +103,12 @@ namespace SMS.Controllers
         {
             try
             {
-                SectionsSetup.pageNo++;
-                SectionsSetup.PageNo = "Page No : " + SectionsSetup.pageNo;
-                SectionsSetup.fromRowNo = SectionsSetup.toRowNo + 1;
-                SectionsSetup.toRowNo = SectionsSetup.pageNo * SectionsSetup.NoOfRecordsPerPage;
-                this.GetSectionsList();
-                if (SectionsSetup.pageNo > 1 && SectionsSetup.SectionsList.Count == 0)
+                FeeCategories.pageNo++;
+                FeeCategories.PageNo = "Page No : " + FeeCategories.pageNo;
+                FeeCategories.fromRowNo = FeeCategories.toRowNo + 1;
+                FeeCategories.toRowNo = FeeCategories.pageNo * FeeCategories.NoOfRecordsPerPage;
+                this.GetFeeCategoriesList();
+                if (FeeCategories.pageNo > 1 && FeeCategories.FeeCategoriesList.Count == 0)
                     MoveToPreviousPage(obj);
             }
             catch (Exception ex)
@@ -118,7 +120,7 @@ namespace SMS.Controllers
             {
 
             }
-            
+
         }
 
         #endregion
@@ -140,14 +142,14 @@ namespace SMS.Controllers
         public void MoveToPreviousPage(object obj)
         {
             try
-            {             
-                if (SectionsSetup.pageNo > 1)
+            {
+                if (FeeCategories.pageNo > 1)
                 {
-                    SectionsSetup.pageNo--;
-                    SectionsSetup.PageNo = "Page No : " + SectionsSetup.pageNo;
-                    SectionsSetup.toRowNo = SectionsSetup.fromRowNo - 1;
-                    SectionsSetup.fromRowNo = (SectionsSetup.toRowNo + 1) - SectionsSetup.NoOfRecordsPerPage;
-                    this.GetSectionsList();
+                    FeeCategories.pageNo--;
+                    FeeCategories.PageNo = "Page No : " + FeeCategories.pageNo;
+                    FeeCategories.toRowNo = FeeCategories.fromRowNo - 1;
+                    FeeCategories.fromRowNo = (FeeCategories.toRowNo + 1) - FeeCategories.NoOfRecordsPerPage;
+                    this.GetFeeCategoriesList();
                 }
 
             }
@@ -163,27 +165,27 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region AddNewSectionCommand
+        #region AddNewFeeCategoryCommand
 
-        public ICommand AddNewSectionCommand
+        public ICommand AddNewFeeCategoryCommand
         {
-            get { return _addNewSectionCommand; }
+            get { return _addNewFeeCategoryCommand; }
         }
 
 
-        public bool CanAddNewSection(object obj)
+        public bool CanAddNewFeeCategory(object obj)
         {
             return true;
         }
 
 
-        public void AddNewSection(object obj)
+        public void AddNewFeeCategory(object obj)
         {
             try
             {
-                SectionsSetup.Section = new SectionsListModel()
+                FeeCategories.FeeCategory = new FeeCategoriesListModel()
                 {
-                    CreatedBy = SectionsSetup.CurrentLogin.User.full_name
+                    CreatedBy = FeeCategories.CurrentLogin.User.full_name
                 };
                 this.ShowForm();
             }
@@ -199,21 +201,21 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region CancelNewSectionCommand
+        #region CancelNewFeeCategoryCommand
 
-        public ICommand CancelNewSectionCommand
+        public ICommand CancelNewFeeCategoryCommand
         {
-            get { return _cancelNewSectionCommand; }
+            get { return _cancelNewFeeCategoryCommand; }
         }
 
 
-        public bool CanCancelNewSection(object obj)
+        public bool CanCancelNewFeeCategory(object obj)
         {
             return true;
         }
 
 
-        public void CancelNewSection(object obj)
+        public void CancelNewFeeCategory(object obj)
         {
             try
             {
@@ -231,28 +233,32 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region SaveSectionsCommand
-        public ICommand SaveSectionsCommand
+        #region SaveFeeCategoriesCommand
+        public ICommand SaveFeeCategoriesCommand
         {
-            get { return _saveSectionsCommand; }
+            get { return _saveFeeCategoriesCommand; }
         }
 
 
-        public bool CanSaveSections(object obj)
+        public bool CanSaveFeeCategories(object obj)
         {
-            return SectionsSetup.Section != null && SectionsSetup.Section.name != null && SectionsSetup.Section.capacity != 0;                
+            return FeeCategories.FeeCategory != null;
+
         }
 
-        public void SaveSections(object obj)
+        public void SaveFeeCategories(object obj)
         {
             try
             {
-                if (SectionsSetupManager.CreateOrModfiySections(SectionsSetup.Section, SectionsSetup.CurrentLogin, SectionsSetup.SchoolInfo))
+
+                if (FeeCategoriesManager.CreateOrModfiyFeeCategories(FeeCategories.FeeCategory, FeeCategories.CurrentLogin, FeeCategories.SchoolInfo))
                 {
-                    GeneralMethods.ShowNotification("Notification", "Section Saved Successfully");
-                    this.GetSectionsList();
+                    GeneralMethods.ShowNotification("Notification", "Fee Category Saved Successfully");
+                    this.GetFeeCategoriesList();
                     this.ShowList();
                 }
+
+
 
             }
             catch (Exception ex)
@@ -270,12 +276,12 @@ namespace SMS.Controllers
         #endregion      
 
         
-        private void GetSectionsList()
+        private void GetFeeCategoriesList()
         {
             try
             {
-                SectionsSetup.SectionsList = SectionsSetupManager.GetSectionsList(SectionsSetup.fromRowNo, SectionsSetup.toRowNo);
-                SectionsSetup.NoRecordsFound = SectionsSetup.SectionsList.Count > 0 ? "Collapsed" : "Visible";
+                FeeCategories.FeeCategoriesList = FeeCategoriesManager.GetFeeCategoriesList(FeeCategories.fromRowNo, FeeCategories.toRowNo);
+                FeeCategories.NoRecordsFound = FeeCategories.FeeCategoriesList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
             {
@@ -291,38 +297,38 @@ namespace SMS.Controllers
 
         private void ShowForm()
         {
-            SectionsSetup.ListVisibility = "Collapsed";
-            SectionsSetup.FormVisibility = "Visible";
+            FeeCategories.ListVisibility = "Collapsed";
+            FeeCategories.FormVisibility = "Visible";
         }
 
         private void ShowList()
         {
-            SectionsSetup.ListVisibility = "Visible";
-            SectionsSetup.FormVisibility = "Collapsed";
+            FeeCategories.ListVisibility = "Visible";
+            FeeCategories.FormVisibility = "Collapsed";
         }
 
         private void GetGlobalObjects()
         {
             //Get the Current Login
-            SectionsSetup.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
+            FeeCategories.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
             //Get School Info
-            SectionsSetup.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+            FeeCategories.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
         }
 
         private void ResetPagination()
         {
-            SectionsSetup.fromRowNo = 1;
-            SectionsSetup.pageNo = 1;
-            SectionsSetup.PageNo = "Page No : " + SectionsSetup.pageNo;
-            SectionsSetup.NoOfRecordsPerPage = SectionsSetup.NoOfRecords;
-            SectionsSetup.toRowNo = SectionsSetup.pageNo * SectionsSetup.NoOfRecordsPerPage;
+            FeeCategories.fromRowNo = 1;
+            FeeCategories.pageNo = 1;
+            FeeCategories.PageNo = "Page No : " + FeeCategories.pageNo;
+            FeeCategories.NoOfRecordsPerPage = FeeCategories.NoOfRecords;
+            FeeCategories.toRowNo = FeeCategories.pageNo * FeeCategories.NoOfRecordsPerPage;
         }
 
 
         private void GetSettings()
         {
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
-            SectionsSetup.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
+            FeeCategories.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
         }
 
 

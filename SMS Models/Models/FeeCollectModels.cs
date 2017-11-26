@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SMS.Models
 {
-    public class PendingMonthlyFeeModel : INotifyPropertyChanged
+    public class PendingMonthlyFeeModel :NotifyPropertyChanged
     {
         private Boolean _IsSelected;
         public string Period { get; set; }
@@ -27,19 +28,9 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
-    public class FeeBalancesModel : INotifyPropertyChanged
+    public class FeeBalancesModel :NotifyPropertyChanged
     {
         private Boolean _IsSelected;
         private Double _fine;
@@ -102,19 +93,8 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-        #endregion
-    }
-    public class PaymentModel : INotifyPropertyChanged // represents mostly student_payments Table
+    public class PaymentModel :NotifyPropertyChanged // represents mostly student_payments Table
     {
         private string _comment;
         private string _recept_no;
@@ -211,20 +191,10 @@ namespace SMS.Models
         public string updated_by { get; set; }
         public DateTime? updated_on { get; set; }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
-    public class FeeDueModel : INotifyPropertyChanged // Represents mostly student_fees Table
+    public class FeeDueModel :NotifyPropertyChanged // Represents mostly student_fees Table
     {
         private Boolean _IsSelected;
         public string id_offline { get; set; }
@@ -253,19 +223,9 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
-    public class FeeCollectOtherFieldsModel : INotifyPropertyChanged
+    public class FeeCollectOtherFieldsModel :NotifyPropertyChanged
     {
         private string _pageNo;
 
@@ -283,20 +243,10 @@ namespace SMS.Models
         }
 
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
-    public class FeeDueFormFieldsModel : INotifyPropertyChanged
+    public class FeeDueFormFieldsModel :NotifyPropertyChanged
     {
         private Double _fine;
         private Double _concession;
@@ -341,20 +291,10 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
-    public class FeeDueListFiltersModel : INotifyPropertyChanged
+    public class FeeDueListFiltersModel :NotifyPropertyChanged
     {
         private FeeCategoryModel _FeeCategory;
         private ObservableCollection<FeeCategoryModel> _FeeCategoryList;
@@ -386,17 +326,7 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
     public class FeeCategoryModel
@@ -412,7 +342,7 @@ namespace SMS.Models
         public string name { get; set; }
     }
 
-    public class MakePaymentModel : INotifyPropertyChanged
+    public class MakePaymentModel :NotifyPropertyChanged
     {
         private ObservableCollection<FeeBalancesModel> _SelectedFeeBalances;
         private PaymentModeModel _SelectedPaymentMode;
@@ -530,17 +460,7 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
 

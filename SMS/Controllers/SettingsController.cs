@@ -2,6 +2,7 @@
 using SMS.Shared;
 using SMS.Views;
 using SMS_Businness_Layer.Businness;
+using SMS_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ using System.Windows.Input;
 
 namespace SMS.Controllers
 {
-    public class SettingsController : INotifyPropertyChanged
+    public class SettingsController :NotifyPropertyChanged
     {
         #region Fields
         private SettingsModel _Settings;
@@ -106,17 +107,6 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
-
+        
     }
 }

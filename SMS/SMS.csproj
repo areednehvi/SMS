@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\FeeAllocationController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\FeeCategoriesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />

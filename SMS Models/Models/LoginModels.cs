@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +9,7 @@ using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
-    public class LoginModel : INotifyPropertyChanged
+    public class LoginModel :NotifyPropertyChanged
     {
         private UsersListModel _User;
         private string _message;
@@ -41,16 +42,6 @@ namespace SMS.Models
 
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 }

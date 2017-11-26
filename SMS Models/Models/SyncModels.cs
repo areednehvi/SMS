@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
-    public class SyncModel : INotifyPropertyChanged
+    public class SyncModel :NotifyPropertyChanged
     {
         private List<SyncModule> _SyncModuleList;
         public SyncProgressModel SyncAllProgress { get; set; }
@@ -89,20 +90,10 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
-    public class SyncProgressModel : INotifyPropertyChanged
+    public class SyncProgressModel :NotifyPropertyChanged
     {
         int _Progress;
         Decimal _ProgressPercentage;
@@ -172,21 +163,11 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
 
     }
 
-    public class SyncModule : INotifyPropertyChanged
+    public class SyncModule :NotifyPropertyChanged
     {
         private string _SyncModuleStatus;
         public string Module { get; set; }     
@@ -204,17 +185,7 @@ namespace SMS.Models
         }   
         public SyncProgressModel SyncModuleProgress { get; set; }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
 
     }
 

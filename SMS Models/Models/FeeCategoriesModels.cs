@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using static SMS_Models.Models.DBModels;
 
 namespace SMS.Models
 {
-    public class FeeCategoriesModel : INotifyPropertyChanged
+    public class FeeCategoriesModel :NotifyPropertyChanged
     {
         private FeeCategoriesListModel _SelectedItemInFeeCategoriesList;
         private FeeCategoriesListModel _FeeCategory;
@@ -149,17 +150,7 @@ namespace SMS.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+        
     }
 
     public class FeeCategoriesListModel : fee_categoriesModel
