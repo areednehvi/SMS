@@ -44,6 +44,9 @@
         <DataTemplate x:Key="FeeCategoriesView" DataType="{x:Type vm:MainController}">
             <local:FeeCategories />
         </DataTemplate>
+        <DataTemplate x:Key="FeeAllocationView" DataType="{x:Type vm:MainController}">
+            <local:FeeAllocation />
+        </DataTemplate>
     </Window.Resources>
 
     <Grid x:Name="grdMain">
@@ -105,7 +108,7 @@
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem Header="Fee Categories" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCategoriesView}}" />
-                    <MenuItem Header="Fee Allocation" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}" />
+                    <MenuItem Header="Fee Allocation" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeAllocationView}}" />
                     <MenuItem Header="Fee Collection" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionView}}"  />
                 </MenuItem>
                 <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}">
@@ -227,6 +230,9 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeCategoriesView">
                                 <Setter Property="ContentTemplate" Value="{StaticResource FeeCategoriesView}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeAllocationView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource FeeAllocationView}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

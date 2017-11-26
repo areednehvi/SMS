@@ -3,6 +3,7 @@ using SMS.Shared;
 using SMS_Businness_Layer.Businness;
 using SMS_Models.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,8 @@ namespace SMS.Controllers
         #region Constructor
         public FeeAllocationController()
         {
+            ViewModel();
+       
 
             _FeeCategories = new FeeCategoriesModel()
             {
@@ -273,9 +276,10 @@ namespace SMS.Controllers
 
         }
 
-        #endregion      
+        #endregion
 
-        
+
+        #region Private Functions
         private void GetFeeCategoriesList()
         {
             try
@@ -325,10 +329,85 @@ namespace SMS.Controllers
         }
 
 
+
         private void GetSettings()
         {
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
             FeeCategories.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
+        }
+        #endregion
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+        private Dictionary<string, object> _items;
+        private Dictionary<string, object> _selectedItems;
+
+
+        public Dictionary<string, object> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                _items = value;
+                OnPropertyChanged("Items");
+            }
+        }
+
+        public Dictionary<string, object> SelectedItems
+        {
+            get
+            {
+                return _selectedItems;
+            }
+            set
+            {
+                _selectedItems = value;
+                
+                OnPropertyChanged("SelectedItems");
+            }
+        }
+        private string _ShowSelectedItems;
+
+        public string ShowSelectedItems
+        {
+            get
+            {
+                return _ShowSelectedItems;
+            }
+            set
+            {
+                _ShowSelectedItems = value;
+                OnPropertyChanged("ShowSelectedItems");
+            }
+        }
+
+
+
+
+
+        private void ViewModel()
+        {
+            Items = new Dictionary<string, object>();
+            Items.Add("Chennai", "MAS");
+            Items.Add("Trichy", "TPJ");
+            Items.Add("Bangalore", "SBC");
+            Items.Add("Coimbatore", "CBE");
+
+            SelectedItems = new Dictionary<string, object>();
+            SelectedItems.Add("Chennai", "MAS");
+            SelectedItems.Add("Trichy", "TPJ");
+            Submit();
+        }
+
+        private void Submit()
+        {
+            ShowSelectedItems = "";
+            foreach (KeyValuePair<string, object> s in SelectedItems)
+            {
+                ShowSelectedItems += s.Key + ",";
+            }
         }
 
 
