@@ -14,13 +14,13 @@ namespace SMS.Controllers
     public class FeeAllocationController : NotifyPropertyChanged
     {
         #region Fields
-        private FeeCategoriesModel _FeeCategories;
+        private FeeAllocationModel _FeeAllocation;
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
-        private ICommand _addNewFeeCategoryCommand;
-        private ICommand _cancelNewFeeCategoryCommand;
-        private ICommand _saveFeeCategoriesCommand;
+        private ICommand _addNewFeeAllocationCommand;
+        private ICommand _cancelNewFeeAllocationCommand;
+        private ICommand _saveFeeAllocationCommand;
         #endregion
 
         #region Constructor
@@ -29,7 +29,7 @@ namespace SMS.Controllers
             ViewModel();
        
 
-            _FeeCategories = new FeeCategoriesModel()
+            _FeeAllocation = new FeeAllocationModel()
             {
                 CurrentLogin = new LoginModel(),
                 SchoolInfo = new SchoolModel()
@@ -47,26 +47,26 @@ namespace SMS.Controllers
             this.ResetPagination();
 
             //Subscribe to Model's Property changed event
-            this.FeeCategories.PropertyChanged += (s, e) =>
+            this.FeeAllocation.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == "SelectedItemInFeeCategoriesList")
+                if (e.PropertyName == "SelectedItemInFeeAllocationList")
                 {
-                    FeeCategories.FeeCategory = FeeCategories.SelectedItemInFeeCategoriesList;
+                    FeeAllocation.FeeAllocation = FeeAllocation.SelectedItemInFeeAllocationList;
                     this.ShowForm();
                 }
             };
 
 
 
-            //Get Initial FeeCategories list
-            this.GetFeeCategoriesList();
+            //Get Initial FeeAllocation list
+            this.GetFeeAllocationList();
 
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
-            _addNewFeeCategoryCommand = new RelayCommand(AddNewFeeCategory, CanAddNewFeeCategory);
-            _cancelNewFeeCategoryCommand = new RelayCommand(CancelNewFeeCategory, CanCancelNewFeeCategory);
-            _saveFeeCategoriesCommand = new RelayCommand(SaveFeeCategories, CanSaveFeeCategories);
+            _addNewFeeAllocationCommand = new RelayCommand(AddNewFeeAllocation, CanAddNewFeeAllocation);
+            _cancelNewFeeAllocationCommand = new RelayCommand(CancelNewFeeAllocation, CanCancelNewFeeAllocation);
+            _saveFeeAllocationCommand = new RelayCommand(SaveFeeAllocation, CanSaveFeeAllocation);
 
             this.ShowList();
         }
@@ -75,16 +75,16 @@ namespace SMS.Controllers
 
         #region Properties
 
-        public FeeCategoriesModel FeeCategories
+        public FeeAllocationModel FeeAllocation
         {
             get
             {
-                return _FeeCategories;
+                return _FeeAllocation;
             }
             set
             {
-                _FeeCategories = value;
-                OnPropertyChanged("FeeCategories");
+                _FeeAllocation = value;
+                OnPropertyChanged("FeeAllocation");
             }
         }
 
@@ -106,12 +106,12 @@ namespace SMS.Controllers
         {
             try
             {
-                FeeCategories.pageNo++;
-                FeeCategories.PageNo = "Page No : " + FeeCategories.pageNo;
-                FeeCategories.fromRowNo = FeeCategories.toRowNo + 1;
-                FeeCategories.toRowNo = FeeCategories.pageNo * FeeCategories.NoOfRecordsPerPage;
-                this.GetFeeCategoriesList();
-                if (FeeCategories.pageNo > 1 && FeeCategories.FeeCategoriesList.Count == 0)
+                FeeAllocation.pageNo++;
+                FeeAllocation.PageNo = "Page No : " + FeeAllocation.pageNo;
+                FeeAllocation.fromRowNo = FeeAllocation.toRowNo + 1;
+                FeeAllocation.toRowNo = FeeAllocation.pageNo * FeeAllocation.NoOfRecordsPerPage;
+                this.GetFeeAllocationList();
+                if (FeeAllocation.pageNo > 1 && FeeAllocation.FeeAllocationList.Count == 0)
                     MoveToPreviousPage(obj);
             }
             catch (Exception ex)
@@ -146,13 +146,13 @@ namespace SMS.Controllers
         {
             try
             {
-                if (FeeCategories.pageNo > 1)
+                if (FeeAllocation.pageNo > 1)
                 {
-                    FeeCategories.pageNo--;
-                    FeeCategories.PageNo = "Page No : " + FeeCategories.pageNo;
-                    FeeCategories.toRowNo = FeeCategories.fromRowNo - 1;
-                    FeeCategories.fromRowNo = (FeeCategories.toRowNo + 1) - FeeCategories.NoOfRecordsPerPage;
-                    this.GetFeeCategoriesList();
+                    FeeAllocation.pageNo--;
+                    FeeAllocation.PageNo = "Page No : " + FeeAllocation.pageNo;
+                    FeeAllocation.toRowNo = FeeAllocation.fromRowNo - 1;
+                    FeeAllocation.fromRowNo = (FeeAllocation.toRowNo + 1) - FeeAllocation.NoOfRecordsPerPage;
+                    this.GetFeeAllocationList();
                 }
 
             }
@@ -168,27 +168,27 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region AddNewFeeCategoryCommand
+        #region AddNewFeeAllocationCommand
 
-        public ICommand AddNewFeeCategoryCommand
+        public ICommand AddNewFeeAllocationCommand
         {
-            get { return _addNewFeeCategoryCommand; }
+            get { return _addNewFeeAllocationCommand; }
         }
 
 
-        public bool CanAddNewFeeCategory(object obj)
+        public bool CanAddNewFeeAllocation(object obj)
         {
             return true;
         }
 
 
-        public void AddNewFeeCategory(object obj)
+        public void AddNewFeeAllocation(object obj)
         {
             try
             {
-                FeeCategories.FeeCategory = new FeeCategoriesListModel()
+                FeeAllocation.FeeAllocation = new FeeAllocationListModel()
                 {
-                    CreatedBy = FeeCategories.CurrentLogin.User.full_name
+                    CreatedBy = FeeAllocation.CurrentLogin.User.full_name
                 };
                 this.ShowForm();
             }
@@ -204,21 +204,21 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region CancelNewFeeCategoryCommand
+        #region CancelNewFeeAllocationCommand
 
-        public ICommand CancelNewFeeCategoryCommand
+        public ICommand CancelNewFeeAllocationCommand
         {
-            get { return _cancelNewFeeCategoryCommand; }
+            get { return _cancelNewFeeAllocationCommand; }
         }
 
 
-        public bool CanCancelNewFeeCategory(object obj)
+        public bool CanCancelNewFeeAllocation(object obj)
         {
             return true;
         }
 
 
-        public void CancelNewFeeCategory(object obj)
+        public void CancelNewFeeAllocation(object obj)
         {
             try
             {
@@ -236,28 +236,28 @@ namespace SMS.Controllers
         }
         #endregion
 
-        #region SaveFeeCategoriesCommand
-        public ICommand SaveFeeCategoriesCommand
+        #region SaveFeeAllocationCommand
+        public ICommand SaveFeeAllocationCommand
         {
-            get { return _saveFeeCategoriesCommand; }
+            get { return _saveFeeAllocationCommand; }
         }
 
 
-        public bool CanSaveFeeCategories(object obj)
+        public bool CanSaveFeeAllocation(object obj)
         {
-            return FeeCategories.FeeCategory != null;
+            return FeeAllocation.FeeAllocation != null;
 
         }
 
-        public void SaveFeeCategories(object obj)
+        public void SaveFeeAllocation(object obj)
         {
             try
             {
 
-                if (FeeCategoriesManager.CreateOrModfiyFeeCategories(FeeCategories.FeeCategory, FeeCategories.CurrentLogin, FeeCategories.SchoolInfo))
+                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.FeeAllocation, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo))
                 {
                     GeneralMethods.ShowNotification("Notification", "Fee Category Saved Successfully");
-                    this.GetFeeCategoriesList();
+                    this.GetFeeAllocationList();
                     this.ShowList();
                 }
 
@@ -280,12 +280,12 @@ namespace SMS.Controllers
 
 
         #region Private Functions
-        private void GetFeeCategoriesList()
+        private void GetFeeAllocationList()
         {
             try
             {
-                FeeCategories.FeeCategoriesList = FeeCategoriesManager.GetFeeCategoriesList(FeeCategories.fromRowNo, FeeCategories.toRowNo);
-                FeeCategories.NoRecordsFound = FeeCategories.FeeCategoriesList.Count > 0 ? "Collapsed" : "Visible";
+                FeeAllocation.FeeAllocationList = FeeAllocationManager.GetFeeAllocationList(FeeAllocation.fromRowNo, FeeAllocation.toRowNo);
+                FeeAllocation.NoRecordsFound = FeeAllocation.FeeAllocationList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
             {
@@ -301,31 +301,31 @@ namespace SMS.Controllers
 
         private void ShowForm()
         {
-            FeeCategories.ListVisibility = "Collapsed";
-            FeeCategories.FormVisibility = "Visible";
+            FeeAllocation.ListVisibility = "Collapsed";
+            FeeAllocation.FormVisibility = "Visible";
         }
 
         private void ShowList()
         {
-            FeeCategories.ListVisibility = "Visible";
-            FeeCategories.FormVisibility = "Collapsed";
+            FeeAllocation.ListVisibility = "Visible";
+            FeeAllocation.FormVisibility = "Collapsed";
         }
 
         private void GetGlobalObjects()
         {
             //Get the Current Login
-            FeeCategories.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
+            FeeAllocation.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
             //Get School Info
-            FeeCategories.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+            FeeAllocation.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
         }
 
         private void ResetPagination()
         {
-            FeeCategories.fromRowNo = 1;
-            FeeCategories.pageNo = 1;
-            FeeCategories.PageNo = "Page No : " + FeeCategories.pageNo;
-            FeeCategories.NoOfRecordsPerPage = FeeCategories.NoOfRecords;
-            FeeCategories.toRowNo = FeeCategories.pageNo * FeeCategories.NoOfRecordsPerPage;
+            FeeAllocation.fromRowNo = 1;
+            FeeAllocation.pageNo = 1;
+            FeeAllocation.PageNo = "Page No : " + FeeAllocation.pageNo;
+            FeeAllocation.NoOfRecordsPerPage = FeeAllocation.NoOfRecords;
+            FeeAllocation.toRowNo = FeeAllocation.pageNo * FeeAllocation.NoOfRecordsPerPage;
         }
 
 
@@ -333,7 +333,7 @@ namespace SMS.Controllers
         private void GetSettings()
         {
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
-            FeeCategories.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
+            FeeAllocation.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
         }
         #endregion
 

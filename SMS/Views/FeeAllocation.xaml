@@ -13,7 +13,7 @@
     </UserControl.Resources>
     <Grid DataContext="{Binding Source={StaticResource FeeAllocationController}}">
         <!-- List -->
-        <Grid x:Name="grdFeeCategoriesList" Visibility="{Binding FeeCategories.ListVisibility}">
+        <Grid x:Name="grdFeeAllocationList" Visibility="{Binding FeeAllocation.ListVisibility}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="50" />
@@ -21,14 +21,14 @@
             </Grid.RowDefinitions>
             <materialDesign:Card Grid.Row="0" Padding="5"  Margin="5,10,5,5" >
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Add New Fee Category" ToolTip="Click to add a FeeCategory" Height="40" FontSize="18" Command="{Binding AddNewFeeCategoryCommand}" ></Button>
+                    <Button Content="Add New Fee Allocation" ToolTip="Click to add a Fee Allocation" Height="40" FontSize="18" Command="{Binding AddNewFeeAllocationCommand}" ></Button>
                 </WrapPanel>
 
             </materialDesign:Card>
-            <Label  Grid.Row="1"   Margin="10,10,0,0"  HorizontalAlignment="Left" Content="Click on any FeeCategory to modify it" FontStyle="Italic">
+            <Label  Grid.Row="1"   Margin="10,10,0,0"  HorizontalAlignment="Left" Content="Click on any FeeAllocation to modify it" FontStyle="Italic">
             </Label>
             <StackPanel Grid.Row="1"   Margin="0,0,10,0"  Orientation="Horizontal"  HorizontalAlignment="Right">
-                <Label x:Name="lblPageNo" Content="{Binding FeeCategories.PageNo}" FontStyle="Italic" Margin="0,12,5,0"/>
+                <Label x:Name="lblPageNo" Content="{Binding FeeAllocation.PageNo}" FontStyle="Italic" Margin="0,12,5,0"/>
                 <Button ToolTip="Move to previous page" Width="26" Height="26" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Command="{Binding PreviousPageCommand}" 
                     Margin="0,0,0,0" HorizontalAlignment="Right" RenderTransformOrigin="0.385,2.01">
                     <Viewbox Width="30" Height="30">
@@ -47,7 +47,7 @@
                     </Viewbox>
                 </Button>
             </StackPanel>
-            <DataGrid Grid.Row="2" Cursor="Hand" x:Name="dataGridGardesList" AlternationCount="2" AlternatingRowBackground="#FFD7FDFA" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding FeeCategories.FeeCategoriesList}"  Margin="10,0,10,0"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" FontSize="14" SelectedItem="{Binding FeeCategories.SelectedItemInFeeCategoriesList}">
+            <DataGrid Grid.Row="2" Cursor="Hand" x:Name="dataGridGardesList" AlternationCount="2" AlternatingRowBackground="#FFD7FDFA" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding FeeAllocation.FeeAllocationList}"  Margin="10,0,10,0"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" FontSize="14" SelectedItem="{Binding FeeAllocation.SelectedItemInFeeAllocationList}">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#FF009688"/>
@@ -72,12 +72,12 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>-->
             </DataGrid>
-            <TextBlock Grid.Row="2" Text="No Record(s) Found" FontSize="20" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,200,0,0" Visibility="{Binding FeeCategories.NoRecordsFound}" />
+            <TextBlock Grid.Row="2" Text="No Record(s) Found" FontSize="20" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,200,0,0" Visibility="{Binding FeeAllocation.NoRecordsFound}" />
         </Grid>
 
         <!-- Form -->
         <materialDesign:Card Margin="5,5,5,5" >
-            <Grid x:Name="grdFeeCategoriesForm" Visibility="Visible">
+            <Grid x:Name="grdFeeAllocationForm" Visibility="{Binding FeeAllocation.FormVisibility}">
                 <StackPanel>
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
@@ -97,27 +97,19 @@
                             <Label Content="Name *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="0" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <StackPanel>
-                                <TextBlock Text="{Binding ShowSelectedItems}" />
-                                <local:MultiSelectComboBox Width="100" Height="30" 
-                                                       ItemsSource="{Binding Items}" SelectedItems="{Binding SelectedItems}" 
-                                                       x:Name="MC"  
-                                                       ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"/>
-                            </StackPanel>
-
+                            <Label  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeAllocation.FeeAllocation.CreatedBy}"/>
                         </Border>
                         <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
                             <Label Content="Created By *" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="0" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <Label  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeCategories.FeeCategory.CreatedBy}"/>
+                            <Label  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeAllocation.FeeAllocation.CreatedBy}"/>
                         </Border>
 
-                        
                     </Grid>
                     <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
-                        <Button  VerticalAlignment="Center" Margin="0,0,20,20" FontSize="18" Width="140" Height="40" Command="{Binding CancelNewFeeCategoryCommand}" Background="#2f4050" Content="Cancel"/>
-                        <Button  VerticalAlignment="Center" Margin="0,0,20,20" FontSize="18" Width="140" Height="40" Content="Save" Command="{Binding SaveFeeCategoriesCommand}" />
+                        <Button  VerticalAlignment="Center" Margin="0,0,20,20" FontSize="18" Width="140" Height="40" Command="{Binding CancelNewFeeAllocationCommand}" Background="#2f4050" Content="Cancel"/>
+                        <Button  VerticalAlignment="Center" Margin="0,0,20,20" FontSize="18" Width="140" Height="40" Content="Save" Command="{Binding SaveFeeAllocationCommand}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

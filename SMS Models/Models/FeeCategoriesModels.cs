@@ -17,7 +17,6 @@ namespace SMS.Models
         private ObservableCollection<FeeCategoriesListModel> _FeeCategoriesList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
-        private PasswordBox _PasswordBox;
         private string _ListVisibility;
         private string _FormVisibility;
         private string _PageNo;
@@ -65,18 +64,7 @@ namespace SMS.Models
                 OnPropertyChanged("FormVisibility");
             }
         }
-        public PasswordBox PasswordBox
-        {
-            get
-            {
-                return _PasswordBox;
-            }
-            set
-            {
-                _PasswordBox = value;
-                OnPropertyChanged("PasswordBox");
-            }
-        }
+        
         public string PageNo
         {
             get
