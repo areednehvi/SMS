@@ -141,9 +141,11 @@ namespace SMS.Models
         
     }
 
-    public class FeeAllocationListModel : fee_categoriesModel
+    public class FeeAllocationListModel : feesModel
     {
-        public string CreatedBy { get; set; }
+        public fee_categoriesModel fee_categories { get; set; }
+        public string GradesAppliedTo { get; set; }
+        public Int64 StudentCount { get; set; }
     }
 
 

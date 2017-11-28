@@ -49,19 +49,43 @@ namespace SMS_Businness_Layer.Businness
             {
                 foreach (DataRow row in objDatatable.Rows)
                 {
-                    FeeAllocationListModel obj = new FeeAllocationListModel();
-                    obj.id_offline = row["id_offline"] != DBNull.Value ? Convert.ToString(row["id_offline"]) : string.Empty;
-                    obj.id_online = row["id_online"] != DBNull.Value ? Convert.ToString(row["id_online"]) : string.Empty;
-                    obj.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
-                    obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;
-                    obj.recur = row["recur"] != DBNull.Value ? Convert.ToString(row["recur"]) : string.Empty;
-                    obj.is_transport = row["is_transport"] != DBNull.Value ? Convert.ToString(row["is_transport"]) : string.Empty;
-                    obj.order = row["order"] != DBNull.Value ? Convert.ToString(row["order"]) : string.Empty;
-                    obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
-                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
-                    obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
-                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
-                    obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
+                    FeeAllocationListModel obj = new FeeAllocationListModel()
+                    {
+                        fee_categories = new fee_categoriesModel()
+                    };
+                    //fees
+                    obj.id_offline = row["fees.id_offline"] != DBNull.Value ? Convert.ToString(row["fees.id_offline"]) : string.Empty;
+                    obj.id_online = row["fees.id_online"] != DBNull.Value ? Convert.ToString(row["fees.id_online"]) : string.Empty;
+                    obj.school_id = row["fees.school_id"] != DBNull.Value ? Convert.ToString(row["fees.school_id"]) : string.Empty;
+                    obj.fee_category_id = row["fees.fee_category_id"] != DBNull.Value ? Convert.ToString(row["fees.fee_category_id"]) : string.Empty;
+                    obj.session_id = row["fees.session_id"] != DBNull.Value ? Convert.ToString(row["fees.session_id"]) : string.Empty;
+                    obj.amount = row["fees.amount"] != DBNull.Value ? Convert.ToDouble(row["fees.amount"]) : 0;
+                    obj.fee_cources = row["fees.fee_cources"] != DBNull.Value ? Convert.ToString(row["fees.fee_cources"]) : string.Empty;
+                    obj.last_date = row["fees.last_date"] != DBNull.Value ? Convert.ToString(row["fees.last_date"]) : string.Empty;
+                    obj.last_day = row["fees.last_day"] != DBNull.Value ? Convert.ToString(row["fees.last_day"]) : string.Empty;
+                    obj.fine_per_day = row["fees.fine_per_day"] != DBNull.Value ? Convert.ToDouble(row["fees.fine_per_day"]) : 0;
+                    obj.is_allocated = row["fees.is_allocated"] != DBNull.Value ? Convert.ToString(row["fees.is_allocated"]) : string.Empty;
+                    obj.remarks = row["fees.remarks"] != DBNull.Value ? Convert.ToString(row["fees.remarks"]) : string.Empty;
+                    obj.created_by = row["fees.created_by"] != DBNull.Value ? Convert.ToString(row["fees.created_by"]) : string.Empty;
+                    obj.created_on = row["fees.created_on"] != DBNull.Value ? Convert.ToDateTime(row["fees.created_on"]) : (DateTime?)null;
+                    obj.updated_by = row["fees.updated_by"] != DBNull.Value ? Convert.ToString(row["fees.updated_by"]) : string.Empty;
+                    obj.updated_on = row["fees.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["fees.updated_on"]) : (DateTime?)null;
+                    //fee_categories
+                    obj.fee_categories.id_offline = row["fee_categories.id_offline"] != DBNull.Value ? Convert.ToString(row["fee_categories.id_offline"]) : string.Empty;
+                    obj.fee_categories.id_online = row["fee_categories.id_online"] != DBNull.Value ? Convert.ToString(row["fee_categories.id_online"]) : string.Empty;
+                    obj.fee_categories.school_id = row["fee_categories.school_id"] != DBNull.Value ? Convert.ToString(row["fee_categories.school_id"]) : string.Empty;
+                    obj.fee_categories.name = row["fee_categories.name"] != DBNull.Value ? Convert.ToString(row["fee_categories.name"]) : string.Empty;
+                    obj.fee_categories.recur = row["fee_categories.recur"] != DBNull.Value ? Convert.ToString(row["fee_categories.recur"]) : string.Empty;
+                    obj.fee_categories.is_transport = row["fee_categories.is_transport"] != DBNull.Value ? Convert.ToString(row["fee_categories.is_transport"]) : string.Empty;
+                    obj.fee_categories.order = row["fee_categories.order"] != DBNull.Value ? Convert.ToString(row["fee_categories.order"]) : string.Empty;
+                    obj.fee_categories.created_by = row["fee_categories.created_by"] != DBNull.Value ? Convert.ToString(row["fee_categories.created_by"]) : string.Empty;
+                    obj.fee_categories.created_on = row["fee_categories.created_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.created_on"]) : (DateTime?)null;
+                    obj.fee_categories.updated_by = row["fee_categories.updated_by"] != DBNull.Value ? Convert.ToString(row["fee_categories.updated_by"]) : string.Empty;
+                    obj.fee_categories.updated_on = row["fee_categories.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.updated_on"]) : (DateTime?)null;
+                    //grades applied to
+                    obj.GradesAppliedTo = row["GradesAppliedTo"] != DBNull.Value ? Convert.ToString(row["GradesAppliedTo"]) : string.Empty;
+                    //student count
+                    obj.StudentCount = row["StudentCount"] != DBNull.Value ? Convert.ToInt64(row["StudentCount"]) : 0;
                     objFeeAllocationList.Add(obj);
                 }
 
@@ -92,8 +116,6 @@ namespace SMS_Businness_Layer.Businness
                     objFeeAllocation.created_by = CurrentLogin.User.id_offline;
                     objFeeAllocation.created_on = DateTime.Now;
                     objFeeAllocation.school_id = SchoolInfo.id_offline;
-                    objFeeAllocation.order = "0";
-                    objFeeAllocation.recur = "0";
                 }
                 objFeeAllocation.updated_by = CurrentLogin.User.id_offline;
                 objFeeAllocation.updated_on = DateTime.Now;
@@ -124,10 +146,15 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("id_offline", typeof(string));
                 table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
-                table.Columns.Add("name", typeof(string));
-                table.Columns.Add("recur", typeof(string));
-                table.Columns.Add("is_transport", typeof(string));
-                table.Columns.Add("order", typeof(string));
+                table.Columns.Add("fee_category_id", typeof(string));
+                table.Columns.Add("session_id", typeof(string));
+                table.Columns.Add("amount", typeof(string));
+                table.Columns.Add("fee_cources", typeof(string));
+                table.Columns.Add("last_date", typeof(string));
+                table.Columns.Add("last_day", typeof(string));
+                table.Columns.Add("fine_per_day", typeof(string));
+                table.Columns.Add("is_allocated", typeof(string));
+                table.Columns.Add("remarks", typeof(string));
                 table.Columns.Add("created_by", typeof(string));
                 table.Columns.Add("created_on", typeof(string));
                 table.Columns.Add("updated_by", typeof(string));
@@ -137,10 +164,15 @@ namespace SMS_Businness_Layer.Businness
                                 obj.id_offline,
                                 obj.id_online,
                                 obj.school_id,
-                                obj.name,
-                                obj.recur,
-                                obj.is_transport,
-                                obj.order,
+                                obj.fee_category_id,
+                                obj.session_id,
+                                obj.amount,
+                                obj.fee_cources,
+                                obj.last_date,
+                                obj.last_day,
+                                obj.fine_per_day,
+                                obj.is_allocated,
+                                obj.remarks,
                                 obj.created_by,
                                 obj.created_on,
                                 obj.updated_by,

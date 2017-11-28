@@ -62,8 +62,11 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding name}"/>
-                    <DataGridTextColumn Width="*" Header="Created By" Binding="{Binding CreatedBy}"/>
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding fee_categories.name}"/>
+                    <DataGridTextColumn Width="*" Header="Amount" Binding="{Binding amount}"/>
+                    <DataGridTextColumn Width="*" Header="Grades Applied to" Binding="{Binding GradesAppliedTo}"/>
+                    <DataGridTextColumn Width="*" Header="Students Count" Binding="{Binding StudentCount}"/>
+                    <DataGridTextColumn Width="*" Header="Is Allocated to Students" Binding="{Binding is_allocated}"/>
                 </DataGrid.Columns>
                 <!-- the following defines sub rows-->
                 <!--<DataGrid.RowDetailsTemplate>

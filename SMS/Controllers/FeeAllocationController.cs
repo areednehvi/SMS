@@ -188,7 +188,7 @@ namespace SMS.Controllers
             {
                 FeeAllocation.FeeAllocation = new FeeAllocationListModel()
                 {
-                    CreatedBy = FeeAllocation.CurrentLogin.User.full_name
+                   
                 };
                 this.ShowForm();
             }
