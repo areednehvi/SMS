@@ -4,6 +4,8 @@ using SMS_Businness_Layer.Businness;
 using SMS_Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,20 +28,25 @@ namespace SMS.Controllers
         #region Constructor
         public FeeAllocationController()
         {
-            ViewModel();
+            
        
 
             _FeeAllocation = new FeeAllocationModel()
             {
                 CurrentLogin = new LoginModel(),
-                SchoolInfo = new SchoolModel()
+                SchoolInfo = new SchoolModel(),
+                Items = new ObservableCollection<Item>(),
+                mCheckedItems = new HashSet<Item>(),
+                
             };
+
+            _FeeAllocation.Items.CollectionChanged += Items_CollectionChanged;
 
             //Get Global Objects
             GetGlobalObjects();
 
             // Get Lists
-            //this.GetDropDownLists();
+            this.GetDropDownLists();
 
             //Get Settings
             this.GetSettings();
@@ -51,7 +58,11 @@ namespace SMS.Controllers
             {
                 if (e.PropertyName == "SelectedItemInFeeAllocationList")
                 {
-                    FeeAllocation.FeeAllocation = FeeAllocation.SelectedItemInFeeAllocationList;
+                    FeeAllocation.Fees = FeeAllocation.SelectedItemInFeeAllocationList;
+                    if (FeeAllocation.Fees != null)
+                    {
+                        FeeAllocation.Fees.FeeCategory = FeeAllocation.FeeCategoriesList.Find(x => x.id_offline == FeeAllocation.Fees.fee_category_id);
+                    }
                     this.ShowForm();
                 }
             };
@@ -69,6 +80,15 @@ namespace SMS.Controllers
             _saveFeeAllocationCommand = new RelayCommand(SaveFeeAllocation, CanSaveFeeAllocation);
 
             this.ShowList();
+
+            /////////////////////////////////////////////////////////////////////////////////////
+            
+
+            // Adding test data
+            for (int i = 0; i < 10; ++i)
+            {
+                FeeAllocation.Items.Add(new Item(string.Format("Item {0}", i.ToString("00"))));
+            }
         }
 
         #endregion
@@ -186,7 +206,7 @@ namespace SMS.Controllers
         {
             try
             {
-                FeeAllocation.FeeAllocation = new FeeAllocationListModel()
+                FeeAllocation.Fees = new FeeAllocationListModel()
                 {
                    
                 };
@@ -245,7 +265,7 @@ namespace SMS.Controllers
 
         public bool CanSaveFeeAllocation(object obj)
         {
-            return FeeAllocation.FeeAllocation != null;
+            return FeeAllocation.Fees != null;
 
         }
 
@@ -254,7 +274,7 @@ namespace SMS.Controllers
             try
             {
 
-                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.FeeAllocation, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo))
+                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.Fees, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo))
                 {
                     GeneralMethods.ShowNotification("Notification", "Fee Category Saved Successfully");
                     this.GetFeeAllocationList();
@@ -335,81 +355,72 @@ namespace SMS.Controllers
             string noOfRecords = SettingsManager.GetSetting(SettingDefinitions.NoOfRowsInGrids);
             FeeAllocation.NoOfRecords = noOfRecords != null ? Convert.ToInt32(noOfRecords) : 50;
         }
+
+        private void GetDropDownLists()
+        {
+            FeeAllocation.FeeCategoriesList = FeeCategoriesManager.GetAllFeeCategories();
+        }
         #endregion
 
         ////////////////////////////////////////////////////////////////////////////////////////
-        private Dictionary<string, object> _items;
-        private Dictionary<string, object> _selectedItems;
 
+        
 
-        public Dictionary<string, object> Items
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            get
+            if (e.OldItems != null)
             {
-                return _items;
+                foreach (Item item in e.OldItems)
+                {
+                    item.PropertyChanged -= Item_PropertyChanged;
+                    FeeAllocation.mCheckedItems.Remove(item);
+                }
             }
-            set
+            if (e.NewItems != null)
             {
-                _items = value;
-                OnPropertyChanged("Items");
+                foreach (Item item in e.NewItems)
+                {
+                    item.PropertyChanged += Item_PropertyChanged;
+                    if (item.IsChecked) FeeAllocation.mCheckedItems.Add(item);
+                }
+            }
+            UpdateText();
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsChecked")
+            {
+                Item item = (Item)sender;
+                if (item.IsChecked)
+                {
+                    FeeAllocation.mCheckedItems.Add(item);
+                }
+                else
+                {
+                    FeeAllocation.mCheckedItems.Remove(item);
+                }
+                UpdateText();
             }
         }
 
-        public Dictionary<string, object> SelectedItems
+        private void UpdateText()
         {
-            get
+            switch (FeeAllocation.mCheckedItems.Count)
             {
-                return _selectedItems;
-            }
-            set
-            {
-                _selectedItems = value;
-                
-                OnPropertyChanged("SelectedItems");
+                case 0:
+                    FeeAllocation.Text = "<none>";
+                    break;
+                //case 1:
+                //    Text = mCheckedItems.First().Name;
+                //    break;
+                default:
+                    FeeAllocation.Text = "<multiple>";
+                    break;
             }
         }
-        private string _ShowSelectedItems;
-
-        public string ShowSelectedItems
-        {
-            get
-            {
-                return _ShowSelectedItems;
-            }
-            set
-            {
-                _ShowSelectedItems = value;
-                OnPropertyChanged("ShowSelectedItems");
-            }
-        }
-
-
-
-
-
-        private void ViewModel()
-        {
-            Items = new Dictionary<string, object>();
-            Items.Add("Chennai", "MAS");
-            Items.Add("Trichy", "TPJ");
-            Items.Add("Bangalore", "SBC");
-            Items.Add("Coimbatore", "CBE");
-
-            SelectedItems = new Dictionary<string, object>();
-            SelectedItems.Add("Chennai", "MAS");
-            SelectedItems.Add("Trichy", "TPJ");
-            Submit();
-        }
-
-        private void Submit()
-        {
-            ShowSelectedItems = "";
-            foreach (KeyValuePair<string, object> s in SelectedItems)
-            {
-                ShowSelectedItems += s.Key + ",";
-            }
-        }
-
-
     }
+    
 }
+
+

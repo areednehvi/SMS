@@ -51,7 +51,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     FeeAllocationListModel obj = new FeeAllocationListModel()
                     {
-                        fee_categories = new fee_categoriesModel()
+                        FeeCategory = new fee_categoriesModel()
                     };
                     //fees
                     obj.id_offline = row["fees.id_offline"] != DBNull.Value ? Convert.ToString(row["fees.id_offline"]) : string.Empty;
@@ -71,17 +71,17 @@ namespace SMS_Businness_Layer.Businness
                     obj.updated_by = row["fees.updated_by"] != DBNull.Value ? Convert.ToString(row["fees.updated_by"]) : string.Empty;
                     obj.updated_on = row["fees.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["fees.updated_on"]) : (DateTime?)null;
                     //fee_categories
-                    obj.fee_categories.id_offline = row["fee_categories.id_offline"] != DBNull.Value ? Convert.ToString(row["fee_categories.id_offline"]) : string.Empty;
-                    obj.fee_categories.id_online = row["fee_categories.id_online"] != DBNull.Value ? Convert.ToString(row["fee_categories.id_online"]) : string.Empty;
-                    obj.fee_categories.school_id = row["fee_categories.school_id"] != DBNull.Value ? Convert.ToString(row["fee_categories.school_id"]) : string.Empty;
-                    obj.fee_categories.name = row["fee_categories.name"] != DBNull.Value ? Convert.ToString(row["fee_categories.name"]) : string.Empty;
-                    obj.fee_categories.recur = row["fee_categories.recur"] != DBNull.Value ? Convert.ToString(row["fee_categories.recur"]) : string.Empty;
-                    obj.fee_categories.is_transport = row["fee_categories.is_transport"] != DBNull.Value ? Convert.ToString(row["fee_categories.is_transport"]) : string.Empty;
-                    obj.fee_categories.order = row["fee_categories.order"] != DBNull.Value ? Convert.ToString(row["fee_categories.order"]) : string.Empty;
-                    obj.fee_categories.created_by = row["fee_categories.created_by"] != DBNull.Value ? Convert.ToString(row["fee_categories.created_by"]) : string.Empty;
-                    obj.fee_categories.created_on = row["fee_categories.created_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.created_on"]) : (DateTime?)null;
-                    obj.fee_categories.updated_by = row["fee_categories.updated_by"] != DBNull.Value ? Convert.ToString(row["fee_categories.updated_by"]) : string.Empty;
-                    obj.fee_categories.updated_on = row["fee_categories.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.updated_on"]) : (DateTime?)null;
+                    obj.FeeCategory.id_offline = row["fee_categories.id_offline"] != DBNull.Value ? Convert.ToString(row["fee_categories.id_offline"]) : string.Empty;
+                    obj.FeeCategory.id_online = row["fee_categories.id_online"] != DBNull.Value ? Convert.ToString(row["fee_categories.id_online"]) : string.Empty;
+                    obj.FeeCategory.school_id = row["fee_categories.school_id"] != DBNull.Value ? Convert.ToString(row["fee_categories.school_id"]) : string.Empty;
+                    obj.FeeCategory.name = row["fee_categories.name"] != DBNull.Value ? Convert.ToString(row["fee_categories.name"]) : string.Empty;
+                    obj.FeeCategory.recur = row["fee_categories.recur"] != DBNull.Value ? Convert.ToString(row["fee_categories.recur"]) : string.Empty;
+                    obj.FeeCategory.is_transport = row["fee_categories.is_transport"] != DBNull.Value ? Convert.ToString(row["fee_categories.is_transport"]) : string.Empty;
+                    obj.FeeCategory.order = row["fee_categories.order"] != DBNull.Value ? Convert.ToString(row["fee_categories.order"]) : string.Empty;
+                    obj.FeeCategory.created_by = row["fee_categories.created_by"] != DBNull.Value ? Convert.ToString(row["fee_categories.created_by"]) : string.Empty;
+                    obj.FeeCategory.created_on = row["fee_categories.created_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.created_on"]) : (DateTime?)null;
+                    obj.FeeCategory.updated_by = row["fee_categories.updated_by"] != DBNull.Value ? Convert.ToString(row["fee_categories.updated_by"]) : string.Empty;
+                    obj.FeeCategory.updated_on = row["fee_categories.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.updated_on"]) : (DateTime?)null;
                     //grades applied to
                     obj.GradesAppliedTo = row["GradesAppliedTo"] != DBNull.Value ? Convert.ToString(row["GradesAppliedTo"]) : string.Empty;
                     //student count

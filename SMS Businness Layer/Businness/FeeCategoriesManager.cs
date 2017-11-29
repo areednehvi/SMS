@@ -41,6 +41,29 @@ namespace SMS_Businness_Layer.Businness
             }            
             
         }
+        public static List<fee_categoriesModel> GetAllFeeCategories()
+        {
+            try
+            {
+                List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
+                {
+                    new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = 1},
+                    new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue}
+                };
+                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetFeeCategoriesList, lstSqlParameters);
+                return MapDatatableToFeeCategoriesObject(objDatable);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
 
         public static ObservableCollection<FeeCategoriesListModel> MapDatatableToFeeCategoriesListObject(DataTable objDatatable)
         {
@@ -67,6 +90,40 @@ namespace SMS_Businness_Layer.Businness
 
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return objFeeCategoriesList;
+        }
+
+        public static List<fee_categoriesModel> MapDatatableToFeeCategoriesObject(DataTable objDatatable)
+        {
+            List<fee_categoriesModel> objFeeCategoriesList = new List<fee_categoriesModel>();
+            try
+            {
+                foreach (DataRow row in objDatatable.Rows)
+                {
+                    fee_categoriesModel obj = new fee_categoriesModel();
+                    obj.id_offline = row["id_offline"] != DBNull.Value ? Convert.ToString(row["id_offline"]) : string.Empty;
+                    obj.id_online = row["id_online"] != DBNull.Value ? Convert.ToString(row["id_online"]) : string.Empty;
+                    obj.school_id = row["school_id"] != DBNull.Value ? Convert.ToString(row["school_id"]) : string.Empty;
+                    obj.name = row["name"] != DBNull.Value ? Convert.ToString(row["name"]) : string.Empty;
+                    obj.recur = row["recur"] != DBNull.Value ? Convert.ToString(row["recur"]) : string.Empty;
+                    obj.is_transport = row["is_transport"] != DBNull.Value ? Convert.ToString(row["is_transport"]) : string.Empty;
+                    obj.order = row["order"] != DBNull.Value ? Convert.ToString(row["order"]) : string.Empty;
+                    obj.created_by = row["created_by"] != DBNull.Value ? Convert.ToString(row["created_by"]) : string.Empty;
+                    obj.created_on = row["created_on"] != DBNull.Value ? Convert.ToDateTime(row["created_on"]) : (DateTime?)null;
+                    obj.updated_by = row["updated_by"] != DBNull.Value ? Convert.ToString(row["updated_by"]) : string.Empty;
+                    obj.updated_on = row["updated_on"] != DBNull.Value ? Convert.ToDateTime(row["updated_on"]) : (DateTime?)null;
+                    objFeeCategoriesList.Add(obj);
+                }
+
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

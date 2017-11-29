@@ -13,8 +13,9 @@ namespace SMS.Models
     public class FeeAllocationModel :NotifyPropertyChanged
     {
         private FeeAllocationListModel _SelectedItemInFeeAllocationList;
-        private FeeAllocationListModel _FeeAllocation;
+        private FeeAllocationListModel _Fees;
         private ObservableCollection<FeeAllocationListModel> _FeeAllocationList;
+        private List<fee_categoriesModel> _FeeCategoriesList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
@@ -22,12 +23,35 @@ namespace SMS.Models
         private string _PageNo;
         private string _NoRecordsFound;
 
+        private ObservableCollection<Item> mItems;
+        public HashSet<Item> mCheckedItems;
+        private string _text;
 
         public int NoOfRecords{get; set;}
         public int fromRowNo { get; set; }
         public int pageNo { get; set; }
         public int NoOfRecordsPerPage { get; set; }
         public int toRowNo { get; set; }
+        public ObservableCollection<Item> Items
+        {
+            get { return mItems; }
+            set
+            {
+                mItems = value;
+                OnPropertyChanged("Items");
+            }
+        }
+
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                OnPropertyChanged("Text");
+            }
+        }
+        
         public ObservableCollection<FeeAllocationListModel> FeeAllocationList
         {
             get
@@ -38,6 +62,18 @@ namespace SMS.Models
             {
                 _FeeAllocationList = value;
                 OnPropertyChanged("FeeAllocationList");
+            }
+        }
+        public List<fee_categoriesModel> FeeCategoriesList
+        {
+            get
+            {
+                return _FeeCategoriesList;
+            }
+            set
+            {
+                _FeeCategoriesList = value;
+                OnPropertyChanged("FeeCategoriesList");
             }
         }
         public string ListVisibility
@@ -102,16 +138,16 @@ namespace SMS.Models
                 OnPropertyChanged("SelectedItemInFeeAllocationList");
             }
         }
-        public FeeAllocationListModel FeeAllocation
+        public FeeAllocationListModel Fees
         {
             get
             {
-                return _FeeAllocation;
+                return _Fees;
             }
             set
             {
-                _FeeAllocation = value;
-                OnPropertyChanged("FeeAllocation");
+                _Fees = value;
+                OnPropertyChanged("Fees");
             }
         }
 
@@ -141,11 +177,61 @@ namespace SMS.Models
         
     }
 
-    public class FeeAllocationListModel : feesModel
+    public class FeeAllocationListModel : feesModel , INotifyPropertyChanged
     {
-        public fee_categoriesModel fee_categories { get; set; }
+        private fee_categoriesModel _FeeCategory;
+        public fee_categoriesModel FeeCategory
+        {
+            get
+            {
+                return _FeeCategory;
+            }
+            set
+            {
+                _FeeCategory = value;
+                OnPropertyChanged("FeeCategory");
+            }
+        }
         public string GradesAppliedTo { get; set; }
         public Int64 StudentCount { get; set; }
+
+        #region INotify Members
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+    }
+
+    public class Item : NotifyPropertyChanged
+    {
+        public string Name { get; private set; }
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged("IsChecked");
+
+            }
+        }
+        private bool _isChecked;
+
+        public Item(string name)
+        {
+            Name = name;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
 
