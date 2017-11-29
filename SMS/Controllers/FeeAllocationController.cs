@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static SMS_Models.Models.DBModels;
 
 namespace SMS.Controllers
 {
@@ -28,22 +29,23 @@ namespace SMS.Controllers
         #region Constructor
         public FeeAllocationController()
         {
-            
-       
-
-            _FeeAllocation = new FeeAllocationModel()
+           
+            FeeAllocation = new FeeAllocationModel()
             {
                 CurrentLogin = new LoginModel(),
                 SchoolInfo = new SchoolModel(),
-                Items = new ObservableCollection<Item>(),
-                mCheckedItems = new HashSet<Item>(),
+                GradesMultiComboBox = new GradesMultiComboBox()
+                {
+                    GradesMultiComboBoxItems = new ObservableCollection<GradesMultiComboBoxItem>(),
+                    GradesMultiComboBoxCheckedItems = new ObservableCollection<GradesMultiComboBoxItem>(),
+                } 
                 
             };
 
-            _FeeAllocation.Items.CollectionChanged += Items_CollectionChanged;
+            FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.CollectionChanged += GradesMultiComboBoxItems_CollectionChanged;
 
             //Get Global Objects
-            GetGlobalObjects();
+            this.GetGlobalObjects();
 
             // Get Lists
             this.GetDropDownLists();
@@ -80,15 +82,6 @@ namespace SMS.Controllers
             _saveFeeAllocationCommand = new RelayCommand(SaveFeeAllocation, CanSaveFeeAllocation);
 
             this.ShowList();
-
-            /////////////////////////////////////////////////////////////////////////////////////
-            
-
-            // Adding test data
-            for (int i = 0; i < 10; ++i)
-            {
-                FeeAllocation.Items.Add(new Item(string.Format("Item {0}", i.ToString("00"))));
-            }
         }
 
         #endregion
@@ -359,68 +352,92 @@ namespace SMS.Controllers
         private void GetDropDownLists()
         {
             FeeAllocation.FeeCategoriesList = FeeCategoriesManager.GetAllFeeCategories();
+            FeeAllocation.GradesList = GradesSetupManager.GetAllGrades();
+            // GradesMultiComboBox
+            FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(new gradesModel() { name = "All" }));
+            for (int i = 0; i < FeeAllocation.GradesList.Count; i++)
+            {
+                FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(FeeAllocation.GradesList[i]));
+            }
         }
-        #endregion
 
-        ////////////////////////////////////////////////////////////////////////////////////////
-
-        
-
-        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void GradesMultiComboBoxItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.OldItems != null)
             {
-                foreach (Item item in e.OldItems)
+                foreach (GradesMultiComboBoxItem item in e.OldItems)
                 {
-                    item.PropertyChanged -= Item_PropertyChanged;
-                    FeeAllocation.mCheckedItems.Remove(item);
+                    item.PropertyChanged -= GradesMultiComboBoxItem_PropertyChanged;
+                    FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Remove(item);
                 }
             }
             if (e.NewItems != null)
             {
-                foreach (Item item in e.NewItems)
+                foreach (GradesMultiComboBoxItem item in e.NewItems)
                 {
-                    item.PropertyChanged += Item_PropertyChanged;
-                    if (item.IsChecked) FeeAllocation.mCheckedItems.Add(item);
+                    item.PropertyChanged += GradesMultiComboBoxItem_PropertyChanged;
+                    if (item.IsChecked) FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Add(item);
                 }
             }
-            UpdateText();
+            GradesMultiComboBoxText();
         }
 
-        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void GradesMultiComboBoxItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsChecked")
             {
-                Item item = (Item)sender;
+                GradesMultiComboBoxItem item = (GradesMultiComboBoxItem)sender;
+                
                 if (item.IsChecked)
                 {
-                    FeeAllocation.mCheckedItems.Add(item);
+                    if (item.Grade.name == "All")
+                    {
+                        item.Grade.name = "All Selected"; // just to come out of infinite loop
+                        for (int i = 0; i < FeeAllocation.GradesList.Count + 1; i++)
+                        {
+                            FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems[i].IsChecked = true;
+                        }
+                    }
+                    if(item.Grade.name != "All Selected" && !FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Contains(item))
+                        FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Add(item);
                 }
                 else
                 {
-                    FeeAllocation.mCheckedItems.Remove(item);
+                    if (item.Grade.name == "All Selected")
+                    {
+                        item.Grade.name = "All"; // just to come out of infinite loop
+                        for (int i = 0; i < FeeAllocation.GradesList.Count + 1; i++)
+                        {
+                            FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems[i].IsChecked = false;
+                        }
+                    }
+                    FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Remove(item);
                 }
-                UpdateText();
+                GradesMultiComboBoxText();
             }
         }
 
-        private void UpdateText()
+        private void GradesMultiComboBoxText()
         {
-            switch (FeeAllocation.mCheckedItems.Count)
+            switch (FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Count)
             {
                 case 0:
-                    FeeAllocation.Text = "<none>";
+                    FeeAllocation.GradesMultiComboBox.Text = "<None>";
                     break;
-                //case 1:
-                //    Text = mCheckedItems.First().Name;
-                //    break;
+                case 1:
+                    FeeAllocation.GradesMultiComboBox.Text = FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems[0].Grade.name;
+                    break;
                 default:
-                    FeeAllocation.Text = "<multiple>";
+                    if (FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Count == FeeAllocation.GradesList.Count)
+                        FeeAllocation.GradesMultiComboBox.Text = "<All>";
+                    else
+                        FeeAllocation.GradesMultiComboBox.Text = "<Multiple>";
                     break;
             }
         }
+        #endregion
     }
-    
+
 }
 
 

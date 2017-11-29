@@ -16,6 +16,7 @@ namespace SMS.Models
         private FeeAllocationListModel _Fees;
         private ObservableCollection<FeeAllocationListModel> _FeeAllocationList;
         private List<fee_categoriesModel> _FeeCategoriesList;
+        private List<gradesModel> _GradesList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
@@ -23,34 +24,11 @@ namespace SMS.Models
         private string _PageNo;
         private string _NoRecordsFound;
 
-        private ObservableCollection<Item> mItems;
-        public HashSet<Item> mCheckedItems;
-        private string _text;
-
         public int NoOfRecords{get; set;}
         public int fromRowNo { get; set; }
         public int pageNo { get; set; }
         public int NoOfRecordsPerPage { get; set; }
-        public int toRowNo { get; set; }
-        public ObservableCollection<Item> Items
-        {
-            get { return mItems; }
-            set
-            {
-                mItems = value;
-                OnPropertyChanged("Items");
-            }
-        }
-
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                _text = value;
-                OnPropertyChanged("Text");
-            }
-        }
+        public int toRowNo { get; set; }      
         
         public ObservableCollection<FeeAllocationListModel> FeeAllocationList
         {
@@ -75,6 +53,22 @@ namespace SMS.Models
                 _FeeCategoriesList = value;
                 OnPropertyChanged("FeeCategoriesList");
             }
+        }
+        public List<gradesModel> GradesList
+        {
+            get
+            {
+                return _GradesList;
+            }
+            set
+            {
+                _GradesList = value;
+                OnPropertyChanged("GradesList");
+            }
+        }
+        public GradesMultiComboBox GradesMultiComboBox
+        {
+            get;set;
         }
         public string ListVisibility
         {
@@ -207,9 +201,10 @@ namespace SMS.Models
         #endregion
     }
 
-    public class Item : NotifyPropertyChanged
+    public class GradesMultiComboBoxItem : NotifyPropertyChanged
     {
-        public string Name { get; private set; }
+        public gradesModel Grade { get; set; }
+        private bool _isChecked;
 
         public bool IsChecked
         {
@@ -218,19 +213,49 @@ namespace SMS.Models
             {
                 _isChecked = value;
                 OnPropertyChanged("IsChecked");
-
+                    
             }
         }
-        private bool _isChecked;
+        
 
-        public Item(string name)
+        public GradesMultiComboBoxItem(gradesModel _grade)
         {
-            Name = name;
+            Grade = _grade;
         }
 
         public override string ToString()
         {
-            return Name;
+            return Grade.name;
+        }
+    }
+
+    public class GradesMultiComboBox :NotifyPropertyChanged
+    {
+        private ObservableCollection<GradesMultiComboBoxItem> _GradesMultiComboBoxItems;
+        private string _text;
+
+        public ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxItems
+        {
+            get { return _GradesMultiComboBoxItems; }
+            set
+            {
+                _GradesMultiComboBoxItems = value;
+                OnPropertyChanged("GradesMultiComboBoxItems");
+            }
+        }
+        public ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems
+        {
+            get; set;
+        }
+
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                OnPropertyChanged("Text");
+            }
         }
     }
 
