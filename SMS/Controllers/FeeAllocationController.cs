@@ -38,11 +38,17 @@ namespace SMS.Controllers
                 {
                     GradesMultiComboBoxItems = new ObservableCollection<GradesMultiComboBoxItem>(),
                     GradesMultiComboBoxCheckedItems = new ObservableCollection<GradesMultiComboBoxItem>(),
-                } 
-                
+                },
+                FeeMonthsMultiComboBox = new FeeMonthsMultiComboBox()
+                {
+                    FeeMonthsMultiComboBoxItems = new ObservableCollection<FeeMonthsMultiComboBoxItem>(),
+                    FeeMonthsMultiComboBoxCheckedItems = new ObservableCollection<FeeMonthsMultiComboBoxItem>(),
+                }
+
             };
 
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.CollectionChanged += GradesMultiComboBoxItems_CollectionChanged;
+            FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.CollectionChanged += FeeMonthsMultiComboBoxItems_CollectionChanged;
 
             //Get Global Objects
             this.GetGlobalObjects();
@@ -353,12 +359,15 @@ namespace SMS.Controllers
         {
             FeeAllocation.FeeCategoriesList = FeeCategoriesManager.GetAllFeeCategories();
             FeeAllocation.GradesList = GradesSetupManager.GetAllGrades();
+            FeeAllocation.FeeMonthsList = SessionsSetupManager.GetFeeMonthsOfCurrentSession();
             // GradesMultiComboBox
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(new gradesModel() { name = "All" }));
-            for (int i = 0; i < FeeAllocation.GradesList.Count; i++)
-            {
-                FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(FeeAllocation.GradesList[i]));
-            }
+            foreach(gradesModel grade in FeeAllocation.GradesList)
+                FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(grade));
+            // FeeMonthsMultiComboBox
+            FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Add(new FeeMonthsMultiComboBoxItem( "All" ));
+            foreach (DateTime feeMonth in FeeAllocation.FeeMonthsList)
+                FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Add(new FeeMonthsMultiComboBoxItem(feeMonth.ToString("MMMM-yyyy")));
         }
 
         private void GradesMultiComboBoxItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -432,6 +441,81 @@ namespace SMS.Controllers
                         FeeAllocation.GradesMultiComboBox.Text = "<All>";
                     else
                         FeeAllocation.GradesMultiComboBox.Text = "<Multiple>";
+                    break;
+            }
+        }
+
+        private void FeeMonthsMultiComboBoxItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (FeeMonthsMultiComboBoxItem item in e.OldItems)
+                {
+                    item.PropertyChanged -= FeeMonthsMultiComboBoxItem_PropertyChanged;
+                    FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Remove(item);
+                }
+            }
+            if (e.NewItems != null)
+            {
+                foreach (FeeMonthsMultiComboBoxItem item in e.NewItems)
+                {
+                    item.PropertyChanged += FeeMonthsMultiComboBoxItem_PropertyChanged;
+                    if (item.IsChecked) FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Add(item);
+                }
+            }
+            FeeMonthsMultiComboBoxText();
+        }
+
+        private void FeeMonthsMultiComboBoxItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsChecked")
+            {
+                FeeMonthsMultiComboBoxItem item = (FeeMonthsMultiComboBoxItem)sender;
+
+                if (item.IsChecked)
+                {
+                    if (item.FeeMonth == "All")
+                    {
+                        item.FeeMonth = "All Selected"; // just to come out of infinite loop
+                        for (int i = 0; i < FeeAllocation.FeeMonthsList.Count + 1; i++)
+                        {
+                            FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems[i].IsChecked = true;
+                        }
+                    }
+                    if (item.FeeMonth != "All Selected" && !FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Contains(item))
+                        FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Add(item);
+                }
+                else
+                {
+                    if (item.FeeMonth == "All Selected")
+                    {
+                        item.FeeMonth = "All"; // just to come out of infinite loop
+                        for (int i = 0; i < FeeAllocation.FeeMonthsList.Count + 1; i++)
+                        {
+                            FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems[i].IsChecked = false;
+                        }
+                    }
+                    FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Remove(item);
+                }
+                FeeMonthsMultiComboBoxText();
+            }
+        }
+
+        private void FeeMonthsMultiComboBoxText()
+        {
+            switch (FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Count)
+            {
+                case 0:
+                    FeeAllocation.FeeMonthsMultiComboBox.Text = "<None>";
+                    break;
+                case 1:
+                    FeeAllocation.FeeMonthsMultiComboBox.Text = FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems[0].FeeMonth;
+                    break;
+                default:
+                    if (FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Count == FeeAllocation.FeeMonthsList.Count)
+                        FeeAllocation.FeeMonthsMultiComboBox.Text = "<All>";
+                    else
+                        FeeAllocation.FeeMonthsMultiComboBox.Text = "<Multiple>";
                     break;
             }
         }

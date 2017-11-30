@@ -17,6 +17,7 @@ namespace SMS.Models
         private ObservableCollection<FeeAllocationListModel> _FeeAllocationList;
         private List<fee_categoriesModel> _FeeCategoriesList;
         private List<gradesModel> _GradesList;
+        private List<DateTime> _FeeMonthsList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
@@ -66,9 +67,25 @@ namespace SMS.Models
                 OnPropertyChanged("GradesList");
             }
         }
+        public List<DateTime> FeeMonthsList
+        {
+            get
+            {
+                return _FeeMonthsList;
+            }
+            set
+            {
+                _FeeMonthsList = value;
+                OnPropertyChanged("FeeMonthsList");
+            }
+        }
         public GradesMultiComboBox GradesMultiComboBox
         {
             get;set;
+        }
+        public FeeMonthsMultiComboBox FeeMonthsMultiComboBox
+        {
+            get; set;
         }
         public string ListVisibility
         {
@@ -244,6 +261,64 @@ namespace SMS.Models
             }
         }
         public ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems
+        {
+            get; set;
+        }
+
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                OnPropertyChanged("Text");
+            }
+        }
+    }
+
+    public class FeeMonthsMultiComboBoxItem : NotifyPropertyChanged
+    {
+        public string FeeMonth { get; set; }
+        private bool _isChecked;
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged("IsChecked");
+
+            }
+        }
+
+
+        public FeeMonthsMultiComboBoxItem(string _FeeMonth)
+        {
+            FeeMonth = _FeeMonth;
+        }
+
+        public override string ToString()
+        {
+            return FeeMonth.ToString();
+        }
+    }
+
+    public class FeeMonthsMultiComboBox : NotifyPropertyChanged
+    {
+        private ObservableCollection<FeeMonthsMultiComboBoxItem> _FeeMonthsMultiComboBoxItems;
+        private string _text;
+
+        public ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxItems
+        {
+            get { return _FeeMonthsMultiComboBoxItems; }
+            set
+            {
+                _FeeMonthsMultiComboBoxItems = value;
+                OnPropertyChanged("FeeMonthsMultiComboBoxItems");
+            }
+        }
+        public ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxCheckedItems
         {
             get; set;
         }

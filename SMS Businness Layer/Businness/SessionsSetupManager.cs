@@ -59,6 +59,28 @@ namespace SMS_Businness_Layer.Businness
             }
 
         }
+        public static List<DateTime> GetFeeMonthsOfCurrentSession()
+        {
+            List<DateTime> FeeMonthList = new List<DateTime>();
+            try
+            {
+                ObservableCollection<SessionsListModel> CurrentSession = GetCurrentSession();
+                for (DateTime date = Convert.ToDateTime(CurrentSession[0].from_date); date.Date <= Convert.ToDateTime(CurrentSession[0].to_date).Date; date = date.AddMonths(1))
+                {
+                    FeeMonthList.Add(new DateTime(date.Year,date.Month,1));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return FeeMonthList;
+
+        }
 
         private static ObservableCollection<SessionsListModel> MapDatatableToSessionsListObject(DataTable objDatatable)
         {
