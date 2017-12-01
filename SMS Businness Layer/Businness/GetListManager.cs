@@ -206,6 +206,31 @@ namespace SMS_Businness_Layer.Businness
             }
 
         }
+        public static List<ListModel> GetAllocateFeeToList()
+        {
+
+            try
+            {
+                List<ListModel> objList = new List<ListModel>()
+                {
+                    new ListModel() { id = "All students of selected grades", name = "All students of selected grades" },
+                    new ListModel() { id ="Chosen students from a list", name = "Chosen students from a list" },
+                    new ListModel() { id ="No one - Will allocate later", name = "No one - Will allocate later" },
+                };
+
+                return objList;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
 
         public static ObservableCollection<NoOfRowsInGridsModel> GetNoOfRowsInGridsList()
         {

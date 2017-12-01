@@ -360,6 +360,7 @@ namespace SMS.Controllers
             FeeAllocation.FeeCategoriesList = FeeCategoriesManager.GetAllFeeCategories();
             FeeAllocation.GradesList = GradesSetupManager.GetAllGrades();
             FeeAllocation.FeeMonthsList = SessionsSetupManager.GetFeeMonthsOfCurrentSession();
+            FeeAllocation.AllocateFeeToList = GetListManager.GetAllocateFeeToList();
             // GradesMultiComboBox
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(new gradesModel() { name = "All" }));
             foreach(gradesModel grade in FeeAllocation.GradesList)

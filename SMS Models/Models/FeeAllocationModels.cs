@@ -18,6 +18,7 @@ namespace SMS.Models
         private List<fee_categoriesModel> _FeeCategoriesList;
         private List<gradesModel> _GradesList;
         private List<DateTime> _FeeMonthsList;
+        private List<ListModel> _AllocateFeeToList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
@@ -53,6 +54,18 @@ namespace SMS.Models
             {
                 _FeeCategoriesList = value;
                 OnPropertyChanged("FeeCategoriesList");
+            }
+        }
+        public List<ListModel> AllocateFeeToList
+        {
+            get
+            {
+                return _AllocateFeeToList;
+            }
+            set
+            {
+                _AllocateFeeToList = value;
+                OnPropertyChanged("AllocateFeeToList");
             }
         }
         public List<gradesModel> GradesList
@@ -191,6 +204,7 @@ namespace SMS.Models
     public class FeeAllocationListModel : feesModel , INotifyPropertyChanged
     {
         private fee_categoriesModel _FeeCategory;
+        private ListModel _AllocateFeeTo;
         public fee_categoriesModel FeeCategory
         {
             get
@@ -201,6 +215,18 @@ namespace SMS.Models
             {
                 _FeeCategory = value;
                 OnPropertyChanged("FeeCategory");
+            }
+        }
+        public ListModel AllocateFeeTo
+        {
+            get
+            {
+                return _AllocateFeeTo;
+            }
+            set
+            {
+                _AllocateFeeTo = value;
+                OnPropertyChanged("AllocateFeeTo");
             }
         }
         public string GradesAppliedTo { get; set; }
