@@ -134,7 +134,7 @@
                             <ComboBox IsEditable="True" IsReadOnly="True" Width="300" FontSize="18" ItemsSource="{Binding FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems}" Text="{Binding FeeAllocation.FeeMonthsMultiComboBox.Text}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox Content="{Binding FeeMonth}" IsChecked="{Binding IsChecked}" />
+                                        <CheckBox Content="{Binding FeeMonth.name}" IsChecked="{Binding IsChecked}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>

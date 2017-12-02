@@ -84,6 +84,8 @@ namespace SMS_Businness_Layer.Businness
                     obj.FeeCategory.updated_on = row["fee_categories.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["fee_categories.updated_on"]) : (DateTime?)null;
                     //grades applied to
                     obj.GradesAppliedTo = row["GradesAppliedTo"] != DBNull.Value ? Convert.ToString(row["GradesAppliedTo"]) : string.Empty;
+                    //applied to Grade IDs
+                    obj.AppliedToGradeIDs = row["AppliedToGradeIDs"] != DBNull.Value ? Convert.ToString(row["AppliedToGradeIDs"]) : string.Empty;
                     //student count
                     obj.StudentCount = row["StudentCount"] != DBNull.Value ? Convert.ToInt64(row["StudentCount"]) : 0;
                     objFeeAllocationList.Add(obj);

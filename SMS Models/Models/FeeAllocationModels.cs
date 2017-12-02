@@ -17,7 +17,7 @@ namespace SMS.Models
         private ObservableCollection<FeeAllocationListModel> _FeeAllocationList;
         private List<fee_categoriesModel> _FeeCategoriesList;
         private List<gradesModel> _GradesList;
-        private List<DateTime> _FeeMonthsList;
+        private List<ListModel> _FeeMonthsList;
         private List<ListModel> _AllocateFeeToList;
         private LoginModel _CurrentLogin;
         private SchoolModel _SchoolInfo;
@@ -80,7 +80,7 @@ namespace SMS.Models
                 OnPropertyChanged("GradesList");
             }
         }
-        public List<DateTime> FeeMonthsList
+        public List<ListModel> FeeMonthsList
         {
             get
             {
@@ -230,6 +230,8 @@ namespace SMS.Models
             }
         }
         public string GradesAppliedTo { get; set; }
+        public string AppliedToGradeIDs { get; set; }
+        public string CreatedBy { get; set; }
         public Int64 StudentCount { get; set; }
 
         #region INotify Members
@@ -304,7 +306,7 @@ namespace SMS.Models
 
     public class FeeMonthsMultiComboBoxItem : NotifyPropertyChanged
     {
-        public string FeeMonth { get; set; }
+        public ListModel FeeMonth { get; set; }
         private bool _isChecked;
 
         public bool IsChecked
@@ -319,7 +321,7 @@ namespace SMS.Models
         }
 
 
-        public FeeMonthsMultiComboBoxItem(string _FeeMonth)
+        public FeeMonthsMultiComboBoxItem(ListModel _FeeMonth)
         {
             FeeMonth = _FeeMonth;
         }
