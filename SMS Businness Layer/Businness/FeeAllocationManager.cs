@@ -106,27 +106,69 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
-        public static Boolean CreateOrModfiyFeeAllocation(FeeAllocationListModel objFeeAllocation, LoginModel CurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean CreateOrModfiyFeeAllocation(FeeAllocationListModel objFees, ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxCheckedItems, ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems, LoginModel CurrentLogin, SchoolModel SchoolInfo, sessionsModel CurrentSession)
         {
             Boolean IsSuccess = false;
             try
             {
-                if (objFeeAllocation.id_offline == null) // New FeeCategory
+                if (objFees.id_offline == null) // New FeeCategory
                 {
-                    objFeeAllocation.id_offline = Guid.NewGuid().ToString();
-                    objFeeAllocation.id_online = Guid.Empty.ToString();
-                    objFeeAllocation.created_by = CurrentLogin.User.id_offline;
-                    objFeeAllocation.created_on = DateTime.Now;
-                    objFeeAllocation.school_id = SchoolInfo.id_offline;
+                    objFees.id_offline = Guid.NewGuid().ToString();
+                    objFees.id_online = Guid.Empty.ToString();
+                    objFees.created_by = CurrentLogin.User.id_offline;
+                    objFees.created_on = DateTime.Now;
+                    objFees.school_id = SchoolInfo.id_offline;
+                    objFees.session_id = CurrentSession.id_offline;
+                    objFees.is_allocated = "true";
                 }
-                objFeeAllocation.updated_by = CurrentLogin.User.id_offline;
-                objFeeAllocation.updated_on = DateTime.Now;
-                                                
-                DataTable objDatatable = MapFeeAllocationListObjectToDataTable(objFeeAllocation);
-                SqlParameter objSqlParameter = new SqlParameter("@Model", SqlDbType.Structured);
-                objSqlParameter.TypeName = DBTableTypes.fee_categories;
-                objSqlParameter.Value = objDatatable;
-                IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyFeeAllocation, objSqlParameter);
+                objFees.fee_cources = string.Empty;
+                objFees.fee_category_id = objFees.FeeCategory.id_offline;
+                foreach (FeeMonthsMultiComboBoxItem feeMonthsMultiComboBoxItem in FeeMonthsMultiComboBoxCheckedItems)
+                {
+                    if (feeMonthsMultiComboBoxItem.FeeMonth.id != "All")
+                    {
+                        objFees.fee_cources += Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id).ToString("yyyy-MM-dd") + ",";
+                    }
+                }
+                objFees.fee_cources = objFees.fee_cources.Substring(0, objFees.fee_cources.Length - 1);
+                objFees.updated_by = CurrentLogin.User.id_offline;
+                objFees.updated_on = DateTime.Now;
+
+                List<grade_feesModel> objExistingGradeFeesList = GetAllGradeFeesList();
+                List<grade_feesModel> objGradeFeesList = new List<grade_feesModel>();
+                
+                foreach (GradesMultiComboBoxItem gradesMultiComboBoxItem in GradesMultiComboBoxCheckedItems)
+                {
+                    grade_feesModel objgrade_fees = new grade_feesModel()
+                    {
+                        id_offline = Guid.NewGuid().ToString(),
+                        id_online = Guid.Empty.ToString(),
+                        created_by = CurrentLogin.User.id_offline,
+                        created_on = DateTime.Now,
+                        school_id = SchoolInfo.id_offline,
+                        fees_id = objFees.id_offline,
+                        grade_id = gradesMultiComboBoxItem.Grade.id_offline,
+                        updated_by = CurrentLogin.User.id_offline,
+                        updated_on = DateTime.Now
+                    };
+
+                    grade_feesModel objExistingGradeFees = objExistingGradeFeesList.Find(x => x.fees_id == objFees.id_offline && x.grade_id == gradesMultiComboBoxItem.Grade.id_offline);
+                    if (objExistingGradeFees != null && objExistingGradeFees.id_offline != null)
+                        objgrade_fees.id_offline = objExistingGradeFees.id_offline;
+                    else
+                        objgrade_fees.id_offline = Guid.NewGuid().ToString();
+                    objGradeFeesList.Add(objgrade_fees);
+                };              
+                DataTable objFeesDatatable = MapFeeAllocationListObjectToDataTable(objFees);
+                DataTable objGradeFeesDatatable = MapGradeFeesObjectsToDataTable(objGradeFeesList);
+
+                List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
+                {
+                    new SqlParameter() {ParameterName = "@FeesModel", SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.fees, Value = objFeesDatatable},
+                    new SqlParameter() {ParameterName = "@GradeFeesModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.grade_fees, Value = objGradeFeesDatatable},
+                    //new SqlParameter() {ParameterName = "@ParentModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.parents, Value = objParentsDatatable},
+                };
+                IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyFeeAllocation, lstSqlParameters);
                 
             }
             catch (Exception ex)
@@ -191,7 +233,7 @@ namespace SMS_Businness_Layer.Businness
 
             }
         }
-        public static DataTable MapFeeAllocationObjectToDataTable(fee_categoriesModel obj)
+        public static DataTable MapGradeFeesObjectsToDataTable(List<grade_feesModel> objList)
         {
             try
             {
@@ -199,28 +241,28 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("id_offline", typeof(string));
                 table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
-                table.Columns.Add("name", typeof(string));
-                table.Columns.Add("recur", typeof(string));
-                table.Columns.Add("is_transport", typeof(string));
-                table.Columns.Add("order", typeof(string));
+                table.Columns.Add("fees_id", typeof(string));
+                table.Columns.Add("grade_id", typeof(string));
                 table.Columns.Add("created_by", typeof(string));
                 table.Columns.Add("created_on", typeof(string));
                 table.Columns.Add("updated_by", typeof(string));
                 table.Columns.Add("updated_on", typeof(string));
 
-                table.Rows.Add(
+                foreach(grade_feesModel obj in objList)
+                {
+                    table.Rows.Add(
                                 obj.id_offline,
                                 obj.id_online,
                                 obj.school_id,
-                                obj.name,
-                                obj.recur,
-                                obj.is_transport,
-                                obj.order,
+                                obj.fees_id,
+                                obj.grade_id,
                                 obj.created_by,
                                 obj.created_on,
                                 obj.updated_by,
                                 obj.updated_on
                               );
+                }
+                
                 return table;
             }
             catch (Exception ex)
@@ -231,6 +273,62 @@ namespace SMS_Businness_Layer.Businness
             {
 
             }
+        }
+        public static List<grade_feesModel> GetAllGradeFeesList()
+        {
+            try
+            {
+                List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
+                {
+                    new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = 1},
+                    new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue}
+                };
+                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetGradeFeesList, lstSqlParameters);
+                return MapDatatableToGradeFeesListObject(objDatable);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
+        public static List<grade_feesModel> MapDatatableToGradeFeesListObject(DataTable objDatatable)
+        {
+            List<grade_feesModel> objGradeFeesList = new List<grade_feesModel>();
+            try
+            {
+                foreach (DataRow row in objDatatable.Rows)
+                {
+                    grade_feesModel obj = new grade_feesModel();
+
+                    obj.id_offline = row["grade_fees.id_offline"] != DBNull.Value ? Convert.ToString(row["grade_fees.id_offline"]) : string.Empty;
+                    obj.id_online = row["grade_fees.id_online"] != DBNull.Value ? Convert.ToString(row["grade_fees.id_online"]) : string.Empty;
+                    obj.school_id = row["grade_fees.school_id"] != DBNull.Value ? Convert.ToString(row["grade_fees.school_id"]) : string.Empty;
+                    obj.fees_id = row["grade_fees.fees_id"] != DBNull.Value ? Convert.ToString(row["grade_fees.fees_id"]) : string.Empty;
+                    obj.grade_id = row["grade_fees.grade_id"] != DBNull.Value ? Convert.ToString(row["grade_fees.grade_id"]) : string.Empty;
+                    obj.created_by = row["grade_fees.created_by"] != DBNull.Value ? Convert.ToString(row["grade_fees.created_by"]) : string.Empty;
+                    obj.created_on = row["grade_fees.created_on"] != DBNull.Value ? Convert.ToDateTime(row["grade_fees.created_on"]) : (DateTime?)null;
+                    obj.updated_by = row["grade_fees.updated_by"] != DBNull.Value ? Convert.ToString(row["grade_fees.updated_by"]) : string.Empty;
+                    obj.updated_on = row["grade_fees.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["grade_fees.updated_on"]) : (DateTime?)null;
+
+                    objGradeFeesList.Add(obj);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return objGradeFeesList;
         }
         #endregion
 

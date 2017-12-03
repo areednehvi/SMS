@@ -278,9 +278,9 @@ namespace SMS.Controllers
             try
             {
 
-                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.Fees, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo))
+                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.Fees, FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems, FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo,FeeAllocation.CurrentSession))
                 {
-                    GeneralMethods.ShowNotification("Notification", "Fee Category Saved Successfully");
+                    GeneralMethods.ShowNotification("Notification", "Fee Allocated Successfully");
                     this.GetFeeAllocationList();
                     this.ShowList();
                 }
@@ -341,6 +341,8 @@ namespace SMS.Controllers
             FeeAllocation.CurrentLogin = (LoginModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentLogin);
             //Get School Info
             FeeAllocation.SchoolInfo = (SchoolModel)GeneralMethods.GetGlobalObject(GlobalObjects.SchoolInfo);
+            //Get Current Session
+            FeeAllocation.CurrentSession = (sessionsModel)GeneralMethods.GetGlobalObject(GlobalObjects.CurrentSession);
         }
 
         private void ResetPagination()

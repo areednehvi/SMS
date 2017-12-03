@@ -20,6 +20,7 @@ namespace SMS.Models
         private List<ListModel> _FeeMonthsList;
         private List<ListModel> _AllocateFeeToList;
         private LoginModel _CurrentLogin;
+        private sessionsModel _CurrentSession;
         private SchoolModel _SchoolInfo;
         private string _ListVisibility;
         private string _FormVisibility;
@@ -186,6 +187,18 @@ namespace SMS.Models
                 _CurrentLogin = value;
             }
         }
+        public sessionsModel CurrentSession
+        {
+            get
+            {
+                return _CurrentSession;
+            }
+            set
+            {
+                _CurrentSession = value;
+            }
+        }
+
         public SchoolModel SchoolInfo
         {
             get
@@ -335,6 +348,7 @@ namespace SMS.Models
     public class FeeMonthsMultiComboBox : NotifyPropertyChanged
     {
         private ObservableCollection<FeeMonthsMultiComboBoxItem> _FeeMonthsMultiComboBoxItems;
+        private ObservableCollection<FeeMonthsMultiComboBoxItem> _FeeMonthsMultiComboBoxCheckedItems;
         private string _text;
 
         public ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxItems
@@ -348,7 +362,12 @@ namespace SMS.Models
         }
         public ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxCheckedItems
         {
-            get; set;
+            get { return _FeeMonthsMultiComboBoxCheckedItems; }
+            set
+            {
+                _FeeMonthsMultiComboBoxCheckedItems = value;
+                OnPropertyChanged("FeeMonthsMultiComboBoxCheckedItems");
+            }
         }
 
         public string Text
