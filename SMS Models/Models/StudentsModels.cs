@@ -12,6 +12,7 @@ namespace SMS.Models
 {
     public class StudentsModel :NotifyPropertyChanged
     {
+        private StudentsListFiltersModel _StudentsListFilters;
         private StudentsListModel _SelectedItemInStudentsList;
         private StudentsListModel _Student;
         private ObservableCollection<StudentsListModel> _StudentsList;
@@ -35,6 +36,16 @@ namespace SMS.Models
         public int pageNo { get; set; }
         public int NoOfRecordsPerPage { get; set; }
         public int toRowNo { get; set; }
+
+        public StudentsListFiltersModel StudentsListFilters
+        {
+            get { return _StudentsListFilters; }
+            set
+            {
+                _StudentsListFilters = value;
+                OnPropertyChanged("StudentsListFilters");
+            }
+        }
         public ObservableCollection<StudentsListModel> StudentsList
         {
             get
@@ -349,6 +360,117 @@ namespace SMS.Models
             }
         }
         #endregion
+
+    }
+
+    public class StudentsListFiltersModel : NotifyPropertyChanged
+    {
+        private GradesModel _grade;
+        private SectionsModel _section;
+        private string _rollNumber;
+        private string _registrationID;
+        private string _concessionAmount;
+        private ObservableCollection<GradesModel> _objGradesModelList;
+        private ObservableCollection<SectionsModel> _objSectionModelList;
+
+        public GradesModel Grade
+        {
+            get
+            {
+                return _grade;
+            }
+            set
+            {
+                _grade = value;
+                OnPropertyChanged("Grade");
+            }
+        }
+
+
+        public SectionsModel Section
+        {
+            get
+            {
+                return _section;
+            }
+            set
+            {
+                _section = value;
+                OnPropertyChanged("Section");
+            }
+
+        }
+
+        public string RollNumber
+        {
+            get
+            {
+                return _rollNumber;
+            }
+            set
+            {
+                _rollNumber = value;
+                OnPropertyChanged("RollNumber");
+            }
+
+        }
+
+        public string RegistrationID
+        {
+            get
+            {
+                return _registrationID;
+            }
+            set
+            {
+                _registrationID = value;
+                OnPropertyChanged("RegistrationID");
+            }
+
+        }
+
+        public string ConcessionAmount
+        {
+            get
+            {
+                return _concessionAmount;
+            }
+            set
+            {
+                _concessionAmount = value;
+                OnPropertyChanged("ConcessionAmount");
+            }
+
+        }
+
+        public ObservableCollection<GradesModel> GradesList
+        {
+            get
+            {
+                return _objGradesModelList;
+            }
+            set
+            {
+                _objGradesModelList = value;
+                OnPropertyChanged("GradesList");
+            }
+        }
+
+        public ObservableCollection<SectionsModel> SectionsList
+        {
+            get
+            {
+                return _objSectionModelList;
+            }
+            set
+            {
+                _objSectionModelList = value;
+                OnPropertyChanged("SectionsList");
+            }
+        }
+
+
+
 
     }
 

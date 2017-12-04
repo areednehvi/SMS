@@ -106,7 +106,13 @@ namespace SMS_Businness_Layer.Businness
         #endregion
 
         #region view
-        public static Boolean CreateOrModfiyFeeAllocation(FeeAllocationListModel objFees, ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxCheckedItems, ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems, LoginModel CurrentLogin, SchoolModel SchoolInfo, sessionsModel CurrentSession)
+        public static Boolean CreateOrModfiyFeeAllocation(
+            FeeAllocationListModel objFees, 
+            ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxCheckedItems, 
+            ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems, 
+            LoginModel CurrentLogin, SchoolModel SchoolInfo, sessionsModel CurrentSession,
+            ListModel AllocateFeeTo
+        )
         {
             Boolean IsSuccess = false;
             try
@@ -136,7 +142,8 @@ namespace SMS_Businness_Layer.Businness
 
                 List<grade_feesModel> objExistingGradeFeesList = GetAllGradeFeesList();
                 List<grade_feesModel> objGradeFeesList = new List<grade_feesModel>();
-                
+                List<student_feesModel> objStudentFeesList = new List<student_feesModel>();
+
                 foreach (GradesMultiComboBoxItem gradesMultiComboBoxItem in GradesMultiComboBoxCheckedItems)
                 {
                     grade_feesModel objgrade_fees = new grade_feesModel()
@@ -158,15 +165,62 @@ namespace SMS_Businness_Layer.Businness
                     else
                         objgrade_fees.id_offline = Guid.NewGuid().ToString();
                     objGradeFeesList.Add(objgrade_fees);
-                };              
+                }; 
+                switch(AllocateFeeTo.id)
+                {
+                    case "All students of selected grades":
+                        
+                        foreach (grade_feesModel objGradeFees in objGradeFeesList)
+                        {
+                            StudentsListFiltersModel StudentsListFilters = new StudentsListFiltersModel()
+                            {
+                                Grade = new GradesModel()
+                                {
+                                    id_offline = objGradeFees.grade_id,
+                                }
+                            };
+                            ObservableCollection<StudentsListModel> StudentList = StudentsManager.GetStudentsList(1, Int64.MaxValue, StudentsListFilters);
+                            foreach (StudentsListModel Student in StudentList)
+                            {
+                                student_feesModel objStudentFees = new student_feesModel()
+                                {
+                                    id_offline = Guid.NewGuid().ToString(),
+                                    id_online = Guid.Empty.ToString(),
+                                    created_by = CurrentLogin.User.id_offline,
+                                    created_on = DateTime.Now,
+                                    school_id = SchoolInfo.id_offline,
+                                    grade_fees_id = objGradeFees.id_offline,
+                                    apply_from = null,
+                                    apply_to = null,
+                                    concession_amount = 0,
+                                    fine = 0,
+                                    no_fine = "0",
+                                    route_vehicle_stops_fee_log_id = Guid.Empty.ToString(),
+                                    student_id = Student.id_offline,
+                                    updated_by = CurrentLogin.User.id_offline,
+                                    updated_on = DateTime.Now
+
+                                };
+                                objStudentFeesList.Add(objStudentFees);
+                            }
+                        }
+                        break;
+                    case "Chosen students from a list":
+                        objStudentFeesList = null;
+                        break;
+                    case "No one - Will allocate later":
+                        objStudentFeesList = null;
+                        break;
+                }
                 DataTable objFeesDatatable = MapFeeAllocationListObjectToDataTable(objFees);
-                DataTable objGradeFeesDatatable = MapGradeFeesObjectsToDataTable(objGradeFeesList);
+                DataTable objGradeFeesDatatable = MapGradeFeesObjectsToDataTable(objGradeFeesList); 
+                DataTable objStudentFeesDatatable = MapGradeFeesObjectsToDataTable(objGradeFeesList);
 
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
                     new SqlParameter() {ParameterName = "@FeesModel", SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.fees, Value = objFeesDatatable},
                     new SqlParameter() {ParameterName = "@GradeFeesModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.grade_fees, Value = objGradeFeesDatatable},
-                    //new SqlParameter() {ParameterName = "@ParentModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.parents, Value = objParentsDatatable},
+                    new SqlParameter() {ParameterName = "@StudentFeesModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.student_fees, Value = objStudentFeesDatatable},
                 };
                 IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyFeeAllocation, lstSqlParameters);
                 

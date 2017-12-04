@@ -336,7 +336,7 @@ namespace SMS.Controllers
         {
             try
             {
-                Students.StudentsList = StudentsManager.GetStudentsList(Students.fromRowNo, Students.toRowNo);
+                Students.StudentsList = StudentsManager.GetStudentsList(Students.fromRowNo, Students.toRowNo,new StudentsListFiltersModel() { });
                 Students.NoRecordsFound = Students.StudentsList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)

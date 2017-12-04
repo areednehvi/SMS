@@ -278,7 +278,7 @@ namespace SMS.Controllers
             try
             {
 
-                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.Fees, FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems, FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo,FeeAllocation.CurrentSession))
+                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.Fees, FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems, FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo,FeeAllocation.CurrentSession,FeeAllocation.Fees.AllocateFeeTo))
                 {
                     GeneralMethods.ShowNotification("Notification", "Fee Allocated Successfully");
                     this.GetFeeAllocationList();

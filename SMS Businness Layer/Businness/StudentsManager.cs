@@ -18,14 +18,15 @@ namespace SMS_Businness_Layer.Businness
     {
 
         #region List      
-        public static ObservableCollection<StudentsListModel> GetStudentsList(Int64 fromRowNo, Int64 toRowNo)
+        public static ObservableCollection<StudentsListModel> GetStudentsList(Int64 fromRowNo, Int64 toRowNo,StudentsListFiltersModel StudentsListFilters)
         {            
             try
             {
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {                    
                     new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = fromRowNo},
-                    new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = toRowNo}                   
+                    new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = toRowNo},
+                    new SqlParameter() {ParameterName = "@GradeID",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.Grade != null && StudentsListFilters.Grade.name ==  "All") ? null : (StudentsListFilters.Grade != null ? StudentsListFilters.Grade.id_offline : null)},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentsList, lstSqlParameters);
                 return MapDatatableToStudentsListObject(objDatable);

@@ -31,8 +31,9 @@ namespace SMS.Models
         public int fromRowNo { get; set; }
         public int pageNo { get; set; }
         public int NoOfRecordsPerPage { get; set; }
-        public int toRowNo { get; set; }      
+        public int toRowNo { get; set; } 
         
+
         public ObservableCollection<FeeAllocationListModel> FeeAllocationList
         {
             get
@@ -380,6 +381,7 @@ namespace SMS.Models
             }
         }
     }
+    
 
 
 }
