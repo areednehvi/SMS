@@ -190,8 +190,8 @@ namespace SMS_Businness_Layer.Businness
                                     created_on = DateTime.Now,
                                     school_id = SchoolInfo.id_offline,
                                     grade_fees_id = objGradeFees.id_offline,
-                                    apply_from = null,
-                                    apply_to = null,
+                                    apply_from = DateTime.Now,
+                                    apply_to = DateTime.Now,
                                     concession_amount = 0,
                                     fine = 0,
                                     no_fine = "0",
@@ -214,7 +214,7 @@ namespace SMS_Businness_Layer.Businness
                 }
                 DataTable objFeesDatatable = MapFeeAllocationListObjectToDataTable(objFees);
                 DataTable objGradeFeesDatatable = MapGradeFeesObjectsToDataTable(objGradeFeesList); 
-                DataTable objStudentFeesDatatable = MapGradeFeesObjectsToDataTable(objGradeFeesList);
+                DataTable objStudentFeesDatatable = MapStudentFeesObjectsToDataTable(objStudentFeesList);
 
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
@@ -317,6 +317,58 @@ namespace SMS_Businness_Layer.Businness
                               );
                 }
                 
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+        public static DataTable MapStudentFeesObjectsToDataTable(List<student_feesModel> objList)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("id_offline", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
+                table.Columns.Add("school_id", typeof(string));
+                table.Columns.Add("grade_fees_id", typeof(string));
+                table.Columns.Add("student_id", typeof(string));
+                table.Columns.Add("route_vehicle_stops_fee_log_id", typeof(string));
+                table.Columns.Add("apply_from", typeof(DateTime));
+                table.Columns.Add("apply_to", typeof(DateTime));
+                table.Columns.Add("fine", typeof(string));
+                table.Columns.Add("concession_amount", typeof(string));
+                table.Columns.Add("no_fine", typeof(string));
+                table.Columns.Add("created_by", typeof(string));
+                table.Columns.Add("created_on", typeof(DateTime));
+                table.Columns.Add("updated_by", typeof(string));
+                table.Columns.Add("updated_on", typeof(DateTime));
+
+                foreach (student_feesModel obj in objList)
+                {
+                    table.Rows.Add(
+                                obj.id_offline,
+                                obj.id_online,
+                                obj.school_id,
+                                obj.grade_fees_id,
+                                obj.student_id,
+                                obj.route_vehicle_stops_fee_log_id,
+                                obj.apply_from,
+                                obj.apply_to,
+                                obj.fine,
+                                obj.concession_amount,
+                                obj.no_fine,
+                                obj.created_by,
+                                obj.created_on,
+                                obj.updated_by,
+                                obj.updated_on
+                              );
+                };
                 return table;
             }
             catch (Exception ex)
