@@ -251,6 +251,7 @@ namespace SMS.Models
         private ListModel _BloodGroup;
         private ListModel _Gender;
         private ListModel _Status;
+        private student_grade_session_logModel _Student_grade_session_log;
         public usersModel User
         {
             get
@@ -261,6 +262,18 @@ namespace SMS.Models
             {
                 _User = value;
                 OnPropertyChanged("User");
+            }
+        }
+        public student_grade_session_logModel Student_grade_session_log
+        {
+            get
+            {
+                return _Student_grade_session_log;
+            }
+            set
+            {
+                _Student_grade_session_log = value;
+                OnPropertyChanged("Student_grade_session_log");
             }
         }
 

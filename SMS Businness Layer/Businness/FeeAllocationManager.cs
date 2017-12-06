@@ -182,26 +182,33 @@ namespace SMS_Businness_Layer.Businness
                             ObservableCollection<StudentsListModel> StudentList = StudentsManager.GetStudentsList(1, Int64.MaxValue, StudentsListFilters);
                             foreach (StudentsListModel Student in StudentList)
                             {
-                                student_feesModel objStudentFees = new student_feesModel()
+                                foreach (FeeMonthsMultiComboBoxItem feeMonthsMultiComboBoxItem in FeeMonthsMultiComboBoxCheckedItems)
                                 {
-                                    id_offline = Guid.NewGuid().ToString(),
-                                    id_online = Guid.Empty.ToString(),
-                                    created_by = CurrentLogin.User.id_offline,
-                                    created_on = DateTime.Now,
-                                    school_id = SchoolInfo.id_offline,
-                                    grade_fees_id = objGradeFees.id_offline,
-                                    apply_from = DateTime.Now,
-                                    apply_to = DateTime.Now,
-                                    concession_amount = 0,
-                                    fine = 0,
-                                    no_fine = "0",
-                                    route_vehicle_stops_fee_log_id = Guid.Empty.ToString(),
-                                    student_id = Student.id_offline,
-                                    updated_by = CurrentLogin.User.id_offline,
-                                    updated_on = DateTime.Now
+                                    if (feeMonthsMultiComboBoxItem.FeeMonth.id != "All")
+                                    {
+                                        student_feesModel objStudentFees = new student_feesModel()
+                                        {
+                                            id_offline = Guid.NewGuid().ToString(),
+                                            id_online = Guid.Empty.ToString(),
+                                            created_by = CurrentLogin.User.id_offline,
+                                            created_on = DateTime.Now,
+                                            school_id = SchoolInfo.id_offline,
+                                            grade_fees_id = objGradeFees.id_offline,
+                                            apply_from = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id),
+                                            apply_to = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id).AddMonths(1).AddDays(-1),
+                                            concession_amount = 0,
+                                            fine = 0,
+                                            no_fine = "0",
+                                            route_vehicle_stops_fee_log_id = Guid.Empty.ToString(),
+                                            student_id = Student.id_offline,
+                                            updated_by = CurrentLogin.User.id_offline,
+                                            updated_on = DateTime.Now
 
-                                };
-                                objStudentFeesList.Add(objStudentFees);
+                                        };
+                                        objStudentFeesList.Add(objStudentFees);
+                                    }
+                                }
+                                
                             }
                         }
                         break;

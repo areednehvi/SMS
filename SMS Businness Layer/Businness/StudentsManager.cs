@@ -56,7 +56,8 @@ namespace SMS_Businness_Layer.Businness
                         Grade = new gradesModel(),
                         Section = new sectionsModel(),
                         Parents = new parentsModel(),
-                        Session = new sessionsModel()
+                        Session = new sessionsModel(),
+                        Student_grade_session_log = new student_grade_session_logModel()
                     };
                     //Student
                     obj.id_offline = row["students.id_offline"] != DBNull.Value ? Convert.ToString(row["students.id_offline"]) : string.Empty;
@@ -177,7 +178,22 @@ namespace SMS_Businness_Layer.Businness
                     obj.Session.created_on = row["sessions.created_on"] != DBNull.Value ? Convert.ToDateTime(row["sessions.created_on"]) : (DateTime?)null;
                     obj.Session.updated_by = row["sessions.updated_by"] != DBNull.Value ? Convert.ToString(row["sessions.updated_by"]) : string.Empty;
                     obj.Session.updated_on = row["sessions.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["sessions.updated_on"]) : (DateTime?)null;
-
+                    //Student_grade_session_log
+                    obj.Student_grade_session_log.id_offline = row["Student_grade_session_log.id_offline"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.id_offline"]) : string.Empty;
+                    obj.Student_grade_session_log.id_online = row["Student_grade_session_log.id_online"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.id_online"]) : string.Empty;
+                    obj.Student_grade_session_log.school_id = row["Student_grade_session_log.school_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.school_id"]) : string.Empty;
+                    obj.Student_grade_session_log.student_id = row["Student_grade_session_log.student_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.student_id"]) : string.Empty;
+                    obj.Student_grade_session_log.registration_id = row["Student_grade_session_log.registration_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.registration_id"]) : string.Empty;
+                    obj.Student_grade_session_log.grade_id = row["Student_grade_session_log.grade_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.grade_id"]) : string.Empty;
+                    obj.Student_grade_session_log.section_id = row["Student_grade_session_log.section_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.section_id"]) : string.Empty;
+                    obj.Student_grade_session_log.roll_number = row["Student_grade_session_log.roll_number"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.roll_number"]) : string.Empty;
+                    obj.Student_grade_session_log.exam_roll_number = row["Student_grade_session_log.exam_roll_number"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.exam_roll_number"]) : string.Empty;
+                    obj.Student_grade_session_log.session_id = row["Student_grade_session_log.session_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.session_id"]) : string.Empty;
+                    obj.Student_grade_session_log.sgsl_status = row["Student_grade_session_log.sgsl_status"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.sgsl_status"]) : string.Empty;
+                    obj.Student_grade_session_log.created_by = row["Student_grade_session_log.created_by"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.created_by"]) : string.Empty;
+                    obj.Student_grade_session_log.created_on = row["Student_grade_session_log.created_on"] != DBNull.Value ? Convert.ToDateTime(row["Student_grade_session_log.created_on"]) : (DateTime?)null;
+                    obj.Student_grade_session_log.updated_by = row["Student_grade_session_log.updated_by"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.updated_by"]) : string.Empty;
+                    obj.Student_grade_session_log.updated_on = row["Student_grade_session_log.updated_on"] != DBNull.Value ? Convert.ToDateTime(row["Student_grade_session_log.updated_on"]) : (DateTime?)null;
 
                     objStudentsList.Add(obj);
                 }
