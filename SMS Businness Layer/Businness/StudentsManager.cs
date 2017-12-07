@@ -252,12 +252,25 @@ namespace SMS_Businness_Layer.Businness
                 objStudents.User.blood_group = objStudents.BloodGroup.id;
                 objStudents.User.gender = objStudents.Gender.id;
                 objStudents.status = objStudents.Status.id;
-
+                if(objStudents.Student_grade_session_log.id_offline == null) // new
+                {
+                    objStudents.Student_grade_session_log.id_offline = Guid.NewGuid().ToString();
+                    objStudents.Student_grade_session_log.id_online = Guid.Empty.ToString();
+                    objStudents.Student_grade_session_log.created_by = CurrentLogin.User.id_offline;
+                    objStudents.Student_grade_session_log.created_on = DateTime.Now;
+                    objStudents.Student_grade_session_log.school_id = SchoolInfo.id_offline;
+                    objStudents.Student_grade_session_log.session_id = CurrentSession.id_offline;
+                    objStudents.Student_grade_session_log.student_id = objStudents.id_offline;
+                    objStudents.Student_grade_session_log.sgsl_status = "active";
+                }
+                objStudents.Student_grade_session_log.updated_by = CurrentLogin.User.id_offline;
+                objStudents.Student_grade_session_log.updated_on = DateTime.Now;
+                objStudents.Student_grade_session_log.section_id = objStudents.Section.id_offline;
+                objStudents.Student_grade_session_log.grade_id = objStudents.Grade.id_offline;       
 
                 DataTable objStudentDatatable = MapStudentsListObjectToDataTable(objStudents);
                 DataTable objUserDatatable = UsersManager.MapUsersObjectToDataTable(objStudents.User);
-                DataTable objGradeDatatable = GradesSetupManager.MapGradeObjectToDataTable(objStudents.Grade);
-                DataTable objSectionDatatable = SectionsSetupManager.MapSectionObjectToDataTable(objStudents.Section);
+                DataTable objStudent_grade_session_logDatatable = MapStudent_grade_session_logToDataTable(objStudents.Student_grade_session_log);
                 DataTable objParentsDatatable = ParentsManager.MapParentsToDataTable(objStudents.Parents);
 
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
@@ -265,6 +278,7 @@ namespace SMS_Businness_Layer.Businness
                     new SqlParameter() {ParameterName = "@StudentModel", SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.students, Value = objStudentDatatable},
                     new SqlParameter() {ParameterName = "@UserModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.users, Value = objUserDatatable},
                     new SqlParameter() {ParameterName = "@ParentModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.parents, Value = objParentsDatatable},
+                    new SqlParameter() {ParameterName = "@Student_grade_session_logModel",  SqlDbType = SqlDbType.Structured, TypeName = DBTableTypes.student_grade_session_log, Value = objStudent_grade_session_logDatatable},
                 };
                 IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.CreateOrModifyStudents, lstSqlParameters);
                 
@@ -327,6 +341,55 @@ namespace SMS_Businness_Layer.Businness
                                 obj.created_on,
                                 obj.updated_by,
                                 obj.updated_on
+                              );
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+
+        private static DataTable MapStudent_grade_session_logToDataTable(student_grade_session_logModel obj)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("school_id", typeof(string));
+                table.Columns.Add("student_id", typeof(string));
+                table.Columns.Add("registration_id", typeof(string));
+                table.Columns.Add("grade_id", typeof(string));
+                table.Columns.Add("section_id", typeof(string));
+                table.Columns.Add("roll_number", typeof(string));
+                table.Columns.Add("exam_roll_number", typeof(string));
+                table.Columns.Add("session_id", typeof(string));
+                table.Columns.Add("sgsl_status", typeof(string));
+                table.Columns.Add("created_by", typeof(string));
+                table.Columns.Add("created_on", typeof(DateTime));
+                table.Columns.Add("updated_by", typeof(string));
+                table.Columns.Add("updated_on", typeof(DateTime));
+
+                table.Rows.Add(
+                                obj.id_offline,
+                                obj.school_id,
+                                obj.student_id,
+                                obj.registration_id,
+                                obj.grade_id,
+                                obj.section_id,
+                                obj.roll_number,
+                                obj.exam_roll_number,
+                                obj.session_id,
+                                obj.sgsl_status,
+                                obj.created_by,
+                                obj.created_on,
+                                obj.updated_by,
+                                obj.updated_on
+
                               );
                 return table;
             }
