@@ -288,13 +288,7 @@ namespace SMS_Models.Models
             public string school_id { get; set; }
             public string user_id { get; set; }
             public string parent_id { get; set; }
-            public string grade_id { get; set; }
-            public string section_id { get; set; }
-            public string session_id { get; set; }
             public string trip_stop_id { get; set; }
-            public string registration_id { get; set; }
-            public string roll_number { get; set; }
-            public string exam_roll_number { get; set; }
             public DateTime? enrollment_date { get; set; }
             public string status { get; set; }
             public string dc_number { get; set; }

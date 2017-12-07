@@ -65,13 +65,6 @@ namespace SMS_Businness_Layer.Businness
                     obj.school_id = row["students.school_id"] != DBNull.Value ? Convert.ToString(row["students.school_id"]) : string.Empty;
                     obj.user_id = row["students.user_id"] != DBNull.Value ? Convert.ToString(row["students.user_id"]) : string.Empty;
                     obj.parent_id = row["students.parent_id"] != DBNull.Value ? Convert.ToString(row["students.parent_id"]) : string.Empty;
-                    obj.grade_id = row["students.grade_id"] != DBNull.Value ? Convert.ToString(row["students.grade_id"]) : string.Empty;
-                    obj.section_id = row["students.section_id"] != DBNull.Value ? Convert.ToString(row["students.section_id"]) : string.Empty;
-                    obj.session_id = row["students.session_id"] != DBNull.Value ? Convert.ToString(row["students.session_id"]) : string.Empty;
-                    obj.trip_stop_id = row["students.trip_stop_id"] != DBNull.Value ? Convert.ToString(row["students.trip_stop_id"]) : string.Empty;
-                    obj.registration_id = row["students.registration_id"] != DBNull.Value ? Convert.ToString(row["students.registration_id"]) : string.Empty;
-                    obj.roll_number = row["students.roll_number"] != DBNull.Value ? Convert.ToString(row["students.roll_number"]) : string.Empty;
-                    obj.exam_roll_number = row["students.exam_roll_number"] != DBNull.Value ? Convert.ToString(row["students.exam_roll_number"]) : string.Empty;
                     obj.enrollment_date = row["students.enrollment_date"] != DBNull.Value ? Convert.ToDateTime(row["students.enrollment_date"]) : (DateTime?)null;
                     obj.status = row["students.status"] != DBNull.Value ? Convert.ToString(row["students.status"]) : string.Empty;
                     obj.dc_number = row["students.dc_number"] != DBNull.Value ? Convert.ToString(row["students.dc_number"]) : string.Empty;
@@ -228,7 +221,6 @@ namespace SMS_Businness_Layer.Businness
                     objStudents.school_id = SchoolInfo.id_offline;
                     objStudents.user_id = Guid.Empty.ToString();
                     objStudents.parent_id = Guid.Empty.ToString();
-                    objStudents.session_id = CurrentSession.id_offline;
                     if (objStudents.User.full_name != null)
                     {
                         objStudents.User.first_name = objStudents.User.full_name.Split(' ')[0];
@@ -237,8 +229,8 @@ namespace SMS_Businness_Layer.Businness
                 }                
                 objStudents.updated_by = CurrentLogin.User.id_offline;
                 objStudents.updated_on = DateTime.Now;
-                objStudents.section_id = objStudents.Section.id_offline;
-                objStudents.grade_id = objStudents.Grade.id_offline;
+                objStudents.status = objStudents.Status.id;
+
                 if (objStudents.Parents.f_full_name != null)
                 {
                     objStudents.Parents.f_first_name = objStudents.Parents.f_full_name.Split(' ')[0] ;
@@ -249,24 +241,20 @@ namespace SMS_Businness_Layer.Businness
                     objStudents.Parents.m_first_name = objStudents.Parents.m_full_name.Split(' ')[0];
                     objStudents.Parents.m_last_name = objStudents.Parents.m_full_name.Split(' ').Length > 1 ? objStudents.Parents.m_full_name.Split(' ')[1] : string.Empty;
                 }
+                objStudents.Parents.updated_on = DateTime.Now;
+                objStudents.Parents.updated_by = CurrentLogin.User.id_offline;
+
                 objStudents.User.blood_group = objStudents.BloodGroup.id;
                 objStudents.User.gender = objStudents.Gender.id;
-                objStudents.status = objStudents.Status.id;
-                if(objStudents.Student_grade_session_log.id_offline == null) // new
-                {
-                    objStudents.Student_grade_session_log.id_offline = Guid.NewGuid().ToString();
-                    objStudents.Student_grade_session_log.id_online = Guid.Empty.ToString();
-                    objStudents.Student_grade_session_log.created_by = CurrentLogin.User.id_offline;
-                    objStudents.Student_grade_session_log.created_on = DateTime.Now;
-                    objStudents.Student_grade_session_log.school_id = SchoolInfo.id_offline;
-                    objStudents.Student_grade_session_log.session_id = CurrentSession.id_offline;
-                    objStudents.Student_grade_session_log.student_id = objStudents.id_offline;
-                    objStudents.Student_grade_session_log.sgsl_status = "active";
-                }
+                objStudents.User.updated_by = CurrentLogin.User.id_offline;
+                objStudents.User.updated_on = DateTime.Now;
+
+                objStudents.Student_grade_session_log.student_id = objStudents.id_offline;
+                objStudents.Student_grade_session_log.sgsl_status = "active";
                 objStudents.Student_grade_session_log.updated_by = CurrentLogin.User.id_offline;
                 objStudents.Student_grade_session_log.updated_on = DateTime.Now;
                 objStudents.Student_grade_session_log.section_id = objStudents.Section.id_offline;
-                objStudents.Student_grade_session_log.grade_id = objStudents.Grade.id_offline;       
+                objStudents.Student_grade_session_log.grade_id = objStudents.Grade.id_offline;      
 
                 DataTable objStudentDatatable = MapStudentsListObjectToDataTable(objStudents);
                 DataTable objUserDatatable = UsersManager.MapUsersObjectToDataTable(objStudents.User);
@@ -304,13 +292,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("user_id", typeof(string));
                 table.Columns.Add("parent_id", typeof(string));
-                table.Columns.Add("grade_id", typeof(string));
-                table.Columns.Add("section_id", typeof(string));
-                table.Columns.Add("session_id", typeof(string));
                 table.Columns.Add("trip_stop_id", typeof(string));
-                table.Columns.Add("registration_id", typeof(string));
-                table.Columns.Add("roll_number", typeof(string));
-                table.Columns.Add("exam_roll_number", typeof(string));
                 table.Columns.Add("enrollment_date", typeof(DateTime));
                 table.Columns.Add("status", typeof(string));
                 table.Columns.Add("dc_number", typeof(string));
@@ -326,13 +308,7 @@ namespace SMS_Businness_Layer.Businness
                                 obj.school_id,
                                 obj.user_id,
                                 obj.parent_id,
-                                obj.grade_id,
-                                obj.section_id,
-                                obj.session_id,
                                 obj.trip_stop_id,
-                                obj.registration_id,
-                                obj.roll_number,
-                                obj.exam_roll_number,
                                 obj.enrollment_date,
                                 obj.status,
                                 obj.dc_number,
@@ -359,7 +335,8 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 DataTable table = new DataTable();
-                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("id_offline", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("student_id", typeof(string));
                 table.Columns.Add("registration_id", typeof(string));
@@ -376,6 +353,7 @@ namespace SMS_Businness_Layer.Businness
 
                 table.Rows.Add(
                                 obj.id_offline,
+                                obj.id_online,
                                 obj.school_id,
                                 obj.student_id,
                                 obj.registration_id,

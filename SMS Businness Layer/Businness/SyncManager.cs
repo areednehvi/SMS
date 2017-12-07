@@ -786,13 +786,7 @@ namespace SMS_Businness_Layer.Businness
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("user_id", typeof(string));
                 table.Columns.Add("parent_id", typeof(string));
-                table.Columns.Add("grade_id", typeof(string));
-                table.Columns.Add("section_id", typeof(string));
-                table.Columns.Add("session_id", typeof(string));
                 table.Columns.Add("trip_stop_id", typeof(string));
-                table.Columns.Add("registration_id", typeof(string));
-                table.Columns.Add("roll_number", typeof(string));
-                table.Columns.Add("exam_roll_number", typeof(string));
                 table.Columns.Add("enrollment_date", typeof(DateTime));
                 table.Columns.Add("status", typeof(string));
                 table.Columns.Add("dc_number", typeof(string));
@@ -807,13 +801,7 @@ namespace SMS_Businness_Layer.Businness
                                 obj.school_id,
                                 obj.user_id,
                                 obj.parent_id,
-                                obj.grade_id,
-                                obj.section_id,
-                                obj.session_id,
                                 obj.trip_stop_id,
-                                obj.registration_id,
-                                obj.roll_number,
-                                obj.exam_roll_number,
                                 obj.enrollment_date,
                                 obj.status,
                                 obj.dc_number,

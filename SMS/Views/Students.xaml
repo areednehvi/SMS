@@ -63,10 +63,10 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="*" Header="Name" Binding="{Binding User.full_name}"/>
-                    <DataGridTextColumn Width="*" Header="Registration #" Binding="{Binding registration_id}"/>
+                    <DataGridTextColumn Width="*" Header="Registration #" Binding="{Binding  Student_grade_session_log.registration_id}"/>
                     <DataGridTextColumn Width="*" Header="Grade" Binding="{Binding Grade.name}" />
                     <DataGridTextColumn Width="*" Header="Section" Binding="{Binding Section.name}" />
-                    <DataGridTextColumn Width="*" Header="Roll No." Binding="{Binding roll_number}" />
+                    <DataGridTextColumn Width="*" Header="Roll No." Binding="{Binding Student_grade_session_log.roll_number}" />
                     <DataGridTextColumn Width="*" Header="Parentage">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}F:{0} M:{1}">

@@ -53,8 +53,8 @@ namespace SMS.Controllers
                     Students.Student = Students.SelectedItemInStudentsList;
                     if (Students.Student != null)
                     {
-                        Students.Student.Section = Students.SectionsList.Find(x => x.id_offline == Students.Student.section_id);
-                        Students.Student.Grade = Students.GradesList.Find(x => x.id_offline == Students.Student.grade_id);
+                        Students.Student.Section = Students.SectionsList.Find(x => x.id_offline == Students.Student.Student_grade_session_log.section_id);
+                        Students.Student.Grade = Students.GradesList.Find(x => x.id_offline == Students.Student.Student_grade_session_log.grade_id);
                         Students.Student.BloodGroup = Students.BloodGroupList.Find(x => x.id == Students.Student.User.blood_group);
                         Students.Student.Gender = Students.GenderList.Find(x => x.id == Students.Student.User.gender);
                         Students.Student.Status = Students.StatusList.Find(x => x.id == Students.Student.status);
@@ -222,6 +222,18 @@ namespace SMS.Controllers
                         updated_on = DateTime.Now,
                         school_id = Students.SchoolInfo.id_offline,
                     },
+                    Student_grade_session_log = new student_grade_session_logModel()
+                    {
+                        id_offline = Guid.NewGuid().ToString(),
+                        id_online = Guid.Empty.ToString(),
+                        created_by = Students.CurrentLogin.User.id_offline,
+                        created_on = DateTime.Now,
+                        school_id = Students.SchoolInfo.id_offline,
+                        session_id = Students.CurrentSession.id_offline,
+                        sgsl_status = "active",
+                        updated_by = Students.CurrentLogin.User.id_offline,
+                        updated_on = DateTime.Now,
+                    },
                     Session = Students.CurrentSession,
                     Section = new sectionsModel(),
                     Grade = new gradesModel(),
@@ -289,12 +301,12 @@ namespace SMS.Controllers
         {
             return Students.Student != null &&
                     Students.Student.User.full_name != null &&
-                    Students.Student.roll_number != null &&
+                    Students.Student.Student_grade_session_log.roll_number != null &&
                     Students.Student.Grade != null &&
                     Students.Student.Section != null &&
                     Students.Student.Gender != null &&
                     Students.Student.Status != null &&
-                    Students.Student.registration_id != null &&
+                    Students.Student.Student_grade_session_log.registration_id != null &&
                     Students.Student.enrollment_date != null &&
                     Students.Student.BloodGroup != null &&
                     Students.Student.User.birth_date != null &&
