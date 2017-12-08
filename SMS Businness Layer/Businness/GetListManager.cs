@@ -80,7 +80,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     tableName = "fee_categories",
                     keyColumn = "name",
-                    valueColumn = "id",
+                    valueColumn = "id_offline",
                     orderBy = "[order]"
                 };
                 DataTable objDatatable = GetList(objGetListModel);

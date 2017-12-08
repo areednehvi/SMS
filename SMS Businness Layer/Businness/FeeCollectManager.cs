@@ -109,7 +109,7 @@ namespace SMS_Businness_Layer.Businness
                 foreach (FeeBalancesModel objFeeBalance in objMakePayment.SelectedFeeBalances)
                 {
                     PaymentModel objPayment = new PaymentModel();
-                    objPayment.id_offline =  new Guid().ToString();
+                    objPayment.id_offline = Guid.NewGuid().ToString();
                     objPayment.id_online = Guid.Empty.ToString();
                     objPayment.school_id = SchoolInfo.id_offline;
                     objPayment.student_fees_id = objFeeBalance.id_offline;
@@ -150,7 +150,7 @@ namespace SMS_Businness_Layer.Businness
             {
                 DataTable table = new DataTable();
                 table.Columns.Add("id_offline", typeof(Guid));
-                table.Columns.Add("id", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
                 table.Columns.Add("school_id", typeof(string));
                 table.Columns.Add("student_fees_id", typeof(string));
                 table.Columns.Add("amount", typeof(Double));
