@@ -67,7 +67,7 @@
                     <DataGridTextColumn Width="*" Header="Grade" Binding="{Binding Grade.name}" />
                     <DataGridTextColumn Width="*" Header="Section" Binding="{Binding Section.name}" />
                     <DataGridTextColumn Width="*" Header="Roll No." Binding="{Binding Student_grade_session_log.roll_number}" />
-                    <DataGridTextColumn Width="*" Header="Parentage">
+                    <DataGridTextColumn Width="250" Header="Parentage">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}F:{0} M:{1}">
                                 <Binding Path="Parents.f_full_name" />

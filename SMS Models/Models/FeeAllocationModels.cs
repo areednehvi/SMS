@@ -26,12 +26,22 @@ namespace SMS.Models
         private string _FormVisibility;
         private string _PageNo;
         private string _NoRecordsFound;
+        private Boolean _IsStudentListEnabled;
 
         public int NoOfRecords{get; set;}
         public int fromRowNo { get; set; }
         public int pageNo { get; set; }
         public int NoOfRecordsPerPage { get; set; }
         public int toRowNo { get; set; } 
+        public Boolean IsStudentListEnabled
+        {
+            get { return _IsStudentListEnabled; }
+            set
+            {
+                _IsStudentListEnabled = value;
+                OnPropertyChanged("IsStudentListEnabled");
+            }
+        }
         
 
         public ObservableCollection<FeeAllocationListModel> FeeAllocationList

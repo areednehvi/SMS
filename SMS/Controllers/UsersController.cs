@@ -35,9 +35,6 @@ namespace SMS.Controllers
             //Get Global Objects
             GetGlobalObjects();
 
-            // Get Lists
-            //this.GetDropDownLists();
-
             //Get Settings
             this.GetSettings();
             // Set pagination
@@ -186,6 +183,7 @@ namespace SMS.Controllers
                 Users.User = new UsersListModel()
                 {
                     is_active = true,
+                    CreatedBy = Users.CurrentLogin.User.username
                 };
                 Users.PasswordBox.Password = null;
                 this.ShowForm();

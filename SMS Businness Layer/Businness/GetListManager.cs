@@ -215,7 +215,6 @@ namespace SMS_Businness_Layer.Businness
                 {
                     new ListModel() { id = "All students of selected grades", name = "All students of selected grades" },
                     new ListModel() { id ="Chosen students from a list", name = "Chosen students from a list" },
-                    new ListModel() { id ="No one - Will allocate later", name = "No one - Will allocate later" },
                 };
 
                 return objList;

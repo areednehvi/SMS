@@ -88,7 +88,7 @@
                 <DataGridTextColumn Width="auto" Header="Parentage" Binding="{Binding parentage}" />
                 <DataGridTextColumn Width="150" Header="Class" Binding="{Binding grade_section}"/>
                 <DataGridTextColumn Width="150" Header="Roll Number" Binding="{Binding roll_number}"/>
-                <DataGridTextColumn Width="*" Header="Allocated Fee Course Count" Binding="{Binding allocated_fee_cource_count}"/>
+                <DataGridTextColumn Width="*" Header="Allocated Fee Months Count" Binding="{Binding allocated_fee_cource_count}"/>
             </DataGrid.Columns>
             <!-- the following defines sub rows-->
             <!--<DataGrid.RowDetailsTemplate>

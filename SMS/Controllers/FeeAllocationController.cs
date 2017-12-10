@@ -34,6 +34,7 @@ namespace SMS.Controllers
             {
                 CurrentLogin = new LoginModel(),
                 SchoolInfo = new SchoolModel(),
+                IsStudentListEnabled = false,
                 GradesMultiComboBox = new GradesMultiComboBox()
                 {
                     GradesMultiComboBoxItems = new ObservableCollection<GradesMultiComboBoxItem>(),
@@ -77,10 +78,21 @@ namespace SMS.Controllers
 
                     }
                     this.ShowForm();
+                    //Subscribe to Model's Property changed event
+                    if (this.FeeAllocation.Fees != null)
+                    {
+                        this.FeeAllocation.Fees.PropertyChanged += (sr, ev) =>
+                        {
+                            if (e.PropertyName == "SelectedItemInFeeAllocationList")
+                            {
+                                if (FeeAllocation.Fees != null && FeeAllocation.Fees.AllocateFeeTo.id == "Chosen students from a list")
+                                    this.FeeAllocation.IsStudentListEnabled = true;
+                            }
+                        };
+                    }
+
                 }
             };
-
-
 
             //Get Initial FeeAllocation list
             this.GetFeeAllocationList();
