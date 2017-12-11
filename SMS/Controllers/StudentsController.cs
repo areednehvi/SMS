@@ -318,16 +318,12 @@ namespace SMS.Controllers
         {
             try
             {
-
                 if (StudentsManager.CreateOrModfiyStudents(Students.Student, Students.CurrentLogin, Students.SchoolInfo,Students.CurrentSession))
                 {
                     GeneralMethods.ShowNotification("Notification", "Student Saved Successfully");
                     this.GetStudentsList();
                     this.ShowList();
                 }
-
-
-
             }
             catch (Exception ex)
             {

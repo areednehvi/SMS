@@ -17,6 +17,7 @@ namespace SMS.Models
         private ObservableCollection<FeeAllocationListModel> _FeeAllocationList;
         private List<fee_categoriesModel> _FeeCategoriesList;
         private List<gradesModel> _GradesList;
+        private List<StudentsListModel> _StudentsList;
         private List<ListModel> _FeeMonthsList;
         private List<ListModel> _AllocateFeeToList;
         private LoginModel _CurrentLogin;
@@ -92,6 +93,18 @@ namespace SMS.Models
                 OnPropertyChanged("GradesList");
             }
         }
+        public List<StudentsListModel> StudentsList
+        {
+            get
+            {
+                return _StudentsList;
+            }
+            set
+            {
+                _StudentsList = value;
+                OnPropertyChanged("StudentsList");
+            }
+        }
         public List<ListModel> FeeMonthsList
         {
             get
@@ -109,6 +122,10 @@ namespace SMS.Models
             get;set;
         }
         public FeeMonthsMultiComboBox FeeMonthsMultiComboBox
+        {
+            get; set;
+        }
+        public StudentsMultiComboBox StudentsMultiComboBox
         {
             get; set;
         }
@@ -391,7 +408,62 @@ namespace SMS.Models
             }
         }
     }
-    
+    public class StudentsMultiComboBoxItem : NotifyPropertyChanged
+    {
+        public StudentsListModel Student { get; set; }
+        private bool _isChecked;
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged("IsChecked");
+
+            }
+        }
+
+        public StudentsMultiComboBoxItem(StudentsListModel _student)
+        {
+            Student = _student;
+        }
+
+        public override string ToString()
+        {
+            return Student.User.full_name;
+        }
+    }
+    public class StudentsMultiComboBox : NotifyPropertyChanged
+    {
+        private ObservableCollection<StudentsMultiComboBoxItem> _StudentsMultiComboBoxItems;
+        private string _text;
+
+        public ObservableCollection<StudentsMultiComboBoxItem> StudentsMultiComboBoxItems
+        {
+            get { return _StudentsMultiComboBoxItems; }
+            set
+            {
+                _StudentsMultiComboBoxItems = value;
+                OnPropertyChanged("StudentsMultiComboBoxItems");
+            }
+        }
+        public ObservableCollection<StudentsMultiComboBoxItem> StudentsMultiComboBoxCheckedItems
+        {
+            get; set;
+        }
+
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                OnPropertyChanged("Text");
+            }
+        }
+    }
+
 
 
 }

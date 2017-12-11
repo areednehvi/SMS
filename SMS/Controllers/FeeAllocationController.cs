@@ -44,12 +44,19 @@ namespace SMS.Controllers
                 {
                     FeeMonthsMultiComboBoxItems = new ObservableCollection<FeeMonthsMultiComboBoxItem>(),
                     FeeMonthsMultiComboBoxCheckedItems = new ObservableCollection<FeeMonthsMultiComboBoxItem>(),
-                }
+                },
+                StudentsMultiComboBox = new StudentsMultiComboBox()
+                {
+                    StudentsMultiComboBoxItems = new ObservableCollection<StudentsMultiComboBoxItem>(),
+                    StudentsMultiComboBoxCheckedItems = new ObservableCollection<StudentsMultiComboBoxItem>(),
+                },
+                
 
             };
 
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.CollectionChanged += GradesMultiComboBoxItems_CollectionChanged;
             FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.CollectionChanged += FeeMonthsMultiComboBoxItems_CollectionChanged;
+            FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.CollectionChanged += StudentsMultiComboBoxItems_CollectionChanged;
 
             //Get Global Objects
             this.GetGlobalObjects();
@@ -380,6 +387,7 @@ namespace SMS.Controllers
             FeeAllocation.GradesList = GradesSetupManager.GetAllGrades();
             FeeAllocation.FeeMonthsList = SessionsSetupManager.GetFeeMonthsOfCurrentSession();
             FeeAllocation.AllocateFeeToList = GetListManager.GetAllocateFeeToList();
+            FeeAllocation.StudentsList = StudentsManager.GetStudentsList(new StudentsListFiltersModel() { Grade = null });
             // GradesMultiComboBox
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(new gradesModel() { name = "All" }));
             foreach(gradesModel grade in FeeAllocation.GradesList)
@@ -388,6 +396,10 @@ namespace SMS.Controllers
             FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Add(new FeeMonthsMultiComboBoxItem( new ListModel() { id ="All", name = "All" } ));
             foreach (ListModel feeMonth in FeeAllocation.FeeMonthsList)
                 FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Add(new FeeMonthsMultiComboBoxItem(feeMonth));
+            // StudentsMultiComboBox
+            FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(new StudentsListModel() { User = new usersModel() { full_name = "Student" }, Grade = new gradesModel() {name="Grade" }, Section = new sectionsModel() { name = "Section" }, Student_grade_session_log = new student_grade_session_logModel() { roll_number="Roll Number" } }));
+            foreach (StudentsListModel student in FeeAllocation.StudentsList)
+                FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(student));
         }
 
         private void GradesMultiComboBoxItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -484,6 +496,80 @@ namespace SMS.Controllers
                 }
             }
             FeeMonthsMultiComboBoxText();
+        }
+
+        private void StudentsMultiComboBoxItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (StudentsMultiComboBoxItem item in e.OldItems)
+                {
+                    item.PropertyChanged -= StudentsMultiComboBoxItem_PropertyChanged;
+                    FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Remove(item);
+                }
+            }
+            if (e.NewItems != null)
+            {
+                foreach (StudentsMultiComboBoxItem item in e.NewItems)
+                {
+                    item.PropertyChanged += StudentsMultiComboBoxItem_PropertyChanged;
+                    if (item.IsChecked) FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Add(item);
+                }
+            }
+            StudentsMultiComboBoxText();
+        }
+
+        private void StudentsMultiComboBoxItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsChecked")
+            {
+                StudentsMultiComboBoxItem item = (StudentsMultiComboBoxItem)sender;
+
+                if (item.IsChecked)
+                {
+                    if (item.Student.User.full_name == "Student")
+                    {
+                        item.Student.User.full_name = "All Selected"; // just to come out of infinite loop
+                        for (int i = 0; i < FeeAllocation.StudentsList.Count + 1; i++)
+                        {
+                            FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems[i].IsChecked = true;
+                        }
+                    }
+                    if (item.Student.User.full_name != "All Selected" && !FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Contains(item))
+                        FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Add(item);
+                }
+                else
+                {
+                    if (item.Student.User.full_name == "All Selected")
+                    {
+                        item.Student.User.full_name = "Student"; // just to come out of infinite loop
+                        for (int i = 0; i < FeeAllocation.StudentsList.Count + 1; i++)
+                        {
+                            FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems[i].IsChecked = false;
+                        }
+                    }
+                    FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Remove(item);
+                }
+                StudentsMultiComboBoxText();
+            }
+        }
+        private void StudentsMultiComboBoxText()
+        {
+            switch (FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Count)
+            {
+                case 0:
+                    FeeAllocation.StudentsMultiComboBox.Text = "";
+                    break;
+                case 1:
+                    FeeAllocation.StudentsMultiComboBox.Text = FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems[0].Student.User.full_name;
+                    break;
+                default:
+                    if (FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Count == FeeAllocation.StudentsList.Count)
+                        FeeAllocation.StudentsMultiComboBox.Text = "<All>";
+                    else
+                        FeeAllocation.StudentsMultiComboBox.Text = "<Multiple>";
+                    break;
+            }
         }
 
         private void FeeMonthsMultiComboBoxItem_PropertyChanged(object sender, PropertyChangedEventArgs e)

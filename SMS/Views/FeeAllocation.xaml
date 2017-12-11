@@ -147,35 +147,56 @@
                             <ComboBox  FontSize="18"  Width="300" ItemsSource="{Binding FeeAllocation.AllocateFeeToList}" DisplayMemberPath="name" SelectedItem="{Binding FeeAllocation.Fees.AllocateFeeTo,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                         </Border>
                         <Border Grid.Row="3" Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Student List*" IsEnabled="{Binding FeeAllocation.IsStudentListEnabled, Mode=TwoWay}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                            <Label Content="Created By*" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
                         </Border>
                         <Border Grid.Row="3" Grid.Column="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <ComboBox IsEnabled="{Binding FeeAllocation.IsStudentListEnabled}" IsEditable="True" IsReadOnly="True" Width="300" FontSize="18" ItemsSource="{Binding FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems}" Text="{Binding FeeAllocation.GradesMultiComboBox.Text}">
-
+                            <Label  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeAllocation.Fees.CreatedBy}"/>
+                        </Border>
+                        <!-- Row 4 -->
+                        <Border Grid.Row="4" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                            <Label Content="Student List*" IsEnabled="{Binding FeeAllocation.IsStudentListEnabled, Mode=TwoWay}" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
+                        </Border>
+                        <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
+                            <ComboBox IsEnabled="{Binding FeeAllocation.IsStudentListEnabled}" 
+                                      IsEditable="True"
+                                      IsReadOnly="True" Width="950" FontSize="18" 
+                                      Text="{Binding FeeAllocation.StudentsMultiComboBox.Text}"
+                                      ItemsSource="{Binding FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <Grid.Children>
-                                                <CheckBox Grid.Column="0" Content="{Binding Grade.name}"  IsChecked="{Binding IsChecked}" />
-                                                <Label Grid.Column="1" Content="hello"/>
+                                                <Border Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                                    <CheckBox Content="{Binding Student.User.full_name}" Margin="5,0,0,0" ToolTip="Student Name"  IsChecked="{Binding IsChecked}" />
+                                                </Border>
+                                                <Border Grid.Column="1" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                                    <Label  ToolTip="Grade - Section">
+                                                        <Label.Content>
+                                                            <TextBlock>
+                                                                <TextBlock.Text>
+                                                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                                                        <Binding Path="Student.Grade.name" />
+                                                                        <Binding Path="Student.Section.name" />
+                                                                    </MultiBinding>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+                                                        </Label.Content>
+                                                    </Label>
+                                                </Border>
+                                                <Border Grid.Column="2" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
+                                                    <Label ToolTip="Roll Number"  Content="{Binding Student.Student_grade_session_log.roll_number}"/>
+                                                </Border>
                                             </Grid.Children>
                                         </Grid>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
 
-                        </Border>
-                        <!-- Row 4 -->
-                        <Border Grid.Row="4" Grid.Column="0" BorderThickness="1" BorderBrush="LightGray" Background="#FFF3F3F3">
-                            <Label Content="Created By*" FontSize="18" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF009688" />
-                        </Border>
-                        <Border Grid.Row="4" Grid.Column="1"  BorderThickness="1"  BorderBrush="LightGray" Background="White">
-                            <Label  VerticalAlignment="Center" FontSize="18" Width="300" Content="{Binding FeeAllocation.Fees.CreatedBy}"/>
                         </Border>
                     </Grid>
                     <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
