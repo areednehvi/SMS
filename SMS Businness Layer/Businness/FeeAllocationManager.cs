@@ -174,9 +174,9 @@ namespace SMS_Businness_Layer.Businness
                         {
                             StudentsListFiltersModel StudentsListFilters = new StudentsListFiltersModel()
                             {
-                                Grade = new GradesModel()
+                                Grades = new List<gradesModel>()
                                 {
-                                    id_offline = objGradeFees.grade_id,
+                                    new gradesModel() { id_offline = objGradeFees.grade_id },
                                 }
                             };
                             ObservableCollection<StudentsListModel> StudentList = StudentsManager.GetStudentsList(1, Int64.MaxValue, StudentsListFilters);

@@ -378,38 +378,38 @@ namespace SMS.Models
 
     public class StudentsListFiltersModel : NotifyPropertyChanged
     {
-        private GradesModel _grade;
-        private SectionsModel _section;
+        private List<gradesModel> _Grades;
+        private List<sectionsModel> _Sections;
         private string _rollNumber;
         private string _registrationID;
         private string _concessionAmount;
         private ObservableCollection<GradesModel> _objGradesModelList;
         private ObservableCollection<SectionsModel> _objSectionModelList;
 
-        public GradesModel Grade
+        public List<gradesModel> Grades
         {
             get
             {
-                return _grade;
+                return _Grades;
             }
             set
             {
-                _grade = value;
-                OnPropertyChanged("Grade");
+                _Grades = value;
+                OnPropertyChanged("Grades");
             }
         }
 
 
-        public SectionsModel Section
+        public List<sectionsModel> Sections
         {
             get
             {
-                return _section;
+                return _Sections;
             }
             set
             {
-                _section = value;
-                OnPropertyChanged("Section");
+                _Sections = value;
+                OnPropertyChanged("Sections");
             }
 
         }

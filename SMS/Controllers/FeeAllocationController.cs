@@ -93,7 +93,10 @@ namespace SMS.Controllers
                             if (e.PropertyName == "SelectedItemInFeeAllocationList")
                             {
                                 if (FeeAllocation.Fees != null && FeeAllocation.Fees.AllocateFeeTo.id == "Chosen students from a list")
+                                    //Make StudentsMultiComboBox Enabled
                                     this.FeeAllocation.IsStudentListEnabled = true;
+                                else
+                                    this.FeeAllocation.IsStudentListEnabled = false;
                             }
                         };
                     }
@@ -387,7 +390,7 @@ namespace SMS.Controllers
             FeeAllocation.GradesList = GradesSetupManager.GetAllGrades();
             FeeAllocation.FeeMonthsList = SessionsSetupManager.GetFeeMonthsOfCurrentSession();
             FeeAllocation.AllocateFeeToList = GetListManager.GetAllocateFeeToList();
-            FeeAllocation.StudentsList = StudentsManager.GetStudentsList(new StudentsListFiltersModel() { Grade = null });
+            
             // GradesMultiComboBox
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.Add(new GradesMultiComboBoxItem(new gradesModel() { name = "All" }));
             foreach(gradesModel grade in FeeAllocation.GradesList)
@@ -396,10 +399,6 @@ namespace SMS.Controllers
             FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Add(new FeeMonthsMultiComboBoxItem( new ListModel() { id ="All", name = "All" } ));
             foreach (ListModel feeMonth in FeeAllocation.FeeMonthsList)
                 FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Add(new FeeMonthsMultiComboBoxItem(feeMonth));
-            // StudentsMultiComboBox
-            FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(new StudentsListModel() { User = new usersModel() { full_name = "Student" }, Grade = new gradesModel() {name="Grade" }, Section = new sectionsModel() { name = "Section" }, Student_grade_session_log = new student_grade_session_logModel() { roll_number="Roll Number" } }));
-            foreach (StudentsListModel student in FeeAllocation.StudentsList)
-                FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(student));
         }
 
         private void GradesMultiComboBoxItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -420,6 +419,7 @@ namespace SMS.Controllers
                     if (item.IsChecked) FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Add(item);
                 }
             }
+
             GradesMultiComboBoxText();
         }
 
@@ -455,6 +455,19 @@ namespace SMS.Controllers
                     FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Remove(item);
                 }
                 GradesMultiComboBoxText();
+
+                //Get Student List based on Selected Grades
+                StudentsListFiltersModel objStudentsListFilters = new StudentsListFiltersModel() { Grades = new List<gradesModel>() };
+                foreach (GradesMultiComboBoxItem gradesMultiComboBoxItem in FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems)
+                {
+                    objStudentsListFilters.Grades.Add(gradesMultiComboBoxItem.Grade);
+                }
+                FeeAllocation.StudentsList = StudentsManager.GetStudentsList(objStudentsListFilters);
+                // StudentsMultiComboBox
+                FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems = new ObservableCollection<StudentsMultiComboBoxItem>();
+                FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(new StudentsListModel() { User = new usersModel() { full_name = "Student" }, Grade = new gradesModel() { name = "Grade" }, Section = new sectionsModel() { name = "Section" }, Student_grade_session_log = new student_grade_session_logModel() { roll_number = "Roll Number" } }));
+                foreach (StudentsListModel student in FeeAllocation.StudentsList)
+                    FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(student));
             }
         }
 

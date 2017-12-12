@@ -26,7 +26,7 @@ namespace SMS_Businness_Layer.Businness
                 {                    
                     new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = fromRowNo},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = toRowNo},
-                    new SqlParameter() {ParameterName = "@GradeID",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.Grade != null && StudentsListFilters.Grade.name ==  "All") ? null : (StudentsListFilters.Grade != null ? StudentsListFilters.Grade.id_offline : null)},
+                    //new SqlParameter() {ParameterName = "@GradeID",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.Grade != null && StudentsListFilters.Grade.name ==  "All") ? null : (StudentsListFilters.Grade != null ? StudentsListFilters.Grade.id_offline : null)},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentsList, lstSqlParameters);
                 return MapDatatableToStudentsListObject(objDatable);
@@ -207,11 +207,12 @@ namespace SMS_Businness_Layer.Businness
         {
             try
             {
+                DataTable objGradesDatatable = GradesSetupManager.MapGradesObjectToDataTable(StudentsListFilters.Grades);
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
-                    new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = 1},
+                    new SqlParameter() {ParameterName = "@FromRowNo", SqlDbType = SqlDbType.NVarChar, Value = 1},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue},
-                    new SqlParameter() {ParameterName = "@GradeID",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.Grade != null && StudentsListFilters.Grade.name ==  "All") ? null : (StudentsListFilters.Grade != null ? StudentsListFilters.Grade.id_offline : null)},
+                    new SqlParameter() {ParameterName = "@GradesModel",  TypeName = DBTableTypes.grades, Value = objGradesDatatable},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentsList, lstSqlParameters);
                 return MapDatatableToStudentsList(objDatable);
