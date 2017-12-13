@@ -56,7 +56,6 @@ namespace SMS.Controllers
 
             FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems.CollectionChanged += GradesMultiComboBoxItems_CollectionChanged;
             FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.CollectionChanged += FeeMonthsMultiComboBoxItems_CollectionChanged;
-            FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.CollectionChanged += StudentsMultiComboBoxItems_CollectionChanged;
 
             //Get Global Objects
             this.GetGlobalObjects();
@@ -300,7 +299,13 @@ namespace SMS.Controllers
             try
             {
 
-                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(FeeAllocation.Fees, FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems, FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems, FeeAllocation.CurrentLogin, FeeAllocation.SchoolInfo,FeeAllocation.CurrentSession,FeeAllocation.Fees.AllocateFeeTo))
+                if (FeeAllocationManager.CreateOrModfiyFeeAllocation(
+                        FeeAllocation.Fees, FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems,
+                        FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems,
+                        FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems,
+                        FeeAllocation.GradesList, FeeAllocation.CurrentLogin, 
+                        FeeAllocation.SchoolInfo,FeeAllocation.CurrentSession,FeeAllocation.Fees.AllocateFeeTo)
+                )
                 {
                     GeneralMethods.ShowNotification("Notification", "Fee Allocated Successfully");
                     this.GetFeeAllocationList();
@@ -465,6 +470,7 @@ namespace SMS.Controllers
                 FeeAllocation.StudentsList = StudentsManager.GetStudentsList(objStudentsListFilters);
                 // StudentsMultiComboBox
                 FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems = new ObservableCollection<StudentsMultiComboBoxItem>();
+                FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.CollectionChanged += StudentsMultiComboBoxItems_CollectionChanged;
                 FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(new StudentsListModel() { User = new usersModel() { full_name = "Student" }, Grade = new gradesModel() { name = "Grade" }, Section = new sectionsModel() { name = "Section" }, Student_grade_session_log = new student_grade_session_logModel() { roll_number = "Roll Number" } }));
                 foreach (StudentsListModel student in FeeAllocation.StudentsList)
                     FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems.Add(new StudentsMultiComboBoxItem(student));

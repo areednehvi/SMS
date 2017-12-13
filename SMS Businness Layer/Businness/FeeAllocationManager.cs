@@ -109,7 +109,9 @@ namespace SMS_Businness_Layer.Businness
         public static Boolean CreateOrModfiyFeeAllocation(
             FeeAllocationListModel objFees, 
             ObservableCollection<FeeMonthsMultiComboBoxItem> FeeMonthsMultiComboBoxCheckedItems, 
-            ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems, 
+            ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems,
+            ObservableCollection<StudentsMultiComboBoxItem> StudentsMultiComboBoxCheckedItems,
+            List<gradesModel> AllGradesList,
             LoginModel CurrentLogin, SchoolModel SchoolInfo, sessionsModel CurrentSession,
             ListModel AllocateFeeTo
         )
@@ -172,13 +174,16 @@ namespace SMS_Businness_Layer.Businness
                         
                         foreach (grade_feesModel objGradeFees in objGradeFeesList)
                         {
+                            gradesModel grade = new gradesModel();
+                            grade = AllGradesList.Find(x => x.id_offline == objGradeFees.grade_id);
                             StudentsListFiltersModel StudentsListFilters = new StudentsListFiltersModel()
-                            {
+                            { 
                                 Grades = new List<gradesModel>()
                                 {
-                                    new gradesModel() { id_offline = objGradeFees.grade_id },
+                                    grade    
                                 }
                             };
+                            
                             ObservableCollection<StudentsListModel> StudentList = StudentsManager.GetStudentsList(1, Int64.MaxValue, StudentsListFilters);
                             foreach (StudentsListModel Student in StudentList)
                             {
@@ -213,7 +218,50 @@ namespace SMS_Businness_Layer.Businness
                         }
                         break;
                     case "Chosen students from a list":
-                        objStudentFeesList = null;
+                        foreach (grade_feesModel objGradeFees in objGradeFeesList)
+                        {
+                            gradesModel grade = new gradesModel();
+                            grade = AllGradesList.Find(x => x.id_offline == objGradeFees.grade_id);
+                            StudentsListFiltersModel StudentsListFilters = new StudentsListFiltersModel()
+                            {
+                                Grades = new List<gradesModel>()
+                                {
+                                    grade
+                                }
+                            };
+
+                            foreach (StudentsMultiComboBoxItem studentMultiComboBoxItem in StudentsMultiComboBoxCheckedItems)
+                            {
+                                studentsModel Student = studentMultiComboBoxItem.Student;
+                                foreach (FeeMonthsMultiComboBoxItem feeMonthsMultiComboBoxItem in FeeMonthsMultiComboBoxCheckedItems)
+                                {
+                                    if (feeMonthsMultiComboBoxItem.FeeMonth.id != "All")
+                                    {
+                                        student_feesModel objStudentFees = new student_feesModel()
+                                        {
+                                            id_offline = Guid.NewGuid().ToString(),
+                                            id_online = Guid.Empty.ToString(),
+                                            created_by = CurrentLogin.User.id_offline,
+                                            created_on = DateTime.Now,
+                                            school_id = SchoolInfo.id_offline,
+                                            grade_fees_id = objGradeFees.id_offline,
+                                            apply_from = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id),
+                                            apply_to = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id).AddMonths(1).AddDays(-1),
+                                            concession_amount = 0,
+                                            fine = 0,
+                                            no_fine = "0",
+                                            route_vehicle_stops_fee_log_id = Guid.Empty.ToString(),
+                                            student_id = Student.id_offline,
+                                            updated_by = CurrentLogin.User.id_offline,
+                                            updated_on = DateTime.Now
+
+                                        };
+                                        objStudentFeesList.Add(objStudentFees);
+                                    }
+                                }
+
+                            }
+                        }
                         break;
                     case "No one - Will allocate later":
                         objStudentFeesList = null;
