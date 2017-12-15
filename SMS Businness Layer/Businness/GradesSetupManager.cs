@@ -41,7 +41,7 @@ namespace SMS_Businness_Layer.Businness
             }            
             
         }
-        public static List<gradesModel> GetAllGrades()
+        public static List<gradesModel> GetAllGrades(Boolean IncludeAllOption = false)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace SMS_Businness_Layer.Businness
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue}
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetGradesList, lstSqlParameters);
-                return MapDatatableTogradesObject(objDatable);
+                return MapDatatableTogradesObject(objDatable,IncludeAllOption);
 
             }
             catch (Exception ex)
@@ -96,11 +96,13 @@ namespace SMS_Businness_Layer.Businness
             }
             return objGradesList;
         }
-        private static List<gradesModel> MapDatatableTogradesObject(DataTable objDatatable)
+        private static List<gradesModel> MapDatatableTogradesObject(DataTable objDatatable,Boolean IncludeAllOption = false)
         {
             List<gradesModel> objGradesList = new List<gradesModel>();
             try
             {
+                if (IncludeAllOption)
+                    objGradesList.Add(new gradesModel() { id_offline = Guid.Empty.ToString(), name = "All" });
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     gradesModel obj = new gradesModel();

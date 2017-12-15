@@ -378,13 +378,14 @@ namespace SMS.Models
 
     public class StudentsListFiltersModel : NotifyPropertyChanged
     {
+        private gradesModel _Grade;
+        private sectionsModel _Section;
         private List<gradesModel> _Grades;
         private List<sectionsModel> _Sections;
         private string _rollNumber;
         private string _registrationID;
-        private string _concessionAmount;
-        private ObservableCollection<GradesModel> _objGradesModelList;
-        private ObservableCollection<SectionsModel> _objSectionModelList;
+        private List<gradesModel> _objGradesModelList;
+        private List<sectionsModel> _objSectionModelList;
 
         public List<gradesModel> Grades
         {
@@ -410,6 +411,33 @@ namespace SMS.Models
             {
                 _Sections = value;
                 OnPropertyChanged("Sections");
+            }
+
+        }
+        public gradesModel Grade
+        {
+            get
+            {
+                return _Grade;
+            }
+            set
+            {
+                _Grade = value;
+                OnPropertyChanged("Grade");
+            }
+        }
+
+
+        public sectionsModel Section
+        {
+            get
+            {
+                return _Section;
+            }
+            set
+            {
+                _Section = value;
+                OnPropertyChanged("Section");
             }
 
         }
@@ -442,21 +470,7 @@ namespace SMS.Models
 
         }
 
-        public string ConcessionAmount
-        {
-            get
-            {
-                return _concessionAmount;
-            }
-            set
-            {
-                _concessionAmount = value;
-                OnPropertyChanged("ConcessionAmount");
-            }
-
-        }
-
-        public ObservableCollection<GradesModel> GradesList
+        public List<gradesModel> GradesList
         {
             get
             {
@@ -469,7 +483,7 @@ namespace SMS.Models
             }
         }
 
-        public ObservableCollection<SectionsModel> SectionsList
+        public List<sectionsModel> SectionsList
         {
             get
             {

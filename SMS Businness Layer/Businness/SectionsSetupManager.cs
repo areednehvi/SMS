@@ -41,7 +41,7 @@ namespace SMS_Businness_Layer.Businness
             }            
             
         }
-        public static List<sectionsModel> GetAllSections()
+        public static List<sectionsModel> GetAllSections(Boolean IncludeAllOption = false)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace SMS_Businness_Layer.Businness
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue}
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetSectionsList, lstSqlParameters);
-                return MapDatatableToSectionsObject(objDatable);
+                return MapDatatableToSectionsObject(objDatable, IncludeAllOption);
 
             }
             catch (Exception ex)
@@ -65,11 +65,13 @@ namespace SMS_Businness_Layer.Businness
 
         }
 
-        private static List<sectionsModel> MapDatatableToSectionsObject(DataTable objDatatable)
+        private static List<sectionsModel> MapDatatableToSectionsObject(DataTable objDatatable, Boolean IncludeAllOption = false)
         {
             List<sectionsModel> objSectionsList = new List<sectionsModel>();
             try
             {
+                if (IncludeAllOption)
+                    objSectionsList.Add(new sectionsModel() { id_offline = Guid.Empty.ToString(), name = "All" });
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     sectionsModel obj = new sectionsModel();
@@ -228,6 +230,47 @@ namespace SMS_Businness_Layer.Businness
                                 obj.updated_by,
                                 obj.updated_on
                               );
+                return table;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+        public static DataTable MapSectionsObjectToDataTable(List<sectionsModel> objList)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("id_offline", typeof(string));
+                table.Columns.Add("id_online", typeof(string));
+                table.Columns.Add("school_id", typeof(string));
+                table.Columns.Add("name", typeof(string));
+                table.Columns.Add("capacity", typeof(string));
+                table.Columns.Add("created_by", typeof(string));
+                table.Columns.Add("created_on", typeof(DateTime));
+                table.Columns.Add("updated_by", typeof(string));
+                table.Columns.Add("updated_on", typeof(DateTime));
+
+                foreach(sectionsModel obj in objList)
+                {
+                    table.Rows.Add(
+                                obj.id_offline,
+                                obj.id_online,
+                                obj.school_id,
+                                obj.name,
+                                obj.capacity,
+                                obj.created_by,
+                                obj.created_on,
+                                obj.updated_by,
+                                obj.updated_on
+                              );
+                }
+                
                 return table;
             }
             catch (Exception ex)

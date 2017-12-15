@@ -31,7 +31,7 @@ namespace SMS.Controllers
             _Students = new StudentsModel()
             {
                 CurrentLogin = new LoginModel(),
-                SchoolInfo = new SchoolModel(),              
+                SchoolInfo = new SchoolModel(),             
             };
 
             //Get Global Objects
@@ -61,6 +61,12 @@ namespace SMS.Controllers
                     }
                     this.ShowForm();
                 }
+            };
+
+            //Subscribe to Model's Property changed event
+            this.Students.StudentsListFilters.PropertyChanged += (s, e) =>
+            {
+                this.GetStudentsList();
             };
 
 
@@ -344,7 +350,7 @@ namespace SMS.Controllers
         {
             try
             {
-                Students.StudentsList = StudentsManager.GetStudentsList(Students.fromRowNo, Students.toRowNo,new StudentsListFiltersModel() { });
+                Students.StudentsList = StudentsManager.GetStudentsList(Students.fromRowNo, Students.toRowNo,Students.StudentsListFilters);
                 Students.NoRecordsFound = Students.StudentsList.Count > 0 ? "Collapsed" : "Visible";
             }
             catch (Exception ex)
@@ -404,6 +410,11 @@ namespace SMS.Controllers
             Students.BloodGroupList = GetListManager.GetStudentBloodGroupList();
             Students.GenderList = GetListManager.GetGenderList();
             Students.StatusList = GetListManager.GetStudentStatusList();
+            Students.StudentsListFilters = new StudentsListFiltersModel()
+            {
+                GradesList = GradesSetupManager.GetAllGrades(IncludeAllOption : true),
+                SectionsList = SectionsSetupManager.GetAllSections(IncludeAllOption: true),
+            };
         }
 
 

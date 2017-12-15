@@ -19,14 +19,34 @@ namespace SMS_Businness_Layer.Businness
 
         #region List      
         public static ObservableCollection<StudentsListModel> GetStudentsList(Int64 fromRowNo, Int64 toRowNo,StudentsListFiltersModel StudentsListFilters)
-        {            
+        {
             try
             {
+                DataTable objGradesDatatable, objSectionsDatatable;
+                if (StudentsListFilters.Grade == null || (StudentsListFilters.Grade != null && StudentsListFilters.Grade.id_offline == Guid.Empty.ToString()))
+                {
+                    List<gradesModel> gradesList = new List<gradesModel>();
+                    gradesList = StudentsListFilters.GradesList.FindAll(x=>x.id_offline != Guid.Empty.ToString());
+                    objGradesDatatable = GradesSetupManager.MapGradesObjectToDataTable(gradesList);
+                }
+                else
+                    objGradesDatatable = GradesSetupManager.MapGradeObjectToDataTable(StudentsListFilters.Grade);
+                if (StudentsListFilters.Section == null || (StudentsListFilters.Section != null && StudentsListFilters.Section.id_offline == Guid.Empty.ToString()))
+                {
+                    List<sectionsModel> sectionsList = new List<sectionsModel>();
+                    sectionsList = StudentsListFilters.SectionsList.FindAll(x => x.id_offline != Guid.Empty.ToString());
+                    objSectionsDatatable = SectionsSetupManager.MapSectionsObjectToDataTable(sectionsList);
+                }
+                else
+                    objSectionsDatatable = SectionsSetupManager.MapSectionObjectToDataTable(StudentsListFilters.Section);
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
-                {                    
+                {
                     new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = fromRowNo},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = toRowNo},
-                    //new SqlParameter() {ParameterName = "@GradeID",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.Grade != null && StudentsListFilters.Grade.name ==  "All") ? null : (StudentsListFilters.Grade != null ? StudentsListFilters.Grade.id_offline : null)},
+                    new SqlParameter() {ParameterName = "@GradesModel",  TypeName = DBTableTypes.grades, Value = objGradesDatatable},
+                    new SqlParameter() {ParameterName = "@SectionsModel",  TypeName = DBTableTypes.sections, Value = objSectionsDatatable},
+                    new SqlParameter() {ParameterName = "@RollNumber",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.RollNumber == "" ? null :StudentsListFilters.RollNumber)},
+                    new SqlParameter() {ParameterName = "@RegistrationID",  SqlDbType = SqlDbType.NVarChar, Value = (StudentsListFilters.RegistrationID == "" ? null :StudentsListFilters.RegistrationID)},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentsList, lstSqlParameters);
                 return MapDatatableToStudentsListObject(objDatable);
