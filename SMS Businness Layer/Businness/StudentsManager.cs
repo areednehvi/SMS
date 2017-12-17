@@ -228,11 +228,13 @@ namespace SMS_Businness_Layer.Businness
             try
             {
                 DataTable objGradesDatatable = GradesSetupManager.MapGradesObjectToDataTable(StudentsListFilters.Grades);
+                DataTable objSectionsDatatable = SectionsSetupManager.MapSectionsObjectToDataTable(StudentsListFilters.Sections);
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
                     new SqlParameter() {ParameterName = "@FromRowNo", SqlDbType = SqlDbType.NVarChar, Value = 1},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue},
                     new SqlParameter() {ParameterName = "@GradesModel",  TypeName = DBTableTypes.grades, Value = objGradesDatatable},
+                    new SqlParameter() {ParameterName = "@SectionsModel",  TypeName = DBTableTypes.sections, Value = objSectionsDatatable},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentsList, lstSqlParameters);
                 return MapDatatableToStudentsList(objDatable);

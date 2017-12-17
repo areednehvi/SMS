@@ -467,6 +467,7 @@ namespace SMS.Controllers
                 {
                     objStudentsListFilters.Grades.Add(gradesMultiComboBoxItem.Grade);
                 }
+                objStudentsListFilters.Sections = SectionsSetupManager.GetAllSections();
                 FeeAllocation.StudentsList = StudentsManager.GetStudentsList(objStudentsListFilters);
                 // StudentsMultiComboBox
                 FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems = new ObservableCollection<StudentsMultiComboBoxItem>();
