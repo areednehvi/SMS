@@ -88,6 +88,8 @@ namespace SMS_Businness_Layer.Businness
                     obj.AppliedToGradeIDs = row["AppliedToGradeIDs"] != DBNull.Value ? Convert.ToString(row["AppliedToGradeIDs"]) : string.Empty;
                     //student count
                     obj.StudentCount = row["StudentCount"] != DBNull.Value ? Convert.ToInt64(row["StudentCount"]) : 0;
+                    //Created By
+                    obj.CreatedBy = row["CreatedBy"] != DBNull.Value ? Convert.ToString(row["CreatedBy"]) : string.Empty;
                     objFeeAllocationList.Add(obj);
                 }
 

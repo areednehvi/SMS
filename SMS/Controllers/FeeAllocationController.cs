@@ -84,22 +84,21 @@ namespace SMS.Controllers
 
                     }
                     this.ShowForm();
-                    //Subscribe to Model's Property changed event
-                    if (this.FeeAllocation.Fees != null)
+                }
+                //Subscribe to Model's Property changed event
+                if (this.FeeAllocation.Fees != null)
+                {
+                    this.FeeAllocation.Fees.PropertyChanged += (sr, ev) =>
                     {
-                        this.FeeAllocation.Fees.PropertyChanged += (sr, ev) =>
+                        if (ev.PropertyName == "AllocateFeeTo")
                         {
-                            if (e.PropertyName == "SelectedItemInFeeAllocationList")
-                            {
-                                if (FeeAllocation.Fees != null && FeeAllocation.Fees.AllocateFeeTo.id == "Chosen students from a list")
-                                    //Make StudentsMultiComboBox Enabled
-                                    this.FeeAllocation.IsStudentListEnabled = true;
-                                else
-                                    this.FeeAllocation.IsStudentListEnabled = false;
-                            }
-                        };
-                    }
-
+                            if (FeeAllocation.Fees != null && FeeAllocation.Fees.AllocateFeeTo.id == "Chosen students from a list")
+                                //Make StudentsMultiComboBox Enabled
+                                this.FeeAllocation.IsStudentListEnabled = true;
+                            else
+                                this.FeeAllocation.IsStudentListEnabled = false;
+                        }
+                    };
                 }
             };
 
@@ -233,8 +232,17 @@ namespace SMS.Controllers
             {
                 FeeAllocation.Fees = new FeeAllocationListModel()
                 {
-                   
+                    CreatedBy = FeeAllocation.CurrentLogin.User.full_name,                
                 };
+                int count = FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Count;
+                for (int i = 0; i < count; i++)
+                    FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems[i].IsChecked = false;
+                count = FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Count;
+                /*for (int i = 0; i < count; i++)
+                    FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems[i].IsChecked = false;
+                count = FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Count;*/
+
+
                 this.ShowForm();
             }
             catch (Exception ex)
@@ -290,7 +298,13 @@ namespace SMS.Controllers
 
         public bool CanSaveFeeAllocation(object obj)
         {
-            return FeeAllocation.Fees != null;
+            return FeeAllocation.Fees != null &&
+                   FeeAllocation.Fees.FeeCategory != null &&
+                   FeeAllocation.Fees.amount != 0 && 
+                   FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems.Count > 0 &&
+                   FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Count > 0 &&
+                   FeeAllocation.Fees.AllocateFeeTo != null &&
+                   ((FeeAllocation.Fees.AllocateFeeTo.id == "Chosen students from a list" && FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Count == 0 ) ? false : true);
 
         }
 
