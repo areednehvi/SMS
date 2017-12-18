@@ -234,14 +234,13 @@ namespace SMS.Controllers
                 {
                     CreatedBy = FeeAllocation.CurrentLogin.User.full_name,                
                 };
-                int count = FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems.Count;
-                for (int i = 0; i < count; i++)
-                    FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems[i].IsChecked = false;
-                count = FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems.Count;
-                /*for (int i = 0; i < count; i++)
-                    FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems[i].IsChecked = false;
-                count = FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems.Count;*/
-
+                FeeAllocation.IsStudentListEnabled = false;
+                foreach (FeeMonthsMultiComboBoxItem objFeeMonthsMultiComboBoxItem in FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxItems)
+                    objFeeMonthsMultiComboBoxItem.IsChecked = false;
+                foreach (GradesMultiComboBoxItem objGradesMultiComboBoxItem in FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxItems)
+                    objGradesMultiComboBoxItem.IsChecked = false;
+                foreach (StudentsMultiComboBoxItem objStudentsMultiComboBoxItem in FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxItems)
+                    objStudentsMultiComboBoxItem.IsChecked = false;
 
                 this.ShowForm();
             }
