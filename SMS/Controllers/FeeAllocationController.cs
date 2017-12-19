@@ -316,7 +316,9 @@ namespace SMS.Controllers
                         FeeAllocation.Fees, FeeAllocation.FeeMonthsMultiComboBox.FeeMonthsMultiComboBoxCheckedItems,
                         FeeAllocation.GradesMultiComboBox.GradesMultiComboBoxCheckedItems,
                         FeeAllocation.StudentsMultiComboBox.StudentsMultiComboBoxCheckedItems,
-                        FeeAllocation.GradesList, FeeAllocation.CurrentLogin, 
+                        FeeAllocation.GradesList, 
+                        FeeAllocation.SectionsList,
+                        FeeAllocation.CurrentLogin, 
                         FeeAllocation.SchoolInfo,FeeAllocation.CurrentSession,FeeAllocation.Fees.AllocateFeeTo)
                 )
                 {
@@ -406,6 +408,7 @@ namespace SMS.Controllers
         {
             FeeAllocation.FeeCategoriesList = FeeCategoriesManager.GetAllFeeCategories();
             FeeAllocation.GradesList = GradesSetupManager.GetAllGrades();
+            FeeAllocation.SectionsList = SectionsSetupManager.GetAllSections();
             FeeAllocation.FeeMonthsList = SessionsSetupManager.GetFeeMonthsOfCurrentSession();
             FeeAllocation.AllocateFeeToList = GetListManager.GetAllocateFeeToList();
             

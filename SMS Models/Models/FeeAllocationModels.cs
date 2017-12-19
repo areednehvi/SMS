@@ -17,6 +17,7 @@ namespace SMS.Models
         private ObservableCollection<FeeAllocationListModel> _FeeAllocationList;
         private List<fee_categoriesModel> _FeeCategoriesList;
         private List<gradesModel> _GradesList;
+        private List<sectionsModel> _SectionsList;
         private List<StudentsListModel> _StudentsList;
         private List<ListModel> _FeeMonthsList;
         private List<ListModel> _AllocateFeeToList;
@@ -91,6 +92,18 @@ namespace SMS.Models
             {
                 _GradesList = value;
                 OnPropertyChanged("GradesList");
+            }
+        }
+        public List<sectionsModel> SectionsList
+        {
+            get
+            {
+                return _SectionsList;
+            }
+            set
+            {
+                _SectionsList = value;
+                OnPropertyChanged("SectionsList");
             }
         }
         public List<StudentsListModel> StudentsList

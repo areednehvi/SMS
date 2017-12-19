@@ -114,6 +114,7 @@ namespace SMS_Businness_Layer.Businness
             ObservableCollection<GradesMultiComboBoxItem> GradesMultiComboBoxCheckedItems,
             ObservableCollection<StudentsMultiComboBoxItem> StudentsMultiComboBoxCheckedItems,
             List<gradesModel> AllGradesList,
+            List<sectionsModel> AllSectionsList,
             LoginModel CurrentLogin, SchoolModel SchoolInfo, sessionsModel CurrentSession,
             ListModel AllocateFeeTo
         )
@@ -180,10 +181,9 @@ namespace SMS_Businness_Layer.Businness
                             grade = AllGradesList.Find(x => x.id_offline == objGradeFees.grade_id);
                             StudentsListFiltersModel StudentsListFilters = new StudentsListFiltersModel()
                             { 
-                                Grades = new List<gradesModel>()
-                                {
-                                    grade    
-                                }
+                                Grade  = grade,
+                                SectionsList = AllSectionsList,
+                                Sections = AllSectionsList,
                             };
                             
                             ObservableCollection<StudentsListModel> StudentList = StudentsManager.GetStudentsList(1, Int64.MaxValue, StudentsListFilters);
@@ -222,43 +222,36 @@ namespace SMS_Businness_Layer.Businness
                     case "Chosen students from a list":
                         foreach (grade_feesModel objGradeFees in objGradeFeesList)
                         {
-                            gradesModel grade = new gradesModel();
-                            grade = AllGradesList.Find(x => x.id_offline == objGradeFees.grade_id);
-                            StudentsListFiltersModel StudentsListFilters = new StudentsListFiltersModel()
-                            {
-                                Grades = new List<gradesModel>()
-                                {
-                                    grade
-                                }
-                            };
-
                             foreach (StudentsMultiComboBoxItem studentMultiComboBoxItem in StudentsMultiComboBoxCheckedItems)
                             {
-                                studentsModel Student = studentMultiComboBoxItem.Student;
-                                foreach (FeeMonthsMultiComboBoxItem feeMonthsMultiComboBoxItem in FeeMonthsMultiComboBoxCheckedItems)
+                                StudentsListModel Student = studentMultiComboBoxItem.Student;
+                                if (Student.Grade.id_offline == objGradeFees.grade_id)
                                 {
-                                    if (feeMonthsMultiComboBoxItem.FeeMonth.id != "All")
+                                    foreach (FeeMonthsMultiComboBoxItem feeMonthsMultiComboBoxItem in FeeMonthsMultiComboBoxCheckedItems)
                                     {
-                                        student_feesModel objStudentFees = new student_feesModel()
+                                        if (feeMonthsMultiComboBoxItem.FeeMonth.id != "All")
                                         {
-                                            id_offline = Guid.NewGuid().ToString(),
-                                            id_online = Guid.Empty.ToString(),
-                                            created_by = CurrentLogin.User.id_offline,
-                                            created_on = DateTime.Now,
-                                            school_id = SchoolInfo.id_offline,
-                                            grade_fees_id = objGradeFees.id_offline,
-                                            apply_from = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id),
-                                            apply_to = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id).AddMonths(1).AddDays(-1),
-                                            concession_amount = 0,
-                                            fine = 0,
-                                            no_fine = "0",
-                                            route_vehicle_stops_fee_log_id = Guid.Empty.ToString(),
-                                            student_id = Student.id_offline,
-                                            updated_by = CurrentLogin.User.id_offline,
-                                            updated_on = DateTime.Now
+                                            student_feesModel objStudentFees = new student_feesModel()
+                                            {
+                                                id_offline = Guid.NewGuid().ToString(),
+                                                id_online = Guid.Empty.ToString(),
+                                                created_by = CurrentLogin.User.id_offline,
+                                                created_on = DateTime.Now,
+                                                school_id = SchoolInfo.id_offline,
+                                                grade_fees_id = objGradeFees.id_offline,
+                                                apply_from = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id),
+                                                apply_to = Convert.ToDateTime(feeMonthsMultiComboBoxItem.FeeMonth.id).AddMonths(1).AddDays(-1),
+                                                concession_amount = 0,
+                                                fine = 0,
+                                                no_fine = "0",
+                                                route_vehicle_stops_fee_log_id = Guid.Empty.ToString(),
+                                                student_id = Student.id_offline,
+                                                updated_by = CurrentLogin.User.id_offline,
+                                                updated_on = DateTime.Now
 
-                                        };
-                                        objStudentFeesList.Add(objStudentFees);
+                                            };
+                                            objStudentFeesList.Add(objStudentFees);
+                                        }
                                     }
                                 }
 
