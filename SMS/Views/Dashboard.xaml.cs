@@ -18,9 +18,9 @@ namespace SMS.Views
     /// <summary>
     /// Interaction logic for testView.xaml
     /// </summary>
-    public partial class testView : Window
+    public partial class Dashboard : UserControl
     {
-        public testView()
+        public Dashboard()
         {
             InitializeComponent();
             this.DataContext = new TestViewModel(GroupBoxDynamicChart);

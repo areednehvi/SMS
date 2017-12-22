@@ -19,5 +19,6 @@ namespace SMS.Shared
         public static View StudentsView = new View() { Name = "StudentsView", Title = "Manage Students" };
         public static View FeeCategoriesView = new View() { Name = "FeeCategoriesView", Title = "Fee Categories" };
         public static View FeeAllocationView = new View() { Name = "FeeAllocationView", Title = "Fee Allocation" };
+        public static View DashboardView = new View() { Name = "DashboardView", Title = "Dashboard" };
     }
 }

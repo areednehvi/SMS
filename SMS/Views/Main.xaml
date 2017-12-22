@@ -17,6 +17,9 @@
     </Window.DataContext>
 
     <Window.Resources>
+        <DataTemplate x:Key="DashboardView" DataType="{x:Type vm:MainController}">
+            <local:Dashboard />
+        </DataTemplate>
         <DataTemplate x:Key="FeeCollectionView" DataType="{x:Type vm:MainController}">
             <local:FeeCollection />
         </DataTemplate>
@@ -59,17 +62,29 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="menu" Background="#2f4050" Visibility="{Binding MenuVisibility}">
-            <Label Content="Welcome to School Universe" HorizontalAlignment="Center" Foreground="White" Margin="0,20,0,0" FontFamily="Viner Hand ITC" FontWeight="Bold" FontSize="18" />
+            <Label Content="Welcome to SMS" HorizontalAlignment="Center" Foreground="White" Margin="0,20,0,0" FontFamily="Viner Hand ITC" FontWeight="Bold" FontSize="18" />
             <Separator/>
             <Image Source="../assets/images/userProfile.png" Margin="0,10,0,10" Width="80"  Height="80"/>
             <Label x:Name="lblUserName" FontSize="14" Foreground="White" HorizontalAlignment="Center" Typography.Capitals="AllSmallCaps" Content="{Binding Login.Username}" />
             <Separator/>
-            <Menu  HorizontalAlignment="Left" Padding="0,10,0,0" Background="#2f4050" VerticalAlignment="Stretch" Width="300" Foreground="White" >
+            <Menu  HorizontalAlignment="Left" Padding="0,10,0,0" Background="#2f4050" VerticalAlignment="Stretch" Width="240" Foreground="White" >
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel />
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
+                <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.DashboardView}}">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox Width="24" Height="24" Margin="0,0,5,0">
+                                <Canvas Width="24" Height="24">
+                                    <Path Data="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z" Fill="White" />
+                                </Canvas>
+                            </Viewbox>
+                            <ContentPresenter Content="Dashboard"  />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
                 <MenuItem Cursor="Hand">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -81,7 +96,7 @@
                             <ContentPresenter Content="Users" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="List" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.UsersView}}" />
+                    <MenuItem Header="List" Margin="30,0,0,0" Width="210" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.UsersView}}" />
                 </MenuItem>
                 <MenuItem Cursor="Hand">
                     <MenuItem.Header>
@@ -94,7 +109,7 @@
                             <ContentPresenter Content="Students" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="List" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.StudentsView}}" />
+                    <MenuItem Header="List" Margin="30,0,0,0" Width="210" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.StudentsView}}" />
                 </MenuItem>
                 <MenuItem Cursor="Hand">
                     <MenuItem.Header>
@@ -107,7 +122,7 @@
                             <ContentPresenter Content="Accounts" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="Fee Categories" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCategoriesView}}" />
+                    <MenuItem Header="Fee Categories" Margin="30,0,0,0" Width="210" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCategoriesView}}" />
                     <MenuItem Header="Fee Allocation" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeAllocationView}}" />
                     <MenuItem Header="Fee Collection" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionView}}"  />
                 </MenuItem>
@@ -146,7 +161,7 @@
                             <ContentPresenter Content="Setup" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="Session" Margin="30,0,0,0" Width="240" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SessionsView}}" />
+                    <MenuItem Header="Session" Margin="30,0,0,0" Width="210" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SessionsView}}" />
                     <MenuItem Header="Grades" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.GradesView}}" />
                     <MenuItem Header="Sections" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SectionsView}}" />
                 </MenuItem>
@@ -202,8 +217,11 @@
             <ContentControl DataContext="{Binding}" >
                 <ContentControl.Style>
                     <Style TargetType="{x:Type ContentControl}">
-                        <Setter Property="ContentTemplate" Value="{StaticResource FeeCollectionView}" />
+                        <Setter Property="ContentTemplate" Value="{StaticResource DashboardView}" />
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="DashboardView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource DashboardView}" />
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeCollectionView">
                                 <Setter Property="ContentTemplate" Value="{StaticResource FeeCollectionView}" />
                             </DataTrigger>

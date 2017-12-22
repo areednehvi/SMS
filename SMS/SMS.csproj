@@ -141,9 +141,6 @@
     <Compile Include="Shared\SyncDefnitions.cs" />
     <Compile Include="Shared\SettingDefinitions.cs" />
     <Compile Include="Shared\ViewDefinitions.cs" />
-    <Compile Include="Views\combo.xaml.cs">
-      <DependentUpon>combo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
@@ -156,8 +153,8 @@
     <Compile Include="Views\FeeCategories.xaml.cs">
       <DependentUpon>FeeCategories.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\testView.xaml.cs">
-      <DependentUpon>testView.xaml</DependentUpon>
+    <Compile Include="Views\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
@@ -193,10 +190,6 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\viewmodel.cs" />
-    <Page Include="Views\combo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Dialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -213,7 +206,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\testView.xaml">
+    <Page Include="Views\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
