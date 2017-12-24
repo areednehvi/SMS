@@ -23,7 +23,11 @@ namespace SMS.Views
         public Dashboard()
         {
             InitializeComponent();
-            this.DataContext = new TestViewModel(GroupBoxDynamicChart);
+            ((DashboardController)gbStudentGenderRatioWidget.DataContext).Dashboard.StudentGenderRatioWidget.GBStudentGenderRatioWidget = this.gbStudentGenderRatioWidget;
+            ((DashboardController)gbStudentGenderRatioWidget.DataContext).SetupStudentRatioWidget();
+
+            ((DashboardController)gbStudentPaymentAsPerMonthWidget.DataContext).Dashboard.StudentPaymentAsPerMonthWidget.GBStudentPaymentAsPerMonthWidget = this.gbStudentPaymentAsPerMonthWidget;
+            ((DashboardController)gbStudentPaymentAsPerMonthWidget.DataContext).SetupStudentPaymentAsPerMonthWidget();
         }
     }
 }

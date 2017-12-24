@@ -126,7 +126,7 @@
                     <MenuItem Header="Fee Allocation" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeAllocationView}}" />
                     <MenuItem Header="Fee Collection" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeeCollectionView}}"  />
                 </MenuItem>
-                <MenuItem Cursor="Hand" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}">
+                <MenuItem Cursor="Hand" Visibility="Collapsed" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SyncView}}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Viewbox Width="24" Height="24" Margin="0,0,5,0">

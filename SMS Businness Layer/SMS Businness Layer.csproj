@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Businness\FeeAllocationManager.cs" />
+    <Compile Include="Businness\DashboardManager.cs" />
     <Compile Include="Businness\ParentsManager.cs" />
     <Compile Include="Businness\StudentsManager.cs" />
     <Compile Include="Businness\FeeCategoriesManager.cs" />

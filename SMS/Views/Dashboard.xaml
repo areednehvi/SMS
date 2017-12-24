@@ -4,11 +4,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:SMS.Controllers"
         xmlns:local="clr-namespace:SMS.Views"
         mc:Ignorable="d"
         xmlns:ChartToolKit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         >
-    <Grid>
+    <UserControl.Resources>
+        <vm:DashboardController x:Key="DashboardController" />
+    </UserControl.Resources>
+    <Grid DataContext="{Binding Source={StaticResource DashboardController}}">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -19,53 +23,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Children>
-            <GroupBox Grid.Row="0" Grid.Column="0" Header="Static Pie Chart" Height="300" Width="400">
-                <ChartToolKit:Chart>
-                    <ChartToolKit:PieSeries  ItemsSource="{Binding Path=TestModel.DataList,
-            UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, NotifyOnSourceUpdated=True }" 
-            IndependentValuePath="Key"
-            DependentValuePath="Value">
-                    </ChartToolKit:PieSeries>
-                </ChartToolKit:Chart>
-            </GroupBox>
-            <GroupBox  Grid.Row="0" Grid.Column="1" Header="Dynamic Pie Chart" x:Name="GroupBoxDynamicChart" Height="300" Width="400">
-            </GroupBox>
-            <GroupBox Grid.Row="0" Grid.Column="2" Header="Static Pie Chart" Height="300" Width="400">
-                <ChartToolKit:Chart>
-                    <ChartToolKit:PieSeries  ItemsSource="{Binding Path=TestModel.DataList,
-            UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, NotifyOnSourceUpdated=True }" 
-            IndependentValuePath="Key"
-            DependentValuePath="Value">
-                    </ChartToolKit:PieSeries>
-                </ChartToolKit:Chart>
-            </GroupBox>
-            <GroupBox Grid.Row="1" Margin="0,20,0,0" Grid.Column="0" Header="Static Pie Chart" Height="300" Width="400">
-                <ChartToolKit:Chart>
-                    <ChartToolKit:PieSeries  ItemsSource="{Binding Path=TestModel.DataList,
-            UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, NotifyOnSourceUpdated=True }" 
-            IndependentValuePath="Key"
-            DependentValuePath="Value">
-                    </ChartToolKit:PieSeries>
-                </ChartToolKit:Chart>
-            </GroupBox>
-            <GroupBox Grid.Row="1" Margin="0,20,0,0" Grid.Column="1" Header="Static Pie Chart" Height="300" Width="400">
-                <ChartToolKit:Chart>
-                    <ChartToolKit:PieSeries  ItemsSource="{Binding Path=TestModel.DataList,
-            UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, NotifyOnSourceUpdated=True }" 
-            IndependentValuePath="Key"
-            DependentValuePath="Value">
-                    </ChartToolKit:PieSeries>
-                </ChartToolKit:Chart>
-            </GroupBox>
-            <GroupBox Grid.Row="1" Margin="0,20,0,0" Grid.Column="2" Header="Static Pie Chart" Height="300" Width="400">
-                <ChartToolKit:Chart>
-                    <ChartToolKit:PieSeries  ItemsSource="{Binding Path=TestModel.DataList,
-            UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, NotifyOnSourceUpdated=True }" 
-            IndependentValuePath="Key"
-            DependentValuePath="Value">
-                    </ChartToolKit:PieSeries>
-                </ChartToolKit:Chart>
-            </GroupBox>
+            <!-- Below is static chart -->
+            <GroupBox  Grid.Row="0" Grid.Column="0" Header="Student Payments as Per Month" x:Name="chart1" Margin="20,0,20,20" Height="250" />
+            <GroupBox  Grid.Row="0" Grid.Column="1" Header="Student Gender Ratio" x:Name="chart" Margin="0,0,20,20" Height="250" />
+            <GroupBox  Grid.Row="0" Grid.Column="2" Header="Student Gender Ratio" x:Name="chart3" Margin="0,0,20,20" Height="250" />
+            <GroupBox  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Revenue as per Month" x:Name="gbStudentPaymentAsPerMonthWidget" Margin="20,0,20,20" />
+            <GroupBox  Grid.Row="1" Grid.Column="2" Header="Student Gender Ratio" x:Name="gbStudentGenderRatioWidget" Margin="0,0,20,20" />
         </Grid.Children>
     </Grid>
 </UserControl>

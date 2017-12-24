@@ -24,6 +24,8 @@ namespace SMS_Businness_Layer.Shared
         public static string GetStudentFeeDue = "GetStudentFeeDue";
         public static string GetStudentBalances = "GetStudentBalances";
         public static string GetCurrentSession = "GetCurrentSession";
+        public static string GetStudentGenderRatio = "GetStudentGenderRatio";
+        public static string GetStudentPaymentsSumAsPerMonth = "GetStudentPaymentsSumAsPerMonth";
         public static string UpdatePayment = "UpdatePayment";
         public static string MakePayment = "MakePayment";
         public static string UpdateFeeDue = "UpdateFeeDue";
@@ -64,5 +66,6 @@ namespace SMS_Businness_Layer.Shared
         public static string CreateOrModifyFeeCategories = "CreateOrModifyFeeCategories";
         public static string CreateOrModifyFeeAllocation = "CreateOrModifyFeeAllocation";
         public static string CreateOrModifyGradeFees = "CreateOrModifyGradeFees";
+        
     }
 }
