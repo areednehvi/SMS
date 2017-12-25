@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
+using System.Windows.Media;
 
 namespace SMS.Controllers
 {
@@ -41,6 +42,8 @@ namespace SMS.Controllers
                 Dashboard.StudentGenderRatioWidget.Widget.DataList = DashboardManager.GetStudentGenderRatio();
                 Chart dynamicChart = new Chart() { Height = 280};
                 PieSeries series = new PieSeries();
+                series.IsSelectionEnabled = true;
+                series.SelectionChanged += new SelectionChangedEventHandler(StudentGenderRatioWidget_SelectionChanged);
                 series.ItemsSource = DashboardManager.GetStudentGenderRatio();
                 series.DependentValuePath = "Value";
                 series.IndependentValuePath = "Key";
@@ -75,6 +78,8 @@ namespace SMS.Controllers
                 series.ItemsSource = DashboardManager.GetStudentPaymentsAsPerMonthRatio();
                 series.DependentValuePath = "Value";
                 series.IndependentValuePath = "Key";
+                series.IsSelectionEnabled = true;
+                series.SelectionChanged += new SelectionChangedEventHandler(StudentPaymentAsPerMonthWidget_SelectionChanged);
                 dynamicChart.Series.Add(series);
                 Dashboard.StudentPaymentAsPerMonthWidget.GBStudentPaymentAsPerMonthWidget.Content = dynamicChart;
             }
@@ -88,6 +93,17 @@ namespace SMS.Controllers
 
             }
 
+        }
+
+        private void StudentGenderRatioWidget_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PieSeries chartSeries = (PieSeries)sender;
+            Keyvalue keyValue =  (Keyvalue)chartSeries.SelectedItem;       
+        }
+        private void StudentPaymentAsPerMonthWidget_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ColumnSeries chartSeries = (ColumnSeries)sender;
+            Keyvalue keyValue = (Keyvalue)chartSeries.SelectedItem;
         }
         #endregion
 

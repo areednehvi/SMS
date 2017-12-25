@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:SMS.Controllers"
         xmlns:local="clr-namespace:SMS.Views"
         mc:Ignorable="d"
-        xmlns:ChartToolKit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:ChartToolKit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" d:DesignWidth="2847.168" d:DesignHeight="1085.571"
         >
     <UserControl.Resources>
         <vm:DashboardController x:Key="DashboardController" />
@@ -24,7 +24,43 @@
         </Grid.ColumnDefinitions>
         <Grid.Children>
             <!-- Below is static chart -->
-            <GroupBox  Grid.Row="0" Grid.Column="0" Header="Student Payments as Per Month" x:Name="chart1" Margin="20,0,20,20" Height="250" />
+            <GroupBox  Grid.Row="0" Grid.Column="0" Header="General Info" Margin="20,0,20,20" Height="250" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.Children>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Background="LightGray" >
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="50" Height="50">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" Fill="Black" />
+                                    </Canvas>
+                                </Viewbox>
+                                <StackPanel>
+                                    <Label Content="Students" HorizontalAlignment="Center" Foreground="Black" Margin="0,5,0,0" FontFamily="Viner Hand ITC" FontWeight="Bold" FontSize="20" />
+                                    <Label Content="234" HorizontalAlignment="Center" Foreground="#FF009688" FontWeight="Bold" FontSize="30" />
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Background="LightSlateGray" >
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Background="LightSlateGray" >
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Background="LightGray"  >
+
+                        </StackPanel>
+                    </Grid.Children>
+                </Grid>
+            </GroupBox>
             <GroupBox  Grid.Row="0" Grid.Column="1" Header="Student Gender Ratio" x:Name="chart" Margin="0,0,20,20" Height="250" />
             <GroupBox  Grid.Row="0" Grid.Column="2" Header="Student Gender Ratio" x:Name="chart3" Margin="0,0,20,20" Height="250" />
             <GroupBox  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Revenue as per Month" x:Name="gbStudentPaymentAsPerMonthWidget" Margin="20,0,20,20" />
