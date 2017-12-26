@@ -203,6 +203,10 @@ namespace SMS_Businness_Layer.Businness
 
                         doc.Add(table);
                         doc.Add(new Paragraph("This is a page 1"));
+                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance("G:/SMS/SMS/assets/images/login.png");
+                        image.ScalePercent(24f);
+                        doc.Add(image);
+
                         doc.Close();
                     }
                 }
