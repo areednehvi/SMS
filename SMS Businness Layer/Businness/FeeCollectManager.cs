@@ -52,7 +52,7 @@ namespace SMS_Businness_Layer.Businness
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     FeeBalancesModel objFeeBalance = new FeeBalancesModel();
-                    objFeeBalance.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
+                    objFeeBalance.id_offline = row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objFeeBalance.apply_from = row["apply_from"] != DBNull.Value ? Convert.ToDateTime(row["apply_from"]) : (DateTime?)null;
                     objFeeBalance.last_day = row["last_day"] != DBNull.Value ? Convert.ToInt32(row["last_day"]) : 0;
                     objFeeBalance.fine_per_day = row["fine_per_day"] != DBNull.Value ? Convert.ToDouble(row["fine_per_day"]) : 0;
@@ -80,8 +80,8 @@ namespace SMS_Businness_Layer.Businness
                         lstPeriods.Add(objFeeBalance.period);
 
                 }
-                if(lstPeriods != null)
-                {                    
+                if (lstPeriods != null)
+                {
                     foreach (string period in lstPeriods)
                     {
                         PendingMonthlyFeeModel objPendingMonthlyFee = new PendingMonthlyFeeModel();
@@ -89,7 +89,7 @@ namespace SMS_Businness_Layer.Businness
                         objPendingMonthlyFee.FeeBalancesList = new ObservableCollection<FeeBalancesModel>(objFeeBalancesList.Where(feeBalance => feeBalance.period == period).OrderBy(feeBalance => feeBalance.fees_category));
                         objPendingMonthlyFee.Total = objPendingMonthlyFee.FeeBalancesList.Sum(feeBalance => feeBalance.balance_amount);
                         objPendingMonthlyFeeList.Add(objPendingMonthlyFee);
-                    }                   
+                    }
                 }
 
             }
@@ -104,7 +104,7 @@ namespace SMS_Businness_Layer.Businness
             return objPendingMonthlyFeeList;
         }
 
-        public static Boolean MakePayments(MakePaymentModel objMakePayment,LoginModel CurrentLogin, SchoolModel SchoolInfo)
+        public static Boolean MakePayments(MakePaymentModel objMakePayment, LoginModel CurrentLogin, SchoolModel SchoolInfo)
         {
             Boolean IsSuccess = false;
             try
@@ -152,65 +152,86 @@ namespace SMS_Businness_Layer.Businness
             Boolean IsSuccess = false;
             try
             {
-                foreach (FeeBalancesModel objFeeBalance in objMakePayment.SelectedFeeBalances)
+                string appRootDir = @"Receipts\Chapter1_Example6.pdf";
+                if (!File.Exists(appRootDir))
+                    Directory.CreateDirectory(Path.GetDirectoryName(appRootDir));
+                using (FileStream fs = new FileStream(appRootDir, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (Document doc = new Document(PageSize.A6))
+                using (PdfWriter writer = PdfWriter.GetInstance(doc, fs))
                 {
-                    PaymentModel objPayment = new PaymentModel();
-                    objPayment.id_offline = Guid.NewGuid().ToString();
-                    objPayment.id_online = Guid.Empty.ToString();
-                    objPayment.school_id = SchoolInfo.id_offline;
-                    objPayment.student_fees_id = objFeeBalance.id_offline;
-                    objPayment.payment_mode = objMakePayment.SelectedPaymentMode.name;
-                    objPayment.amount = objFeeBalance.balance_amount;
-                    objPayment.fine = objFeeBalance.fine;
-                    objPayment.comment = objMakePayment.Payment.comment;
-                    objPayment.recept_no = objMakePayment.Payment.recept_no;
-                    objPayment.ip = null;
-                    objPayment.created_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
-                    objPayment.updated_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
-                    objPayment.created_on = DateTime.Now;
-                    objPayment.updated_on = DateTime.Now;
-                    objPayment.payment_date = objMakePayment.Payment.payment_date;
+                    writer.PageEvent = new PDFWriterEvents("Smart School",fontSize : 30);
+                    doc.Open();
+                    Image image = Image.GetInstance("../assets/images/receiptLogo.jpg");
+                    image.ScalePercent(30f);
+                    doc.Add(image);
+                    doc.Add(new Header("Header","Smart School"));
+                    PdfPTable table = new PdfPTable(5);
 
-                    string appRootDir = @"Receipts\Chapter1_Example6.pdf";
-                    if (!File.Exists(appRootDir))
-                        Directory.CreateDirectory(Path.GetDirectoryName(appRootDir));
+                    Font fontHeading = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.BOLD);
+                    Font fontCell = new Font(Font.FontFamily.TIMES_ROMAN, 4, Font.NORMAL);
 
-                    using (FileStream fs = new FileStream(appRootDir, FileMode.Create, FileAccess.Write, FileShare.None))
-                    using (Document doc = new Document(PageSize.A6))
-                    using (PdfWriter writer = PdfWriter.GetInstance(doc, fs))
+                    PdfPHeaderCell headerCell = new PdfPHeaderCell();
+                    headerCell.Phrase = new Phrase("Date",font : fontHeading);
+                    table.AddCell(headerCell);
+
+                    headerCell = new PdfPHeaderCell();
+                    headerCell.Phrase = new Phrase("Amount", font: fontHeading);
+                    table.AddCell(headerCell);
+
+                    headerCell = new PdfPHeaderCell();
+                    headerCell.Phrase = new Phrase("Concession", font: fontHeading);
+                    table.AddCell(headerCell);
+
+                    headerCell = new PdfPHeaderCell();
+                    headerCell.Phrase = new Phrase("Fine", font: fontHeading);
+                    table.AddCell(headerCell);
+
+                    headerCell = new PdfPHeaderCell();
+                    headerCell.Phrase = new Phrase("Total", font: fontHeading);
+                    table.AddCell(headerCell);
+                    foreach (FeeBalancesModel objFeeBalance in objMakePayment.SelectedFeeBalances)
                     {
-                        writer.PageEvent = new PDFWriterEvents("This is a Test");
-                        doc.Open();
-                        PdfPTable table = new PdfPTable(3);
+                        PaymentModel objPayment = new PaymentModel();
+                        objPayment.id_offline = Guid.NewGuid().ToString();
+                        objPayment.id_online = Guid.Empty.ToString();
+                        objPayment.school_id = SchoolInfo.id_offline;
+                        objPayment.student_fees_id = objFeeBalance.id_offline;
+                        objPayment.payment_mode = objMakePayment.SelectedPaymentMode.name;
+                        objPayment.amount = objFeeBalance.balance_amount;
+                        objPayment.fine = objFeeBalance.fine;
+                        objPayment.comment = objMakePayment.Payment.comment;
+                        objPayment.recept_no = objMakePayment.Payment.recept_no;
+                        objPayment.ip = null;
+                        objPayment.created_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
+                        objPayment.updated_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
+                        objPayment.created_on = DateTime.Now;
+                        objPayment.updated_on = DateTime.Now;
+                        objPayment.payment_date = objMakePayment.Payment.payment_date;
 
-                        PdfPCell cell = new PdfPCell(new Phrase(objPayment.payment_date.ToString()));
-                        table.AddCell(cell);
-                        cell = new PdfPCell(new Phrase("Row 1, Col 2"));
-                        table.AddCell(cell);
-                        cell = new PdfPCell(new Phrase("Row 1, Col 3"));
+                     
+                        PdfPCell cell = new PdfPCell(new Phrase(objPayment.payment_date.ToString(),font: fontCell));
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("Row 2 ,Col 1"));
+                        cell = new PdfPCell(new Phrase(objPayment.amount.ToString(), font: fontCell));
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("Row 2 and row 3, Col 2 and Col 3"));
-                        cell.Rowspan = 2;
-                        cell.Colspan = 2;
+                        cell = new PdfPCell(new Phrase(objPayment.payment_date.ToString(), font: fontCell));
                         table.AddCell(cell);
 
-                        cell = new PdfPCell(new Phrase("Row 3, Col 1"));
+                        cell = new PdfPCell(new Phrase(objPayment.fine.ToString(), font: fontCell));
                         table.AddCell(cell);
 
-                        doc.Add(table);
-                        doc.Add(new Paragraph("This is a page 1"));
-                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance("G:/SMS/SMS/assets/images/login.png");
-                        image.ScalePercent(24f);
-                        doc.Add(image);
+                        cell = new PdfPCell(new Phrase(objPayment.payment_date.ToString(), font: fontCell));
+                        table.AddCell(cell);
 
-                        doc.Close();
+
+
                     }
+                    doc.Add(table);
+                    doc.Close();
+
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -276,28 +297,28 @@ namespace SMS_Businness_Layer.Businness
 
         #region PaymentHistory
         public static ObservableCollection<PaymentModel> GetStudentPaymentHistory(Int64 fromRowNo, Int64 toRowNo, string studentID)
-        {            
+        {
             try
             {
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
-                {                    
+                {
                     new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = fromRowNo},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = toRowNo},
-                    new SqlParameter() {ParameterName = "@StudentID",  SqlDbType = SqlDbType.NVarChar, Value = studentID == "" ? null : studentID},                   
+                    new SqlParameter() {ParameterName = "@StudentID",  SqlDbType = SqlDbType.NVarChar, Value = studentID == "" ? null : studentID},
                 };
-                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentPaymentHistory,lstSqlParameters);
+                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetStudentPaymentHistory, lstSqlParameters);
                 return MapDatatableToPaymentHistoryObject(objDatable);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             finally
             {
 
-            }            
-            
+            }
+
         }
 
         private static ObservableCollection<PaymentModel> MapDatatableToPaymentHistoryObject(DataTable objDatatable)
@@ -308,7 +329,7 @@ namespace SMS_Businness_Layer.Businness
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     PaymentModel objPaymentHistory = new PaymentModel();
-                    objPaymentHistory.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
+                    objPaymentHistory.id_offline = row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objPaymentHistory.id_online = row["id_online"] != DBNull.Value ? row["id_online"].ToString() : string.Empty;
                     objPaymentHistory.school_id = row["school_id"] != DBNull.Value ? row["school_id"].ToString() : string.Empty;
                     objPaymentHistory.student_fees_id = row["student_fees_id"] != DBNull.Value ? row["student_fees_id"].ToString() : string.Empty;
@@ -318,7 +339,7 @@ namespace SMS_Businness_Layer.Businness
                     objPaymentHistory.payment_mode = row["payment_mode"] != DBNull.Value ? row["payment_mode"].ToString() : string.Empty;
                     objPaymentHistory.payment_date = row["payment_date"] != DBNull.Value ? Convert.ToDateTime(row["payment_date"]) : (DateTime?)null;
                     objPaymentHistory.concession_amount = row["concession_amount"] != DBNull.Value ? Convert.ToDouble(row["concession_amount"]) : 0;
-                    objPaymentHistory.month = row["month"] != DBNull.Value ? row["month"].ToString() : string.Empty;                    
+                    objPaymentHistory.month = row["month"] != DBNull.Value ? row["month"].ToString() : string.Empty;
                     objPaymentHistory.apply_from = row["apply_from"] != DBNull.Value ? Convert.ToDateTime(row["apply_from"]) : (DateTime?)null;
                     objPaymentHistory.apply_to = row["apply_to"] != DBNull.Value ? Convert.ToDateTime(row["apply_to"]) : (DateTime?)null;
                     objPaymentHistory.fee_amount = row["fee_amount"] != DBNull.Value ? Convert.ToDouble(row["fee_amount"]) : 0;
@@ -334,7 +355,7 @@ namespace SMS_Businness_Layer.Businness
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -345,12 +366,12 @@ namespace SMS_Businness_Layer.Businness
             return objPaymentHistoryList;
         }
 
-        public static Boolean UpdatePaymentHistory(PaymentModel objPayment,LoginModel CurrentLogin)
+        public static Boolean UpdatePaymentHistory(PaymentModel objPayment, LoginModel CurrentLogin)
         {
             try
             {
                 objPayment.updated_on = DateTime.Now;
-                objPayment.updated_by = CurrentLogin.User.id_offline!= null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
+                objPayment.updated_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
 
                 DataTable objDatatable = MapPaymentToDataTable(objPayment);
                 SqlParameter objSqlParameter = new SqlParameter("@PaymentTable", SqlDbType.Structured);
@@ -358,7 +379,7 @@ namespace SMS_Businness_Layer.Businness
                 objSqlParameter.Value = objDatatable;
                 return DataAccess.ExecuteNonQuery(StoredProcedures.UpdatePayment, objSqlParameter);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -404,7 +425,7 @@ namespace SMS_Businness_Layer.Businness
                 foreach (DataRow row in objDatatable.Rows)
                 {
                     FeeDueModel objFeeDue = new FeeDueModel();
-                    objFeeDue.id_offline =  row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
+                    objFeeDue.id_offline = row["id_offline"] != DBNull.Value ? row["id_offline"].ToString() : string.Empty;
                     objFeeDue.student_balance = row["student_balance"] != DBNull.Value ? Convert.ToDouble(row["student_balance"]) : 0;
                     objFeeDue.student_id = row["student_id"] != DBNull.Value ? row["student_id"].ToString() : string.Empty;
                     objFeeDue.concession_amount = row["concession_amount"] != DBNull.Value ? Convert.ToDouble(row["concession_amount"]) : 0;
@@ -431,7 +452,7 @@ namespace SMS_Businness_Layer.Businness
             return objFeeDueList;
         }
 
-        public static Boolean UpdateFeeDue(FeeDueModel objFeeDueModel,LoginModel CurrentLogin)
+        public static Boolean UpdateFeeDue(FeeDueModel objFeeDueModel, LoginModel CurrentLogin)
         {
             try
             {
@@ -462,7 +483,7 @@ namespace SMS_Businness_Layer.Businness
                 DataTable table = new DataTable();
                 table.Columns.Add("id_offline", typeof(string));
                 table.Columns.Add("student_id", typeof(string));
-                table.Columns.Add("student_balance", typeof(Double));                
+                table.Columns.Add("student_balance", typeof(Double));
                 table.Columns.Add("apply_from", typeof(DateTime));
                 table.Columns.Add("apply_to", typeof(DateTime));
                 table.Columns.Add("fine", typeof(Double));
@@ -503,7 +524,7 @@ namespace SMS_Businness_Layer.Businness
                 {
                     new SqlParameter() {ParameterName = "@key",     SqlDbType = SqlDbType.NVarChar, Value = "id"},
                     new SqlParameter() {ParameterName = "@value",     SqlDbType = SqlDbType.NVarChar, Value = objFeeDueModel.id_offline},
-                    new SqlParameter() {ParameterName = "@tableName",  SqlDbType = SqlDbType.NVarChar, Value = "student_fees"}                
+                    new SqlParameter() {ParameterName = "@tableName",  SqlDbType = SqlDbType.NVarChar, Value = "student_fees"}
                 };
                 return DataAccess.ExecuteNonQuery(StoredProcedures.DeleteRecord, lstSqlParameters);
             }
