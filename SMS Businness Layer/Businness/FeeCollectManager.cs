@@ -1,4 +1,6 @@
-﻿using SMS.Models;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using SMS.Models;
 using SMS_Businness_Layer.Shared;
 using SMS_Data_Layer.DataAccess;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -132,6 +135,78 @@ namespace SMS_Businness_Layer.Businness
                     IsSuccess = DataAccess.ExecuteNonQuery(StoredProcedures.MakePayment, objSqlParameter);
 
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return IsSuccess;
+        }
+
+        public static Boolean PrintReceipt(MakePaymentModel objMakePayment, LoginModel CurrentLogin, SchoolModel SchoolInfo)
+        {
+            Boolean IsSuccess = false;
+            try
+            {
+                foreach (FeeBalancesModel objFeeBalance in objMakePayment.SelectedFeeBalances)
+                {
+                    PaymentModel objPayment = new PaymentModel();
+                    objPayment.id_offline = Guid.NewGuid().ToString();
+                    objPayment.id_online = Guid.Empty.ToString();
+                    objPayment.school_id = SchoolInfo.id_offline;
+                    objPayment.student_fees_id = objFeeBalance.id_offline;
+                    objPayment.payment_mode = objMakePayment.SelectedPaymentMode.name;
+                    objPayment.amount = objFeeBalance.balance_amount;
+                    objPayment.fine = objFeeBalance.fine;
+                    objPayment.comment = objMakePayment.Payment.comment;
+                    objPayment.recept_no = objMakePayment.Payment.recept_no;
+                    objPayment.ip = null;
+                    objPayment.created_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
+                    objPayment.updated_by = CurrentLogin.User.id_offline != null ? CurrentLogin.User.id_offline : Guid.Empty.ToString();
+                    objPayment.created_on = DateTime.Now;
+                    objPayment.updated_on = DateTime.Now;
+                    objPayment.payment_date = objMakePayment.Payment.payment_date;
+
+                    string appRootDir = @"Receipts\Chapter1_Example6.pdf";
+                    if (!File.Exists(appRootDir))
+                        Directory.CreateDirectory(Path.GetDirectoryName(appRootDir));
+
+                    using (FileStream fs = new FileStream(appRootDir, FileMode.Create, FileAccess.Write, FileShare.None))
+                    using (Document doc = new Document(PageSize.A6))
+                    using (PdfWriter writer = PdfWriter.GetInstance(doc, fs))
+                    {
+                        writer.PageEvent = new PDFWriterEvents("This is a Test");
+                        doc.Open();
+                        PdfPTable table = new PdfPTable(3);
+
+                        PdfPCell cell = new PdfPCell(new Phrase(objPayment.payment_date.ToString()));
+                        table.AddCell(cell);
+                        cell = new PdfPCell(new Phrase("Row 1, Col 2"));
+                        table.AddCell(cell);
+                        cell = new PdfPCell(new Phrase("Row 1, Col 3"));
+                        table.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Row 2 ,Col 1"));
+                        table.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Row 2 and row 3, Col 2 and Col 3"));
+                        cell.Rowspan = 2;
+                        cell.Colspan = 2;
+                        table.AddCell(cell);
+
+                        cell = new PdfPCell(new Phrase("Row 3, Col 1"));
+                        table.AddCell(cell);
+
+                        doc.Add(table);
+                        doc.Add(new Paragraph("This is a page 1"));
+                        doc.Close();
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
