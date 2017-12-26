@@ -296,6 +296,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="assets\images\rupees.png" />
     <Content Include="SMS.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
