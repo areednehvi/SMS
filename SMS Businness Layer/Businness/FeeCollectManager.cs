@@ -164,7 +164,7 @@ namespace SMS_Businness_Layer.Businness
                     Font fontTableCell = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.NORMAL);
                     Font fontHeading = new Font(Font.FontFamily.COURIER, 16, Font.BOLD);  
 
-                    writer.PageEvent = new PDFWriterEvents("Smart School", fontSize: 30f, xPosition: 200f, yPosition: 800f);
+                    writer.PageEvent = new PDFWriterEvents("Smart School", fontSize: 30f, xPosition: 150, yPosition: 250);
                     doc.Open();
 
                     //Header with logo
