@@ -535,7 +535,7 @@ namespace SMS.Controllers
                 if (FeeCollectManager.MakePayments(MakePayment, CurrentLogin, SchoolInfo))
                 {
                     GeneralMethods.ShowNotification("Notification", "Payment Saved Successfully!");
-                    if(FeeCollectManager.PrintReceipt(MakePayment, CurrentLogin, SchoolInfo))
+                    if(FeeCollectManager.PrintReceipt(MakePayment, CurrentLogin, SchoolInfo, FeeCollectionStudentList))
                     {
 
                     }                    

@@ -22,6 +22,7 @@ namespace SMS_Businness_Layer.Shared
             this.xPosition = xPosition;
             this.yPosition = yPosition;
             this.angle = angle;
+            this.fontSize = fontSize;
         }
 
         public void OnOpenDocument(PdfWriter writer, Document document) { }
