@@ -64,6 +64,40 @@ namespace SMS_Businness_Layer.Businness
             return lstKeyValues;
 
         }
+        public static GeneralInfoWidgetModel GetDashboardGeneralInfoWidgetDetails()
+        {
+            try
+            {
+                DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetDashboardGeneralInfoWidgetDetails);
+                return MapDatatableToGeneralInfoWidgetObject(objDatable);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+        private static GeneralInfoWidgetModel MapDatatableToGeneralInfoWidgetObject(DataTable objDatatable)
+        {
+            GeneralInfoWidgetModel obj = new GeneralInfoWidgetModel();
+            try
+            {                
+                obj.StudentCount = objDatatable.Rows[0]["StudentCount"] != DBNull.Value ? Convert.ToInt32(objDatatable.Rows[0]["StudentCount"]) : 0;
+                obj.TodaysRevenue = objDatatable.Rows[0]["TodaysRevenue"] != DBNull.Value ? Convert.ToDouble(objDatatable.Rows[0]["TodaysRevenue"]) : 0;               
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+            return obj;
+        }
 
 
     }

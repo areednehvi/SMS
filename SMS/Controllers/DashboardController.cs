@@ -28,8 +28,9 @@ namespace SMS.Controllers
         {
             this.Dashboard = new DashboardModel()
             {
-                StudentGenderRatioWidget = new StudentGenderRatioWidgetModel(){ Widget = new WidgetModel() },
+                StudentGenderRatioWidget = new StudentGenderRatioWidgetModel() { Widget = new WidgetModel() },
                 StudentPaymentAsPerMonthWidget = new StudentPaymentAsPerMonthWidgetModel() { Widget = new WidgetModel() },
+                GeneralInfoWidget = DashboardManager.GetDashboardGeneralInfoWidgetDetails()
             };          
         }
 

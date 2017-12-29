@@ -8,6 +8,16 @@ namespace SMS_Models.Models
     {
         public StudentGenderRatioWidgetModel StudentGenderRatioWidget;
         public StudentPaymentAsPerMonthWidgetModel StudentPaymentAsPerMonthWidget;
+        private GeneralInfoWidgetModel _GeneralInfoWidget;
+        public GeneralInfoWidgetModel GeneralInfoWidget
+        {
+            get { return _GeneralInfoWidget; }
+            set
+            {
+                _GeneralInfoWidget = value;
+                OnPropertyChanged("GeneralInfoWidget");
+            }
+        }
     }
 
     
@@ -44,6 +54,33 @@ namespace SMS_Models.Models
             }
         }
         public GroupBox GBStudentPaymentAsPerMonthWidget;
+    }
+    public class GeneralInfoWidgetModel : NotifyPropertyChanged
+    {
+        private Int32 _StudentCount;
+        private Double _TodaysRevenue;
+        public Int32 StudentCount
+        {
+            get
+            { return _StudentCount; }
+            set
+            {
+                _StudentCount = value;
+                OnPropertyChanged("StudentCount");
+            }
+        }
+        public Double TodaysRevenue
+        {
+            get
+            {
+                return _TodaysRevenue;
+            }
+            set
+            {
+                _TodaysRevenue = value;
+                OnPropertyChanged("TodaysRevenue");
+            }
+        }
     }
     public class Keyvalue : NotifyPropertyChanged
     {
