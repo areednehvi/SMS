@@ -119,6 +119,15 @@
     <Compile Include="Views\FeeAllocation.xaml.cs">
       <DependentUpon>FeeAllocation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BalanceFeesReport.xaml.cs">
+      <DependentUpon>BalanceFeesReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FeesStatementReport.xaml.cs">
+      <DependentUpon>FeesStatementReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionsReport.xaml.cs">
+      <DependentUpon>TransactionsReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Students.xaml.cs">
       <DependentUpon>Students.xaml</DependentUpon>
     </Compile>
@@ -167,6 +176,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\FeeAllocation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BalanceFeesReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FeesStatementReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TransactionsReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

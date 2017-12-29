@@ -20,5 +20,8 @@ namespace SMS.Shared
         public static View FeeCategoriesView = new View() { Name = "FeeCategoriesView", Title = "Fee Categories" };
         public static View FeeAllocationView = new View() { Name = "FeeAllocationView", Title = "Fee Allocation" };
         public static View DashboardView = new View() { Name = "DashboardView", Title = "Dashboard" };
+        public static View FeesStatementReportView = new View() { Name = "FeesStatementReportView", Title = "Fees Statement Report" };
+        public static View BalanceFeesReportView = new View() { Name = "BalanceFeesReportView", Title = "Balance Fees Report" };
+        public static View TransactionsReportView = new View() { Name = "TransactionsReportView", Title = "Transactions Report" };
     }
 }

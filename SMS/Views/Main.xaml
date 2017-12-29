@@ -50,6 +50,16 @@
         <DataTemplate x:Key="FeeAllocationView" DataType="{x:Type vm:MainController}">
             <local:FeeAllocation />
         </DataTemplate>
+        <DataTemplate x:Key="FeesStatementReportView" DataType="{x:Type vm:MainController}">
+            <local:FeesStatementReport />
+        </DataTemplate>
+        <DataTemplate x:Key="BalanceFeesReportView" DataType="{x:Type vm:MainController}">
+            <local:BalanceFeesReport />
+        </DataTemplate>
+        <DataTemplate x:Key="TransactionsReportView" DataType="{x:Type vm:MainController}">
+            <local:TransactionsReport />
+        </DataTemplate>
+        
     </Window.Resources>
 
     <Grid x:Name="grdMain">
@@ -165,6 +175,21 @@
                     <MenuItem Header="Grades" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.GradesView}}" />
                     <MenuItem Header="Sections" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.SectionsView}}" />
                 </MenuItem>
+                <MenuItem Cursor="Hand">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox Width="24" Height="24" Margin="0,0,5,0">
+                                <Canvas Width="24" Height="24">
+                                    <Path Data="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M7,20H9V14H7V20M11,20H13V12H11V20M15,20H17V16H15V20Z" Fill="White" />
+                                </Canvas>
+                            </Viewbox>
+                            <ContentPresenter Content="Reports" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem Header="Fees Statement" Margin="30,0,0,0" Width="210" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.FeesStatementReportView}}" />
+                    <MenuItem Header="Balance Fees" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.BalanceFeesReportView}}" />
+                    <MenuItem Header="Transactions" Margin="30,0,0,0" Command="{Binding LoadViewCommand}" CommandParameter="{Binding Source={x:Static shared:ViewDefinitions.TransactionsReportView}}" />
+                </MenuItem>
                 <MenuItem Cursor="Hand" Command="{Binding LogOutCommand}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -251,6 +276,15 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeeAllocationView">
                                 <Setter Property="ContentTemplate" Value="{StaticResource FeeAllocationView}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="FeesStatementReportView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource FeesStatementReportView}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="BalanceFeesReportView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource BalanceFeesReportView}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedView.Name,Mode=TwoWay}" Value="TransactionsReportView">
+                                <Setter Property="ContentTemplate" Value="{StaticResource TransactionsReportView}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
