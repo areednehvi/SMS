@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -231,21 +233,41 @@ namespace SMS_Businness_Layer.Businness
             return objTransactionsReportList;
         }
 
-        public static ObservableCollection<TransactionsReportListModel> GetTransactionsReportList(TransactionsReporFiltersModel TransactionsReportListFilters)
+        private static DataTable GetTransactionsReportListDatatable(TransactionsReporFiltersModel TransactionsReportListFilters)
         {
             try
             {
-                DataTable objGradesDatatable = GradesSetupManager.MapGradesObjectToDataTable(TransactionsReportListFilters.Grades);
-                DataTable objSectionsDatatable = SectionsSetupManager.MapSectionsObjectToDataTable(TransactionsReportListFilters.Sections);
+                DataTable objGradesDatatable, objSectionsDatatable;
+                if (TransactionsReportListFilters.Grade == null || (TransactionsReportListFilters.Grade != null && TransactionsReportListFilters.Grade.id_offline == Guid.Empty.ToString()))
+                {
+                    List<gradesModel> gradesList = new List<gradesModel>();
+                    gradesList = TransactionsReportListFilters.GradesList.FindAll(x => x.id_offline != Guid.Empty.ToString());
+                    objGradesDatatable = GradesSetupManager.MapGradesObjectToDataTable(gradesList);
+                }
+                else
+                    objGradesDatatable = GradesSetupManager.MapGradeObjectToDataTable(TransactionsReportListFilters.Grade);
+                if (TransactionsReportListFilters.Section == null || (TransactionsReportListFilters.Section != null && TransactionsReportListFilters.Section.id_offline == Guid.Empty.ToString()))
+                {
+                    List<sectionsModel> sectionsList = new List<sectionsModel>();
+                    sectionsList = TransactionsReportListFilters.SectionsList.FindAll(x => x.id_offline != Guid.Empty.ToString());
+                    objSectionsDatatable = SectionsSetupManager.MapSectionsObjectToDataTable(sectionsList);
+                }
+                else
+                    objSectionsDatatable = SectionsSetupManager.MapSectionObjectToDataTable(TransactionsReportListFilters.Section);
                 List<SqlParameter> lstSqlParameters = new List<SqlParameter>()
                 {
-                    new SqlParameter() {ParameterName = "@FromRowNo", SqlDbType = SqlDbType.NVarChar, Value = 1},
+                    new SqlParameter() {ParameterName = "@FromRowNo",     SqlDbType = SqlDbType.NVarChar, Value = 1},
                     new SqlParameter() {ParameterName = "@ToRowNo",  SqlDbType = SqlDbType.NVarChar, Value = Int64.MaxValue},
                     new SqlParameter() {ParameterName = "@GradesModel",  TypeName = DBTableTypes.grades, Value = objGradesDatatable},
                     new SqlParameter() {ParameterName = "@SectionsModel",  TypeName = DBTableTypes.sections, Value = objSectionsDatatable},
+                    new SqlParameter() {ParameterName = "@RollNumber",  SqlDbType = SqlDbType.NVarChar, Value = (TransactionsReportListFilters.RollNumber == "" ? null :TransactionsReportListFilters.RollNumber)},
+                    new SqlParameter() {ParameterName = "@ReceiptNumber",  SqlDbType = SqlDbType.NVarChar, Value = (TransactionsReportListFilters.ReceiptNumber == "" ? null :TransactionsReportListFilters.ReceiptNumber)},
+                    new SqlParameter() {ParameterName = "@PaymentFromDate",  SqlDbType = SqlDbType.Date, Value = (TransactionsReportListFilters.FromDate == (DateTime?)null ? (DateTime?)null :TransactionsReportListFilters.FromDate)},
+                    new SqlParameter() {ParameterName = "@PaymentToDate",  SqlDbType = SqlDbType.Date, Value = (TransactionsReportListFilters.ToDate == (DateTime?)null ? (DateTime?)null :TransactionsReportListFilters.ToDate)},
+                    new SqlParameter() {ParameterName = "@RegistrationID",  SqlDbType = SqlDbType.NVarChar, Value = (TransactionsReportListFilters.RegistrationID == "" ? null :TransactionsReportListFilters.RegistrationID)},
                 };
                 DataTable objDatable = DataAccess.GetDataTable(StoredProcedures.GetTransactionsReport, lstSqlParameters);
-                return MapDatatableToTransactionsReportObject(objDatable);
+                return objDatable;
 
             }
             catch (Exception ex)
@@ -259,5 +281,51 @@ namespace SMS_Businness_Layer.Businness
 
         }
 
+        public static Boolean ExportTransactionsReportToExcel(TransactionsReporFiltersModel TransactionsReportListFilters)
+        {
+            Boolean IsSuccess = false;
+            try
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add("Registration #", typeof(string));
+                table.Columns.Add("Student", typeof(string));
+                table.Columns.Add("Grade", typeof(string));
+                table.Columns.Add("Roll Number", typeof(string));
+                table.Columns.Add("Receipt Number", typeof(string));
+                table.Columns.Add("Fee", typeof(string));
+                table.Columns.Add("Payment Date", typeof(string));
+                table.Columns.Add("Payment", typeof(string));
+
+                DataTable objDatatable = GetTransactionsReportListDatatable(TransactionsReportListFilters);
+                foreach(DataRow row in objDatatable.Rows)
+                {
+                    table.Rows.Add(
+                        row["Student_grade_session_log.registration_id"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.registration_id"]) : string.Empty,
+                        row["users.full_name"] != DBNull.Value ? Convert.ToString(row["users.full_name"]) : string.Empty,
+                        (row["grades.name"] != DBNull.Value ? Convert.ToString(row["grades.name"]) : string.Empty) + " - " + (row["sections.name"] != DBNull.Value ? Convert.ToString(row["sections.name"]) : string.Empty),
+                        row["Student_grade_session_log.roll_number"] != DBNull.Value ? Convert.ToString(row["Student_grade_session_log.roll_number"]) : string.Empty,
+                        row["Student_payments.recept_no"] != DBNull.Value ? Convert.ToString(row["Student_payments.recept_no"]) : string.Empty,
+                        (row["fee_categories.name"] != DBNull.Value ? Convert.ToString(row["fee_categories.name"]) : string.Empty) + " - " + (row["student_fees.apply_from"] != DBNull.Value ? Convert.ToDateTime(row["student_fees.apply_from"]).ToString("MMM yyyy") : string.Empty),
+                        row["Student_payments.payment_date"] != DBNull.Value ? Convert.ToDateTime(row["Student_payments.payment_date"]).ToString("dd-MMM-yyyy") : string.Empty,
+                        row["Student_payments.amount"] != DBNull.Value ? Convert.ToString(row["Student_payments.amount"]) : string.Empty
+                    );
+                }
+
+                String pathAndName = "Reports/TransactionReport_" + DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss") + ".csv";
+                GenericMethods.ExportDatatableToExcel(table, pathAndName);
+                if (File.Exists(pathAndName))
+                {
+                    Process process = new Process();
+                    process.StartInfo.FileName = Path.GetFullPath(pathAndName);
+                    process.Start();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+
+            }
+            return IsSuccess;
+        }
     }
 }

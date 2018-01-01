@@ -19,6 +19,7 @@ namespace SMS.Controllers
 
         private ICommand _nextPageCommand;
         private ICommand _previousPageCommand;
+        private ICommand _exportToExcelCommand;
         #endregion
 
         #region Constructor
@@ -55,6 +56,7 @@ namespace SMS.Controllers
             //Initialize  Commands
             _nextPageCommand = new RelayCommand(MoveToNextPage, CanMoveToNextPage);
             _previousPageCommand = new RelayCommand(MoveToPreviousPage, CanMoveToPreviousPage);
+            _exportToExcelCommand = new RelayCommand(ExportToExcel, CanExportToExcel);
         }
 
         #endregion
@@ -152,8 +154,40 @@ namespace SMS.Controllers
 
             }
         }
+        #endregion\
+
+        #region ExportToExcelCommand
+
+        public ICommand ExportToExcelCommand
+        {
+            get { return _exportToExcelCommand; }
+        }
+
+
+        public bool CanExportToExcel(object obj)
+        {
+            return true;
+        }
+
+
+        public void ExportToExcel(object obj)
+        {
+            try
+            {
+                TransactionsReportManager.ExportTransactionsReportToExcel(TransactionsReport.TransactionsReportFilters);
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Please notify about the error to Admin \n\nERROR : " + ex.Message + "\n\nSTACK TRACE : " + ex.StackTrace;
+                GeneralMethods.ShowDialog("Error", errorMessage, true);
+            }
+            finally
+            {
+
+            }
+        }
         #endregion
-        
+
         private void GetTransactionsReportList()
         {
             try
