@@ -186,7 +186,7 @@
                                         </WrapPanel>
                                         <WrapPanel Orientation="Horizontal" Margin="10,0,0,0" >
                                             <Label  Content="Payment Date" Width="Auto" FontSize="16" Foreground="#FF009688"/>
-                                            <DatePicker x:Name="dpPaymentDate" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontSize="16" Width="200" SelectedDate="{Binding MakePayment.Payment.payment_date,StringFormat=dd/MM/yyyy,Mode=TwoWay}" ToolTip="Select Payment Date" />
+                                            <DatePicker x:Name="dpPaymentDate" VerticalAlignment="Stretch" HorizontalAlignment="Center" FontSize="16" Width="200" SelectedDate="{Binding MakePayment.Payment.payment_date,StringFormat=dd/MMM/yyyy,Mode=TwoWay}" ToolTip="Select Payment Date" />
                                         </WrapPanel>
                                         <WrapPanel Orientation="Horizontal"  Margin="10,0,0,0" >
                                             <Label  Content="Receipt Number" Width="Auto" FontSize="16" Foreground="#FF009688"/>

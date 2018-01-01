@@ -17,19 +17,17 @@ using System.Windows.Shapes;
 namespace SMS.Views
 {
     /// <summary>
-    /// Interaction logic for FeesStatementReport.xaml
+    /// Interaction logic for FeeCollection.xaml
     /// </summary>
-    public partial class FeesStatementReport : UserControl
+    public partial class TransactionsReport : UserControl
     {
-        public FeesStatementReport()
+        public TransactionsReport()
         {
-            InitializeComponent();            
-
+            InitializeComponent();
             double height = SystemParameters.PrimaryScreenHeight - 250;
             GridLength gl = new GridLength(height);
             grdRowNo2.Height = gl;
-
-            svForm.Height = height + 100;
+           
         }
     }
 }

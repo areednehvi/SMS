@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\FeeAllocationController.cs" />
+    <Compile Include="Controllers\TransactionsReportController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\FeeCategoriesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -122,11 +123,11 @@
     <Compile Include="Views\BalanceFeesReport.xaml.cs">
       <DependentUpon>BalanceFeesReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FeesStatementReport.xaml.cs">
-      <DependentUpon>FeesStatementReport.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TransactionsReport.xaml.cs">
       <DependentUpon>TransactionsReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FeesStatementReport.xaml.cs">
+      <DependentUpon>FeesStatementReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Students.xaml.cs">
       <DependentUpon>Students.xaml</DependentUpon>
@@ -183,11 +184,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\FeesStatementReport.xaml">
+    <Page Include="Views\TransactionsReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TransactionsReport.xaml">
+    <Page Include="Views\FeesStatementReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -20,6 +20,7 @@ namespace SMS_Businness_Layer.Shared
         public static string GetFeeAllocationList = "GetFeeAllocationList";
         public static string GetGradeFeesList = "GetGradeFeesList";
         public static string GetList = "GetList";
+        public static string GetTransactionsReport = "GetTransactionsReport";
         public static string GetStudentPaymentHistory = "GetStudentPaymentHistory";
         public static string GetStudentFeeDue = "GetStudentFeeDue";
         public static string GetStudentBalances = "GetStudentBalances";

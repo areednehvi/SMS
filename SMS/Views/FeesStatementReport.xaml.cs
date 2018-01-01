@@ -19,9 +19,9 @@ namespace SMS.Views
     /// <summary>
     /// Interaction logic for TransactionsReport.xaml
     /// </summary>
-    public partial class TransactionsReport : UserControl
+    public partial class FeesStatementReport : UserControl
     {
-        public TransactionsReport()
+        public FeesStatementReport()
         {
             InitializeComponent();            
 
